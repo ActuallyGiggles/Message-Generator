@@ -34,7 +34,7 @@ func Out(oi OutputInstructions) (output string, err error) {
 	}
 
 	if err == nil {
-		stats.LifetimeOutputs++
+		stats.TotalOutputs++
 		stats.SessionOutputs++
 	}
 

@@ -30,7 +30,7 @@ func (w *worker) addInput(content string) {
 	extractTail(&w.Chain, w.Name, slice)
 
 	w.Intake++
-	stats.LifetimeInputs++
+	stats.TotalInputs++
 	stats.SessionInputs++
 }
 

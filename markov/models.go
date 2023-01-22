@@ -122,27 +122,20 @@ type Statistics struct {
 	SessionUptime    time.Duration
 
 	// Inputs
-	LifetimeInputs int
-	SessionInputs  int
+	TotalInputs   int
+	SessionInputs int
 
 	// Outputs
-	LifetimeOutputs int
-	SessionOutputs  int
+	TotalOutputs   int
+	SessionOutputs int
 
 	// Write variables
-	WriteMode         string
-	InputCurrentCount int
-	InputCountLimit   int
-	NextWriteTime     time.Time
-	TimeUntilWrite    time.Duration
+	NextWriteTime  time.Time
+	TimeUntilWrite time.Duration
 
-	Workers int
-
+	Workers         int
 	PeakChainIntake PeakIntakeStruct
-
-	Durations []report
-
-	DefluffDate time.Time
+	Durations       []report
 }
 
 type report struct {
