@@ -1,0 +1,2835 @@
+[
+ {
+  "Platform": "twitch",
+  "ChannelName": "39daph",
+  "ChannelID": "160504245",
+  "DiscordChannelID": "940619835212177441",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "aceu",
+  "ChannelID": "88946548",
+  "DiscordChannelID": "940620541872726107",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "veibae",
+  "ChannelID": "97245742",
+  "DiscordChannelID": "940620542875156480",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "rainhoe",
+  "ChannelID": "127309732",
+  "DiscordChannelID": "1064961391372542002",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "skippypoppin",
+  "ChannelID": "205301469",
+  "DiscordChannelID": "940620544376729620",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "nmplol",
+  "ChannelID": "21841789",
+  "DiscordChannelID": "940620545144279101",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "nmplol2",
+  "ChannelID": "142954462",
+  "DiscordChannelID": "940620545853116476",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "qtcinderella",
+  "ChannelID": "247808909",
+  "DiscordChannelID": "940620546964606986",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "maya",
+  "ChannelID": "235835559",
+  "DiscordChannelID": "940620547652485150",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "saruei",
+  "ChannelID": "122863474",
+  "DiscordChannelID": "940620548352925816",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "hachubby",
+  "ChannelID": "195166073",
+  "DiscordChannelID": "940620549376344064",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "supertf",
+  "ChannelID": "59635827",
+  "DiscordChannelID": "940620550261309530",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "nyanners",
+  "ChannelID": "82350088",
+  "DiscordChannelID": "940620551255363644",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "erobb221",
+  "ChannelID": "96858382",
+  "DiscordChannelID": "940620551897108491",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "hasanabi",
+  "ChannelID": "207813352",
+  "DiscordChannelID": "940620552442347621",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "amouranth",
+  "ChannelID": "125387632",
+  "DiscordChannelID": "940622513396912189",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "xqc",
+  "ChannelID": "71092938",
+  "DiscordChannelID": "940842824495153152",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "pokimane",
+  "ChannelID": "44445592",
+  "DiscordChannelID": "940925636183224341",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "lilypichu",
+  "ChannelID": "31106024",
+  "DiscordChannelID": "940925994536157194",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "mizkif",
+  "ChannelID": "94753024",
+  "DiscordChannelID": "940926818708508713",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "asmongold",
+  "ChannelID": "26261471",
+  "DiscordChannelID": "940926841223520296",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "disguisedtoast",
+  "ChannelID": "87204022",
+  "DiscordChannelID": "940926941077323786",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "lacari",
+  "ChannelID": "29400754",
+  "DiscordChannelID": "940927040809488424",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "projektmelody",
+  "ChannelID": "478575546",
+  "DiscordChannelID": "941137323914039296",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "berry0314",
+  "ChannelID": "198860406",
+  "DiscordChannelID": "941790010108158032",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "avoidingthepuddle",
+  "ChannelID": "23528098",
+  "DiscordChannelID": "941808065836109855",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "myth",
+  "ChannelID": "110690086",
+  "DiscordChannelID": "942562957139783731",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "apricot",
+  "ChannelID": "151054406",
+  "DiscordChannelID": "943774177788309535",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "ironmouse",
+  "ChannelID": "175831187",
+  "DiscordChannelID": "945308719548362753",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "macaiyla",
+  "ChannelID": "43126328",
+  "DiscordChannelID": "945507358489063424",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "shroud",
+  "ChannelID": "37402112",
+  "DiscordChannelID": "945561169962352640",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "pokelawls",
+  "ChannelID": "12943173",
+  "DiscordChannelID": "945686219810013214",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "summit1g",
+  "ChannelID": "26490481",
+  "DiscordChannelID": "945849071367749662",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "loltyler1",
+  "ChannelID": "51496027",
+  "DiscordChannelID": "947024621461471254",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "cyr",
+  "ChannelID": "37522866",
+  "DiscordChannelID": "948244765315567626",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "esfandtv",
+  "ChannelID": "38746172",
+  "DiscordChannelID": "948482236699791400",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "moonmoon",
+  "ChannelID": "121059319",
+  "DiscordChannelID": "948486257716129792",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sykkuno",
+  "ChannelID": "26154978",
+  "DiscordChannelID": "949572367682793532",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "nihmune",
+  "ChannelID": "650221094",
+  "DiscordChannelID": "950923977021325343",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "filian",
+  "ChannelID": "198633200",
+  "DiscordChannelID": "951042941282025472",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "emiru",
+  "ChannelID": "91067577",
+  "DiscordChannelID": "951043230919712888",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "alinity",
+  "ChannelID": "38718052",
+  "DiscordChannelID": "951073264011182080",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "roflgator",
+  "ChannelID": "11897156",
+  "DiscordChannelID": "951749213291687966",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "nymn",
+  "ChannelID": "62300805",
+  "DiscordChannelID": "952656660302794783",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "adinross",
+  "ChannelID": "59299632",
+  "DiscordChannelID": "953076496573014106",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "iitztimmy",
+  "ChannelID": "45302947",
+  "DiscordChannelID": "953209445545029672",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "snuffy",
+  "ChannelID": "515567425",
+  "DiscordChannelID": "953266501941620747",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "russel",
+  "ChannelID": "70682869",
+  "DiscordChannelID": "953795877502353429",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "alveussanctuary",
+  "ChannelID": "636587384",
+  "DiscordChannelID": "953851467045928980",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "mitchjones",
+  "ChannelID": "26194208",
+  "DiscordChannelID": "954774344549146664",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "ambish",
+  "ChannelID": "81298008",
+  "DiscordChannelID": "955640398099918888",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "brucedropemoff",
+  "ChannelID": "88084663",
+  "DiscordChannelID": "958182820621213716",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sashagrey",
+  "ChannelID": "421838340",
+  "DiscordChannelID": "961436611340537946",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "jerma985",
+  "ChannelID": "23936415",
+  "DiscordChannelID": "962659611989639198",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "kyedae",
+  "ChannelID": "445529741",
+  "DiscordChannelID": "967690181362733076",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "silvervale",
+  "ChannelID": "56938961",
+  "DiscordChannelID": "970172193382232104",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "penta",
+  "ChannelID": "84316241",
+  "DiscordChannelID": "984324572448976926",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "shylily",
+  "ChannelID": "100901794",
+  "DiscordChannelID": "987487760883548211",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "trickywi",
+  "ChannelID": "63054799",
+  "DiscordChannelID": "997381538759049247",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "baoo",
+  "ChannelID": "110059426",
+  "DiscordChannelID": "997433641653260369",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "schrodingerlee",
+  "ChannelID": "597535246",
+  "DiscordChannelID": "1001390453997965352",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "mande",
+  "ChannelID": "128856353",
+  "DiscordChannelID": "1001773336424095854",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "faide",
+  "ChannelID": "51065352",
+  "DiscordChannelID": "1001773749139410964",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sovietwomble",
+  "ChannelID": "67802451",
+  "DiscordChannelID": "1001805015037513728",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "cottontailva",
+  "ChannelID": "548281862",
+  "DiscordChannelID": "1005049431122522125",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "momo",
+  "ChannelID": "38852102",
+  "DiscordChannelID": "1009363659358748792",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "forsen",
+  "ChannelID": "22484632",
+  "DiscordChannelID": "1013376621790642186",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "justaminx",
+  "ChannelID": "134609454",
+  "DiscordChannelID": "1016505941295898634",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "clubs_on_xbox",
+  "ChannelID": "461977365",
+  "DiscordChannelID": "1020756582977515622",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "WhichChannelsToUse": "all",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "zoil",
+  "ChannelID": "95304188",
+  "DiscordChannelID": "1023742229644328980",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "wakewilder",
+  "ChannelID": "526832402",
+  "DiscordChannelID": "1024230047084716053",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "kaicenat",
+  "ChannelID": "641972806",
+  "DiscordChannelID": "1024541931306487829",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "elis",
+  "ChannelID": "186352304",
+  "DiscordChannelID": "1025290032229122048",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "scarra",
+  "ChannelID": "22253819",
+  "DiscordChannelID": "1026233769935519846",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "abe",
+  "ChannelID": "52028814",
+  "DiscordChannelID": "1026233995635216435",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "imaqtpie",
+  "ChannelID": "24991333",
+  "DiscordChannelID": "1026234021778313287",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "lirik",
+  "ChannelID": "23161357",
+  "DiscordChannelID": "1026234075951931463",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "jummychu",
+  "ChannelID": "37727476",
+  "DiscordChannelID": "1026234386309459978",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "yvonnie",
+  "ChannelID": "45184940",
+  "DiscordChannelID": "1026234437249278013",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "tekken",
+  "ChannelID": "947519",
+  "DiscordChannelID": "1026239737477988522",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "brittt",
+  "ChannelID": "122125654",
+  "DiscordChannelID": "1026240525407375423",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "michaelreeves",
+  "ChannelID": "469790580",
+  "DiscordChannelID": "1026240671067148400",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "quarterjade",
+  "ChannelID": "173758090",
+  "DiscordChannelID": "1026240727866421319",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "masayoshi",
+  "ChannelID": "46673989",
+  "DiscordChannelID": "1026240746027749396",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "ariasaki",
+  "ChannelID": "62510206",
+  "DiscordChannelID": "1026241140904689775",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "thealbertchang",
+  "ChannelID": "39195074",
+  "DiscordChannelID": "1026241565976449086",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sydeon",
+  "ChannelID": "244407024",
+  "DiscordChannelID": "1026241678702559302",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "zentreya",
+  "ChannelID": "128440061",
+  "DiscordChannelID": "1026242212926853160",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "hajime",
+  "ChannelID": "639093626",
+  "DiscordChannelID": "1026242255012499529",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "amemiyanazuna",
+  "ChannelID": "803456874",
+  "DiscordChannelID": "1026242673033617449",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "ksonsouchou",
+  "ChannelID": "149495712",
+  "DiscordChannelID": "1026242840075972629",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "fuslie",
+  "ChannelID": "83402203",
+  "DiscordChannelID": "1026243038227468308",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "valkyrae",
+  "ChannelID": "79615025",
+  "DiscordChannelID": "1026243229856837663",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "natsumiii",
+  "ChannelID": "42177890",
+  "DiscordChannelID": "1026243312815980564",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "edisonparklive",
+  "ChannelID": "75425569",
+  "DiscordChannelID": "1026243376393240627",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "peterpark",
+  "ChannelID": "124494583",
+  "DiscordChannelID": "1026243445460844594",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "kkatamina",
+  "ChannelID": "526763937",
+  "DiscordChannelID": "1026243483402502234",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "starsmitten",
+  "ChannelID": "61852275",
+  "DiscordChannelID": "1026243517510602873",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "boxbox",
+  "ChannelID": "38881685",
+  "DiscordChannelID": "1026243529736978592",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "xchocobars",
+  "ChannelID": "42583390",
+  "DiscordChannelID": "1026243596036341790",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "jakenbakelive",
+  "ChannelID": "11249217",
+  "DiscordChannelID": "1026243649580826684",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "hyoon",
+  "ChannelID": "55170062",
+  "DiscordChannelID": "1026243710180151356",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "tinakitten",
+  "ChannelID": "42032495",
+  "DiscordChannelID": "1026243836009271436",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "kristoferyee",
+  "ChannelID": "254756234",
+  "DiscordChannelID": "1026243924999815198",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "bnans",
+  "ChannelID": "110176631",
+  "DiscordChannelID": "1026243980670812180",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "hjune",
+  "ChannelID": "121111915",
+  "DiscordChannelID": "1026244035179978782",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "tarik",
+  "ChannelID": "36340781",
+  "DiscordChannelID": "1026244082927935488",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "ludwig",
+  "ChannelID": "40934651",
+  "DiscordChannelID": "1026244252612702269",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "itshafu",
+  "ChannelID": "30777889",
+  "DiscordChannelID": "1026244271306715177",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "moistcr1tikal",
+  "ChannelID": "132230344",
+  "DiscordChannelID": "1026328207949049906",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "torinojyosei",
+  "ChannelID": "472125459",
+  "DiscordChannelID": "1026383542999060540",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "extraemily",
+  "ChannelID": "517475551",
+  "DiscordChannelID": "1026383725442908190",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "prezoh",
+  "ChannelID": "56811658",
+  "DiscordChannelID": "1026738601691713576",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "yourragegaming",
+  "ChannelID": "36926489",
+  "DiscordChannelID": "1027091107873570859",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "schlatt",
+  "ChannelID": "98125665",
+  "DiscordChannelID": "1029567182411157584",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sweet_anita",
+  "ChannelID": "217377982",
+  "DiscordChannelID": "1032037913015373855",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "knut",
+  "ChannelID": "43494917",
+  "DiscordChannelID": "1032038431188070441",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "redbloodies",
+  "ChannelID": "56821682",
+  "DiscordChannelID": "1057893126259359814",
+  "Settings": {
+   "IsCollectingMessages": false,
+   "Reply": false,
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "WhichChannelsToUse": "except self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "kiaraakitty",
+  "ChannelID": "61335991",
+  "DiscordChannelID": "1032560569997344808",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "supcaitlin",
+  "ChannelID": "131439149",
+  "DiscordChannelID": "1032560608589135893",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "moontastix",
+  "ChannelID": "514615151",
+  "DiscordChannelID": "1033545647296626688",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "simply",
+  "ChannelID": "35780889",
+  "DiscordChannelID": "1034937923986006108",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "zackrawrr",
+  "ChannelID": "552120296",
+  "DiscordChannelID": "1035085577613217792",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "charming_jo",
+  "ChannelID": "134433708",
+  "DiscordChannelID": "1037269070887788565",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "nyyxxii",
+  "ChannelID": "177029122",
+  "DiscordChannelID": "1037606982024183878",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "senzawa",
+  "ChannelID": "131712227",
+  "DiscordChannelID": "1040500653639864370",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "crazy_japanese",
+  "ChannelID": "510473442",
+  "DiscordChannelID": "1040801855804035222",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "yabbe",
+  "ChannelID": "",
+  "DiscordChannelID": "1041273867047542814",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "teclu",
+  "ChannelID": "27090497",
+  "DiscordChannelID": "1051795199224987678",
+  "Settings": {
+   "IsCollectingMessages": false,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "WhichChannelsToUse": "all",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "gammainkk",
+  "ChannelID": "190381811",
+  "DiscordChannelID": "1051982289573257348",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "squchan",
+  "ChannelID": "79792848",
+  "DiscordChannelID": "1053385386992357426",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "greencomfytea",
+  "ChannelID": "48897356",
+  "DiscordChannelID": "1053956990214357003",
+  "Settings": {
+   "IsCollectingMessages": false,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "WhichChannelsToUse": "all",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "cdawgva",
+  "ChannelID": "45098797",
+  "DiscordChannelID": "1054370857859940474",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sodapoppin",
+  "ChannelID": "26301881",
+  "DiscordChannelID": "940620543546253383",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "actuallygiggles",
+  "ChannelID": "196390720",
+  "DiscordChannelID": "1055217929861480458",
+  "Settings": {
+   "IsCollectingMessages": false,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
+   },
+   "WhichChannelsToUse": "except self",
+   "CustomChannelsToUse": [
+    "sodapoppin"
+   ]
+  }
+ }
+]
