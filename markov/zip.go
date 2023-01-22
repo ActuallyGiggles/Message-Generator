@@ -2,13 +2,16 @@ package markov
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"strings"
 )
 
 func zipChains() {
+	fmt.Println("before lock")
 	busy.Lock()
+	fmt.Println("after lock")
 	defer duration(track("zip duration"))
 
 	debugLog("creating zip archive...")
@@ -25,7 +28,9 @@ func zipChains() {
 
 	debugLog("closing zip archive...")
 	zipWriter.Close()
+	fmt.Println("before unlock")
 	busy.Unlock()
+	fmt.Println("after unlock")
 }
 
 func addDirectoryToZip(zipWriter *zip.Writer, path string) error {

@@ -1,6 +1,7 @@
 package markov
 
 import (
+	"fmt"
 	"sync"
 	"time"
 )
@@ -33,7 +34,7 @@ func tickerLoops() {
 
 	writingTicker = writeTicker()
 	if instructions.ShouldZip {
-		zippingTicker = time.NewTicker(6 * time.Hour)
+		zippingTicker = time.NewTicker(10 * time.Minute)
 	}
 	if instructions.ShouldDefluff {
 		defluffTicker = time.NewTicker(7 * (24 * time.Hour))
@@ -44,6 +45,7 @@ func tickerLoops() {
 		case <-writingTicker.C:
 			go writeLoop()
 		case <-zippingTicker.C:
+			fmt.Println("zip ticker went off")
 			go zipChains()
 		case <-defluffTicker.C:
 			go defluff()
