@@ -34,7 +34,7 @@ func writeLoop() {
 	}
 
 	debugLog("writing")
-	defer duration(track("write duration"))
+	defer duration(track("writing duration"))
 
 	for _, w := range workerMap {
 		w.ChainMx.Lock()

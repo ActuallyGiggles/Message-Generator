@@ -14,7 +14,7 @@ func Out(oi OutputInstructions) (output string, err error) {
 	method := oi.Method
 	target := oi.Target
 
-	defer duration(track("output"))
+	defer duration(track("output duration"))
 
 	if exists := DoesChainExist(name); !exists {
 		return "", errors.New("Chain '" + name + "' is not found in directory.")

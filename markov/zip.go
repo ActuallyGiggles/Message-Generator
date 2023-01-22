@@ -11,7 +11,7 @@ import (
 
 func zipChains() {
 	busy.Lock()
-	defer duration(track("zip duration"))
+	defer duration(track("zipping duration"))
 
 	debugLog("creating zip archive...")
 	archive, err := os.Create("markov-chains.zip")
