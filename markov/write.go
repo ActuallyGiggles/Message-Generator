@@ -25,11 +25,6 @@ func writeTicker() *time.Ticker {
 	}
 
 	stats.NextWriteTime = time.Now().Add(time.Duration(instructions.WriteInterval) * unit)
-	// for range time.Tick(time.Duration(instructions.WriteInterval) * unit) {
-	// 	stats.NextWriteTime = time.Now().Add(time.Duration(instructions.WriteInterval) * unit)
-
-	// 	go writeLoop()
-	// }
 
 	return time.NewTicker(time.Duration(instructions.WriteInterval) * unit)
 }
@@ -124,9 +119,8 @@ func (w *worker) writeHead() {
 								childMatch = true
 
 								enc.AddEntry(child{
-									Word:     newChild.Word,
-									Value:    newChild.Value + existingChild.Value,
-									LastUsed: time.Now(),
+									Word:  newChild.Word,
+									Value: newChild.Value + existingChild.Value,
 								})
 
 								parent.removeChild(j)
@@ -226,9 +220,8 @@ func (w *worker) writeBody() {
 									childMatch = true
 
 									uParent.Children = append(uParent.Children, child{
-										Word:     newChild.Word,
-										Value:    newChild.Value + existingChild.Value,
-										LastUsed: time.Now(),
+										Word:  newChild.Word,
+										Value: newChild.Value + existingChild.Value,
 									})
 
 									newParent.removeChild(nCIndex)
@@ -256,9 +249,8 @@ func (w *worker) writeBody() {
 									grandparentMatch = true
 
 									uParent.Grandparents = append(uParent.Grandparents, grandparent{
-										Word:     newGrandparent.Word,
-										Value:    newGrandparent.Value + existingGrandparent.Value,
-										LastUsed: time.Now(),
+										Word:  newGrandparent.Word,
+										Value: newGrandparent.Value + existingGrandparent.Value,
 									})
 
 									newParent.removeGrandparent(nPIndex)
@@ -361,9 +353,8 @@ func (w *worker) writeTail() {
 								grandparentMatch = true
 
 								enc.AddEntry(child{
-									Word:     newGrandparent.Word,
-									Value:    newGrandparent.Value + existingGrandparent.Value,
-									LastUsed: time.Now(),
+									Word:  newGrandparent.Word,
+									Value: newGrandparent.Value + existingGrandparent.Value,
 								})
 
 								parent.removeGrandparent(j)

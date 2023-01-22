@@ -7,31 +7,7 @@ import (
 	"time"
 )
 
-const standardDefluffDuration = 7 * (24 * time.Hour) // 1 week
-var durationUntilDefluff time.Duration
-
-// func checkForDefluffDate(setNewDate bool) {
-// 	// If no date or specify to set new date, make new date according to standardDefluffDuration.
-// 	if stats.DefluffDate.IsZero() || setNewDate {
-// 		stats.DefluffDate = time.Now().Add(standardDefluffDuration)
-// 		durationUntilDefluff = time.Until(stats.DefluffDate)
-// 		saveStats()
-// 	} else {
-// 		// If date is already set, that means we need to complete the first date with a custom durationUntilDefluff first. Then we can set a ticker for standardDefluffDuration.
-// 		durationUntilDefluff = time.Until(stats.DefluffDate)
-
-// 		// Wait for the rest of the duration needed, defluff, and set a new date. If durationUntilDefluff is 0 or negative, it will start immediately.
-// 		time.Sleep(durationUntilDefluff)
-// 		defluff()
-// 		go checkForDefluffDate(true)
-// 		return
-// 	}
-
-// 	// We are now ready for a ticker to start.
-// 	for range time.Tick(durationUntilDefluff) {
-// 		go defluff()
-// 	}
-// }
+const standardDefluffDuration = 24 * time.Hour // 1 day
 
 func defluff() {
 	busy.Lock()
@@ -90,16 +66,15 @@ func defluffHead(chain string) {
 				panic(err)
 			}
 
-			// If more than a week has passed since last used, ignore
-			if time.Since(existingChild.LastUsed).Hours() > standardDefluffDuration.Hours() {
+			// If used less than x times in the past day, ignore
+			if existingChild.Value < instructions.DefluffTriggerValue {
 				continue
 			}
 
 			// Add child into new list
 			enc.AddEntry(child{
-				Word:     existingChild.Word,
-				Value:    existingChild.Value,
-				LastUsed: existingChild.LastUsed,
+				Word:  existingChild.Word,
+				Value: existingChild.Value,
 			})
 		}
 
@@ -160,30 +135,28 @@ func defluffBody(chain string) {
 			}
 
 			for _, eChild := range existingParent.Children {
-				// If more than a week has passed since last used, ignore
-				if time.Since(eChild.LastUsed).Hours() > standardDefluffDuration.Hours() {
+				// If used less than x times in the past day, ignore
+				if eChild.Value < instructions.DefluffTriggerValue {
 					continue
 				}
 
 				// Add child into new list
 				updatedParent.Children = append(updatedParent.Children, child{
-					Word:     eChild.Word,
-					Value:    eChild.Value,
-					LastUsed: eChild.LastUsed,
+					Word:  eChild.Word,
+					Value: eChild.Value,
 				})
 			}
 
 			for _, eGrandparent := range existingParent.Grandparents {
-				// If more than a week has passed since last used, ignore
-				if time.Since(eGrandparent.LastUsed).Hours() > standardDefluffDuration.Hours() {
+				// If used less than x times in the past day, ignore
+				if eGrandparent.Value < instructions.DefluffTriggerValue {
 					continue
 				}
 
 				// Add grandparent into new list
 				updatedParent.Grandparents = append(updatedParent.Grandparents, grandparent{
-					Word:     eGrandparent.Word,
-					Value:    eGrandparent.Value,
-					LastUsed: eGrandparent.LastUsed,
+					Word:  eGrandparent.Word,
+					Value: eGrandparent.Value,
 				})
 			}
 
@@ -240,23 +213,22 @@ func defluffTail(chain string) {
 
 		// For everything in old file
 		for dec.More() {
-			var existingChild child
+			var existingGrandparent grandparent
 
-			err := dec.Decode(&existingChild)
+			err := dec.Decode(&existingGrandparent)
 			if err != nil {
 				panic(err)
 			}
 
-			// If more than a week has passed since last used, ignore
-			if time.Since(existingChild.LastUsed).Hours() > standardDefluffDuration.Hours() {
+			// If used less than x times in the past day, ignore
+			if existingGrandparent.Value < instructions.DefluffTriggerValue {
 				continue
 			}
 
 			// Add child into new list
 			enc.AddEntry(child{
-				Word:     existingChild.Word,
-				Value:    existingChild.Value,
-				LastUsed: existingChild.LastUsed,
+				Word:  existingGrandparent.Word,
+				Value: existingGrandparent.Value,
 			})
 		}
 

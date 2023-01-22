@@ -65,14 +65,15 @@ func Start() {
 	go api.HandleRequests()
 
 	markov.Start(markov.StartInstructions{
-		WriteInterval: 10,
-		IntervalUnit:  "minutes",
-		SeparationKey: " ",
-		StartKey:      "b5G(n1$I!4g",
-		EndKey:        "e1$D(n7",
-		Debug:         false,
-		ShouldZip:     true,
-		ShouldDefluff: true,
+		WriteInterval:       10,
+		IntervalUnit:        "minutes",
+		SeparationKey:       " ",
+		StartKey:            "b5G(n1$I!4g",
+		EndKey:              "e1$D(n7",
+		Debug:               false,
+		ShouldZip:           true,
+		ShouldDefluff:       true,
+		DefluffTriggerValue: 25,
 	})
 
 	go twitter.Start()

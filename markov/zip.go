@@ -7,24 +7,6 @@ import (
 	"strings"
 )
 
-// func zipTicker() *time.Ticker {
-// 	// for range time.Tick(6 * time.Hour) {
-// 	// 	for {
-// 	// 		if !writing && !defluffing {
-// 	// 			break
-// 	// 		}
-// 	// 	}
-
-// 	// 	//busy.Lock()
-// 	// 	zipping = true
-
-// 	// 	zipChains()
-
-// 	// 	zipping = false
-// 	// 	//busy.Unlock()
-// 	// }
-// }
-
 func zipChains() {
 	busy.Lock()
 	defer duration(track("zip duration"))

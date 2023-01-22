@@ -2,7 +2,6 @@ package markov
 
 import (
 	"strings"
-	"time"
 )
 
 // In adds an entry into a specific chain.
@@ -66,15 +65,13 @@ func extractHead(c *chain, name string, slice []string) {
 				if child.Word == next {
 					childExists = true
 					child.Value += 1
-					child.LastUsed = time.Now()
 				}
 			}
 
 			if !childExists {
 				child := child{
-					Word:     next,
-					Value:    1,
-					LastUsed: time.Now(),
+					Word:  next,
+					Value: 1,
 				}
 				parent.Children = append(parent.Children, child)
 			}
@@ -84,9 +81,8 @@ func extractHead(c *chain, name string, slice []string) {
 	if !parentExists {
 		var children []child
 		child := child{
-			Word:     next,
-			Value:    1,
-			LastUsed: time.Now(),
+			Word:  next,
+			Value: 1,
 		}
 		children = append(children, child)
 		parent := parent{
@@ -116,15 +112,13 @@ func extractBody(c *chain, name string, slice []string) {
 					if child.Word == next {
 						childExists = true
 						child.Value += 1
-						child.LastUsed = time.Now()
 					}
 				}
 
 				if !childExists {
 					child := child{
-						Word:     next,
-						Value:    1,
-						LastUsed: time.Now(),
+						Word:  next,
+						Value: 1,
 					}
 					parent.Children = append(parent.Children, child)
 				}
@@ -136,15 +130,13 @@ func extractBody(c *chain, name string, slice []string) {
 					if grandparent.Word == previous {
 						grandparentExists = true
 						grandparent.Value += 1
-						grandparent.LastUsed = time.Now()
 					}
 				}
 
 				if !grandparentExists {
 					grandparent := grandparent{
-						Word:     previous,
-						Value:    1,
-						LastUsed: time.Now(),
+						Word:  previous,
+						Value: 1,
 					}
 					parent.Grandparents = append(parent.Grandparents, grandparent)
 				}
@@ -155,18 +147,16 @@ func extractBody(c *chain, name string, slice []string) {
 			// Deal with child
 			var children []child
 			child := child{
-				Word:     next,
-				Value:    1,
-				LastUsed: time.Now(),
+				Word:  next,
+				Value: 1,
 			}
 			children = append(children, child)
 
 			// Deal with grandparent
 			var grandparents []grandparent
 			grandparent := grandparent{
-				Word:     previous,
-				Value:    1,
-				LastUsed: time.Now(),
+				Word:  previous,
+				Value: 1,
 			}
 			grandparents = append(grandparents, grandparent)
 
@@ -197,15 +187,13 @@ func extractTail(c *chain, name string, slice []string) {
 				if grandparent.Word == previous {
 					grandparentExists = true
 					grandparent.Value += 1
-					grandparent.LastUsed = time.Now()
 				}
 			}
 
 			if !grandparentExists {
 				grandparent := grandparent{
-					Word:     previous,
-					Value:    1,
-					LastUsed: time.Now(),
+					Word:  previous,
+					Value: 1,
 				}
 				parent.Grandparents = append(parent.Grandparents, grandparent)
 			}
@@ -215,9 +203,8 @@ func extractTail(c *chain, name string, slice []string) {
 	if !parentExists {
 		var grandparents []grandparent
 		grandparent := grandparent{
-			Word:     previous,
-			Value:    1,
-			LastUsed: time.Now(),
+			Word:  previous,
+			Value: 1,
 		}
 		grandparents = append(grandparents, grandparent)
 		parent := parent{

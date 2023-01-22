@@ -9,14 +9,15 @@ import (
 
 // StartInstructions details intructions to start markov.
 //
-// 	WriteInterval: How often to trigger a write cycle.
-// 	IntervalUnit: What unit to use for the WriteInterval.
-//  SeparationKey: What string should act as a separator. (E.g. a " ")
-// 	StartKey: What string can be used to mark the beginning of a message. (E.g. "!-")
-// 	EndKey: What string can be used to mark the end of a message. (E.g. "-!")
-//  ReportDurations: If you would like the bot to report the duration of writing cycles or zip cycles, provide a channel. Otherwise, leave as nil.
-//  Zip: Whether or not to zip the markov-chains folder every 24 hours.
-// 	Debug: Print logs of stuffs.
+//	WriteInterval: How often to trigger a write cycle.
+//	IntervalUnit: What unit to use for the WriteInterval.
+//	SeparationKey: What string should act as a separator. (E.g. a " ")
+//	StartKey: What string can be used to mark the beginning of a message. (E.g. "!-")
+//	EndKey: What string can be used to mark the end of a message. (E.g. "-!")
+//	ShouldZip: Whether or not to zip the markov-chains folder every six hours.
+//	ShouldDefluff: Whether or not to defluff (clean infrequently used values) database every 24 hours.
+//	DefluffTriggerValue: What value amount is too little to keep and therefore should be defluffed.
+//	Debug: Print logs of stuffs.
 type StartInstructions struct {
 	WriteInterval int
 	IntervalUnit  string
@@ -25,21 +26,22 @@ type StartInstructions struct {
 	StartKey      string
 	EndKey        string
 
-	ShouldZip     bool
-	ShouldDefluff bool
+	ShouldZip           bool
+	ShouldDefluff       bool
+	DefluffTriggerValue int
 
 	Debug bool
 }
 
 // OutputInstructions details instructions on how to make an output.
 //
-// 	Chain: What chain to use.
-// 	Method: What method to use.
-// 		"LikelyBeginning": Start with a likely beginning word.
+//	Chain: What chain to use.
+//	Method: What method to use.
+//		"LikelyBeginning": Start with a likely beginning word.
 //		"TargetedBeginning": Start with a specific beginning word.
-// 		"TargetedMiddle": Generate a message with a specific middle word. (yet to implement)
+//		"TargetedMiddle": Generate a message with a specific middle word. (yet to implement)
 //		"TargetedEnding": End with a specific ending word.
-// 		"LikelyEnding": End with a likely ending word.
+//		"LikelyEnding": End with a likely ending word.
 type OutputInstructions struct {
 	Chain  string
 	Method string
@@ -64,15 +66,13 @@ type parent struct {
 }
 
 type child struct {
-	Word     string
-	Value    int
-	LastUsed time.Time
+	Word  string
+	Value int
 }
 
 type grandparent struct {
-	Word     string
-	Value    int
-	LastUsed time.Time
+	Word  string
+	Value int
 }
 
 type input struct {
