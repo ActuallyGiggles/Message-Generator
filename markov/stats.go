@@ -7,8 +7,8 @@ import (
 )
 
 func Stats() (statistics Statistics) {
-	stats.LifetimeUptime = time.Now().Sub(stats.LifetimeStartTime)
-	stats.SessionUptime = time.Now().Sub(stats.SessionStartTime)
+	stats.TotalUptime = time.Now().Sub(stats.TotalStartTime).String()
+	stats.SessionUptime = time.Now().Sub(stats.SessionStartTime).String()
 	stats.TimeUntilWrite = stats.NextWriteTime.Sub(time.Now())
 	stats.Workers = len(CurrentWorkers())
 	return stats
@@ -45,7 +45,7 @@ func loadStats() {
 
 	fS, _ := f.Stat()
 	if fS.Size() == 0 {
-		stats.LifetimeStartTime = time.Now()
+		stats.TotalStartTime = time.Now()
 		stats.SessionStartTime = time.Now()
 		return
 	}

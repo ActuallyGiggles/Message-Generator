@@ -113,13 +113,13 @@ type Progress struct {
 }
 
 type Statistics struct {
-	// Start times
-	LifetimeStartTime time.Time
-	SessionStartTime  time.Time
+	// Total times
+	TotalStartTime time.Time
+	TotalUptime    string
 
-	// Uptimes
-	LifetimeUptime time.Duration
-	SessionUptime  time.Duration
+	// Session times
+	SessionStartTime time.Time
+	SessionUptime    string
 
 	// Inputs
 	LifetimeInputs int
