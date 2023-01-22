@@ -35,7 +35,7 @@ func tickerLoops() {
 	var zippingTicker *time.Ticker
 	var defluffTicker *time.Ticker
 
-	if instructions.WriteInterval == 0 {
+	if instructions.WriteInterval != 0 {
 		writingTicker = writeTicker()
 	}
 	if instructions.ShouldZip {
