@@ -1,7 +1,7 @@
 package api
 
 import (
-	"Twitch-Message-Generator/platform/twitch"
+	"Message-Generator/platform/twitch"
 )
 
 type APIResponse struct {

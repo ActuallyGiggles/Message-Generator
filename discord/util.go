@@ -1,10 +1,10 @@
 package discord
 
 import (
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/platform/twitch"
-	"Twitch-Message-Generator/stats"
-	"Twitch-Message-Generator/twitter"
+	"Message-Generator/global"
+	"Message-Generator/platform/twitch"
+	"Message-Generator/stats"
+	"Message-Generator/twitter"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"

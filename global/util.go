@@ -1,7 +1,7 @@
 package global
 
 import (
-	"Twitch-Message-Generator/stats"
+	"Message-Generator/stats"
 	"crypto/rand"
 	"encoding/json"
 	"fmt"

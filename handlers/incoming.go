@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"Twitch-Message-Generator/discord"
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/markov"
-	"Twitch-Message-Generator/platform"
+	"Message-Generator/discord"
+	"Message-Generator/global"
+	"Message-Generator/markov"
+	"Message-Generator/platform"
 	"fmt"
 )
 

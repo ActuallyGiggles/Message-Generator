@@ -1,9 +1,9 @@
 package twitch
 
 import (
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/platform"
-	"Twitch-Message-Generator/stats"
+	"Message-Generator/global"
+	"Message-Generator/platform"
+	"Message-Generator/stats"
 	"time"
 
 	"github.com/gempir/go-twitch-irc/v3"

@@ -1,8 +1,8 @@
 package discord
 
 import (
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/stats"
+	"Message-Generator/global"
+	"Message-Generator/stats"
 	"strings"
 
 	"time"

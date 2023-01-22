@@ -1,15 +1,15 @@
 package handlers
 
 import (
-	"Twitch-Message-Generator/discord"
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/platform"
-	"Twitch-Message-Generator/platform/twitch"
+	"Message-Generator/discord"
+	"Message-Generator/global"
+	"Message-Generator/platform"
+	"Message-Generator/platform/twitch"
 	"regexp"
 	"strings"
 	"time"
 
-	"Twitch-Message-Generator/markov"
+	"Message-Generator/markov"
 )
 
 // prepareMessageForMarkov prepares the message to be inputted into a Markov chain.

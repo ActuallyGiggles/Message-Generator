@@ -1,9 +1,9 @@
 package twitter
 
 import (
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/platform/twitch"
-	"Twitch-Message-Generator/stats"
+	"Message-Generator/global"
+	"Message-Generator/platform/twitch"
+	"Message-Generator/stats"
 	"context"
 	"fmt"
 	"sync"

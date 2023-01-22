@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"Twitch-Message-Generator/discord"
-	"Twitch-Message-Generator/markov"
-	"Twitch-Message-Generator/platform/twitch"
-	"Twitch-Message-Generator/twitter"
+	"Message-Generator/discord"
+	"Message-Generator/markov"
+	"Message-Generator/platform/twitch"
+	"Message-Generator/twitter"
 	"strings"
 	"time"
 )

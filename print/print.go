@@ -1,7 +1,7 @@
 package print
 
 import (
-	"Twitch-Message-Generator/stats"
+	"Message-Generator/stats"
 	"bufio"
 	"context"
 	"fmt"

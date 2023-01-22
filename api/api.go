@@ -1,18 +1,18 @@
 package api
 
 import (
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/handlers"
-	"Twitch-Message-Generator/platform"
-	"Twitch-Message-Generator/platform/twitch"
-	"Twitch-Message-Generator/print"
-	"Twitch-Message-Generator/stats"
+	"Message-Generator/global"
+	"Message-Generator/handlers"
+	"Message-Generator/platform"
+	"Message-Generator/platform/twitch"
+	"Message-Generator/print"
+	"Message-Generator/stats"
 	"encoding/json"
 	"net/http"
 	_ "net/http/pprof"
 	"strings"
 
-	"Twitch-Message-Generator/markov"
+	"Message-Generator/markov"
 )
 
 var (
@@ -60,10 +60,10 @@ func apiHomePage(w http.ResponseWriter, r *http.Request) {
 		welcome.Usage = "Start using this API by going to /getsentence and ?channel=[channel]"
 		welcome.Example = "https://actuallygiggles.localtonet.com/get-sentence?channel=39daph"
 		welcome.PS = "Not every channel is being tracked! If you have a suggestion on which channel should be tracked, @ me on Twitter or join the Discord!"
-		welcome.Socials.Website = "https://actuallygiggles.github.io/twitch-message-generator/"
+		welcome.Socials.Website = "https://actuallygiggles.github.io/Message-Generator/"
 		welcome.Socials.Twitter = "https://twitter.com/shit_chat_says"
 		welcome.Socials.Discord = "discord.gg/wA96rfyn9p"
-		welcome.Socials.GitHub = "https://github.com/ActuallyGiggles/Twitch-Message-Generator"
+		welcome.Socials.GitHub = "https://github.com/ActuallyGiggles/Message-Generator"
 		welcome.ChannelsEndpoint = "/data"
 		welcome.EmotesEndpoint = "/emotes"
 		json.NewEncoder(w).Encode(welcome)

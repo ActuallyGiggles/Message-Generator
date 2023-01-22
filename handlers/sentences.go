@@ -1,15 +1,15 @@
 package handlers
 
 import (
-	"Twitch-Message-Generator/discord"
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/platform"
-	"Twitch-Message-Generator/platform/twitch"
-	"Twitch-Message-Generator/print"
+	"Message-Generator/discord"
+	"Message-Generator/global"
+	"Message-Generator/platform"
+	"Message-Generator/platform/twitch"
+	"Message-Generator/print"
 	"strings"
 	"sync"
 
-	"Twitch-Message-Generator/markov"
+	"Message-Generator/markov"
 )
 
 var (

@@ -1,8 +1,8 @@
 package twitch
 
 import (
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/print"
+	"Message-Generator/global"
+	"Message-Generator/print"
 	"sync"
 	"time"
 

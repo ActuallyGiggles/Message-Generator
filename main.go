@@ -1,22 +1,22 @@
 package main
 
 import (
-	"Twitch-Message-Generator/api"
-	"Twitch-Message-Generator/discord"
-	"Twitch-Message-Generator/global"
-	"Twitch-Message-Generator/handlers"
-	"Twitch-Message-Generator/platform"
-	"Twitch-Message-Generator/platform/twitch"
-	"Twitch-Message-Generator/print"
-	"Twitch-Message-Generator/stats"
-	"Twitch-Message-Generator/twitter"
+	"Message-Generator/api"
+	"Message-Generator/discord"
+	"Message-Generator/global"
+	"Message-Generator/handlers"
+	"Message-Generator/platform"
+	"Message-Generator/platform/twitch"
+	"Message-Generator/print"
+	"Message-Generator/stats"
+	"Message-Generator/twitter"
 	"context"
 	"time"
 
 	"os/signal"
 	"syscall"
 
-	"Twitch-Message-Generator/markov"
+	"Message-Generator/markov"
 
 	"github.com/pkg/profile"
 )
