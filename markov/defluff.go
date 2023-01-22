@@ -2,6 +2,7 @@ package markov
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -27,6 +28,8 @@ func defluff() {
 	}
 
 	busy.Unlock()
+
+	fmt.Println("Done Defluffing at", time.Now().String())
 }
 
 func defluffHead(chain string) {

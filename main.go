@@ -64,6 +64,9 @@ func Start() {
 	go handlers.Incoming(incomingMessages)
 	go api.HandleRequests()
 
+	go twitter.Start()
+	go discord.Start()
+
 	markov.Start(markov.StartInstructions{
 		WriteInterval:       10,
 		IntervalUnit:        "minutes",
@@ -76,12 +79,7 @@ func Start() {
 		DefluffTriggerValue: 25,
 	})
 
-	go twitter.Start()
-
-	go discord.Start()
-
 	twitch.GatherEmotes(debug)
-
 	go twitch.Start(incomingMessages)
 
 	stats.Start()

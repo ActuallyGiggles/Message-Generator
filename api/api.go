@@ -178,7 +178,9 @@ func getSentence(w http.ResponseWriter, r *http.Request) {
 }
 
 func serverStats(w http.ResponseWriter, r *http.Request) {
-	print.Info("Hit Stats Endpoint")
+	// if limitEndpoint(60, "serverStats notification") {
+	// 	print.Info("Hit Stats Endpoint")
+	// }
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")

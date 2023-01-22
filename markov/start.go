@@ -34,20 +34,25 @@ func tickerLoops() {
 
 	writingTicker = writeTicker()
 	if instructions.ShouldZip {
-		zippingTicker = time.NewTicker(10 * time.Minute)
+		zippingTicker = time.NewTicker(6 * time.Hour)
 	}
 	if instructions.ShouldDefluff {
-		defluffTicker = time.NewTicker(7 * (24 * time.Hour))
+		defluffTicker = time.NewTicker(24 * time.Hour)
 	}
+
+	fmt.Println("zip ticker to go off at", time.Now().Add(6*time.Hour))
+	fmt.Println("defluff ticker to go off at", time.Now().Add(24*time.Hour))
 
 	for {
 		select {
 		case <-writingTicker.C:
+			fmt.Println("write ticker went off")
 			go writeLoop()
 		case <-zippingTicker.C:
 			fmt.Println("zip ticker went off")
 			go zipChains()
 		case <-defluffTicker.C:
+			fmt.Println("defluff ticker went off")
 			go defluff()
 		}
 	}

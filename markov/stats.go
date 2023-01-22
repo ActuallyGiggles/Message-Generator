@@ -9,12 +9,8 @@ import (
 func Stats() (statistics Statistics) {
 	stats.LifetimeUptime = time.Now().Sub(stats.LifetimeStartTime)
 	stats.SessionUptime = time.Now().Sub(stats.SessionStartTime)
-
-	stats.InputCurrentCount = writeInputsCounter
 	stats.TimeUntilWrite = stats.NextWriteTime.Sub(time.Now())
-
 	stats.Workers = len(CurrentWorkers())
-
 	return stats
 }
 

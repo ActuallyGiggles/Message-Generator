@@ -2,17 +2,16 @@ package markov
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"time"
 )
 
 var (
-	writeInputsCounter int
+	unit time.Duration
 )
 
 func writeTicker() *time.Ticker {
-	var unit time.Duration
-
 	switch instructions.IntervalUnit {
 	default:
 		unit = time.Minute
@@ -61,11 +60,13 @@ func writeLoop() {
 
 		w.ChainMx.Unlock()
 	}
-
-	writeInputsCounter = 0
 	saveStats()
 
 	busy.Unlock()
+
+	stats.NextWriteTime = time.Now().Add(time.Duration(instructions.WriteInterval) * unit)
+
+	fmt.Println("Done Writing at", time.Now().String())
 }
 
 func (w *worker) writeHead() {

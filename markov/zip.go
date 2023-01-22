@@ -6,12 +6,11 @@ import (
 	"io"
 	"os"
 	"strings"
+	"time"
 )
 
 func zipChains() {
-	fmt.Println("before lock")
 	busy.Lock()
-	fmt.Println("after lock")
 	defer duration(track("zip duration"))
 
 	debugLog("creating zip archive...")
@@ -28,9 +27,9 @@ func zipChains() {
 
 	debugLog("closing zip archive...")
 	zipWriter.Close()
-	fmt.Println("before unlock")
 	busy.Unlock()
-	fmt.Println("after unlock")
+
+	fmt.Println("Done Zipping at", time.Now().String())
 }
 
 func addDirectoryToZip(zipWriter *zip.Writer, path string) error {
