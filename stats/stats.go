@@ -22,6 +22,8 @@ var (
 
 func Start() {
 	StartTime = time.Now()
+	stats.Markov.TotalStartTime = GetStats().Markov.TotalStartTime
+	stats.Markov.TotalUptime = GetStats().Markov.TotalUptime
 
 	go intakePerHour()
 }
