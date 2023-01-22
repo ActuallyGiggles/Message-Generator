@@ -24,12 +24,9 @@ var (
 func HandleRequests() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", apiHomePage)
-
 	mux.HandleFunc("/data", websiteHomePage)
 	mux.HandleFunc("/emotes", emotes)
-
 	mux.HandleFunc("/get-sentence", getSentence)
-
 	mux.HandleFunc("/server-stats", serverStats)
 
 	//handler := cors.AllowAll().Handler(mux)
@@ -192,7 +189,7 @@ func serverStats(w http.ResponseWriter, r *http.Request) {
 			err := struct {
 				Error string
 			}{}
-			err.Error = "Incorrect security code"
+			err.Error = "Incorrect security code lol"
 			json.NewEncoder(w).Encode(err)
 			return
 		}
