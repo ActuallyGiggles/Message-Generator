@@ -7,7 +7,6 @@
 *.env
 *.mod
 *.sum
-*.json
 *.zip
 localtonet_key.txt
 logs.txt
