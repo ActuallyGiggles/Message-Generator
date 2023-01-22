@@ -7,7 +7,10 @@ import (
 )
 
 var (
-	instructions StartInstructions
+	instructions    StartInstructions
+	writeInterval   = 10 * time.Minute
+	zipInterval     = 6 * time.Hour
+	defluffInterval = 24 * time.Hour
 
 	busy sync.Mutex
 
@@ -32,28 +35,32 @@ func tickerLoops() {
 	var zippingTicker *time.Ticker
 	var defluffTicker *time.Ticker
 
-	writingTicker = writeTicker()
+	if instructions.WriteInterval == 0 {
+		writingTicker = writeTicker()
+	}
 	if instructions.ShouldZip {
 		zippingTicker = time.NewTicker(6 * time.Hour)
+		stats.NextZipTime = time.Now().Add(time.Duration(6*time.Hour) * unit)
 	}
 	if instructions.ShouldDefluff {
 		defluffTicker = time.NewTicker(24 * time.Hour)
+		stats.NextDefluffTime = time.Now().Add(time.Duration(24*time.Hour) * unit)
 	}
-
-	fmt.Println("zip ticker to go off at", time.Now().Add(6*time.Hour))
-	fmt.Println("defluff ticker to go off at", time.Now().Add(24*time.Hour))
 
 	for {
 		select {
 		case <-writingTicker.C:
 			fmt.Println("write ticker went off")
 			go writeLoop()
+			stats.NextWriteTime = time.Now().Add(writeInterval)
 		case <-zippingTicker.C:
 			fmt.Println("zip ticker went off")
 			go zipChains()
+			stats.NextZipTime = time.Now().Add(zipInterval)
 		case <-defluffTicker.C:
 			fmt.Println("defluff ticker went off")
 			go defluff()
+			stats.NextDefluffTime = time.Now().Add(defluffInterval)
 		}
 	}
 }

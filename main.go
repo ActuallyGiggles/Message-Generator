@@ -68,8 +68,6 @@ func Start() {
 	go discord.Start()
 
 	markov.Start(markov.StartInstructions{
-		WriteInterval:       10,
-		IntervalUnit:        "minutes",
 		SeparationKey:       " ",
 		StartKey:            "b5G(n1$I!4g",
 		EndKey:              "e1$D(n7",

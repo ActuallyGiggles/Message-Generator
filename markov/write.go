@@ -22,9 +22,8 @@ func writeTicker() *time.Ticker {
 	case "hours":
 		unit = time.Hour
 	}
-
-	stats.NextWriteTime = time.Now().Add(time.Duration(instructions.WriteInterval) * unit)
-
+	writeInterval = time.Duration(instructions.WriteInterval) * unit
+	stats.NextWriteTime = time.Now().Add(writeInterval)
 	return time.NewTicker(time.Duration(instructions.WriteInterval) * unit)
 }
 
@@ -63,8 +62,6 @@ func writeLoop() {
 	saveStats()
 
 	busy.Unlock()
-
-	stats.NextWriteTime = time.Now().Add(time.Duration(instructions.WriteInterval) * unit)
 
 	fmt.Println("Done Writing at", time.Now().String())
 }

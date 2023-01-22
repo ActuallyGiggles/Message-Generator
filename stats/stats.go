@@ -12,7 +12,6 @@ import (
 
 var (
 	stats               Stats
-	StartTime           time.Time
 	InputsPerHour       int
 	previousIntakeTotal int
 	OutputsPerHour      int
@@ -21,7 +20,6 @@ var (
 )
 
 func Start() {
-	StartTime = time.Now()
 	stats.Markov.TotalStartTime = GetStats().Markov.TotalStartTime
 	stats.Markov.TotalUptime = GetStats().Markov.TotalUptime
 
@@ -42,38 +40,41 @@ func intakePerHour() {
 
 func Log(message ...string) {
 	t := time.Now()
-	stats.Logs = append(stats.Logs, fmt.Sprintf("[%d/%d/%d %d:%d] %s", int(t.Month()), t.Day(), t.Year(), t.Hour(), t.Minute(), message))
+	Logs = append(Logs, fmt.Sprintf("[%d/%d/%d %d:%d] %-5s %s", int(t.Month()), t.Day(), t.Year(), t.Hour(), t.Minute(), "|", message))
 }
 
 func GetStats() (stats Stats) {
 	stats.Markov = markov.Stats()
+	stats.System = SystemStats()
+	stats.Logs = Logs
 	return stats
 }
 
 // SystemStats provides statistics on CPU, Memory, and GoRoutines.
-func SystemStats() {
-	CPUUsage(&stats.System)
-	GoroutineUsage(&stats.System)
-	MemoryUsage(&stats.System)
+func SystemStats() (s SystemStatistics) {
+	CPUUsage(&s)
+	GoroutineUsage(&s)
+	MemoryUsage(&s)
+	return s
 }
-func CPUUsage(rts *SystemStatistics) {
+func CPUUsage(s *SystemStatistics) {
 	percentage, err := cpu.Percent(0, false)
 	if err != nil {
 		panic(err)
 	}
-	stats.System.CPU = percentage[0]
+	s.CPU = percentage[0]
 }
 
-func MemoryUsage(rts *SystemStatistics) {
+func MemoryUsage(s *SystemStatistics) {
 	vmStat, err := mem.VirtualMemory()
 	if err != nil {
 		panic(err)
 	}
-	stats.System.Memory = vmStat.UsedPercent
+	s.Memory = vmStat.UsedPercent
 }
 
-func GoroutineUsage(rts *SystemStatistics) {
-	stats.System.Goroutines = runtime.NumGoroutine()
+func GoroutineUsage(s *SystemStatistics) {
+	s.Goroutines = runtime.NumGoroutine()
 }
 
 func bToMb(b uint64) uint64 {

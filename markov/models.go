@@ -9,8 +9,8 @@ import (
 
 // StartInstructions details intructions to start markov.
 //
-//	WriteInterval: How often to trigger a write cycle.
-//	IntervalUnit: What unit to use for the WriteInterval.
+//	WriteInterval: How often to trigger a write cycle. If left blank, will be 10 minutes.
+//	IntervalUnit: What unit to use for the WriteInterval. If left blank, will be 10 minutes.
 //	SeparationKey: What string should act as a separator. (E.g. a " ")
 //	StartKey: What string can be used to mark the beginning of a message. (E.g. "!-")
 //	EndKey: What string can be used to mark the end of a message. (E.g. "-!")
@@ -129,9 +129,17 @@ type Statistics struct {
 	TotalOutputs   int
 	SessionOutputs int
 
-	// Write variables
+	// Write
 	NextWriteTime  time.Time
 	TimeUntilWrite time.Duration
+
+	// Zip
+	NextZipTime  time.Time
+	TimeUntilZip time.Duration
+
+	// Defluff
+	NextDefluffTime  time.Time
+	TimeUntilDefluff time.Duration
 
 	Workers         int
 	PeakChainIntake PeakIntakeStruct

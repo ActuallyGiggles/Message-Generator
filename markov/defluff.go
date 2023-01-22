@@ -8,8 +8,6 @@ import (
 	"time"
 )
 
-const standardDefluffDuration = 24 * time.Hour // 1 day
-
 func defluff() {
 	busy.Lock()
 	defer duration(track("defluffing duration"))

@@ -9,16 +9,16 @@ type Stats struct {
 	InputsPerHour  int
 	OutputsPerHour int
 
-	System SystemStatistics `json:"system"`
+	System SystemStatistics
 
 	WebsiteHits  int
 	SentenceHits int
 
-	Logs []string `json:"logs"`
+	Logs []string
 }
 
 type SystemStatistics struct {
-	CPU        float64 `json:"cpu"`
-	Memory     float64 `json:"memory"`
-	Goroutines int     `json:"goroutines"`
+	CPU        float64
+	Memory     float64
+	Goroutines int
 }
