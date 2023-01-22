@@ -1,7 +1,7 @@
 package api
 
 import (
-	"markov-generator/platform/twitch"
+	"Twitch-Message-Generator/platform/twitch"
 )
 
 type APIResponse struct {

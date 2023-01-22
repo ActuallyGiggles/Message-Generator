@@ -1,7 +1,7 @@
 package stats
 
 import (
-	"markov-generator/markov"
+	"Twitch-Message-Generator/markov"
 )
 
 type Stats struct {

@@ -1,18 +1,18 @@
 package api
 
 import (
+	"Twitch-Message-Generator/global"
+	"Twitch-Message-Generator/handlers"
+	"Twitch-Message-Generator/platform"
+	"Twitch-Message-Generator/platform/twitch"
+	"Twitch-Message-Generator/print"
+	"Twitch-Message-Generator/stats"
 	"encoding/json"
-	"markov-generator/global"
-	"markov-generator/handlers"
-	"markov-generator/platform"
-	"markov-generator/platform/twitch"
-	"markov-generator/print"
-	"markov-generator/stats"
 	"net/http"
 	_ "net/http/pprof"
 	"strings"
 
-	"markov-generator/markov"
+	"Twitch-Message-Generator/markov"
 )
 
 var (
@@ -63,7 +63,7 @@ func apiHomePage(w http.ResponseWriter, r *http.Request) {
 		welcome.Socials.Website = "https://actuallygiggles.github.io/twitch-message-generator/"
 		welcome.Socials.Twitter = "https://twitter.com/shit_chat_says"
 		welcome.Socials.Discord = "discord.gg/wA96rfyn9p"
-		welcome.Socials.GitHub = "https://github.com/ActuallyGiggles/markov-generator"
+		welcome.Socials.GitHub = "https://github.com/ActuallyGiggles/Twitch-Message-Generator"
 		welcome.ChannelsEndpoint = "/data"
 		welcome.EmotesEndpoint = "/emotes"
 		json.NewEncoder(w).Encode(welcome)

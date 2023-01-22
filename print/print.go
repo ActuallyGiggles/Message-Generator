@@ -1,10 +1,10 @@
 package print
 
 import (
+	"Twitch-Message-Generator/stats"
 	"bufio"
 	"context"
 	"fmt"
-	"markov-generator/stats"
 	"os"
 	"strings"
 

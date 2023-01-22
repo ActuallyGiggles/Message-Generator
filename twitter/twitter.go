@@ -1,11 +1,11 @@
 package twitter
 
 import (
+	"Twitch-Message-Generator/global"
+	"Twitch-Message-Generator/platform/twitch"
+	"Twitch-Message-Generator/stats"
 	"context"
 	"fmt"
-	"markov-generator/global"
-	"markov-generator/platform/twitch"
-	"markov-generator/stats"
 	"sync"
 	"time"
 

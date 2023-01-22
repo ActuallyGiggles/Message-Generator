@@ -1,8 +1,8 @@
 package twitch
 
 import (
-	"markov-generator/global"
-	"markov-generator/stats"
+	"Twitch-Message-Generator/global"
+	"Twitch-Message-Generator/stats"
 	"sync"
 )
 

@@ -1,13 +1,13 @@
 package twitch
 
 import (
+	"Twitch-Message-Generator/global"
+	"Twitch-Message-Generator/stats"
 	"bytes"
 	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"log"
-	"markov-generator/global"
-	"markov-generator/stats"
 	"net/http"
 )
 

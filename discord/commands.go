@@ -1,9 +1,9 @@
 package discord
 
 import (
+	"Twitch-Message-Generator/global"
+	"Twitch-Message-Generator/platform/twitch"
 	"fmt"
-	"markov-generator/global"
-	"markov-generator/platform/twitch"
 	"strconv"
 	"strings"
 )

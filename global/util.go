@@ -1,11 +1,11 @@
 package global
 
 import (
+	"Twitch-Message-Generator/stats"
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"markov-generator/stats"
 	"math/big"
 	"os"
 	"regexp"

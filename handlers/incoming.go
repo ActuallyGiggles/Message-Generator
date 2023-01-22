@@ -1,11 +1,11 @@
 package handlers
 
 import (
+	"Twitch-Message-Generator/discord"
+	"Twitch-Message-Generator/global"
+	"Twitch-Message-Generator/markov"
+	"Twitch-Message-Generator/platform"
 	"fmt"
-	"markov-generator/discord"
-	"markov-generator/global"
-	"markov-generator/markov"
-	"markov-generator/platform"
 )
 
 func Incoming(c chan platform.Message) {

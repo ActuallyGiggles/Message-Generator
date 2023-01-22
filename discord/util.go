@@ -1,10 +1,10 @@
 package discord
 
 import (
-	"markov-generator/global"
-	"markov-generator/platform/twitch"
-	"markov-generator/stats"
-	"markov-generator/twitter"
+	"Twitch-Message-Generator/global"
+	"Twitch-Message-Generator/platform/twitch"
+	"Twitch-Message-Generator/stats"
+	"Twitch-Message-Generator/twitter"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"

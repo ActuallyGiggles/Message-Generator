@@ -1,8 +1,8 @@
 package stats
 
 import (
+	"Twitch-Message-Generator/markov"
 	"fmt"
-	"markov-generator/markov"
 	"runtime"
 	"time"
 
