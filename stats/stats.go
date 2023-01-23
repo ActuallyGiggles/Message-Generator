@@ -20,9 +20,6 @@ var (
 )
 
 func Start() {
-	stats.Markov.TotalStartTime = GetStats().Markov.TotalStartTime
-	stats.Markov.TotalUptime = GetStats().Markov.TotalUptime
-
 	go intakePerHour()
 }
 
@@ -40,7 +37,7 @@ func intakePerHour() {
 
 func Log(message ...string) {
 	t := time.Now()
-	Logs = append(Logs, fmt.Sprintf("[%d/%d/%d %d:%d] %-5s %s", int(t.Month()), t.Day(), t.Year(), t.Hour(), t.Minute(), "|", message))
+	Logs = append(Logs, fmt.Sprintf("[%d/%d/%d %d:%d] %s %s", int(t.Month()), t.Day(), t.Year(), t.Hour(), t.Minute(), "|", message))
 }
 
 func GetStats() (stats Stats) {
