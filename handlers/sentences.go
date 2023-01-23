@@ -183,9 +183,12 @@ recurse:
 
 // CreateReplySentence takes in a message and outputs a targeted sentence that directly mentions a user.
 func CreateReplySentence(msg platform.Message, directive global.Directive) {
-	fmt.Println("test1")
+	if msg.AuthorName != "actuallygiggles" {
+		return
+	}
+
 	// If does not mention, return.
-	if !strings.Contains(msg.Content, global.BotName) {
+	if !strings.Contains(strings.ToLower(msg.Content), strings.ToLower(global.BotName)) {
 		return
 	}
 
