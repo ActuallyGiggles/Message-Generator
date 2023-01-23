@@ -16,15 +16,22 @@ import (
 // prepareMessageForMarkov prepares the message to be inputted into a Markov chain.
 func prepareMessageForMarkov(msg platform.Message) (processed string) {
 	if strings.Contains(msg.Content, "@") {
-		fmt.Println(msg.Content)
+		fmt.Println("1", msg.Content)
 	}
 
 	processed = removeMentions(msg.Content)
-	processed = lowercaseIfNotEmote(msg.ChannelName, processed)
-	processed = removeWeirdTwitchCharactersAndTrim(processed)
-
 	if strings.Contains(msg.Content, "@") {
-		fmt.Println(processed)
+		fmt.Println("2", processed)
+	}
+
+	processed = lowercaseIfNotEmote(msg.ChannelName, processed)
+	if strings.Contains(msg.Content, "@") {
+		fmt.Println("3", processed)
+	}
+
+	processed = removeWeirdTwitchCharactersAndTrim(processed)
+	if strings.Contains(msg.Content, "@") {
+		fmt.Println("4", processed)
 	}
 
 	return processed
