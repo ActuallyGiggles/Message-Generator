@@ -5,7 +5,6 @@ import (
 	"Message-Generator/global"
 	"Message-Generator/platform"
 	"Message-Generator/platform/twitch"
-	"fmt"
 	"regexp"
 	"strings"
 	"time"
@@ -15,11 +14,9 @@ import (
 
 // prepareMessageForMarkov prepares the message to be inputted into a Markov chain.
 func prepareMessageForMarkov(msg platform.Message) (processed string) {
-	fmt.Println("test1", msg.Content)
 	processed = removeMentions(msg.Content)
 	processed = lowercaseIfNotEmote(msg.ChannelName, processed)
 	processed = removeWeirdTwitchCharactersAndTrim(processed)
-	fmt.Println("test2", processed)
 	return processed
 }
 
