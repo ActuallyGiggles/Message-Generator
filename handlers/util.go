@@ -41,14 +41,10 @@ func prepareMessageForMarkov(msg platform.Message) (processed string) {
 func removeMentions(message string) (processed string) {
 	var s []string
 	for _, word := range strings.Split(message, " ") {
-		if !strings.Contains(word, "@") {
-			s = append(s, word)
+		if strings.Contains(word, "@") || strings.Contains(word, global.BotName) {
 			continue
 		}
-		if !strings.Contains(word, global.BotName) {
-			s = append(s, word)
-			continue
-		}
+		s = append(s, word)
 	}
 	processed = strings.Join(s, " ")
 	return processed
