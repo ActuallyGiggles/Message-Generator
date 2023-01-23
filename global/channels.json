@@ -2463,7 +2463,11 @@
   "DiscordChannelID": "1057893126259359814",
   "Settings": {
    "IsCollectingMessages": false,
-   "Reply": false,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
    "Participation": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
