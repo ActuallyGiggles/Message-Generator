@@ -6,6 +6,7 @@ import (
 	"Message-Generator/platform"
 	"Message-Generator/platform/twitch"
 	"Message-Generator/print"
+	"fmt"
 	"strings"
 	"sync"
 
@@ -182,6 +183,7 @@ recurse:
 
 // CreateReplySentence takes in a message and outputs a targeted sentence that directly mentions a user.
 func CreateReplySentence(msg platform.Message, directive global.Directive) {
+	fmt.Println("test1")
 	// If does not mention, return.
 	if !strings.Contains(msg.Content, global.BotName) {
 		return
@@ -197,10 +199,13 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 		return
 	}
 
+	fmt.Println("test2")
+
 	recursionLimit := len(markov.CurrentWorkers())
 	timesRecursed := 0
 
 recurse:
+	fmt.Println("test3", timesRecursed)
 	chainToUse := decideWhichChannelToUse(directive)
 
 	var method string
@@ -226,6 +231,8 @@ recurse:
 		Chain:  chainToUse,
 		Target: target,
 	})
+
+	fmt.Println("test4", output, err)
 
 	// Handle error.
 	if err != nil {
