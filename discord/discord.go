@@ -44,7 +44,9 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 
 	// If dialogue is ongoing, send to dialogue
 	if dialogueOngoing {
+		fmt.Println("test1")
 		fmt.Println(Dialogue{Arguments: messageSlice[1:], MessageID: message.ID})
+		fmt.Println("test2")
 		dialogueChannel <- Dialogue{Arguments: messageSlice[1:], MessageID: message.ID}
 		return
 	}
