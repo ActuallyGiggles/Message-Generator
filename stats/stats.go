@@ -37,7 +37,9 @@ func intakePerHour() {
 
 func Log(message ...string) {
 	t := time.Now()
-	Logs = append(Logs, fmt.Sprintf("[%d/%d/%d %d:%d] %s %s", int(t.Month()), t.Day(), t.Year(), t.Hour(), t.Minute(), "|", message))
+	for _, m := range message {
+		Logs = append(Logs, fmt.Sprintf("[%d/%d/%d %d:%d] %s %s", int(t.Month()), t.Day(), t.Year(), t.Hour(), t.Minute(), "|", m))
+	}
 }
 
 func GetStats() (stats Stats) {
