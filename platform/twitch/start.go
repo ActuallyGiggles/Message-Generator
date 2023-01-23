@@ -16,12 +16,12 @@ var (
 )
 
 func GatherEmotes(debug bool) {
-	pb = print.ProgressBar("Collecting Twitch API information...", 4+len(global.Directives)*6)
-	GetLiveStatuses(true)
-
 	if debug {
 		return
 	}
+
+	pb = print.ProgressBar("Collecting Twitch API information...", 4+len(global.Directives)*6)
+	GetLiveStatuses(true)
 
 	GetEmoteController(true, global.Directive{})
 	pb.Stop()
