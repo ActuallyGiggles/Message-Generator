@@ -12,6 +12,11 @@ var (
 )
 
 func writeTicker() *time.Ticker {
+	if instructions.WriteInterval == 0 && instructions.IntervalUnit == "" {
+		stats.NextWriteTime = time.Now().Add(writeInterval)
+		return time.NewTicker(writeInterval)
+	}
+
 	switch instructions.IntervalUnit {
 	default:
 		unit = time.Minute
@@ -22,9 +27,10 @@ func writeTicker() *time.Ticker {
 	case "hours":
 		unit = time.Hour
 	}
+
 	writeInterval = time.Duration(instructions.WriteInterval) * unit
 	stats.NextWriteTime = time.Now().Add(writeInterval)
-	return time.NewTicker(time.Duration(instructions.WriteInterval) * unit)
+	return time.NewTicker(writeInterval)
 }
 
 func writeLoop() {
