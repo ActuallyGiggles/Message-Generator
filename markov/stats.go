@@ -10,6 +10,8 @@ func Stats() (statistics Statistics) {
 	stats.TotalUptime = time.Now().Sub(stats.TotalStartTime)
 	stats.SessionUptime = time.Now().Sub(stats.SessionStartTime)
 	stats.TimeUntilWrite = stats.NextWriteTime.Sub(time.Now())
+	stats.TimeUntilZip = stats.NextZipTime.Sub(time.Now())
+	stats.TimeUntilDefluff = stats.NextDefluffTime.Sub(time.Now())
 	stats.Workers = len(CurrentWorkers())
 	return stats
 }
