@@ -220,10 +220,9 @@ func updateDirective(channelID string, messageID string) {
 
 	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Which channel will you update?").ID)
 	channelName := <-dialogueChannel
+	fmt.Println(channelName)
 	messagesToDelete = append(messagesToDelete, channelName.MessageID)
 	if channelName.Arguments[0] == "cancel" {
-		dialogueOngoing = false
-		dialogueChannel = nil
 		return
 	}
 
@@ -245,8 +244,6 @@ recurse:
 	settingsToUpdate := <-dialogueChannel
 	messagesToDelete = append(messagesToDelete, settingsToUpdate.MessageID)
 	if settingsToUpdate.Arguments[0] == "cancel" {
-		dialogueOngoing = false
-		dialogueChannel = nil
 		return
 	}
 	for _, setting := range settingsToUpdate.Arguments {
@@ -294,8 +291,6 @@ recurse:
 	changeAgain := <-dialogueChannel
 	messagesToDelete = append(messagesToDelete, settingsToUpdate.MessageID)
 	if changeAgain.Arguments[0] == "cancel" {
-		dialogueOngoing = false
-		dialogueChannel = nil
 		return
 	}
 	if changeAgain.Arguments[0] == "1" {
