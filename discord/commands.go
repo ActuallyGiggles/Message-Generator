@@ -220,7 +220,6 @@ func updateDirective(channelID string, messageID string) {
 
 	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Which channel will you update?").ID)
 	channelName := <-dialogueChannel
-	fmt.Println("test3", channelName)
 	messagesToDelete = append(messagesToDelete, channelName.MessageID)
 	if channelName.Arguments[0] == "cancel" {
 		return

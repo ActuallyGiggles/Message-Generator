@@ -3,7 +3,6 @@ package discord
 import (
 	"Message-Generator/global"
 	"Message-Generator/stats"
-	"fmt"
 	"strings"
 
 	"time"
@@ -44,10 +43,7 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 
 	// If dialogue is ongoing, send to dialogue
 	if dialogueOngoing {
-		fmt.Println("test1")
-		fmt.Println(Dialogue{Arguments: messageSlice[1:], MessageID: message.ID})
-		fmt.Println("test2")
-		dialogueChannel <- Dialogue{Arguments: messageSlice[1:], MessageID: message.ID}
+		dialogueChannel <- Dialogue{Arguments: messageSlice, MessageID: message.ID}
 		return
 	}
 
