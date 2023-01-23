@@ -29,9 +29,11 @@ func removeMentions(message string) (processed string) {
 	for _, word := range strings.Split(message, " ") {
 		if !strings.Contains(word, "@") {
 			s = append(s, word)
+			continue
 		}
 		if !strings.Contains(word, global.BotName) {
 			s = append(s, word)
+			continue
 		}
 	}
 	processed = strings.Join(s, " ")
