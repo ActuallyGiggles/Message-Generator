@@ -15,7 +15,7 @@ import (
 // prepareMessageForMarkov prepares the message to be inputted into a Markov chain.
 func prepareMessageForMarkov(msg platform.Message) (processed string) {
 	processed = removeMentions(msg.Content)
-	processed = lowercaseIfNotEmote(msg.ChannelName, msg.Content)
+	processed = lowercaseIfNotEmote(msg.ChannelName, processed)
 	processed = removeWeirdTwitchCharactersAndTrim(processed)
 	return processed
 }
@@ -32,7 +32,6 @@ func removeMentions(message string) (processed string) {
 		}
 	}
 	processed = strings.Join(s, " ")
-
 	return processed
 }
 
