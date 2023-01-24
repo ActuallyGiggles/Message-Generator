@@ -77,6 +77,7 @@ func (w *worker) writeHead() {
 
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	fmt.Println("old head opened")
 	if err != nil {
 		panic(err)
 	} else {
@@ -90,9 +91,11 @@ func (w *worker) writeHead() {
 			w.Chain.removeParent(0)
 			f.Write(chainData)
 			f.Close()
+			fmt.Println("old head closed - no new head")
 			return
 		} else {
 			fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
+			fmt.Println("new head opened")
 			if err != nil {
 				panic(err)
 			}
@@ -147,10 +150,12 @@ func (w *worker) writeHead() {
 
 			enc.CloseEncoder()
 			fN.Close()
+			fmt.Println("new head closed")
 		}
 	}
 
 	f.Close()
+	fmt.Println("old head closed")
 
 	err = os.Remove(defaultPath)
 	if err != nil {
@@ -169,6 +174,7 @@ func (w *worker) writeBody() {
 
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	fmt.Println("old body opened")
 	if err != nil {
 		panic(err)
 	} else {
@@ -181,9 +187,11 @@ func (w *worker) writeBody() {
 			chainData, _ := json.MarshalIndent(w.Chain.Parents, "", "    ")
 			f.Write(chainData)
 			f.Close()
+			fmt.Println("old body closed - no new body")
 			return
 		} else {
 			fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
+			fmt.Println("new body opened")
 			if err != nil {
 				panic(err)
 			}
@@ -288,11 +296,13 @@ func (w *worker) writeBody() {
 
 			enc.CloseEncoder()
 			fN.Close()
+			fmt.Println("new body closed")
 		}
 	}
 
 	// Close the chain file
 	f.Close()
+	fmt.Println("old body closed")
 
 	err = os.Remove(defaultPath)
 	if err != nil {
@@ -311,6 +321,7 @@ func (w *worker) writeTail() {
 
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	fmt.Println("old tail opened")
 	if err != nil {
 		panic(err)
 	} else {
@@ -324,9 +335,11 @@ func (w *worker) writeTail() {
 			w.Chain.removeParent(0)
 			f.Write(chainData)
 			f.Close()
+			fmt.Println("old tail closed - no new tail")
 			return
 		} else {
 			fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
+			fmt.Println("new tail opened")
 			if err != nil {
 				panic(err)
 			}
@@ -381,10 +394,12 @@ func (w *worker) writeTail() {
 
 			enc.CloseEncoder()
 			fN.Close()
+			fmt.Println("new tail closed")
 		}
 	}
 
 	f.Close()
+	fmt.Println("old tail closed")
 
 	err = os.Remove(defaultPath)
 	if err != nil {
