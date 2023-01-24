@@ -182,6 +182,7 @@ func addDirective(channelID string, messageID string) {
 	go twitch.GetLiveStatuses(false)
 
 	ok := twitch.GetEmoteController(false, channel)
+	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Gathering emotes and broadcaster information...").ID)
 	if !ok {
 		DeleteDiscordChannel(channelName.Arguments[0])
 		SayByIDAndDelete(channelID, "Could not retrieve "+channelName.Arguments[0]+"'s emotes...")
