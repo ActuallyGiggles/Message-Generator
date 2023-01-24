@@ -62,7 +62,6 @@ func showChannels(channelID string, messageID string) {
 }
 
 func addDirective(channelID string, messageID string) {
-	fmt.Println("b3\n", twitch.Broadcasters)
 	defer DeleteDiscordMessage(channelID, messageID)
 
 	dialogueOngoing = true

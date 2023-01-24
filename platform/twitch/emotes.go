@@ -3,7 +3,6 @@ package twitch
 import (
 	"Message-Generator/global"
 	"Message-Generator/stats"
-	"fmt"
 	"sync"
 )
 
@@ -22,7 +21,9 @@ func GetEmoteController(isInit bool, channel global.Directive) (ok bool) {
 	thirdPartyChannelEmotesToUpdateMx.Lock()
 	defer broadcastersMx.Unlock()
 	defer thirdPartyChannelEmotesToUpdateMx.Unlock()
-	Broadcasters = make(map[string]Data)
+	if isInit {
+		Broadcasters = make(map[string]Data)
+	}
 
 	if channel.ChannelName == "" {
 		for _, directive := range global.Directives {
@@ -69,7 +70,6 @@ func GetEmoteController(isInit bool, channel global.Directive) (ok bool) {
 
 		transferEmotes(isInit)
 	} else {
-		fmt.Println("b1\n", Broadcasters)
 		// Get Broadcaster Info
 		data, err := GetBroadcasterInfo(channel.ChannelName)
 		if err != nil {
@@ -77,7 +77,6 @@ func GetEmoteController(isInit bool, channel global.Directive) (ok bool) {
 			return false
 		}
 		Broadcasters[channel.ChannelName] = data // Add broadcaster
-		fmt.Println("b2\n", Broadcasters)
 
 		// Get Twitch Channel Emotes
 		err = getTwitchChannelEmotes(data)
