@@ -26,7 +26,6 @@ func Start(sI StartInstructions) {
 
 	createFolders()
 	loadStats()
-	// go checkForDefluffDate(false)
 	go tickerLoops()
 }
 

@@ -65,10 +65,9 @@ func writeLoop() {
 
 		w.ChainMx.Unlock()
 	}
+
 	saveStats()
-
 	busy.Unlock()
-
 	fmt.Println("Done Writing at", time.Now().String())
 }
 

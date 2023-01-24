@@ -13,22 +13,19 @@ func zipChains() {
 	busy.Lock()
 	defer duration(track("zipping duration"))
 
-	debugLog("creating zip archive...")
 	archive, err := os.Create("markov-chains.zip")
 	if err != nil {
 		panic(err)
 	}
-	defer archive.Close()
 	zipWriter := zip.NewWriter(archive)
 
 	if err := addDirectoryToZip(zipWriter, "./markov-chains/"); err != nil {
 		panic(err)
 	}
 
-	debugLog("closing zip archive...")
 	zipWriter.Close()
+	archive.Close()
 	busy.Unlock()
-
 	fmt.Println("Done Zipping at", time.Now().String())
 }
 

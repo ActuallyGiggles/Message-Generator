@@ -82,7 +82,6 @@ func defluffHead(chain string) {
 
 		enc.CloseEncoder()
 		fN.Close()
-
 	}
 
 	f.Close()
