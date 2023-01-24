@@ -74,7 +74,7 @@ func Start() {
 		Debug:               false,
 		ShouldZip:           true,
 		ShouldDefluff:       true,
-		DefluffTriggerValue: 25,
+		DefluffTriggerValue: 10,
 	})
 
 	twitch.GatherEmotes(debug)
