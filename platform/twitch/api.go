@@ -16,14 +16,25 @@ func routineBroadcastersUpdate(directive global.Directive) (err error) {
 	if err == nil {
 		Broadcasters[directive.ChannelName] = data
 
-		e := global.ThirdPartyEmotes{
-			Name: directive.ChannelName,
-		}
-
-		thirdPartyChannelEmotesToUpdate = append(thirdPartyChannelEmotesToUpdate, e)
+		// What is the purpose of the bottom here?
+		// e := global.ThirdPartyEmotes{
+		// 	Name: directive.ChannelName,
+		// }
+		// thirdPartyChannelEmotesToUpdate = append(thirdPartyChannelEmotesToUpdate, e)
 	} else {
 		return err
 	}
+
+	return nil
+}
+
+func AddNewBroadcastersInfo(channelName string) error {
+	data, err := GetBroadcasterInfo(channelName)
+	if err != nil {
+		return err
+	}
+
+	Broadcasters[channelName] = data
 
 	return nil
 }

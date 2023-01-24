@@ -8,6 +8,7 @@ import (
 	"Message-Generator/print"
 	"Message-Generator/stats"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	_ "net/http/pprof"
 	"strings"
@@ -91,16 +92,20 @@ func websiteHomePage(w http.ResponseWriter, r *http.Request) {
 	var data DataSend
 
 	// Channels Used
+	// Has to be a directive
 	for _, directive := range global.Directives {
+		// Has to be collecting messages
 		if !directive.Settings.IsCollectingMessages {
 			continue
 		}
 
+		// Has to have a chain existing
 		if !markov.DoesChainExist(directive.ChannelName) {
 			continue
 		}
 
 		for _, broadcaster := range twitch.Broadcasters {
+			// Find img, display name, etc - basically profile information to display on site
 			if broadcaster.Login == directive.ChannelName {
 				data.ChannelsUsed = append(data.ChannelsUsed, broadcaster)
 				break
@@ -118,6 +123,8 @@ func websiteHomePage(w http.ResponseWriter, r *http.Request) {
 		e.Live = status
 		data.ChannelsLive = append(data.ChannelsLive, e)
 	}
+
+	fmt.Println(data)
 
 	err := json.NewEncoder(w).Encode(data)
 	if err != nil {

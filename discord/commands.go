@@ -180,7 +180,6 @@ func addDirective(channelID string, messageID string) {
 	}
 
 	go twitch.GetLiveStatuses(false)
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Gathering emotes for "+channelName.Arguments[0]).ID)
 
 	ok := twitch.GetEmoteController(false, channel)
 	if !ok {
@@ -188,7 +187,13 @@ func addDirective(channelID string, messageID string) {
 		SayByIDAndDelete(channelID, "Could not retrieve "+channelName.Arguments[0]+"'s emotes...")
 	}
 
-	err := global.UpdateChannels("add", channel)
+	err := twitch.AddNewBroadcastersInfo(channelName.Arguments[0])
+	if err != nil {
+		DeleteDiscordChannel(channelName.Arguments[0])
+		SayByIDAndDelete(channelID, err.Error())
+	}
+
+	err = global.UpdateChannels("add", channel)
 	if err == nil {
 		twitch.Join(channelName.Arguments[0])
 		SayByID(channelID, channelName.Arguments[0]+" added successfully.")
@@ -325,9 +330,13 @@ func removeDirective(channelID string, messageID string, args []string) {
 		channel := <-dialogueChannel
 		messagesToDelete = append(messagesToDelete, channel.MessageID)
 		global.UpdateChannels("remove", global.Directive{ChannelName: channel.Arguments[0]})
+		twitch.Depart(channel.Arguments[0])
 	} else {
 		global.UpdateChannels("remove", global.Directive{ChannelName: args[0]})
+		twitch.Depart(args[0])
 	}
+
+	twitch.Depart(args[0])
 }
 
 func showRegex(channelID string, messageID string) {
