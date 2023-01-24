@@ -187,13 +187,7 @@ func addDirective(channelID string, messageID string) {
 		SayByIDAndDelete(channelID, "Could not retrieve "+channelName.Arguments[0]+"'s emotes...")
 	}
 
-	err := twitch.AddNewBroadcastersInfo(channelName.Arguments[0])
-	if err != nil {
-		DeleteDiscordChannel(channelName.Arguments[0])
-		SayByIDAndDelete(channelID, err.Error())
-	}
-
-	err = global.UpdateChannels("add", channel)
+	err := global.UpdateChannels("add", channel)
 	if err == nil {
 		twitch.Join(channelName.Arguments[0])
 		SayByID(channelID, channelName.Arguments[0]+" added successfully.")

@@ -8,7 +8,6 @@ import (
 	"Message-Generator/print"
 	"Message-Generator/stats"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	_ "net/http/pprof"
 	"strings"
@@ -123,8 +122,6 @@ func websiteHomePage(w http.ResponseWriter, r *http.Request) {
 		e.Live = status
 		data.ChannelsLive = append(data.ChannelsLive, e)
 	}
-
-	fmt.Println(data)
 
 	err := json.NewEncoder(w).Encode(data)
 	if err != nil {
