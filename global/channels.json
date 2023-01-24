@@ -2835,5 +2835,26 @@
     "sodapoppin"
    ]
   }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "bonnierabbit",
+  "ChannelID": "485587109",
+  "DiscordChannelID": "1067324746557046844",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
  }
 ]
