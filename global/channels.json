@@ -2856,5 +2856,26 @@
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
   }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "surefour",
+  "ChannelID": "2982838",
+  "DiscordChannelID": "1067339342856585216",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
  }
 ]
