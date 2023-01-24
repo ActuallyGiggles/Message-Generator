@@ -323,17 +323,18 @@ func findChannelIDs(mode string, platform string, channelName string, returnChan
 func removeDeterminers(content string) (target string) {
 	s := strings.Split(clearNonAlphanumeric(content), " ")
 	ns := []string{}
-	wordsToAvoid := "^" + global.BotName + "$|^me$|^are$|^this$|^that$|^those$|^to$|^you$|^i$|^is$|^a$|^the$|^a$|^an$|^this$|^that$|^these$|^those$|^my$|^your$|^his$|^her$|^it$|^its$|^our$|^their$|^much$|^many$|^of$|^most$|^some$|^any$|^enough$|^all$|^both$|^half$|^either$|^neither$|^each$|^every$|^other$|^another$|^such$|^rather$|^quite$|^from$"
 
-	for _, w := range s {
-		match, err := regexp.MatchString(wordsToAvoid, w)
-		if err != nil {
-			panic(err)
+	wordsToAvoid := []string{global.BotName, "me", "are", "to", "you", "i", "is", "a", "an", "the", "my", "your", "it", "its", "their", "much", "many", "of", "some", "any", "from", "such"}
+
+wordLoop:
+	for _, word := range s {
+		for _, determiner := range wordsToAvoid {
+			if word == determiner {
+				continue wordLoop
+			}
 		}
 
-		if !match {
-			ns = append(ns, w)
-		}
+		ns = append(ns, word)
 	}
 
 	if len(ns) == 0 {
