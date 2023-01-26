@@ -7,13 +7,18 @@ import (
 )
 
 func Stats() (statistics Statistics) {
-	stats.TotalUptime = time.Now().Sub(stats.TotalStartTime)
 	stats.SessionUptime = time.Now().Sub(stats.SessionStartTime)
 	stats.TimeUntilWrite = stats.NextWriteTime.Sub(time.Now())
 	stats.TimeUntilZip = stats.NextZipTime.Sub(time.Now())
 	stats.TimeUntilDefluff = stats.NextDefluffTime.Sub(time.Now())
 	stats.Workers = len(CurrentWorkers())
 	return stats
+}
+
+func updateTotalUptime() {
+	for range time.Tick(1 * time.Second) {
+		stats.TotalUptime = stats.TotalUptime + (1 * time.Second)
+	}
 }
 
 func saveStats() {
@@ -61,6 +66,8 @@ func loadStats() {
 	stats.SessionInputs = 0
 	stats.SessionOutputs = 0
 	stats.Durations = nil
+
+	go updateTotalUptime()
 }
 
 func track(process string) (string, time.Time) {
