@@ -52,11 +52,11 @@ func tickerLoops() {
 			stats.NextWriteTime = time.Now().Add(writeInterval)
 		case <-zippingTicker.C:
 			fmt.Println("zip ticker went off")
-			go zipChains()
+			//go zipChains()
 			stats.NextZipTime = time.Now().Add(zipInterval)
 		case <-defluffTicker.C:
 			fmt.Println("defluff ticker went off")
-			go defluff()
+			//go defluff()
 			stats.NextDefluffTime = time.Now().Add(defluffInterval)
 		}
 	}
