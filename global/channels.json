@@ -2877,5 +2877,26 @@
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
   }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "ellyen",
+  "ChannelID": "141045387",
+  "DiscordChannelID": "1067524011191451698",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
  }
 ]

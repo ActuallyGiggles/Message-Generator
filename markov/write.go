@@ -41,6 +41,7 @@ func writeLoop() {
 	debugLog("writing")
 	defer duration(track("writing duration"))
 
+	// waitgroup each worker
 	for _, w := range workerMap {
 		w.ChainMx.Lock()
 

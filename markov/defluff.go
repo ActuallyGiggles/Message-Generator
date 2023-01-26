@@ -9,6 +9,7 @@ import (
 )
 
 func defluff() {
+	return
 	busy.Lock()
 	defer duration(track("defluffing duration"))
 

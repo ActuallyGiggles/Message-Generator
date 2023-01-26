@@ -10,6 +10,7 @@ import (
 )
 
 func zipChains() {
+	return
 	busy.Lock()
 	defer duration(track("zipping duration"))
 

@@ -6,6 +6,7 @@ import (
 
 // In adds an entry into a specific chain.
 func In(chainName string, content string) {
+	return
 	if content == "" || len(content) <= 0 {
 		return
 	}
