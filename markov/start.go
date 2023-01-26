@@ -47,7 +47,7 @@ func tickerLoops() {
 	for {
 		select {
 		case <-writingTicker.C:
-			fmt.Println("write ticker went off")
+			// fmt.Println("write ticker went off")
 			go writeLoop()
 			stats.NextWriteTime = time.Now().Add(writeInterval)
 		case <-zippingTicker.C:

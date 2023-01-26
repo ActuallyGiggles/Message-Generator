@@ -34,8 +34,9 @@ func writeTicker() *time.Ticker {
 }
 
 func writeLoop() {
+	fmt.Println("write ticker went off")
 	if !busy.TryLock() {
-		fmt.Println("")
+		fmt.Println("ignored write ticker - still busy")
 		return
 	}
 
