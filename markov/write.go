@@ -3,6 +3,7 @@ package markov
 import (
 	"encoding/json"
 	"os"
+	"sync"
 	"time"
 )
 
@@ -41,35 +42,38 @@ func writeLoop() {
 
 	defer duration(track("writing duration"))
 
-	// TODO: waitgroup each worker and let each have its own goroutine
+	var wg sync.WaitGroup
+
 	for _, w := range workerMap {
-		w.ChainMx.Lock()
-
-		if w.Intake == 0 {
-			w.ChainMx.Unlock()
-			continue
-		}
-
-		// Find new peak intake chain
-		if w.Intake > stats.PeakChainIntake.Amount {
-			stats.PeakChainIntake.Chain = w.Name
-			stats.PeakChainIntake.Amount = w.Intake
-			stats.PeakChainIntake.Time = time.Now()
-		}
-
-		w.writeHead()
-		w.writeTail()
-		w.writeBody()
-
-		w.Chain.Parents = nil
-		w.Intake = 0
-
-		w.ChainMx.Unlock()
+		wg.Add(1)
+		go w.writeAll(&wg)
 	}
+
+	wg.Wait()
 
 	saveStats()
 	busy.Unlock()
 	debugLog("Done Writing at", time.Now().String())
+}
+
+func (w *worker) writeAll(wg *sync.WaitGroup) {
+	defer wg.Done()
+	w.ChainMx.Lock()
+	defer w.ChainMx.Unlock()
+
+	// Find new peak intake chain
+	if w.Intake > stats.PeakChainIntake.Amount {
+		stats.PeakChainIntake.Chain = w.Name
+		stats.PeakChainIntake.Amount = w.Intake
+		stats.PeakChainIntake.Time = time.Now()
+	}
+
+	w.writeHead()
+	w.writeTail()
+	w.writeBody()
+
+	w.Chain.Parents = nil
+	w.Intake = 0
 }
 
 func (w *worker) writeHead() {
