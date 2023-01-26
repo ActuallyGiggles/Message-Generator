@@ -531,7 +531,7 @@ goThroughBody:
 		return output, errors.New(fmt.Sprintf("parent %s does not exist in chain %s", parentWord, name))
 	}
 
-	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle")
+	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle - " + "./markov-chains/" + name + "_head.json")
 }
 
 func getNextWord(parent parent) (child string) {
@@ -635,7 +635,7 @@ func getStartWord(name string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("Internal error - code should not reach this point")
+	return "", errors.New("Internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
 }
 
 func getEndWord(name string) (phrase string, err error) {
@@ -701,5 +701,5 @@ func getEndWord(name string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("Internal error - code should not reach this point")
+	return "", errors.New("Internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
 }
