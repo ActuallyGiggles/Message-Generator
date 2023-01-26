@@ -2,7 +2,6 @@ package markov
 
 import (
 	"archive/zip"
-	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -11,9 +10,10 @@ import (
 
 func zipChains() {
 	busy.Lock()
+	debugLog("zip ticker went off")
 	defer duration(track("zipping duration"))
 
-	archive, err := os.Create("markov-chains.zip")
+	archive, err := os.OpenFile("markov-chains.zip", os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}
@@ -26,7 +26,7 @@ func zipChains() {
 	zipWriter.Close()
 	archive.Close()
 	busy.Unlock()
-	fmt.Println("Done Zipping at", time.Now().String())
+	debugLog("Done Zipping at", time.Now().String())
 }
 
 func addDirectoryToZip(zipWriter *zip.Writer, path string) error {

@@ -2,7 +2,6 @@ package markov
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"time"
 )
@@ -34,16 +33,15 @@ func writeTicker() *time.Ticker {
 }
 
 func writeLoop() {
-	fmt.Println("write ticker went off")
+	debugLog("write ticker went off")
 	if !busy.TryLock() {
-		fmt.Println("ignored write ticker - still busy")
+		debugLog("ignored write ticker - still busy")
 		return
 	}
 
-	debugLog("writing")
 	defer duration(track("writing duration"))
 
-	// waitgroup each worker
+	// TODO: waitgroup each worker and let each have its own goroutine
 	for _, w := range workerMap {
 		w.ChainMx.Lock()
 
@@ -71,7 +69,7 @@ func writeLoop() {
 
 	saveStats()
 	busy.Unlock()
-	fmt.Println("Done Writing at", time.Now().String())
+	debugLog("Done Writing at", time.Now().String())
 }
 
 func (w *worker) writeHead() {

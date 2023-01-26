@@ -2,7 +2,6 @@ package markov
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -10,6 +9,7 @@ import (
 
 func defluff() {
 	busy.Lock()
+	debugLog("defluff ticker went off")
 	defer duration(track("defluffing duration"))
 
 	for _, chain := range chains(false, true) {
@@ -27,8 +27,7 @@ func defluff() {
 	}
 
 	busy.Unlock()
-
-	fmt.Println("Done Defluffing at", time.Now().String())
+	debugLog("Done Defluffing at", time.Now().String())
 }
 
 func defluffHead(chain string) {

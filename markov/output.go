@@ -52,7 +52,7 @@ func likelyBeginning(name string) (output string, err error) {
 	output = parentWord
 
 	for true {
-		// does this cause the write concurrency issue? should test if open and openfile of same file at the same time causes concurrency issue when writing
+		// TODO: does this cause the write concurrency issue? should test if open and openfile of same file at the same time causes concurrency issue when writing
 		f, err := os.Open("./markov-chains/" + name + "_body.json")
 		if err != nil {
 			return "", err
