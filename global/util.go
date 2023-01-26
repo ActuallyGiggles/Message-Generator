@@ -47,6 +47,9 @@ func RandomNumber(min, max int) int {
 }
 
 func PickRandomFromSlice(slice []string) string {
+	if len(slice) == 0 {
+		return ""
+	}
 	return slice[RandomNumber(0, len(slice))]
 }
 

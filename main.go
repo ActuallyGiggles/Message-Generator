@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/profile"
 )
 
-var debug = false
+var debug = true
 
 func main() {
 	// Profiling
@@ -74,7 +74,7 @@ func Start() {
 		Debug:               true,
 		ShouldZip:           true,
 		ShouldDefluff:       true,
-		DefluffTriggerValue: 10,
+		DefluffTriggerValue: 50,
 	})
 
 	twitch.GatherEmotes(debug)

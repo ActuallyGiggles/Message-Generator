@@ -7,16 +7,13 @@ import (
 
 var (
 	instructions    StartInstructions
-	writeInterval   = 1 * time.Minute
+	writeInterval   = 10 * time.Minute
 	zipInterval     = 6 * time.Hour
 	defluffInterval = 24 * time.Hour
 
 	busy sync.Mutex
 
 	stats Statistics
-
-	trackingProgress bool
-	progressChannel  chan Progress
 )
 
 // Start starts markov based on instructions pDuration
@@ -34,10 +31,12 @@ func tickerLoops() {
 	var defluffTicker *time.Ticker
 
 	writingTicker = writeTicker()
+
 	if instructions.ShouldZip {
 		zippingTicker = time.NewTicker(zipInterval)
 		stats.NextZipTime = time.Now().Add(zipInterval)
 	}
+
 	if instructions.ShouldDefluff {
 		defluffTicker = time.NewTicker(defluffInterval)
 		stats.NextDefluffTime = time.Now().Add(defluffInterval)
@@ -52,7 +51,7 @@ func tickerLoops() {
 			go zipChains()
 			stats.NextZipTime = time.Now().Add(zipInterval)
 		case <-defluffTicker.C:
-			//go defluff()
+			go defluff()
 			stats.NextDefluffTime = time.Now().Add(defluffInterval)
 		}
 	}

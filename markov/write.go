@@ -34,32 +34,27 @@ func writeTicker() *time.Ticker {
 }
 
 func writeLoop() {
-	debugLog("write ticker went off")
 	if !busy.TryLock() {
-		debugLog("ignored write ticker - still busy")
 		return
 	}
 
 	defer duration(track("writing duration"))
 
 	var wg sync.WaitGroup
+	wg.Add(len(workerMap))
 
 	for _, w := range workerMap {
-		wg.Add(1)
-		go w.writeAll(&wg)
+		go w.writeAllPerChain(&wg)
 	}
 
 	wg.Wait()
 
-	saveStats()
 	busy.Unlock()
-	debugLog("Done Writing at", time.Now().String())
+	saveStats()
 }
 
-func (w *worker) writeAll(wg *sync.WaitGroup) {
-	defer wg.Done()
+func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 	w.ChainMx.Lock()
-	defer w.ChainMx.Unlock()
 
 	// Find new peak intake chain
 	if w.Intake > stats.PeakChainIntake.Amount {
@@ -74,11 +69,18 @@ func (w *worker) writeAll(wg *sync.WaitGroup) {
 
 	w.Chain.Parents = nil
 	w.Intake = 0
+
+	w.ChainMx.Unlock()
+	wg.Done()
 }
 
 func (w *worker) writeHead() {
 	defaultPath := "./markov-chains/" + w.Name + "_head.json"
 	newPath := "./markov-chains/" + w.Name + "_head_new.json"
+
+	if len(w.Chain.Parents) == 0 {
+		return
+	}
 
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
@@ -132,7 +134,6 @@ func (w *worker) writeHead() {
 								})
 
 								parent.removeChild(j)
-
 								continue
 							}
 						}
@@ -170,6 +171,10 @@ func (w *worker) writeHead() {
 func (w *worker) writeBody() {
 	defaultPath := "./markov-chains/" + w.Name + "_body.json"
 	newPath := "./markov-chains/" + w.Name + "_body_new.json"
+
+	if len(w.Chain.Parents) == 0 {
+		return
+	}
 
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
@@ -312,6 +317,10 @@ func (w *worker) writeBody() {
 func (w *worker) writeTail() {
 	defaultPath := "./markov-chains/" + w.Name + "_tail.json"
 	newPath := "./markov-chains/" + w.Name + "_tail_new.json"
+
+	if len(w.Chain.Parents) == 0 {
+		return
+	}
 
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
