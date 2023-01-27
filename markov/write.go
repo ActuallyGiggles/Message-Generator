@@ -51,6 +51,7 @@ func writeLoop() {
 
 	busy.Unlock()
 	saveStats()
+	stats.NextWriteTime = time.Now().Add(writeInterval)
 }
 
 func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
@@ -64,8 +65,8 @@ func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 	}
 
 	w.writeHead()
-	w.writeTail()
 	w.writeBody()
+	w.writeTail()
 
 	w.Chain.Parents = nil
 	w.Intake = 0
@@ -99,7 +100,7 @@ func (w *worker) writeHead() {
 			f.Close()
 			return
 		} else {
-			fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
+			fN, err := os.Create(newPath)
 			if err != nil {
 				panic(err)
 			}
@@ -192,7 +193,7 @@ func (w *worker) writeBody() {
 			f.Close()
 			return
 		} else {
-			fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
+			fN, err := os.Create(newPath)
 			if err != nil {
 				panic(err)
 			}
@@ -339,7 +340,7 @@ func (w *worker) writeTail() {
 			f.Close()
 			return
 		} else {
-			fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
+			fN, err := os.Create(newPath)
 			if err != nil {
 				panic(err)
 			}

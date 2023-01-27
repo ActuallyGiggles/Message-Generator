@@ -10,7 +10,6 @@ import (
 
 func defluff() {
 	busy.Lock()
-	debugLog("defluff ticker went off")
 	defer duration(track("defluffing duration"))
 
 	for _, chain := range chains(false, true) {
@@ -28,7 +27,7 @@ func defluff() {
 	}
 
 	busy.Unlock()
-	debugLog("Done Defluffing at", time.Now().String())
+	stats.NextDefluffTime = time.Now().Add(defluffInterval)
 }
 
 func defluffHead(chain string) {

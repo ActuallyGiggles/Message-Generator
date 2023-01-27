@@ -10,7 +10,6 @@ import (
 
 func zipChains() {
 	busy.Lock()
-	debugLog("zip ticker went off")
 	defer duration(track("zipping duration"))
 
 	archive, err := os.OpenFile("markov-chains.zip", os.O_CREATE, 0666)
@@ -26,7 +25,7 @@ func zipChains() {
 	zipWriter.Close()
 	archive.Close()
 	busy.Unlock()
-	debugLog("Done Zipping at", time.Now().String())
+	stats.NextZipTime = time.Now().Add(zipInterval)
 }
 
 func addDirectoryToZip(zipWriter *zip.Writer, path string) error {

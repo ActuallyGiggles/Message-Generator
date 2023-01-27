@@ -46,13 +46,10 @@ func tickerLoops() {
 		select {
 		case <-writingTicker.C:
 			go writeLoop()
-			stats.NextWriteTime = time.Now().Add(writeInterval)
 			// case <-zippingTicker.C:
 			// 	go zipChains()
-			// 	stats.NextZipTime = time.Now().Add(zipInterval)
 			// case <-defluffTicker.C:
 			// 	go defluff()
-			// 	stats.NextDefluffTime = time.Now().Add(defluffInterval)
 		}
 	}
 }
