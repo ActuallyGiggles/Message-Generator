@@ -39,7 +39,7 @@ func writeLoop() {
 		return
 	}
 
-	//defer duration(track("writing duration"))
+	defer duration(track("writing duration"))
 
 	var wg sync.WaitGroup
 	wg.Add(len(workerMap))
