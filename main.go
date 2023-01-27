@@ -68,11 +68,9 @@ func Start() {
 	go discord.Start()
 
 	markov.Start(markov.StartInstructions{
-		SeparationKey: " ",
-		// StartKey:            "b5G(n1$I!4g",
-		// EndKey:              "e1$D(n7",
-		StartKey:            "start",
-		EndKey:              "end",
+		SeparationKey:       " ",
+		StartKey:            "b5G(n1$I!4g",
+		EndKey:              "e1$D(n7",
 		Debug:               true,
 		ShouldZip:           true,
 		ShouldDefluff:       true,
