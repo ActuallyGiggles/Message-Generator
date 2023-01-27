@@ -2,6 +2,7 @@ package markov
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -38,7 +39,7 @@ func writeLoop() {
 		return
 	}
 
-	defer duration(track("writing duration"))
+	//defer duration(track("writing duration"))
 
 	var wg sync.WaitGroup
 	wg.Add(len(workerMap))
@@ -56,6 +57,12 @@ func writeLoop() {
 
 func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 	w.ChainMx.Lock()
+	defer w.ChainMx.Unlock()
+	defer wg.Done()
+
+	if len(w.Chain.Parents) == 0 {
+		return
+	}
 
 	// Find new peak intake chain
 	if w.Intake > stats.PeakChainIntake.Amount {
@@ -64,24 +71,20 @@ func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 		stats.PeakChainIntake.Time = time.Now()
 	}
 
+	// As of 1/26/23, the head would be first, taking away the start key in the chain.
+	// Then, the body would take everything else with it, leaving no end key for the tail.
+	// Currently patched in body with an if word == start or end key: continue.
 	w.writeHead()
 	w.writeBody()
 	w.writeTail()
 
 	w.Chain.Parents = nil
 	w.Intake = 0
-
-	w.ChainMx.Unlock()
-	wg.Done()
 }
 
 func (w *worker) writeHead() {
 	defaultPath := "./markov-chains/" + w.Name + "_head.json"
 	newPath := "./markov-chains/" + w.Name + "_head_new.json"
-
-	if len(w.Chain.Parents) == 0 {
-		return
-	}
 
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
@@ -94,6 +97,7 @@ func (w *worker) writeHead() {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
+			fmt.Println(w.Chain.Parents[0].Children)
 			chainData, _ := json.MarshalIndent(w.Chain.Parents[0].Children, "", "    ")
 			w.Chain.removeParent(0)
 			f.Write(chainData)
@@ -173,10 +177,6 @@ func (w *worker) writeBody() {
 	defaultPath := "./markov-chains/" + w.Name + "_body.json"
 	newPath := "./markov-chains/" + w.Name + "_body_new.json"
 
-	if len(w.Chain.Parents) == 0 {
-		return
-	}
-
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
 	if err != nil {
@@ -214,6 +214,10 @@ func (w *worker) writeBody() {
 				parentMatch := false
 				// Find newParent in existingParents
 				for nPIndex, newParent := range *&w.Chain.Parents {
+
+					if newParent.Word == instructions.StartKey || newParent.Word == instructions.EndKey {
+						continue
+					}
 
 					if newParent.Word == existingParent.Word {
 						parentMatch = true
@@ -319,10 +323,6 @@ func (w *worker) writeTail() {
 	defaultPath := "./markov-chains/" + w.Name + "_tail.json"
 	newPath := "./markov-chains/" + w.Name + "_tail_new.json"
 
-	if len(w.Chain.Parents) == 0 {
-		return
-	}
-
 	// Open existing chain file
 	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
 	if err != nil {
@@ -369,7 +369,7 @@ func (w *worker) writeTail() {
 							if newGrandparent.Word == existingGrandparent.Word {
 								grandparentMatch = true
 
-								enc.AddEntry(child{
+								enc.AddEntry(grandparent{
 									Word:  newGrandparent.Word,
 									Value: newGrandparent.Value + existingGrandparent.Value,
 								})
@@ -384,8 +384,8 @@ func (w *worker) writeTail() {
 						}
 					}
 
-					for _, c := range *&parent.Grandparents {
-						enc.AddEntry(c)
+					for _, g := range *&parent.Grandparents {
+						enc.AddEntry(g)
 					}
 
 					w.Chain.removeParent(i)
@@ -398,7 +398,6 @@ func (w *worker) writeTail() {
 	}
 
 	f.Close()
-
 	err = os.Remove(defaultPath)
 	if err != nil {
 		panic(err)

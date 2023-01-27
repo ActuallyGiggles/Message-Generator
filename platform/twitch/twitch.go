@@ -14,7 +14,7 @@ var client *twitch.Client
 var totalM int
 
 // Start creates a twitch client and connects it.
-func Start(incoming chan platform.Message) {
+func Start(debug bool, incoming chan platform.Message) {
 startOver:
 	// Make unexported client use the address for the initialized client
 	client = &twitch.Client{}
@@ -33,8 +33,12 @@ startOver:
 		incoming <- m
 	})
 
-	for _, directive := range global.Directives {
-		client.Join(directive.ChannelName)
+	if debug {
+		Join("actuallygiggles")
+	} else {
+		for _, directive := range global.Directives {
+			client.Join(directive.ChannelName)
+		}
 	}
 
 	err := client.Connect()

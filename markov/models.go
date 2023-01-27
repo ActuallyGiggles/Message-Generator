@@ -61,8 +61,8 @@ type chain struct {
 
 type parent struct {
 	Word         string
-	Children     []child
 	Grandparents []grandparent
+	Children     []child
 }
 
 type child struct {

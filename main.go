@@ -68,9 +68,11 @@ func Start() {
 	go discord.Start()
 
 	markov.Start(markov.StartInstructions{
-		SeparationKey:       " ",
-		StartKey:            "b5G(n1$I!4g",
-		EndKey:              "e1$D(n7",
+		SeparationKey: " ",
+		// StartKey:            "b5G(n1$I!4g",
+		// EndKey:              "e1$D(n7",
+		StartKey:            "start",
+		EndKey:              "end",
 		Debug:               true,
 		ShouldZip:           true,
 		ShouldDefluff:       true,
@@ -78,7 +80,7 @@ func Start() {
 	})
 
 	twitch.GatherEmotes(debug)
-	go twitch.Start(incomingMessages)
+	go twitch.Start(debug, incomingMessages)
 
 	stats.Start()
 
