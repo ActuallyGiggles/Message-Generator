@@ -132,10 +132,12 @@ func (w *worker) writeHead() {
 							if newChild.Word == existingChild.Word {
 								childMatch = true
 
-								enc.AddEntry(child{
+								if err := enc.AddEntry(child{
 									Word:  newChild.Word,
 									Value: newChild.Value + existingChild.Value,
-								})
+								}); err != nil {
+									panic(err)
+								}
 
 								parent.removeChild(j)
 								continue
@@ -143,19 +145,26 @@ func (w *worker) writeHead() {
 						}
 
 						if !childMatch {
-							enc.AddEntry(existingChild)
+							if err := enc.AddEntry(existingChild); err != nil {
+								panic(err)
+							}
 						}
 					}
 
 					for _, c := range *&parent.Children {
-						enc.AddEntry(c)
+						if err := enc.AddEntry(c); err != nil {
+							panic(err)
+						}
 					}
 
 					w.Chain.removeParent(i)
 				}
 			}
 
-			enc.CloseEncoder()
+			if err := enc.CloseEncoder(); err != nil {
+				panic(err)
+			}
+
 			fN.Close()
 		}
 	}
@@ -294,7 +303,9 @@ func (w *worker) writeBody() {
 							uParent.Grandparents = append(uParent.Grandparents, newGrandparent)
 						}
 
-						enc.AddEntry(uParent)
+						if err := enc.AddEntry(uParent); err != nil {
+							panic(err)
+						}
 
 						w.Chain.removeParent(nPIndex)
 						break
@@ -302,15 +313,21 @@ func (w *worker) writeBody() {
 				}
 
 				if !parentMatch {
-					enc.AddEntry(existingParent)
+					if err := enc.AddEntry(existingParent); err != nil {
+						panic(err)
+					}
 				}
 			}
 
 			for _, nParent := range w.Chain.Parents {
-				enc.AddEntry(nParent)
+				if err := enc.AddEntry(nParent); err != nil {
+					panic(err)
+				}
 			}
 
-			enc.CloseEncoder()
+			if err := enc.CloseEncoder(); err != nil {
+				panic(err)
+			}
 			fN.Close()
 		}
 	}
@@ -389,10 +406,12 @@ func (w *worker) writeTail() {
 							if newGrandparent.Word == existingGrandparent.Word {
 								grandparentMatch = true
 
-								enc.AddEntry(grandparent{
+								if err := enc.AddEntry(grandparent{
 									Word:  newGrandparent.Word,
 									Value: newGrandparent.Value + existingGrandparent.Value,
-								})
+								}); err != nil {
+									panic(err)
+								}
 
 								parent.removeGrandparent(j)
 								continue
@@ -400,19 +419,25 @@ func (w *worker) writeTail() {
 						}
 
 						if !grandparentMatch {
-							enc.AddEntry(existingGrandparent)
+							if err := enc.AddEntry(existingGrandparent); err != nil {
+								panic(err)
+							}
 						}
 					}
 
 					for _, g := range *&parent.Grandparents {
-						enc.AddEntry(g)
+						if err := enc.AddEntry(g); err != nil {
+							panic(err)
+						}
 					}
 
 					w.Chain.removeParent(i)
 				}
 			}
 
-			enc.CloseEncoder()
+			if err := enc.CloseEncoder(); err != nil {
+				panic(err)
+			}
 			fN.Close()
 		}
 	}
