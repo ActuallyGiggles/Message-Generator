@@ -2,7 +2,6 @@ package markov
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -145,7 +144,6 @@ func defluffBody(chain string) {
 					Word:  eChild.Word,
 					Value: eChild.Value,
 				})
-				fmt.Println(eChild.Word, eChild.Value)
 			}
 
 			for _, eGrandparent := range existingParent.Grandparents {

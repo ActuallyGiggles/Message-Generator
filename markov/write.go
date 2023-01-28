@@ -2,7 +2,6 @@ package markov
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -97,7 +96,6 @@ func (w *worker) writeHead() {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
-			fmt.Println(w.Chain.Parents[0].Children)
 			chainData, _ := json.MarshalIndent(w.Chain.Parents[0].Children, "", "    ")
 			w.Chain.removeParent(0)
 			f.Write(chainData)
