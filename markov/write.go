@@ -160,18 +160,21 @@ func (w *worker) writeHead() {
 		}
 	}
 
-	f.Close()
-
-	var triedToRemove int
-tryRemove:
-	err = os.Remove(defaultPath)
+	var triedToClose int
+tryClose:
+	err = f.Close()
 	if err != nil {
 		time.Sleep(5 * time.Second)
-		if triedToRemove < 25 {
-			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
-			triedToRemove++
-			goto tryRemove
+		if triedToClose < 25 {
+			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToClose)
+			triedToClose++
+			goto tryClose
 		}
+	}
+
+	err = os.Remove(defaultPath)
+	if err != nil {
+		panic(err)
 	}
 
 	err = os.Rename(newPath, defaultPath)
@@ -313,18 +316,21 @@ func (w *worker) writeBody() {
 	}
 
 	// Close the chain file
-	f.Close()
-
-	var triedToRemove int
-tryRemove:
-	err = os.Remove(defaultPath)
+	var triedToClose int
+tryClose:
+	err = f.Close()
 	if err != nil {
 		time.Sleep(5 * time.Second)
-		if triedToRemove < 25 {
-			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
-			triedToRemove++
-			goto tryRemove
+		if triedToClose < 25 {
+			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToClose)
+			triedToClose++
+			goto tryClose
 		}
+	}
+
+	err = os.Remove(defaultPath)
+	if err != nil {
+		panic(err)
 	}
 
 	err = os.Rename(newPath, defaultPath)
@@ -411,18 +417,21 @@ func (w *worker) writeTail() {
 		}
 	}
 
-	f.Close()
-
-	var triedToRemove int
-tryRemove:
-	err = os.Remove(defaultPath)
+	var triedToClose int
+tryClose:
+	err = f.Close()
 	if err != nil {
 		time.Sleep(5 * time.Second)
-		if triedToRemove < 25 {
-			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
-			triedToRemove++
-			goto tryRemove
+		if triedToClose < 25 {
+			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToClose)
+			triedToClose++
+			goto tryClose
 		}
+	}
+
+	err = os.Remove(defaultPath)
+	if err != nil {
+		panic(err)
 	}
 
 	err = os.Rename(newPath, defaultPath)
