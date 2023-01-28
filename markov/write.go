@@ -162,13 +162,14 @@ func (w *worker) writeHead() {
 	f.Close()
 
 	var triedToRemove int
-
-	tryRemove:
+tryRemove:
 	err = os.Remove(defaultPath)
 	if err != nil {
 		time.Sleep(5 * time.Second)
-		triedToRemove++ 
-		if triedToRemove
+		if triedToRemove < 50 {
+			triedToRemove++
+			goto tryRemove
+		}
 	}
 
 	err = os.Rename(newPath, defaultPath)
@@ -313,9 +314,15 @@ func (w *worker) writeBody() {
 	f.Close()
 	time.Sleep(5 * time.Second)
 
+	var triedToRemove int
+tryRemove:
 	err = os.Remove(defaultPath)
 	if err != nil {
-		panic(err)
+		time.Sleep(5 * time.Second)
+		if triedToRemove < 50 {
+			triedToRemove++
+			goto tryRemove
+		}
 	}
 
 	err = os.Rename(newPath, defaultPath)
@@ -405,9 +412,15 @@ func (w *worker) writeTail() {
 	f.Close()
 	time.Sleep(5 * time.Second)
 
+	var triedToRemove int
+tryRemove:
 	err = os.Remove(defaultPath)
 	if err != nil {
-		panic(err)
+		time.Sleep(5 * time.Second)
+		if triedToRemove < 50 {
+			triedToRemove++
+			goto tryRemove
+		}
 	}
 
 	err = os.Rename(newPath, defaultPath)
