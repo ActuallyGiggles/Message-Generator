@@ -167,7 +167,7 @@ tryRemove:
 	err = os.Remove(defaultPath)
 	if err != nil {
 		time.Sleep(5 * time.Second)
-		if triedToRemove < 50 {
+		if triedToRemove < 25 {
 			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
 			triedToRemove++
 			goto tryRemove
@@ -314,14 +314,13 @@ func (w *worker) writeBody() {
 
 	// Close the chain file
 	f.Close()
-	time.Sleep(5 * time.Second)
 
 	var triedToRemove int
 tryRemove:
 	err = os.Remove(defaultPath)
 	if err != nil {
 		time.Sleep(5 * time.Second)
-		if triedToRemove < 50 {
+		if triedToRemove < 25 {
 			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
 			triedToRemove++
 			goto tryRemove
@@ -413,14 +412,13 @@ func (w *worker) writeTail() {
 	}
 
 	f.Close()
-	time.Sleep(5 * time.Second)
 
 	var triedToRemove int
 tryRemove:
 	err = os.Remove(defaultPath)
 	if err != nil {
 		time.Sleep(5 * time.Second)
-		if triedToRemove < 50 {
+		if triedToRemove < 25 {
 			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
 			triedToRemove++
 			goto tryRemove
