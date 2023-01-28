@@ -162,9 +162,15 @@ func (w *worker) writeHead() {
 	}
 
 	f.Close()
+
+	var triedToRemove int
+
+	tryRemove:
 	err = os.Remove(defaultPath)
 	if err != nil {
-		panic(err)
+		time.Sleep(5 * time.Second)
+		triedToRemove++ 
+		if triedToRemove
 	}
 
 	err = os.Rename(newPath, defaultPath)
@@ -307,6 +313,7 @@ func (w *worker) writeBody() {
 
 	// Close the chain file
 	f.Close()
+	time.Sleep(5 * time.Second)
 
 	err = os.Remove(defaultPath)
 	if err != nil {
@@ -398,6 +405,8 @@ func (w *worker) writeTail() {
 	}
 
 	f.Close()
+	time.Sleep(5 * time.Second)
+
 	err = os.Remove(defaultPath)
 	if err != nil {
 		panic(err)
