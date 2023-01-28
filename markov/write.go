@@ -166,7 +166,7 @@ tryClose:
 	if err != nil {
 		time.Sleep(5 * time.Second)
 		if triedToClose < 25 {
-			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToClose)
+			fmt.Println("attempting to close:", defaultPath, ", attempt #: ", triedToClose)
 			triedToClose++
 			goto tryClose
 		}
@@ -322,7 +322,7 @@ tryClose:
 	if err != nil {
 		time.Sleep(5 * time.Second)
 		if triedToClose < 25 {
-			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToClose)
+			fmt.Println("attempting to close:", defaultPath, ", attempt #: ", triedToClose)
 			triedToClose++
 			goto tryClose
 		}
@@ -423,7 +423,7 @@ tryClose:
 	if err != nil {
 		time.Sleep(5 * time.Second)
 		if triedToClose < 25 {
-			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToClose)
+			fmt.Println("attempting to close:", defaultPath, ", attempt #: ", triedToClose)
 			triedToClose++
 			goto tryClose
 		}
