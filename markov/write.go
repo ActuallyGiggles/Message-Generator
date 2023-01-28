@@ -2,6 +2,7 @@ package markov
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -167,6 +168,7 @@ tryRemove:
 	if err != nil {
 		time.Sleep(5 * time.Second)
 		if triedToRemove < 50 {
+			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
 			triedToRemove++
 			goto tryRemove
 		}
@@ -320,6 +322,7 @@ tryRemove:
 	if err != nil {
 		time.Sleep(5 * time.Second)
 		if triedToRemove < 50 {
+			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
 			triedToRemove++
 			goto tryRemove
 		}
@@ -418,6 +421,7 @@ tryRemove:
 	if err != nil {
 		time.Sleep(5 * time.Second)
 		if triedToRemove < 50 {
+			fmt.Println("attempting to remove:", defaultPath, ", attempt #: ", triedToRemove)
 			triedToRemove++
 			goto tryRemove
 		}
