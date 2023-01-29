@@ -38,19 +38,16 @@ func writeLoop() {
 	if !busy.TryLock() {
 		return
 	}
-
+	defer busy.Unlock()
 	defer duration(track("writing duration"))
 
 	var wg sync.WaitGroup
 	wg.Add(len(workerMap))
-
 	for _, w := range workerMap {
 		go w.writeAllPerChain(&wg)
 	}
-
 	wg.Wait()
 
-	busy.Unlock()
 	saveStats()
 	stats.NextWriteTime = time.Now().Add(writeInterval)
 }
@@ -181,15 +178,7 @@ tryClose:
 		}
 	}
 
-	err = os.Remove(defaultPath)
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.Rename(newPath, defaultPath)
-	if err != nil {
-		panic(err)
-	}
+	removeAndRename(defaultPath, newPath)
 }
 
 func (w *worker) writeBody() {
@@ -345,15 +334,7 @@ tryClose:
 		}
 	}
 
-	err = os.Remove(defaultPath)
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.Rename(newPath, defaultPath)
-	if err != nil {
-		panic(err)
-	}
+	removeAndRename(defaultPath, newPath)
 }
 
 func (w *worker) writeTail() {
@@ -388,9 +369,13 @@ func (w *worker) writeTail() {
 				panic(err)
 			}
 
+			// For every parent in parents
 			for i, parent := range *&w.Chain.Parents {
+
+				// If the parent is an end key
 				if parent.Word == instructions.EndKey {
 
+					// Look through all of its grandparents
 					for dec.More() {
 						var existingGrandparent grandparent
 
@@ -401,11 +386,14 @@ func (w *worker) writeTail() {
 
 						grandparentMatch := false
 
+						// For every new grandparent in new grandparents
 						for j, newGrandparent := range *&parent.Grandparents {
 
+							// If this new grandparent matches the existing/old grandparent
 							if newGrandparent.Word == existingGrandparent.Word {
 								grandparentMatch = true
 
+								// Create a new grandparent with combined values of the previous two and write to a new file
 								if err := enc.AddEntry(grandparent{
 									Word:  newGrandparent.Word,
 									Value: newGrandparent.Value + existingGrandparent.Value,
@@ -413,11 +401,13 @@ func (w *worker) writeTail() {
 									panic(err)
 								}
 
+								// Remove that old grandparent
 								parent.removeGrandparent(j)
 								continue
 							}
 						}
 
+						// If there is no new grandparent that matches the old grandparent, just add the old one to the new file
 						if !grandparentMatch {
 							if err := enc.AddEntry(existingGrandparent); err != nil {
 								panic(err)
@@ -425,12 +415,14 @@ func (w *worker) writeTail() {
 						}
 					}
 
+					// Now, for every new grandparent that wasn't matched, also add it to the new file
 					for _, g := range *&parent.Grandparents {
 						if err := enc.AddEntry(g); err != nil {
 							panic(err)
 						}
 					}
 
+					// Finally, remove the whole new parent that was being worked on from the new chain
 					w.Chain.removeParent(i)
 				}
 			}
@@ -454,13 +446,29 @@ tryClose:
 		}
 	}
 
-	err = os.Remove(defaultPath)
+	removeAndRename(defaultPath, newPath)
+}
+
+func removeAndRename(defaultPath, newPath string) {
+	var triedToRemove int
+tryRemove:
+	err := os.Remove(defaultPath)
 	if err != nil {
-		panic(err)
+		if triedToRemove < 30 {
+			fmt.Println("tried to remove:", defaultPath, ", attempt #: ", triedToRemove)
+			triedToRemove++
+			goto tryRemove
+		}
 	}
 
+	var triedToRename int
+tryRename:
 	err = os.Rename(newPath, defaultPath)
 	if err != nil {
-		panic(err)
+		if triedToRename < 30 {
+			fmt.Println("tried to rename:", defaultPath, ", attempt #: ", triedToRename)
+			triedToRename++
+			goto tryRename
+		}
 	}
 }
