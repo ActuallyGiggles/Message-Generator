@@ -38,28 +38,32 @@ func writeLoop() {
 	if !busy.TryLock() {
 		return
 	}
-	defer busy.Unlock()
+
 	defer duration(track("writing duration"))
 
 	var wg sync.WaitGroup
-	wg.Add(len(workerMap))
+
 	for _, w := range workerMap {
+		wg.Add(1)
 		go w.writeAllPerChain(&wg)
 	}
+
 	wg.Wait()
 
 	saveStats()
 	stats.NextWriteTime = time.Now().Add(writeInterval)
+	busy.Unlock()
 }
 
 func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
-	w.ChainMx.Lock()
-	defer w.ChainMx.Unlock()
 	defer wg.Done()
 
 	if len(w.Chain.Parents) == 0 {
 		return
 	}
+
+	w.ChainMx.Lock()
+	defer w.ChainMx.Unlock()
 
 	// Find new peak intake chain
 	if w.Intake > stats.PeakChainIntake.Amount {
@@ -68,12 +72,10 @@ func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 		stats.PeakChainIntake.Time = time.Now()
 	}
 
-	// As of 1/26/23, the head would be first, taking away the start key in the chain.
-	// Then, the body would take everything else with it, leaving no end key for the tail.
-	// Currently patched in body with an if word == start or end key: continue.
+	// Body needs to be last because it will write all existing parents into body file
 	w.writeHead()
-	w.writeBody()
 	w.writeTail()
+	w.writeBody()
 
 	w.Chain.Parents = nil
 	w.Intake = 0
@@ -208,7 +210,9 @@ func (w *worker) writeBody() {
 
 			var enc encode
 
-			StartEncoder(&enc, fN)
+			if err = StartEncoder(&enc, fN); err != nil {
+				panic(err)
+			}
 
 			// For every new item in the existing chain
 			for dec.More() {
@@ -455,10 +459,11 @@ tryRemove:
 	err := os.Remove(defaultPath)
 	if err != nil {
 		if triedToRemove < 30 {
-			fmt.Println("tried to remove:", defaultPath, ", attempt #: ", triedToRemove)
+			fmt.Println("tried to remove:", defaultPath+", attempt #: ", triedToRemove)
 			triedToRemove++
 			goto tryRemove
 		}
+		panic(err)
 	}
 
 	var triedToRename int
@@ -466,9 +471,10 @@ tryRename:
 	err = os.Rename(newPath, defaultPath)
 	if err != nil {
 		if triedToRename < 30 {
-			fmt.Println("tried to rename:", defaultPath, ", attempt #: ", triedToRename)
+			fmt.Println("tried to rename:", defaultPath+", attempt #: ", triedToRename)
 			triedToRename++
 			goto tryRename
 		}
+		panic(err)
 	}
 }

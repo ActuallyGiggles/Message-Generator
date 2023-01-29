@@ -33,12 +33,8 @@ startOver:
 		incoming <- m
 	})
 
-	if debug {
-		Join("actuallygiggles")
-	} else {
-		for _, directive := range global.Directives {
-			client.Join(directive.ChannelName)
-		}
+	for _, directive := range global.Directives {
+		client.Join(directive.ChannelName)
 	}
 
 	err := client.Connect()

@@ -7,7 +7,7 @@ import (
 
 var (
 	instructions    StartInstructions
-	writeInterval   = 10 * time.Minute
+	writeInterval   = 10 * time.Second
 	zipInterval     = 6 * time.Hour
 	defluffInterval = 24 * time.Hour
 
