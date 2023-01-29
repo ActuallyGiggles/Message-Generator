@@ -14,10 +14,13 @@ func Out(oi OutputInstructions) (output string, err error) {
 	method := oi.Method
 	target := oi.Target
 
-	// defer duration(track("output duration"))
+	//defer duration(track("output duration"))
 
-	if exists := DoesChainExist(name); !exists {
+	if w, exists := DoesChainExist(name); !exists {
 		return "", errors.New("Chain '" + name + "' is not found in directory.")
+	} else {
+		w.ChainMx.Lock()
+		defer w.ChainMx.Unlock()
 	}
 
 	switch method {

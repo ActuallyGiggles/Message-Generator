@@ -2,7 +2,6 @@ package markov
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -73,15 +72,20 @@ func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 	}
 
 	// Body needs to be last because it will write all existing parents into body file
-	w.writeHead()
-	w.writeTail()
+
+	var wg2 sync.WaitGroup
+	wg2.Add(2)
+	w.writeHead(&wg2)
+	w.writeTail(&wg2)
+	wg2.Wait()
 	w.writeBody()
 
 	w.Chain.Parents = nil
 	w.Intake = 0
 }
 
-func (w *worker) writeHead() {
+func (w *worker) writeHead(wg2 *sync.WaitGroup) {
+	defer wg2.Done()
 	defaultPath := "./markov-chains/" + w.Name + "_head.json"
 	newPath := "./markov-chains/" + w.Name + "_head_new.json"
 
@@ -168,16 +172,115 @@ func (w *worker) writeHead() {
 		}
 	}
 
-	var triedToClose int
-tryClose:
 	err = f.Close()
 	if err != nil {
-		time.Sleep(5 * time.Second)
-		if triedToClose < 25 {
-			fmt.Println("attempting to close:", defaultPath, ", attempt #: ", triedToClose)
-			triedToClose++
-			goto tryClose
+		panic(err)
+	}
+
+	removeAndRename(defaultPath, newPath)
+}
+
+func (w *worker) writeTail(wg2 *sync.WaitGroup) {
+	defer wg2.Done()
+	defaultPath := "./markov-chains/" + w.Name + "_tail.json"
+	newPath := "./markov-chains/" + w.Name + "_tail_new.json"
+
+	// Open existing chain file
+	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	if err != nil {
+		panic(err)
+	} else {
+		// Start a new decoder
+		dec := json.NewDecoder(f)
+
+		// Get beginning token
+		_, err = dec.Token()
+		if err != nil {
+			chainData, _ := json.MarshalIndent(w.Chain.Parents[0].Grandparents, "", "    ")
+			w.Chain.removeParent(0)
+			f.Write(chainData)
+			f.Close()
+			return
+		} else {
+			fN, err := os.Create(newPath)
+			if err != nil {
+				panic(err)
+			}
+
+			var enc encode
+
+			if err = StartEncoder(&enc, fN); err != nil {
+				panic(err)
+			}
+
+			// For every parent in parents
+			for i, parent := range *&w.Chain.Parents {
+
+				// If the parent is an end key
+				if parent.Word == instructions.EndKey {
+
+					// Look through all of its grandparents
+					for dec.More() {
+						var existingGrandparent grandparent
+
+						err := dec.Decode(&existingGrandparent)
+						if err != nil {
+							panic(err)
+						}
+
+						grandparentMatch := false
+
+						// For every new grandparent in new grandparents
+						for j, newGrandparent := range *&parent.Grandparents {
+
+							// If this new grandparent matches the existing/old grandparent
+							if newGrandparent.Word == existingGrandparent.Word {
+								grandparentMatch = true
+
+								// Create a new grandparent with combined values of the previous two and write to a new file
+								if err := enc.AddEntry(grandparent{
+									Word:  newGrandparent.Word,
+									Value: newGrandparent.Value + existingGrandparent.Value,
+								}); err != nil {
+									panic(err)
+								}
+
+								// Remove that old grandparent
+								parent.removeGrandparent(j)
+								continue
+							}
+						}
+
+						// If there is no new grandparent that matches the old grandparent, just add the old one to the new file
+						if !grandparentMatch {
+							if err := enc.AddEntry(existingGrandparent); err != nil {
+								panic(err)
+							}
+						}
+					}
+
+					// Now, for every new grandparent that wasn't matched, also add it to the new file
+					for _, g := range *&parent.Grandparents {
+						if err := enc.AddEntry(g); err != nil {
+							panic(err)
+						}
+					}
+
+					// Finally, remove the whole new parent that was being worked on from the new chain
+					w.Chain.removeParent(i)
+				}
+			}
+
+			if err := enc.CloseEncoder(); err != nil {
+				panic(err)
+			}
+			fN.Close()
 		}
+	}
+
+	err = f.Close()
+	if err != nil {
+		panic(err)
 	}
 
 	removeAndRename(defaultPath, newPath)
@@ -326,155 +429,10 @@ func (w *worker) writeBody() {
 	}
 
 	// Close the chain file
-	var triedToClose int
-tryClose:
 	err = f.Close()
 	if err != nil {
-		time.Sleep(5 * time.Second)
-		if triedToClose < 25 {
-			fmt.Println("attempting to close:", defaultPath, ", attempt #: ", triedToClose)
-			triedToClose++
-			goto tryClose
-		}
+		panic(err)
 	}
 
 	removeAndRename(defaultPath, newPath)
-}
-
-func (w *worker) writeTail() {
-	defaultPath := "./markov-chains/" + w.Name + "_tail.json"
-	newPath := "./markov-chains/" + w.Name + "_tail_new.json"
-
-	// Open existing chain file
-	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
-	if err != nil {
-		panic(err)
-	} else {
-		// Start a new decoder
-		dec := json.NewDecoder(f)
-
-		// Get beginning token
-		_, err = dec.Token()
-		if err != nil {
-			chainData, _ := json.MarshalIndent(w.Chain.Parents[0].Grandparents, "", "    ")
-			w.Chain.removeParent(0)
-			f.Write(chainData)
-			f.Close()
-			return
-		} else {
-			fN, err := os.Create(newPath)
-			if err != nil {
-				panic(err)
-			}
-
-			var enc encode
-
-			if err = StartEncoder(&enc, fN); err != nil {
-				panic(err)
-			}
-
-			// For every parent in parents
-			for i, parent := range *&w.Chain.Parents {
-
-				// If the parent is an end key
-				if parent.Word == instructions.EndKey {
-
-					// Look through all of its grandparents
-					for dec.More() {
-						var existingGrandparent grandparent
-
-						err := dec.Decode(&existingGrandparent)
-						if err != nil {
-							panic(err)
-						}
-
-						grandparentMatch := false
-
-						// For every new grandparent in new grandparents
-						for j, newGrandparent := range *&parent.Grandparents {
-
-							// If this new grandparent matches the existing/old grandparent
-							if newGrandparent.Word == existingGrandparent.Word {
-								grandparentMatch = true
-
-								// Create a new grandparent with combined values of the previous two and write to a new file
-								if err := enc.AddEntry(grandparent{
-									Word:  newGrandparent.Word,
-									Value: newGrandparent.Value + existingGrandparent.Value,
-								}); err != nil {
-									panic(err)
-								}
-
-								// Remove that old grandparent
-								parent.removeGrandparent(j)
-								continue
-							}
-						}
-
-						// If there is no new grandparent that matches the old grandparent, just add the old one to the new file
-						if !grandparentMatch {
-							if err := enc.AddEntry(existingGrandparent); err != nil {
-								panic(err)
-							}
-						}
-					}
-
-					// Now, for every new grandparent that wasn't matched, also add it to the new file
-					for _, g := range *&parent.Grandparents {
-						if err := enc.AddEntry(g); err != nil {
-							panic(err)
-						}
-					}
-
-					// Finally, remove the whole new parent that was being worked on from the new chain
-					w.Chain.removeParent(i)
-				}
-			}
-
-			if err := enc.CloseEncoder(); err != nil {
-				panic(err)
-			}
-			fN.Close()
-		}
-	}
-
-	var triedToClose int
-tryClose:
-	err = f.Close()
-	if err != nil {
-		time.Sleep(5 * time.Second)
-		if triedToClose < 25 {
-			fmt.Println("attempting to close:", defaultPath, ", attempt #: ", triedToClose)
-			triedToClose++
-			goto tryClose
-		}
-	}
-
-	removeAndRename(defaultPath, newPath)
-}
-
-func removeAndRename(defaultPath, newPath string) {
-	var triedToRemove int
-tryRemove:
-	err := os.Remove(defaultPath)
-	if err != nil {
-		if triedToRemove < 30 {
-			fmt.Println("tried to remove:", defaultPath+", attempt #: ", triedToRemove)
-			triedToRemove++
-			goto tryRemove
-		}
-		panic(err)
-	}
-
-	var triedToRename int
-tryRename:
-	err = os.Rename(newPath, defaultPath)
-	if err != nil {
-		if triedToRename < 30 {
-			fmt.Println("tried to rename:", defaultPath+", attempt #: ", triedToRename)
-			triedToRename++
-			goto tryRename
-		}
-		panic(err)
-	}
 }

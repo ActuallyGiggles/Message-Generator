@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/profile"
 )
 
-var debug = true
+var debug = false
 
 func main() {
 	// Profiling

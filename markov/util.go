@@ -51,13 +51,17 @@ func chains(isInit bool, includeFullName bool) (chains []string) {
 }
 
 // DoesChainExist returns if a chain exists or not.
-func DoesChainExist(name string) (exists bool) {
+func DoesChainExist(name string) (w *worker, exists bool) {
 	for _, c := range chains(false, false) {
 		if c == name {
-			return true
+			for _, w := range workerMap {
+				if w.Name == c {
+					return w, true
+				}
+			}
 		}
 	}
-	return false
+	return nil, false
 }
 
 // workerExists returns if a chain worker exists or not.
@@ -249,4 +253,16 @@ func RemoveWorker(chain string) error {
 	delete(workerMap, chain)
 
 	return nil
+}
+
+func removeAndRename(defaultPath, newPath string) {
+	err := os.Remove(defaultPath)
+	if err != nil {
+		panic(err)
+	}
+
+	err = os.Rename(newPath, defaultPath)
+	if err != nil {
+		panic(err)
+	}
 }

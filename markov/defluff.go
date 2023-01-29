@@ -12,16 +12,22 @@ func defluff() {
 	defer duration(track("defluffing duration"))
 
 	for _, chain := range chains(false, true) {
-		if strings.Contains(chain, "_head") {
-			defluffHead(chain)
-		}
+		if w, ok := workerMap[chain[:len(chain)-5]]; ok {
+			w.ChainMx.Unlock()
 
-		if strings.Contains(chain, "_body") {
-			defluffBody(chain)
-		}
+			if strings.Contains(chain, "_head") {
+				defluffHead(chain)
+			}
 
-		if strings.Contains(chain, "_tail") {
-			defluffTail(chain)
+			if strings.Contains(chain, "_body") {
+				defluffBody(chain)
+			}
+
+			if strings.Contains(chain, "_tail") {
+				defluffTail(chain)
+			}
+
+			w.ChainMx.Unlock()
 		}
 	}
 
@@ -84,15 +90,7 @@ func defluffHead(chain string) {
 
 	f.Close()
 
-	err = os.Remove(defaultPath)
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.Rename(newPath, defaultPath)
-	if err != nil {
-		panic(err)
-	}
+	removeAndRename(defaultPath, newPath)
 }
 
 func defluffBody(chain string) {
@@ -174,15 +172,7 @@ func defluffBody(chain string) {
 
 	f.Close()
 
-	err = os.Remove(defaultPath)
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.Rename(newPath, defaultPath)
-	if err != nil {
-		panic(err)
-	}
+	removeAndRename(defaultPath, newPath)
 }
 
 func defluffTail(chain string) {
@@ -241,13 +231,5 @@ func defluffTail(chain string) {
 
 	f.Close()
 
-	err = os.Remove(defaultPath)
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.Rename(newPath, defaultPath)
-	if err != nil {
-		panic(err)
-	}
+	removeAndRename(defaultPath, newPath)
 }
