@@ -11,31 +11,35 @@ func defluff() {
 	busy.Lock()
 	defer duration(track("defluffing duration"))
 
+	var totalRemoved int
+
 	for _, chain := range chains(false, true) {
 		if w, ok := workerMap[chain[:len(chain)-5]]; ok {
 			w.ChainMx.Unlock()
 
 			if strings.Contains(chain, "_head") {
-				defluffHead(chain)
+				totalRemoved += defluffHead(chain)
 			}
 
 			if strings.Contains(chain, "_body") {
-				defluffBody(chain)
+				totalRemoved += defluffBody(chain)
 			}
 
 			if strings.Contains(chain, "_tail") {
-				defluffTail(chain)
+				totalRemoved += defluffTail(chain)
 			}
 
 			w.ChainMx.Unlock()
 		}
 	}
 
+	debugLog("Total defluffed:", totalRemoved)
+
 	busy.Unlock()
 	stats.NextDefluffTime = time.Now().Add(defluffInterval)
 }
 
-func defluffHead(chain string) {
+func defluffHead(chain string) (removed int) {
 	defaultPath := "./markov-chains/" + chain + ".json"
 	newPath := "./markov-chains/" + chain + "_defluffed.json"
 
@@ -74,6 +78,7 @@ func defluffHead(chain string) {
 
 			// If used less than x times in the past day, ignore
 			if existingChild.Value < instructions.DefluffTriggerValue {
+				removed++
 				continue
 			}
 
@@ -91,9 +96,11 @@ func defluffHead(chain string) {
 	f.Close()
 
 	removeAndRename(defaultPath, newPath)
+
+	return removed
 }
 
-func defluffBody(chain string) {
+func defluffBody(chain string) (removed int) {
 	defaultPath := "./markov-chains/" + chain + ".json"
 	newPath := "./markov-chains/" + chain + "_defluffed.json"
 
@@ -134,6 +141,7 @@ func defluffBody(chain string) {
 			for _, eChild := range existingParent.Children {
 				// If used less than x times in the past day, ignore
 				if eChild.Value < instructions.DefluffTriggerValue {
+					removed++
 					continue
 				}
 
@@ -147,6 +155,7 @@ func defluffBody(chain string) {
 			for _, eGrandparent := range existingParent.Grandparents {
 				// If used less than x times in the past day, ignore
 				if eGrandparent.Value < instructions.DefluffTriggerValue {
+					removed++
 					continue
 				}
 
@@ -173,9 +182,11 @@ func defluffBody(chain string) {
 	f.Close()
 
 	removeAndRename(defaultPath, newPath)
+
+	return removed
 }
 
-func defluffTail(chain string) {
+func defluffTail(chain string) (removed int) {
 	defaultPath := "./markov-chains/" + chain + ".json"
 	newPath := "./markov-chains/" + chain + "_defluffed.json"
 
@@ -214,6 +225,7 @@ func defluffTail(chain string) {
 
 			// If used less than x times in the past day, ignore
 			if existingGrandparent.Value < instructions.DefluffTriggerValue {
+				removed++
 				continue
 			}
 
@@ -232,4 +244,5 @@ func defluffTail(chain string) {
 	f.Close()
 
 	removeAndRename(defaultPath, newPath)
+	return removed
 }

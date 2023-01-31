@@ -59,7 +59,6 @@ func addDirectoryToZip(zipWriter *zip.Writer, path string) error {
 		defer f2.Close()
 
 		filePath = strings.TrimPrefix(filePath, "./")
-		debugLog("zipping directory", filePath, "to archive...")
 		w2, err := zipWriter.Create(filePath)
 		if err != nil {
 			return err
