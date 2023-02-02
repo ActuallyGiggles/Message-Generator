@@ -334,7 +334,12 @@ wordLoop:
 			}
 		}
 
-		ns = append(ns, word)
+		w := strings.ReplaceAll(word, ".", "")
+		w = strings.ReplaceAll(word, ",", "")
+		w = strings.ReplaceAll(word, "!", "")
+		w = strings.ReplaceAll(word, "?", "")
+
+		ns = append(ns, w)
 	}
 
 	if len(ns) == 0 {

@@ -9,21 +9,21 @@ import (
 	"time"
 )
 
-func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string, method string, message string, mention string) {
+func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence string, oi markov.OutputInstructions, message string, mention string) {
 	// Say message into discord all channel and respective discord channel.
-	discord.Say("all", "Channel: "+channelUsed+"\nMessage: "+message)
-	discord.Say(channelUsed, message)
+	discord.Say("all", "Channel: "+oi.Chain+"\nMessage: "+message)
+	discord.Say(oi.Chain, message)
 
 	// If message is three words or longer, add to potential tweets.
 	// continue
 	if len(strings.Split(message, " ")) >= 3 {
-		twitter.AddMessageToPotentialTweets(channelUsed, message)
+		twitter.AddMessageToPotentialTweets(oi.Chain, message)
 	}
 
 	// If message is from api, send to website results.
 	// stop
 	if origin == "api" {
-		discord.Say("website-results", "Channel: "+channelUsed+"\nMethod: "+method+"\nMessage: "+message)
+		discord.Say("website-results", "Channel: "+oi.Chain+"\nMethod: "+oi.Method+"\nMessage: "+message)
 		return
 	}
 
@@ -31,7 +31,7 @@ func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string
 	// stop
 	if origin == "participation" {
 		twitch.Say(sendBackToChannel, message)
-		discord.Say("participation", "Channel Used: "+channelUsed+"\nMethod: "+method+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: "+message)
+		discord.Say("participation", "Channel Used: "+oi.Chain+"\nMethod: "+oi.Method+"\nTrigger Sentence: "+triggerSentence+"\nTarget: "+oi.Target+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: "+message)
 		return
 	}
 
@@ -39,7 +39,7 @@ func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string
 	// stop
 	if origin == "reply" {
 		twitch.Say(sendBackToChannel, "@"+mention+" "+message)
-		discord.Say("reply", "Channel Used: "+channelUsed+"\nMethod: "+method+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: @"+mention+" "+message)
+		discord.Say("reply", "Channel Used: "+oi.Chain+"\nMethod: "+oi.Method+"\nTrigger Sentence: "+triggerSentence+"\nTarget: "+oi.Target+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: @"+mention+" "+message)
 		return
 	}
 

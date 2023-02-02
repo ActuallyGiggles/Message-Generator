@@ -31,11 +31,13 @@ func CreateDefaultSentence(channel string) {
 	var timesRecursed = 0
 
 recurse:
-	// Get output.
-	output, err := markov.Out(markov.OutputInstructions{
+	oi := markov.OutputInstructions{
 		Chain:  channel,
 		Method: "LikelyBeginning",
-	})
+	}
+
+	// Get output.
+	output, err := markov.Out(oi)
 
 	if err != nil {
 		if timesRecursed > recursionLimit {
@@ -58,7 +60,7 @@ recurse:
 		return
 	}
 
-	OutgoingHandler("default", channel, channel, "LikelyBeginning", output, "")
+	OutgoingHandler("default", channel, "", oi, output, "")
 }
 
 // CreateAPISentence outputs a likely sentence for the API.
@@ -72,12 +74,13 @@ func CreateAPISentence(channel string) (output string, success bool) {
 	var timesRecursed = 0
 
 recurse:
-	method := global.PickRandomFromSlice([]string{"LikelyBeginning", "LikelyEnding"})
-	// Get output.
-	output, err := markov.Out(markov.OutputInstructions{
+	oi := markov.OutputInstructions{
 		Chain:  channel,
-		Method: method,
-	})
+		Method: global.PickRandomFromSlice([]string{"LikelyBeginning", "LikelyEnding"}),
+	}
+
+	// Get output.
+	output, err := markov.Out(oi)
 
 	if err != nil {
 		if timesRecursed > recursionLimit {
@@ -102,7 +105,7 @@ recurse:
 		goto recurse
 	}
 
-	OutgoingHandler("api", channel, channel, method, output, "")
+	OutgoingHandler("api", channel, "", oi, output, "")
 
 	return output, true
 }
@@ -133,21 +136,21 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	var timesRecursed = 0
 
 recurse:
-	chainToUse := decideWhichChannelToUse(directive)
-
-	// Pick a method and target word.
-	method := global.PickRandomFromSlice([]string{"TargetedBeginning", "TargetedMiddle", "TargetedEnding"})
-	target := removeDeterminers(strings.ReplaceAll(msg.Content, ".", ""))
+	oi := markov.OutputInstructions{
+		Chain:  decideWhichChannelToUse(directive),
+		Method: global.PickRandomFromSlice([]string{"TargetedBeginning", "TargetedMiddle", "TargetedEnding"}),
+		Target: removeDeterminers(msg.Content),
+	}
 
 	// Get output.
-	output, err := markov.Out(markov.OutputInstructions{
-		Chain:  chainToUse,
-		Method: method,
-		Target: target,
-	})
+	output, err := markov.Out(oi)
 
 	// Handle error.
 	if err != nil {
+		if strings.Contains(err.Error(), "Target is empty") {
+			return
+		}
+
 		// Stop if too much recursing.
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
@@ -171,9 +174,7 @@ recurse:
 	}
 
 	// Handle output.
-	OutgoingHandler("participation", chainToUse, msg.ChannelName, method, output, "")
-
-	return
+	OutgoingHandler("participation", msg.ChannelName, msg.Content, oi, output, "")
 }
 
 // CreateReplySentence takes in a message and outputs a targeted sentence that directly mentions a user.
@@ -197,34 +198,37 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 	timesRecursed := 0
 
 recurse:
-	chainToUse := decideWhichChannelToUse(directive)
-
-	var method string
-	var target string
+	var oi markov.OutputInstructions
 
 	questionType := questionType(msg.Content)
 	if questionType == "yes no question" {
-		method = "TargetedBeginning"
-		target = global.PickRandomFromSlice([]string{"yes", "no", "maybe", "absolutely", "absolutely", "who knows"})
+		oi = markov.OutputInstructions{
+			Method: "TargetedBeginning",
+			Chain:  decideWhichChannelToUse(directive),
+			Target: global.PickRandomFromSlice([]string{"yes", "no", "maybe", "absolutely", "absolutely", "who knows"}),
+		}
 	} else if questionType == "explanation question" {
-		method = "TargetedBeginning"
-		target = global.PickRandomFromSlice([]string{"because", "idk", "idc", "well", "you see"})
+		oi = markov.OutputInstructions{
+			Method: "TargetedBeginning",
+			Chain:  decideWhichChannelToUse(directive),
+			Target: global.PickRandomFromSlice([]string{"because", "idk", "idc", "well", "you see"}),
+		}
 	} else {
-		method = global.PickRandomFromSlice([]string{"TargetedBeginning", "TargetedMiddle", "TargetedEnding"})
-		target = removeDeterminers(strings.ReplaceAll(msg.Content, ".", ""))
-		if target == "" {
-			return
+		oi = markov.OutputInstructions{
+			Method: global.PickRandomFromSlice([]string{"TargetedBeginning", "TargetedMiddle", "TargetedEnding"}),
+			Chain:  decideWhichChannelToUse(directive),
+			Target: removeDeterminers(msg.Content),
 		}
 	}
 
-	output, err := markov.Out(markov.OutputInstructions{
-		Method: method,
-		Chain:  chainToUse,
-		Target: target,
-	})
+	output, err := markov.Out(oi)
 
 	// Handle error.
 	if err != nil {
+		if strings.Contains(err.Error(), "Target is empty") {
+			return
+		}
+
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
 			print.Warning("Could not create reply sentence.\nTrigger Message:\n\t" + msg.Content + "\n" + "Error: " + err.Error())
@@ -247,7 +251,5 @@ recurse:
 	}
 
 	// Handle output.
-	OutgoingHandler("reply", chainToUse, msg.ChannelName, method, output, msg.AuthorName)
-
-	return
+	OutgoingHandler("reply", msg.ChannelName, msg.Content, oi, output, msg.AuthorName)
 }

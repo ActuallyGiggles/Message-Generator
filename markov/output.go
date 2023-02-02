@@ -162,6 +162,10 @@ func likelyEnding(name string) (output string, err error) {
 }
 
 func targetedBeginning(name, target string) (output string, err error) {
+	if target == "" {
+		return "", errors.New("Target is empty for TargetedBeginning")
+	}
+
 	var parentWord string
 	var childChosen string
 
@@ -275,6 +279,10 @@ func targetedBeginning(name, target string) (output string, err error) {
 }
 
 func targetedEnding(name, target string) (output string, err error) {
+	if target == "" {
+		return "", errors.New("Target is empty for TargetedEnding")
+	}
+
 	var parentWord string
 	var grandparentChosen string
 
@@ -393,6 +401,10 @@ func targetedEnding(name, target string) (output string, err error) {
 }
 
 func targetedMiddle(name, target string) (output string, err error) {
+	if target == "" {
+		return "", errors.New("Target is empty for TargetedMiddle")
+	}
+
 	var parentWord string
 	var childChosen string
 	var grandparentChosen string
