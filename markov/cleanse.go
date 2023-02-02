@@ -12,7 +12,7 @@ func Cleanse(entry string) (totalCleansed int) {
 
 	for _, chain := range chains(false, true) {
 		if w, ok := workerMap[chain[:len(chain)-5]]; ok {
-			w.ChainMx.Unlock()
+			w.ChainMx.Lock()
 
 			if strings.Contains(chain, "_head") {
 				totalCleansed += cleanseHead(chain, entry)
