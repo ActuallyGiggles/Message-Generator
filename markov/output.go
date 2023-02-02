@@ -347,12 +347,7 @@ func targetedEnding(name, target string) (output string, err error) {
 	if err != nil {
 		return "", err
 	}
-	parentSplit := strings.Split(parentWord, " ")
-	if len(parentSplit) == 1 {
-		output = parentSplit[0] + " "
-	} else {
-		output = parentSplit[1] + " "
-	}
+	output = parentWord
 
 	for true {
 		f, err := os.Open("./markov-chains/" + name + "_body.json")
