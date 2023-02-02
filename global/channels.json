@@ -2996,7 +2996,7 @@
     "IsAllowedWhenOffline": true
    },
    "Participation": {
-    "IsEnabled": true,
+    "IsEnabled": false,
     "IsAllowedWhenOnline": true,
     "IsAllowedWhenOffline": true
    },
