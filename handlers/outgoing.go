@@ -9,11 +9,9 @@ import (
 	"time"
 )
 
-func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string, message string, mention string) {
-	str := "Channel: " + channelUsed + "\nMessage: " + message
-
+func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string, method string, message string, mention string) {
 	// Say message into discord all channel and respective discord channel.
-	discord.Say("all", str)
+	discord.Say("all", "Channel: "+channelUsed+"\nMessage: "+message)
 	discord.Say(channelUsed, message)
 
 	// If message is three words or longer, add to potential tweets.
@@ -25,7 +23,7 @@ func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string
 	// If message is from api, send to website results.
 	// stop
 	if origin == "api" {
-		discord.Say("website-results", str)
+		discord.Say("website-results", "Channel: "+channelUsed+"\nMethod: "+method+"\nMessage: "+message)
 		return
 	}
 
@@ -33,7 +31,7 @@ func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string
 	// stop
 	if origin == "participation" {
 		twitch.Say(sendBackToChannel, message)
-		discord.Say("participation", "Channel Used: "+channelUsed+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: "+message)
+		discord.Say("participation", "Channel Used: "+channelUsed+"\nMethod: "+method+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: "+message)
 		return
 	}
 
@@ -41,7 +39,7 @@ func OutgoingHandler(origin string, channelUsed string, sendBackToChannel string
 	// stop
 	if origin == "reply" {
 		twitch.Say(sendBackToChannel, "@"+mention+" "+message)
-		discord.Say("reply", "Channel Used: "+channelUsed+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: @"+mention+" "+message)
+		discord.Say("reply", "Channel Used: "+channelUsed+"\nMethod: "+method+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: @"+mention+" "+message)
 		return
 	}
 

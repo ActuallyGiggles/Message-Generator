@@ -60,7 +60,7 @@ recurse:
 		return
 	}
 
-	OutgoingHandler("default", channel, channel, output, "")
+	OutgoingHandler("default", channel, channel, "LikelyBeginning", output, "")
 }
 
 // CreateAPISentence outputs a likely sentence for the API.
@@ -74,10 +74,11 @@ func CreateAPISentence(channel string) (output string, success bool) {
 	var timesRecursed = 0
 
 recurse:
+	method := global.PickRandomFromSlice([]string{"LikelyBeginning", "LikelyEnding"})
 	// Get output.
 	output, err := markov.Out(markov.OutputInstructions{
 		Chain:  channel,
-		Method: global.PickRandomFromSlice([]string{"LikelyBeginning", "LikelyEnding"}),
+		Method: method,
 	})
 
 	if err != nil {
@@ -104,7 +105,7 @@ recurse:
 		goto recurse
 	}
 
-	OutgoingHandler("api", channel, channel, output, "")
+	OutgoingHandler("api", channel, channel, method, output, "")
 
 	return output, true
 }
@@ -135,7 +136,6 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	var timesRecursed = 0
 
 recurse:
-
 	chainToUse := decideWhichChannelToUse(directive)
 
 	// Pick a method and target word.
@@ -175,7 +175,7 @@ recurse:
 	}
 
 	// Handle output.
-	OutgoingHandler("participation", chainToUse, msg.ChannelName, output, "")
+	OutgoingHandler("participation", chainToUse, msg.ChannelName, method, output, "")
 
 	return
 }
@@ -252,7 +252,7 @@ recurse:
 	}
 
 	// Handle output.
-	OutgoingHandler("reply", chainToUse, msg.ChannelName, output, msg.AuthorName)
+	OutgoingHandler("reply", chainToUse, msg.ChannelName, method, output, msg.AuthorName)
 
 	return
 }
