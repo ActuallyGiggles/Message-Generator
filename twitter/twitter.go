@@ -3,7 +3,7 @@ package twitter
 import (
 	"Message-Generator/global"
 	"Message-Generator/platform/twitch"
-	"Message-Generator/stats"
+	"Message-Generator/print"
 	"context"
 	"fmt"
 	"sync"
@@ -51,7 +51,7 @@ func SendTweet(channel string, message string) {
 
 	_, err := managetweet.Create(context.Background(), client, p)
 	if err != nil {
-		stats.Log(err.Error())
+		print.Error(err.Error())
 		return
 	}
 }
@@ -71,7 +71,7 @@ func pickTweet() {
 	for range time.Tick(1 * time.Hour) {
 		channel, message, empty := pickRandomFromMap()
 		if empty {
-			stats.Log("Empty map.")
+			print.Error("Empty twitter map.")
 		} else {
 			SendTweet(channel, message)
 		}

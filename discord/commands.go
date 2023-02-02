@@ -3,20 +3,15 @@ package discord
 import (
 	"Message-Generator/global"
 	"Message-Generator/platform/twitch"
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
 )
 
 var (
-	dialogueOngoing bool
 	dialogueChannel chan Dialogue
 )
-
-type Dialogue struct {
-	Arguments []string
-	MessageID string
-}
 
 // commandsHandler receives commands from an admin and returns a response.
 func commandsHandler(message IncomingMessage) {
@@ -24,6 +19,7 @@ func commandsHandler(message IncomingMessage) {
 	// Directives settings
 	case "showchannels":
 		showChannels(message.ChannelID, message.MessageID)
+	case "showchanneldetailed":
 	case "addchannel":
 		addDirective(message.ChannelID, message.MessageID)
 	case "updatechannel":
@@ -62,31 +58,23 @@ func showChannels(channelID string, messageID string) {
 }
 
 func addDirective(channelID string, messageID string) {
-	defer DeleteDiscordMessage(channelID, messageID)
-
-	dialogueOngoing = true
-	dialogueChannel = make(chan Dialogue)
-	var messagesToDelete []string
+	var conversationIDs MessageIDs
 
 	defer func() {
-		for _, message := range messagesToDelete {
-			DeleteDiscordMessage(channelID, message)
-		}
-
-		dialogueOngoing = false
+		conversationIDs.delete(channelID)
 		dialogueChannel = nil
 	}()
+
+	conversationIDs.add(messageID)
 
 	channel := global.Directive{}
 
 	// Get platform
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "What is the platform?\n(1) Twitch\n(2) Youtube").ID)
+	conversationIDs.add(SayByID(channelID, "What is the platform?\n(1) Twitch\n(2) Youtube").ID)
 	platform := <-dialogueChannel
-	messagesToDelete = append(messagesToDelete, platform.MessageID)
+	conversationIDs.add(platform.MessageID)
 	switch platform.Arguments[0] {
 	case "cancel":
-		dialogueOngoing = false
-		dialogueChannel = nil
 		return
 	case "1":
 		channel.Platform = "twitch"
@@ -95,13 +83,11 @@ func addDirective(channelID string, messageID string) {
 	}
 
 	// Get channel name
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "What is the channel name?").ID)
+	conversationIDs.add(SayByID(channelID, "What is the channel name?").ID)
 	channelName := <-dialogueChannel
-	messagesToDelete = append(messagesToDelete, channelName.MessageID)
+	conversationIDs.add(channelName.MessageID)
 	switch channelName.Arguments[0] {
 	case "cancel":
-		dialogueOngoing = false
-		dialogueChannel = nil
 		return
 	default:
 		channel.ChannelName = strings.ToLower(channelName.Arguments[0])
@@ -116,7 +102,7 @@ func addDirective(channelID string, messageID string) {
 	}
 
 	// Get platform channel ID and channel ID
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Gathering IDs...").ID)
+	conversationIDs.add(SayByID(channelID, "Gathering IDs...").ID)
 	platformChannelID, discordChannelID, success := findChannelIDs("add", channel.Platform, channelName.Arguments[0], channelID)
 	if !success {
 		return
@@ -124,12 +110,10 @@ func addDirective(channelID string, messageID string) {
 	channel.ChannelID = platformChannelID
 	channel.DiscordChannelID = discordChannelID
 
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "For the following options, type 0 if false and 1 if true:\n\n1. Will be collecting messages into Markov chain?\n2. Will be allowed to reply?\n3. Will be allowed to reply in online chat?\n4. Will be allowed to reply in offline chat?\n5. Will be allowed to participate with chat?\n6. Will be allowed to participate online?\n7. Will be allowed to participate offline?").ID)
+	conversationIDs.add(SayByID(channelID, "For the following options, type 0 if false and 1 if true:\n\n1. Will be collecting messages into Markov chain?\n2. Will be allowed to reply?\n3. Will be allowed to reply in online chat?\n4. Will be allowed to reply in offline chat?\n5. Will be allowed to participate with chat?\n6. Will be allowed to participate online?\n7. Will be allowed to participate offline?").ID)
 	boolSettings := <-dialogueChannel
-	messagesToDelete = append(messagesToDelete, boolSettings.MessageID)
+	conversationIDs.add(boolSettings.MessageID)
 	if boolSettings.Arguments[0] == "cancel" {
-		dialogueOngoing = false
-		dialogueChannel = nil
 		return
 	}
 	for i, setting := range boolSettings.Arguments {
@@ -157,12 +141,10 @@ func addDirective(channelID string, messageID string) {
 		}
 	}
 
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "What chains will this channel use to post with?\n\nAll (1)     All except self (2)     Self (3)     Custom (4)\n\nIf custom, what are the custom channels to use?").ID)
+	conversationIDs.add(SayByID(channelID, "What chains will this channel use to post with?\n\nAll (1)     All except self (2)     Self (3)     Custom (4)\n\nIf custom, what are the custom channels to use?").ID)
 	responseSettings := <-dialogueChannel
-	messagesToDelete = append(messagesToDelete, responseSettings.MessageID)
+	conversationIDs.add(responseSettings.MessageID)
 	if responseSettings.Arguments[0] == "cancel" {
-		dialogueOngoing = false
-		dialogueChannel = nil
 		return
 	}
 	mode := responseSettings.Arguments[0]
@@ -182,7 +164,7 @@ func addDirective(channelID string, messageID string) {
 	go twitch.GetLiveStatuses(false)
 
 	ok := twitch.GetEmoteController(false, channel)
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Gathering emotes and broadcaster information...").ID)
+	conversationIDs.add(SayByID(channelID, "Gathering emotes and broadcaster information...").ID)
 	if !ok {
 		DeleteDiscordChannel(channelName.Arguments[0])
 		SayByIDAndDelete(channelID, "Could not retrieve "+channelName.Arguments[0]+"'s emotes...")
@@ -199,28 +181,21 @@ func addDirective(channelID string, messageID string) {
 }
 
 func updateDirective(channelID string, messageID string) {
-	defer DeleteDiscordMessage(channelID, messageID)
-
-	var messagesToDelete []string
-	defer func() {
-		for _, message := range messagesToDelete {
-			DeleteDiscordMessage(channelID, message)
-		}
-	}()
+	var conversationIDs MessageIDs
 
 	defer func() {
-		dialogueOngoing = false
+		conversationIDs.delete(channelID)
 		dialogueChannel = nil
 	}()
 
-	dialogueOngoing = true
+	conversationIDs.add(messageID)
 	dialogueChannel = make(chan Dialogue)
 
 	var channel *global.Directive
 
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Which channel will you update?").ID)
+	conversationIDs.add(SayByID(channelID, "Which channel will you update?").ID)
 	channelName := <-dialogueChannel
-	messagesToDelete = append(messagesToDelete, channelName.MessageID)
+	conversationIDs.add(channelName.MessageID)
 	if channelName.Arguments[0] == "cancel" {
 		return
 	}
@@ -234,16 +209,19 @@ func updateDirective(channelID string, messageID string) {
 	}
 
 	if !found {
-		messagesToDelete = append(messagesToDelete, SayByID(channelID, "Not a tracked channel.").ID)
+		conversationIDs.add(SayByID(channelID, "Not a tracked channel.").ID)
 		return
 	}
 
 recurse:
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Which do you want to update?\n\n1. Collecting messages for Markov chains\n2. Allowing replies?\n3. Allowing replies online?\n4. Allowing replies offline?\n5. Allowing chat participation?\n6. Allowing chat participation when online?\n7. Allowing chat participation when offline?\n8. What chains to use when posting to chat?").ID)
+	conversationIDs.add(SayByID(channelID, "Which do you want to update?\n\n1. Collecting messages for Markov chains\n2. Allowing replies?\n3. Allowing replies online?\n4. Allowing replies offline?\n5. Allowing chat participation?\n6. Allowing chat participation when online?\n7. Allowing chat participation when offline?\n8. What chains to use when posting to chat?\n\nType [cancel] or [done] if you want to cancel or you are done.").ID)
 	settingsToUpdate := <-dialogueChannel
-	messagesToDelete = append(messagesToDelete, settingsToUpdate.MessageID)
+	conversationIDs.add(settingsToUpdate.MessageID)
 	if settingsToUpdate.Arguments[0] == "cancel" {
 		return
+	}
+	if settingsToUpdate.Arguments[0] == "done" {
+		goto decidedUpdates
 	}
 	for _, setting := range settingsToUpdate.Arguments {
 		switch setting {
@@ -262,12 +240,10 @@ recurse:
 		case "7":
 			channel.Settings.Participation.IsAllowedWhenOffline = !channel.Settings.Participation.IsAllowedWhenOffline
 		case "8":
-			messagesToDelete = append(messagesToDelete, SayByID(channelID, "What chains will this channel use to post with?\n\nAll (1)     All except self (2)     Self (3)     Custom (4)\n\nIf custom, what are the custom channels to use?").ID)
+			conversationIDs.add(SayByID(channelID, "What chains will this channel use to post with?\n\nAll (1)     All except self (2)     Self (3)     Custom (4)\n\nIf custom, what are the custom channels to use?").ID)
 			responseSettings := <-dialogueChannel
-			messagesToDelete = append(messagesToDelete, responseSettings.MessageID)
+			conversationIDs.add(responseSettings.MessageID)
 			if responseSettings.Arguments[0] == "cancel" {
-				dialogueOngoing = false
-				dialogueChannel = nil
 				return
 			}
 			mode := responseSettings.Arguments[0]
@@ -285,17 +261,9 @@ recurse:
 			}
 		}
 	}
+	goto recurse
 
-	messagesToDelete = append(messagesToDelete, SayByID(channelID, "Anything else? Type 0 if false and 1 if true.").ID)
-	changeAgain := <-dialogueChannel
-	messagesToDelete = append(messagesToDelete, settingsToUpdate.MessageID)
-	if changeAgain.Arguments[0] == "cancel" {
-		return
-	}
-	if changeAgain.Arguments[0] == "1" {
-		goto recurse
-	}
-
+decidedUpdates:
 	err := global.UpdateChannels("update", *channel)
 	if err == nil {
 		SayByID(channelID, strings.Title(channelName.Arguments[0])+" updated successfully.")
@@ -305,25 +273,20 @@ recurse:
 }
 
 func removeDirective(channelID string, messageID string, args []string) {
-	defer DeleteDiscordMessage(channelID, messageID)
-
-	dialogueOngoing = true
-	dialogueChannel = make(chan Dialogue)
-	var messagesToDelete []string
+	var conversationIDs MessageIDs
 
 	defer func() {
-		for _, message := range messagesToDelete {
-			DeleteDiscordMessage(channelID, message)
-		}
-
-		dialogueOngoing = false
+		conversationIDs.delete(channelID)
 		dialogueChannel = nil
 	}()
 
+	conversationIDs.add(messageID)
+	dialogueChannel = make(chan Dialogue)
+
 	if len(args) == 0 {
-		messagesToDelete = append(messagesToDelete, SayByID(channelID, "Enter channel to remove.").ID)
+		conversationIDs.add(SayByID(channelID, "Enter channel to remove.").ID)
 		channel := <-dialogueChannel
-		messagesToDelete = append(messagesToDelete, channel.MessageID)
+		conversationIDs.add(channel.MessageID)
 		global.UpdateChannels("remove", global.Directive{ChannelName: channel.Arguments[0]})
 		twitch.Depart(channel.Arguments[0])
 	} else {
@@ -332,6 +295,20 @@ func removeDirective(channelID string, messageID string, args []string) {
 	}
 
 	twitch.Depart(args[0])
+}
+
+func showDirectiveDetailed(channelID string, messageID string, args []string) {
+	defer DeleteDiscordMessage(channelID, messageID)
+	for _, directive := range global.Directives {
+		if directive.ChannelName == args[0] {
+			file, err := json.MarshalIndent(directive, "", " ")
+			if err != nil {
+				SayByIDAndDelete(channelID, "There was an error!")
+			}
+			SayByIDAndDelete(channelID, string(file))
+		}
+	}
+	SayByIDAndDelete(channelID, "Channel "+args[0]+" not found in list.")
 }
 
 func showRegex(channelID string, messageID string) {
@@ -468,5 +445,5 @@ func removeBannedUser(channelID string, messageID string, args []string) {
 
 func help(channelID string, messageID string) {
 	defer DeleteDiscordMessage(channelID, messageID)
-	SayByIDAndDelete(channelID, fmt.Sprintf("Commands:\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]", "addchannel", "updatechannel", "seeregex", "addregex", "removeregex", "seebannedusers", "addbanneduser", "removebanneduser", "help"))
+	SayByIDAndDelete(channelID, fmt.Sprintf("Commands:\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]", "showchannels", "addchannel", "updatechannel", "removechannel", "showregex", "addregex", "removeregex", "showbannedusers", "addbanneduser", "removebanneduser", "help"))
 }

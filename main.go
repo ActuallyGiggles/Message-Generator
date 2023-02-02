@@ -59,13 +59,14 @@ func main() {
 func Start() {
 	// Make platform and discord channels
 	incomingMessages := make(chan platform.Message)
+	errorChannel := make(chan string)
 
 	global.Start()
 	go handlers.Incoming(incomingMessages)
 	go api.HandleRequests()
 
 	go twitter.Start()
-	go discord.Start()
+	go discord.Start(errorChannel)
 
 	markov.Start(markov.StartInstructions{
 		SeparationKey:       " ",
@@ -83,5 +84,5 @@ func Start() {
 	stats.Start()
 
 	print.Page("Twitch Message Generator")
-	print.Started("Program Started at " + time.Now().Format(time.RFC822))
+	print.Started("Program Started at "+time.Now().Format(time.RFC822), errorChannel)
 }

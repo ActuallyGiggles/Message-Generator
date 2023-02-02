@@ -3,7 +3,7 @@ package discord
 import (
 	"Message-Generator/global"
 	"Message-Generator/platform/twitch"
-	"Message-Generator/stats"
+	"Message-Generator/print"
 	"Message-Generator/twitter"
 	"strings"
 
@@ -19,7 +19,7 @@ func manuallyTweet(r *discordgo.MessageReactionAdd) {
 	// If message was sent by bot
 	messageInfo, err := discord.ChannelMessage(r.ChannelID, r.MessageID)
 	if err != nil {
-		stats.Log(err.Error())
+		print.Error(err.Error())
 		return
 	}
 
@@ -83,4 +83,14 @@ func findChannelIDs(mode string, platform string, channelName string, returnChan
 		}
 	}
 	return platformChannelID, discordChannelID, true
+}
+
+func (IDs *MessageIDs) add(ID string) {
+	IDs.IDs = append(IDs.IDs, ID)
+}
+
+func (IDs *MessageIDs) delete(channelID string) {
+	for _, mID := range IDs.IDs {
+		DeleteDiscordMessage(channelID, mID)
+	}
 }

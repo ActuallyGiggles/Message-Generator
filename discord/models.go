@@ -8,3 +8,12 @@ type IncomingMessage struct {
 	Command     string
 	Args        []string
 }
+
+type MessageIDs struct {
+	IDs []string
+}
+
+type Dialogue struct {
+	Arguments []string
+	MessageID string
+}

@@ -2,7 +2,7 @@ package discord
 
 import (
 	"Message-Generator/global"
-	"Message-Generator/stats"
+	"Message-Generator/print"
 	"strings"
 
 	"time"
@@ -14,7 +14,7 @@ var (
 	discord *discordgo.Session
 )
 
-func Start() {
+func Start(errorChannel chan string) {
 	bot, err := discordgo.New("Bot " + global.DiscordToken)
 	discord = bot
 	if err != nil {
@@ -27,6 +27,7 @@ func Start() {
 	}
 
 	CollectSupportDiscordChannelIDs(discord)
+	go reportErrors(errorChannel)
 
 	discord.AddHandler(messageHandler)
 	discord.AddHandler(reactionHandler)
@@ -42,7 +43,7 @@ func messageHandler(session *discordgo.Session, message *discordgo.MessageCreate
 	}
 
 	// If dialogue is ongoing, send to dialogue
-	if dialogueOngoing {
+	if dialogueChannel != nil {
 		dialogueChannel <- Dialogue{Arguments: messageSlice, MessageID: message.ID}
 		return
 	}
@@ -73,7 +74,7 @@ func reactionHandler(s *discordgo.Session, r *discordgo.MessageReactionAdd) {
 func SayByID(channelId string, message string) (id *discordgo.Message) {
 	m, err := discord.ChannelMessageSend(channelId, WrapInCodeBlock(message))
 	if err != nil {
-		stats.Log("SayById failed \n" + err.Error())
+		print.Error("SayById failed \n" + err.Error())
 		return
 	}
 	return m
@@ -132,7 +133,7 @@ func GetChannels(session *discordgo.Session) (channels []*discordgo.Channel, err
 func CreateDiscordChannel(name string) (channel *discordgo.Channel, ok bool) {
 	c, err := discord.GuildChannelCreate(global.DiscordGuildID, name, discordgo.ChannelTypeGuildText)
 	if err != nil {
-		stats.Log("CreateDiscordChannel failed\n" + err.Error())
+		print.Error("CreateDiscordChannel failed\n" + err.Error())
 		return nil, false
 	}
 	return c, true
@@ -144,7 +145,7 @@ func DeleteDiscordChannel(name string) (ok bool) {
 		if c.ChannelName == name {
 			_, err := discord.ChannelDelete(c.ChannelID)
 			if err != nil {
-				stats.Log("DeleteDiscordChannel failed\n" + err.Error())
+				print.Error("DeleteDiscordChannel failed\n" + err.Error())
 			}
 		}
 	}
@@ -154,7 +155,7 @@ func DeleteDiscordChannel(name string) (ok bool) {
 func DeleteDiscordMessage(channelID string, messageID string) {
 	err := discord.ChannelMessageDelete(channelID, messageID)
 	if err != nil {
-		stats.Log("DeleteDiscordMessage failed\n" + err.Error())
+		print.Error("DeleteDiscordMessage failed\n" + err.Error())
 	}
 }
 
@@ -189,4 +190,10 @@ func CollectSupportDiscordChannelIDs(session *discordgo.Session) (ok bool) {
 	}
 
 	return true
+}
+
+func reportErrors(errorChannel chan string) {
+	for err := range errorChannel {
+		Say("error-tracking", err)
+	}
 }

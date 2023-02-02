@@ -1,7 +1,6 @@
 package global
 
 import (
-	"Message-Generator/stats"
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
@@ -51,12 +50,6 @@ func PickRandomFromSlice(slice []string) string {
 		return ""
 	}
 	return slice[RandomNumber(0, len(slice))]
-}
-
-func RecoverFullName(functionName string) {
-	if r := recover(); r != nil {
-		stats.Log("recovered '" + functionName)
-	}
 }
 
 func LoadChannels() {

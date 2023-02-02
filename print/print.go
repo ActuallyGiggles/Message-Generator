@@ -12,6 +12,7 @@ import (
 )
 
 var started string
+var errorChannel chan string
 
 func Page(title string) {
 	print("\033[H\033[2J")
@@ -32,6 +33,7 @@ func Success(message string) {
 }
 
 func Error(message string) {
+	errorChannel <- message
 	pterm.Error.Println(message)
 	stats.Log(message)
 	fmt.Println()
@@ -43,6 +45,7 @@ func Info(message string) {
 }
 
 func Warning(message string) {
+	errorChannel <- message
 	pterm.Warning.Println(message)
 	fmt.Println()
 }
@@ -52,10 +55,11 @@ func ProgressBar(title string, total int) (pb *pterm.ProgressbarPrinter) {
 	return pb
 }
 
-func Started(text string) {
+func Started(text string, errorChan chan string) {
 	stats.Log(text)
 	Info(text)
 	started = text
+	errorChannel = errorChan
 }
 
 func TerminalInput(cancel context.CancelFunc) {

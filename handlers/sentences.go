@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"Message-Generator/discord"
 	"Message-Generator/global"
 	"Message-Generator/platform"
 	"Message-Generator/platform/twitch"
@@ -42,7 +41,6 @@ recurse:
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
 			print.Warning("Could not create default sentence.\nError: " + err.Error())
-			discord.Say("error-tracking", err.Error())
 
 			return
 		}
@@ -85,7 +83,6 @@ recurse:
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
 			print.Warning("Could not create API sentence.\nError: " + err.Error())
-			discord.Say("error-tracking", err.Error())
 
 			return "", false
 		}
@@ -155,7 +152,6 @@ recurse:
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
 			print.Warning("Could not create participation sentence.\nTrigger Message:\n\t" + msg.Content + "\n" + "Error: " + err.Error())
-			discord.Say("error-tracking", err.Error())
 			return
 		}
 
@@ -232,7 +228,6 @@ recurse:
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
 			print.Warning("Could not create reply sentence.\nTrigger Message:\n\t" + msg.Content + "\n" + "Error: " + err.Error())
-			discord.Say("error-tracking", err.Error())
 			return
 		}
 
