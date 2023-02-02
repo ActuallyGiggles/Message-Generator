@@ -77,6 +77,9 @@ func addDirective(channelID string, messageID string) {
 	platform := <-dialogueChannel
 	conversationIDs.add(platform.MessageID)
 	switch platform.Arguments[0] {
+	default:
+		conversationIDs.add(SayByID(channelID, "Not a proper platform").ID)
+		return
 	case "cancel":
 		return
 	case "1":
@@ -153,6 +156,9 @@ func addDirective(channelID string, messageID string) {
 	mode := responseSettings.Arguments[0]
 	customChannels := responseSettings.Arguments[1:]
 	switch mode {
+	default:
+		conversationIDs.add(SayByID(channelID, "Not a proper answer.").ID)
+		return
 	case "1", "all", "All":
 		channel.Settings.WhichChannelsToUse = "all"
 	case "2", "all except self", "All except self":
@@ -227,6 +233,9 @@ recurse:
 	}
 	for _, setting := range settingsToUpdate.Arguments {
 		switch setting {
+		default:
+			conversationIDs.add(SayByID(channelID, "Not a proper answer.").ID)
+			return
 		case "1":
 			channel.Settings.IsCollectingMessages = !channel.Settings.IsCollectingMessages
 		case "2":
