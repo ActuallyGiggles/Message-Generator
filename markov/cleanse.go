@@ -6,35 +6,33 @@ import (
 	"strings"
 )
 
-func cleanse(entry string) {
+func Cleanse(entry string) (totalCleansed int) {
 	busy.Lock()
 	defer duration(track("cleanse duration"))
-
-	var totalRemoved int
 
 	for _, chain := range chains(false, true) {
 		if w, ok := workerMap[chain[:len(chain)-5]]; ok {
 			w.ChainMx.Unlock()
 
 			if strings.Contains(chain, "_head") {
-				totalRemoved += cleanseHead(chain, entry)
+				totalCleansed += cleanseHead(chain, entry)
 			}
 
 			if strings.Contains(chain, "_body") {
-				totalRemoved += cleanseBody(chain, entry)
+				totalCleansed += cleanseBody(chain, entry)
 			}
 
 			if strings.Contains(chain, "_tail") {
-				totalRemoved += cleanseTail(chain, entry)
+				totalCleansed += cleanseTail(chain, entry)
 			}
 
 			w.ChainMx.Unlock()
 		}
 	}
 
-	debugLog("Total cleansed:", totalRemoved)
-
 	busy.Unlock()
+	debugLog("Total cleansed:", totalCleansed)
+	return totalCleansed
 }
 
 func cleanseHead(chain, entry string) (removed int) {

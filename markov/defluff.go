@@ -33,9 +33,8 @@ func defluff() {
 		}
 	}
 
-	debugLog("Total defluffed:", totalRemoved)
-
 	busy.Unlock()
+	debugLog("Total defluffed:", totalRemoved)
 	stats.NextDefluffTime = time.Now().Add(defluffInterval)
 }
 

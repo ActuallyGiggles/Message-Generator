@@ -2,6 +2,7 @@ package discord
 
 import (
 	"Message-Generator/global"
+	"Message-Generator/markov"
 	"Message-Generator/platform/twitch"
 	"encoding/json"
 	"fmt"
@@ -42,7 +43,9 @@ func commandsHandler(message IncomingMessage) {
 	case "removebanneduser":
 		removeBannedUser(message.ChannelID, message.MessageID, message.Args)
 
-	// Help
+		// Misc
+	case "cleanse":
+		cleanse(message.ChannelID, message.MessageID, message.Args)
 	case "help":
 		help(message.ChannelID, message.MessageID)
 	}
@@ -443,7 +446,21 @@ func removeBannedUser(channelID string, messageID string, args []string) {
 	}
 }
 
+func cleanse(channelID string, messageID string, args []string) {
+	var conversationIDs MessageIDs
+
+	defer func() {
+		conversationIDs.delete(channelID)
+		dialogueChannel = nil
+	}()
+
+	conversationIDs.add(messageID)
+	conversationIDs.add(SayByID(channelID, "Cleansing chains of the word: "+args[0]).ID)
+	cleansedNumber := markov.Cleanse(args[0])
+	SayByID(channelID, "Cleansed a total of "+strconv.Itoa(cleansedNumber)+" entries matching ["+args[0]+"]")
+}
+
 func help(channelID string, messageID string) {
 	defer DeleteDiscordMessage(channelID, messageID)
-	SayByIDAndDelete(channelID, fmt.Sprintf("Commands:\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]", "showchannels", "addchannel", "updatechannel", "removechannel", "showregex", "addregex", "removeregex", "showbannedusers", "addbanneduser", "removebanneduser", "help"))
+	SayByIDAndDelete(channelID, fmt.Sprintf("Commands:\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]", "showchannels", "addchannel", "updatechannel", "removechannel", "showregex", "addregex", "removeregex", "showbannedusers", "addbanneduser", "removebanneduser", "cleanse", "help"))
 }
