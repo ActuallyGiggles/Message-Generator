@@ -2940,5 +2940,68 @@
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
   }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "missmikkaa",
+  "ChannelID": "48201326",
+  "DiscordChannelID": "1070754829271568415",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "cohhcarnage",
+  "ChannelID": "26610234",
+  "DiscordChannelID": "1070755551727853749",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "kitboga",
+  "ChannelID": "32787655",
+  "DiscordChannelID": "1070755663615102986",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
  }
 ]
