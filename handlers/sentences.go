@@ -125,12 +125,12 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	}
 
 	// Allow passage if random rejection of 50% allows.
-	if randomChance := global.RandomNumber(0, 100); randomChance > 50 {
+	if randomChance := global.RandomNumber(0, 100); randomChance > 25 {
 		return
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockParticipation(global.RandomNumber(5, 10), msg.ChannelName) {
+	if !lockParticipation(global.RandomNumber(5, 15), msg.ChannelName) {
 		return
 	}
 
@@ -192,7 +192,7 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockReply(global.RandomNumber(1, 1), msg.ChannelName) {
+	if !lockReply(global.RandomNumber(1, 5), msg.ChannelName) {
 		return
 	}
 
