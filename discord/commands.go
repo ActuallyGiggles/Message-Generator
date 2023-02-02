@@ -324,6 +324,7 @@ func showDirectiveDetailed(channelID string, messageID string, args []string) {
 				SayByIDAndDelete(channelID, "There was an error!")
 			}
 			SayByIDAndDelete(channelID, string(file))
+			return
 		}
 	}
 	SayByIDAndDelete(channelID, "Channel "+args[0]+" not found in list.")
