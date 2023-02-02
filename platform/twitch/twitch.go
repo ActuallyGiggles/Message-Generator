@@ -3,7 +3,7 @@ package twitch
 import (
 	"Message-Generator/global"
 	"Message-Generator/platform"
-	"Message-Generator/stats"
+	"Message-Generator/print"
 	"time"
 
 	"github.com/gempir/go-twitch-irc/v3"
@@ -40,7 +40,7 @@ startOver:
 	err := client.Connect()
 	if err != nil {
 		time.Sleep(10 * time.Second)
-		stats.Log("started over:", err.Error())
+		print.Error("started over:\n" + err.Error())
 		goto startOver
 	}
 }

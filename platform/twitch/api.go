@@ -2,7 +2,7 @@ package twitch
 
 import (
 	"Message-Generator/global"
-	"Message-Generator/stats"
+	"Message-Generator/print"
 	"bytes"
 	"encoding/json"
 	"errors"
@@ -48,13 +48,13 @@ func GetBroadcasterInfo(channelName string) (data Data, err error) {
 	req.Header.Set("Client-Id", global.TwitchClientID)
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
 	if err != nil {
-		stats.Log("GetBroadcasterID failed\n", err.Error())
+		print.Error("GetBroadcasterID failed\n" + err.Error())
 		return d, err
 	}
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		stats.Log("GetBroadcasterID failed\n", err.Error())
+		print.Error("GetBroadcasterID failed\n" + err.Error())
 		return d, err
 	}
 	defer resp.Body.Close()
@@ -64,7 +64,7 @@ func GetBroadcasterInfo(channelName string) (data Data, err error) {
 	}
 	broadcaster := Broadcaster[Data]{}
 	if err := json.Unmarshal(body, &broadcaster); err != nil {
-		stats.Log("GetBroadcasterID failed\n", err.Error())
+		print.Error("GetBroadcasterID failed\n" + err.Error())
 		return d, err
 	}
 	for _, v := range broadcaster.Data {
@@ -396,19 +396,19 @@ func GetLiveStatus(channelName string) (live bool) {
 	req.Header.Set("Authorization", "Bearer "+global.TwitchOAuth)
 	req.Header.Set("Client-Id", global.TwitchClientID)
 	if err != nil {
-		stats.Log(err.Error())
+		print.Error(err.Error())
 	}
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
-		stats.Log(err.Error())
+		print.Error(err.Error())
 		return
 	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	var stream StreamStatusData
 	if err := json.Unmarshal(body, &stream); err != nil {
-		stats.Log(err.Error())
+		print.Error(err.Error())
 	}
 	if len(stream.Data) == 0 {
 		return false

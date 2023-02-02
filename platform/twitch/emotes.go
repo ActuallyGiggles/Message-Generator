@@ -2,7 +2,7 @@ package twitch
 
 import (
 	"Message-Generator/global"
-	"Message-Generator/stats"
+	"Message-Generator/print"
 	"sync"
 )
 
@@ -73,17 +73,19 @@ func GetEmoteController(isInit bool, channel global.Directive) (ok bool) {
 		// Get Broadcaster Info
 		data, err := GetBroadcasterInfo(channel.ChannelName)
 		if err != nil {
-			stats.Log(err.Error())
+			print.Error(err.Error())
 			return false
 		}
-		Broadcasters[channel.ChannelName] = data // Add broadcaster
+		// Add broadcaster
+		Broadcasters[channel.ChannelName] = data
 
 		// Get Twitch Channel Emotes
 		err = getTwitchChannelEmotes(data)
 		if err != nil {
-			stats.Log(err.Error())
+			print.Error(err.Error())
 		}
-		global.TwitchChannelEmotes = append(global.TwitchChannelEmotes, twitchChannelEmotesToUpdate...) // Add each twitch channel emote
+		// Add each twitch channel emote
+		global.TwitchChannelEmotes = append(global.TwitchChannelEmotes, twitchChannelEmotesToUpdate...)
 		twitchChannelEmotesToUpdate = nil
 
 		thirdPartyChannelEmotesToUpdate = append(thirdPartyChannelEmotesToUpdate, global.ThirdPartyEmotes{Name: channel.ChannelName})
@@ -91,21 +93,21 @@ func GetEmoteController(isInit bool, channel global.Directive) (ok bool) {
 		// Get 7tv emotes
 		err = get7tvChannelEmotes(data)
 		if err != nil {
-			stats.Log(err.Error())
+			print.Error(err.Error())
 			return false
 		}
 
 		// Get BTTV emotes
 		err = getBttvChannelEmotes(data)
 		if err != nil {
-			stats.Log(err.Error())
+			print.Error(err.Error())
 			return false
 		}
 
 		// Get FFZ emotes
 		err = getFfzChannelEmotes(data)
 		if err != nil {
-			stats.Log(err.Error())
+			print.Error(err.Error())
 			return false
 		}
 
@@ -137,24 +139,16 @@ func transferGlobalEmotes() {
 	global.GlobalEmotes = nil
 	global.GlobalEmotes = append(global.GlobalEmotes, globalEmotesToUpdate...)
 	globalEmotesToUpdate = nil
-	// fmt.Printf("%d Global emotes\n", len(global.GlobalEmotes))
 }
 
 func transferTwitchChannelEmotes() {
 	global.TwitchChannelEmotes = nil
 	global.TwitchChannelEmotes = append(global.TwitchChannelEmotes, twitchChannelEmotesToUpdate...)
 	twitchChannelEmotesToUpdate = nil
-	// fmt.Printf("%d Twitch Channel emotes\n", len(global.TwitchChannelEmotes))
 }
 
 func transferThirdPartyEmotes() {
 	global.ThirdPartyChannelEmotes = nil
 	global.ThirdPartyChannelEmotes = append(global.ThirdPartyChannelEmotes, thirdPartyChannelEmotesToUpdate...)
 	thirdPartyChannelEmotesToUpdate = nil
-	// fmt.Printf("%d Third Party emotes\n", func() (total int) {
-	// 	for _, c := range global.ThirdPartyChannelEmotes {
-	// 		total += len(c.Emotes)
-	// 	}
-	// 	return
-	// }())
 }
