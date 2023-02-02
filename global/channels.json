@@ -2794,9 +2794,9 @@
  },
  {
   "Platform": "twitch",
-  "ChannelName": "sodapoppin",
-  "ChannelID": "26301881",
-  "DiscordChannelID": "940620543546253383",
+  "ChannelName": "varsitygaming",
+  "ChannelID": "114856888",
+  "DiscordChannelID": "1070051864890060912",
   "Settings": {
    "IsCollectingMessages": true,
    "Reply": {
@@ -2910,6 +2910,27 @@
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
     "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sodapoppin",
+  "ChannelID": "26301881",
+  "DiscordChannelID": "940620543546253383",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": true
    },
    "Participation": {
     "IsEnabled": false,

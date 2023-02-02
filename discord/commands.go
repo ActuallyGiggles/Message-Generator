@@ -104,7 +104,7 @@ func addDirective(channelID string, messageID string) {
 		dialogueChannel = nil
 		return
 	default:
-		channel.ChannelName = channelName.Arguments[0]
+		channel.ChannelName = strings.ToLower(channelName.Arguments[0])
 	}
 
 	// Return if channel is already added
