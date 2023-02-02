@@ -229,7 +229,7 @@ func updateDirective(channelID string, messageID string) {
 	}
 
 getWhatSettingToUpdate:
-	conversationIDs.add(SayByID(channelID, "Which do you want to update?\n\n1. Collecting messages for Markov chains\n2. Allowing replies?\n3. Allowing replies online?\n4. Allowing replies offline?\n5. Allowing chat participation?\n6. Allowing chat participation when online?\n7. Allowing chat participation when offline?\n8. What chains to use when posting to chat?\n\nType [cancel] or [done] if you want to cancel or you are done.").ID)
+	conversationIDs.add(SayByID(channelID, "Which do you want to update?\n\n1. Collecting messages for Markov chains? Currently: "+strconv.FormatBool(channel.Settings.IsCollectingMessages)+"\n2. Allowing replies? Currently: "+strconv.FormatBool(channel.Settings.Reply.IsEnabled)+"\n3. Allowing replies online? Currently: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOnline)+"\n4. Allowing replies offline? Currently: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOffline)+"\n5. Allowing chat participation? Currently: "+strconv.FormatBool(channel.Settings.Participation.IsEnabled)+"\n6. Allowing chat participation when online? Currently: "+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOnline)+"\n7. Allowing chat participation when offline?"+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOffline)+"\n8. What chains to use when posting to chat? Currently: "+strings.Join(channel.Settings.CustomChannelsToUse, " ")+"\n\nType [cancel] or [done] if you want to cancel or you are done.").ID)
 	settingsToUpdate := <-dialogueChannel
 	conversationIDs.add(settingsToUpdate.MessageID)
 	if settingsToUpdate.Arguments[0] == "cancel" {
@@ -284,6 +284,7 @@ getWhatSettingToUpdate:
 				channel.Settings.WhichChannelsToUse = "custom"
 				channel.Settings.CustomChannelsToUse = customChannels
 			}
+			conversationIDs.add(SayByID(channelID, "Participation offline: "+strings.Join(channel.Settings.CustomChannelsToUse, " ")).ID)
 		}
 	}
 	goto getWhatSettingToUpdate
