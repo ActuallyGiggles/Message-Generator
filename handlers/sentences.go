@@ -14,10 +14,12 @@ import (
 var (
 	defaultLocks         = make(map[string]bool)
 	defaultLocksMx       sync.Mutex
-	participationLocks   = make(map[string]bool)
-	participationLocksMx sync.Mutex
 	apiLocks             = make(map[string]bool)
 	apiLocksMx           sync.Mutex
+	participationLocks   = make(map[string]bool)
+	participationLocksMx sync.Mutex
+	replyLocks           = make(map[string]bool)
+	replyLocksMx         sync.Mutex
 )
 
 // CreateDefaultSentence outputs a likely sentence to a Discord channel.
@@ -128,7 +130,7 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockParticipation(global.RandomNumber(1, 10), msg.ChannelName) {
+	if !lockParticipation(global.RandomNumber(5, 10), msg.ChannelName) {
 		return
 	}
 
@@ -191,6 +193,11 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 
 	// Allow passage if channel is online and online is enabled or if channel is offline and offline is enabled.
 	if (twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOnline) || (!twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOffline) {
+		return
+	}
+
+	// Allow passage if not currently timed out.
+	if !lockReply(global.RandomNumber(1, 1), msg.ChannelName) {
 		return
 	}
 

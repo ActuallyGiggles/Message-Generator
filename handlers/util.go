@@ -239,6 +239,26 @@ func unlockParticipation(timer int, channel string) {
 	participationLocksMx.Unlock()
 }
 
+// lockReply will mark a channel as locked until the time (in minutes) has passed.
+func lockReply(time int, channel string) bool {
+	replyLocksMx.Lock()
+	if replyLocks[channel] {
+		replyLocksMx.Unlock()
+		return false
+	}
+	replyLocks[channel] = true
+	replyLocksMx.Unlock()
+	go unlockReply(time, channel)
+	return true
+}
+
+func unlockReply(timer int, channel string) {
+	time.Sleep(time.Duration(timer) * time.Minute)
+	replyLocksMx.Lock()
+	replyLocks[channel] = false
+	replyLocksMx.Unlock()
+}
+
 func isSentenceTooShort(sentence string) bool {
 	// Split sentence into words
 	s := strings.Split(sentence, " ")
