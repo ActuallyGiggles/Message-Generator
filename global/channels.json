@@ -2996,9 +2996,9 @@
     "IsAllowedWhenOffline": true
    },
    "Participation": {
-    "IsEnabled": false,
-    "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOffline": true
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
