@@ -181,11 +181,6 @@ recurse:
 
 // CreateReplySentence takes in a message and outputs a targeted sentence that directly mentions a user.
 func CreateReplySentence(msg platform.Message, directive global.Directive) {
-	// If does not mention, return.
-	if !strings.Contains(strings.ToLower(msg.Content), strings.ToLower(global.BotName)) {
-		return
-	}
-
 	// If not allowed to respond to mentions, return.
 	if !directive.Settings.Reply.IsEnabled {
 		return

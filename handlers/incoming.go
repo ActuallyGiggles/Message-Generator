@@ -6,6 +6,7 @@ import (
 	"Message-Generator/markov"
 	"Message-Generator/platform"
 	"fmt"
+	"strings"
 )
 
 func Incoming(c chan platform.Message) {
@@ -14,7 +15,7 @@ func Incoming(c chan platform.Message) {
 			continue
 		}
 
-		preparedMessage := prepareMessageForMarkov(msg)
+		preparedContent := prepareMessageForMarkov(msg)
 
 		var exists bool
 
@@ -23,14 +24,19 @@ func Incoming(c chan platform.Message) {
 				exists = true
 
 				if directive.Settings.IsCollectingMessages {
-					go markov.In(msg.ChannelName, preparedMessage)
+					go markov.In(msg.ChannelName, preparedContent)
 					go CreateDefaultSentence(msg.ChannelName)
 				}
 
-				go CreateReplySentence(msg, directive)
+				preparedMsg := msg
+				preparedMsg.Content = preparedContent
 
-				msg.Content = preparedMessage
-				go CreateParticipationSentence(msg, directive)
+				// If message contains a ping for the bot, run a reply
+				if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(global.BotName)) {
+					go CreateReplySentence(preparedMsg, directive)
+				}
+
+				go CreateParticipationSentence(preparedMsg, directive)
 			}
 		}
 
