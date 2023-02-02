@@ -14,7 +14,7 @@ func Incoming(c chan platform.Message) {
 			continue
 		}
 
-		msg.Content = prepareMessageForMarkov(msg)
+		preparedMessage := prepareMessageForMarkov(msg)
 
 		var exists bool
 
@@ -23,11 +23,13 @@ func Incoming(c chan platform.Message) {
 				exists = true
 
 				if directive.Settings.IsCollectingMessages {
-					go markov.In(msg.ChannelName, msg.Content)
+					go markov.In(msg.ChannelName, preparedMessage)
 					go CreateDefaultSentence(msg.ChannelName)
 				}
 
 				go CreateReplySentence(msg, directive)
+
+				msg.Content = preparedMessage
 				go CreateParticipationSentence(msg, directive)
 			}
 		}
