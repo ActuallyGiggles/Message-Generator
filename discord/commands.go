@@ -21,6 +21,7 @@ func commandsHandler(message IncomingMessage) {
 	case "showchannels":
 		showChannels(message.ChannelID, message.MessageID)
 	case "showchanneldetailed":
+		showDirectiveDetailed(message.ChannelID, message.MessageID, message.Args)
 	case "addchannel":
 		addDirective(message.ChannelID, message.MessageID)
 	case "updatechannel":
@@ -72,6 +73,7 @@ func addDirective(channelID string, messageID string) {
 	conversationIDs.add(messageID)
 	channel := global.Directive{}
 
+getThePlatform:
 	// Get platform
 	conversationIDs.add(SayByID(channelID, "What is the platform?\n(1) Twitch\n(2) Youtube").ID)
 	platform := <-dialogueChannel
@@ -79,7 +81,7 @@ func addDirective(channelID string, messageID string) {
 	switch platform.Arguments[0] {
 	default:
 		conversationIDs.add(SayByID(channelID, "Not a proper platform").ID)
-		return
+		goto getThePlatform
 	case "cancel":
 		return
 	case "1":
@@ -116,6 +118,7 @@ func addDirective(channelID string, messageID string) {
 	channel.ChannelID = platformChannelID
 	channel.DiscordChannelID = discordChannelID
 
+getTheSettingsToSet:
 	conversationIDs.add(SayByID(channelID, "For the following options, type 0 if false and 1 if true:\n\n1. Will be collecting messages into Markov chain?\n2. Will be allowed to reply?\n3. Will be allowed to reply in online chat?\n4. Will be allowed to reply in offline chat?\n5. Will be allowed to participate with chat?\n6. Will be allowed to participate online?\n7. Will be allowed to participate offline?").ID)
 	boolSettings := <-dialogueChannel
 	conversationIDs.add(boolSettings.MessageID)
@@ -129,6 +132,9 @@ func addDirective(channelID string, messageID string) {
 			return
 		} else {
 			switch i {
+			default:
+				conversationIDs.add(SayByID(channelID, "Not a proper answer.").ID)
+				goto getTheSettingsToSet
 			case 0:
 				channel.Settings.IsCollectingMessages = result
 			case 1:
@@ -147,6 +153,7 @@ func addDirective(channelID string, messageID string) {
 		}
 	}
 
+getWhatChannelToUse:
 	conversationIDs.add(SayByID(channelID, "What chains will this channel use to post with?\n\nAll (1)     All except self (2)     Self (3)     Custom (4)\n\nIf custom, what are the custom channels to use?").ID)
 	responseSettings := <-dialogueChannel
 	conversationIDs.add(responseSettings.MessageID)
@@ -158,7 +165,7 @@ func addDirective(channelID string, messageID string) {
 	switch mode {
 	default:
 		conversationIDs.add(SayByID(channelID, "Not a proper answer.").ID)
-		return
+		goto getWhatChannelToUse
 	case "1", "all", "All":
 		channel.Settings.WhichChannelsToUse = "all"
 	case "2", "all except self", "All except self":
@@ -221,7 +228,7 @@ func updateDirective(channelID string, messageID string) {
 		return
 	}
 
-recurse:
+getWhatSettingToUpdate:
 	conversationIDs.add(SayByID(channelID, "Which do you want to update?\n\n1. Collecting messages for Markov chains\n2. Allowing replies?\n3. Allowing replies online?\n4. Allowing replies offline?\n5. Allowing chat participation?\n6. Allowing chat participation when online?\n7. Allowing chat participation when offline?\n8. What chains to use when posting to chat?\n\nType [cancel] or [done] if you want to cancel or you are done.").ID)
 	settingsToUpdate := <-dialogueChannel
 	conversationIDs.add(settingsToUpdate.MessageID)
@@ -235,7 +242,7 @@ recurse:
 		switch setting {
 		default:
 			conversationIDs.add(SayByID(channelID, "Not a proper answer.").ID)
-			return
+			goto getWhatSettingToUpdate
 		case "1":
 			channel.Settings.IsCollectingMessages = !channel.Settings.IsCollectingMessages
 		case "2":
@@ -272,7 +279,7 @@ recurse:
 			}
 		}
 	}
-	goto recurse
+	goto getWhatSettingToUpdate
 
 decidedUpdates:
 	err := global.UpdateChannels("update", *channel)
