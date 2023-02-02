@@ -166,9 +166,12 @@ func targetedBeginning(name, target string) (output string, err error) {
 		return "", errors.New("Target is empty for TargetedBeginning")
 	}
 
+	if len(strings.Split(target, instructions.SeparationKey)) > 1 {
+		return "", errors.New(fmt.Sprintf("You can only have 1 target."))
+	}
+
 	var parentWord string
 	var childChosen string
-
 	var initialList []Choice
 
 	f, err := os.Open("./markov-chains/" + name + "_head.json")
@@ -191,34 +194,11 @@ func targetedBeginning(name, target string) (output string, err error) {
 			panic(err)
 		}
 
-		numberOfTargets := len(strings.Split(target, instructions.SeparationKey))
-
-		if numberOfTargets == 1 {
-			potentialParentSplit := strings.Split(currentParent.Word, " ")
-			if potentialParentSplit[0] == target {
-				initialList = append(initialList, Choice{
-					Word:   currentParent.Word,
-					Weight: currentParent.Value,
-				})
-			} else if currentParent.Word == target {
-				initialList = append(initialList, Choice{
-					Word:   currentParent.Word,
-					Weight: currentParent.Value,
-				})
-			}
-		}
-
-		if numberOfTargets == 2 {
-			if currentParent.Word == target {
-				initialList = append(initialList, Choice{
-					Word:   currentParent.Word,
-					Weight: currentParent.Value,
-				})
-			}
-		}
-
-		if numberOfTargets > 2 {
-			return "", errors.New(fmt.Sprintf("You can only have 1 or 2 targets under the current system. Number of current targets: %d", numberOfTargets))
+		if strings.Contains(currentParent.Word, target) {
+			initialList = append(initialList, Choice{
+				Word:   currentParent.Word,
+				Weight: currentParent.Value,
+			})
 		}
 	}
 
@@ -256,14 +236,12 @@ func targetedBeginning(name, target string) (output string, err error) {
 
 			if currentParent.Word == parentWord {
 				parentExists = true
-
 				childChosen = getNextWord(currentParent)
 
 				if childChosen == instructions.EndKey {
 					return output, nil
 				} else {
 					output = output + instructions.SeparationKey + childChosen
-
 					parentWord = childChosen
 					continue
 				}
@@ -283,9 +261,12 @@ func targetedEnding(name, target string) (output string, err error) {
 		return "", errors.New("Target is empty for TargetedEnding")
 	}
 
+	if len(strings.Split(target, instructions.SeparationKey)) > 1 {
+		return "", errors.New(fmt.Sprintf("You can only have 1 target."))
+	}
+
 	var parentWord string
 	var grandparentChosen string
-
 	var initialList []Choice
 
 	f, err := os.Open("./markov-chains/" + name + "_tail.json")
@@ -308,34 +289,11 @@ func targetedEnding(name, target string) (output string, err error) {
 			panic(err)
 		}
 
-		numberOfTargets := len(strings.Split(target, instructions.SeparationKey))
-
-		if numberOfTargets == 1 {
-			potentialParentSplit := strings.Split(currentParent.Word, " ")
-			if potentialParentSplit[0] == target {
-				initialList = append(initialList, Choice{
-					Word:   currentParent.Word,
-					Weight: currentParent.Value,
-				})
-			} else if currentParent.Word == target {
-				initialList = append(initialList, Choice{
-					Word:   currentParent.Word,
-					Weight: currentParent.Value,
-				})
-			}
-		}
-
-		if numberOfTargets == 2 {
-			if currentParent.Word == target {
-				initialList = append(initialList, Choice{
-					Word:   currentParent.Word,
-					Weight: currentParent.Value,
-				})
-			}
-		}
-
-		if numberOfTargets > 2 {
-			return "", errors.New(fmt.Sprintf("You can only have 1 or 2 targets under the current system. Number of current targets: %d", numberOfTargets))
+		if strings.Contains(currentParent.Word, target) {
+			initialList = append(initialList, Choice{
+				Word:   currentParent.Word,
+				Weight: currentParent.Value,
+			})
 		}
 	}
 
@@ -373,14 +331,12 @@ func targetedEnding(name, target string) (output string, err error) {
 
 			if currentParent.Word == parentWord {
 				parentExists = true
-
 				grandparentChosen = getPreviousWord(currentParent)
 
 				if grandparentChosen == instructions.StartKey {
 					return output, nil
 				} else {
 					output = grandparentChosen + instructions.SeparationKey + output
-
 					parentWord = grandparentChosen
 					continue
 				}
@@ -398,6 +354,10 @@ func targetedEnding(name, target string) (output string, err error) {
 func targetedMiddle(name, target string) (output string, err error) {
 	if target == "" {
 		return "", errors.New("Target is empty for TargetedMiddle")
+	}
+
+	if len(strings.Split(target, instructions.SeparationKey)) > 1 {
+		return "", errors.New(fmt.Sprintf("You can only have 1 target."))
 	}
 
 	var parentWord string
@@ -426,46 +386,22 @@ func targetedMiddle(name, target string) (output string, err error) {
 			panic(err)
 		}
 
-		numberOfTargets := len(strings.Split(target, instructions.SeparationKey))
+		if strings.Contains(currentParent.Word, target) {
+			var totalWeight int
 
-		if numberOfTargets == 1 {
-			potentialParentSplit := strings.Split(currentParent.Word, " ")
-			if potentialParentSplit[0] == target {
-				goto addParent
-			} else if currentParent.Word == target {
-				goto addParent
-			} else {
-				continue
+			for _, child := range currentParent.Children {
+				totalWeight += child.Value
 			}
-		}
 
-		if numberOfTargets == 2 {
-			if currentParent.Word == target {
-				goto addParent
-			} else {
-				continue
+			for _, grandparent := range currentParent.Grandparents {
+				totalWeight += grandparent.Value
 			}
+
+			initialList = append(initialList, Choice{
+				Word:   currentParent.Word,
+				Weight: totalWeight,
+			})
 		}
-
-		if numberOfTargets > 2 {
-			return "", errors.New(fmt.Sprintf("You can only have 1 or 2 targets under the current system. Number of current targets: %d", numberOfTargets))
-		}
-
-	addParent:
-		var totalWeight int
-
-		for _, child := range currentParent.Children {
-			totalWeight += child.Value
-		}
-
-		for _, grandparent := range currentParent.Grandparents {
-			totalWeight += grandparent.Value
-		}
-
-		initialList = append(initialList, Choice{
-			Word:   currentParent.Word,
-			Weight: totalWeight,
-		})
 	}
 
 	if len(initialList) <= 0 {

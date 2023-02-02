@@ -154,7 +154,7 @@ recurse:
 		// Stop if too much recursing.
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
-			print.Warning("Could not create participation sentence.\nTrigger Message:\n" + msg.Content + "\n" + "Error: " + err.Error())
+			print.Warning("Could not create participation sentence.\nTrigger Message:" + msg.Content + "\n" + "Error: " + err.Error())
 			return
 		}
 
@@ -231,7 +231,7 @@ recurse:
 
 		if timesRecursed > recursionLimit {
 			// Report if too many errors.
-			print.Warning("Could not create reply sentence.\nTrigger Message:\n" + msg.Content + "\n" + "Error: " + err.Error())
+			print.Warning("Could not create reply sentence.\nTrigger Message:" + msg.Content + "\n" + "Error: " + err.Error())
 			return
 		}
 
