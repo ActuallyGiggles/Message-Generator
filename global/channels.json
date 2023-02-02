@@ -2922,15 +2922,15 @@
  },
  {
   "Platform": "twitch",
-  "ChannelName": "sodapoppin",
-  "ChannelID": "26301881",
-  "DiscordChannelID": "940620543546253383",
+  "ChannelName": "kitboga",
+  "ChannelID": "32787655",
+  "DiscordChannelID": "1070755663615102986",
   "Settings": {
    "IsCollectingMessages": true,
    "Reply": {
-    "IsEnabled": true,
+    "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": true
+    "IsAllowedWhenOffline": false
    },
    "Participation": {
     "IsEnabled": false,
@@ -2985,15 +2985,15 @@
  },
  {
   "Platform": "twitch",
-  "ChannelName": "kitboga",
-  "ChannelID": "32787655",
-  "DiscordChannelID": "1070755663615102986",
+  "ChannelName": "sodapoppin",
+  "ChannelID": "26301881",
+  "DiscordChannelID": "940620543546253383",
   "Settings": {
    "IsCollectingMessages": true,
    "Reply": {
-    "IsEnabled": false,
+    "IsEnabled": true,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "IsAllowedWhenOffline": true
    },
    "Participation": {
     "IsEnabled": false,
