@@ -51,5 +51,6 @@
  "\\bk?n\\s*[i1jely]\\s*[gq]*\\s*[gq][gq]\\s*[e3iuao]*\\s*r?\\b|\\bk?n\\s*[i1jely]\\s*[gq]\\b",
  "jews?\\b",
  "\\bdie(d|s)?\\b",
- "\\bcoons?(y|i?e?s?|er)?"
+ "\\bcoons?(y|i?e?s?|er)?",
+ "jihad"
 ]
