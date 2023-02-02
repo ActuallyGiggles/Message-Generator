@@ -245,18 +245,25 @@ getWhatSettingToUpdate:
 			goto getWhatSettingToUpdate
 		case "1":
 			channel.Settings.IsCollectingMessages = !channel.Settings.IsCollectingMessages
+			conversationIDs.add(SayByID(channelID, "Collecting messages: "+strconv.FormatBool(channel.Settings.IsCollectingMessages)).ID)
 		case "2":
 			channel.Settings.Reply.IsEnabled = !channel.Settings.Reply.IsEnabled
+			conversationIDs.add(SayByID(channelID, "Reply: "+strconv.FormatBool(channel.Settings.Reply.IsEnabled)).ID)
 		case "3":
 			channel.Settings.Reply.IsAllowedWhenOnline = !channel.Settings.Reply.IsAllowedWhenOnline
+			conversationIDs.add(SayByID(channelID, "Reply online: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOnline)).ID)
 		case "4":
 			channel.Settings.Reply.IsAllowedWhenOffline = !channel.Settings.Reply.IsAllowedWhenOffline
+			conversationIDs.add(SayByID(channelID, "Reply offline: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOffline)).ID)
 		case "5":
 			channel.Settings.Participation.IsEnabled = !channel.Settings.Participation.IsEnabled
+			conversationIDs.add(SayByID(channelID, "Participation: "+strconv.FormatBool(channel.Settings.Participation.IsEnabled)).ID)
 		case "6":
 			channel.Settings.Participation.IsAllowedWhenOnline = !channel.Settings.Participation.IsAllowedWhenOnline
+			conversationIDs.add(SayByID(channelID, "Participation online: "+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOnline)).ID)
 		case "7":
 			channel.Settings.Participation.IsAllowedWhenOffline = !channel.Settings.Participation.IsAllowedWhenOffline
+			conversationIDs.add(SayByID(channelID, "Participation offline: "+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOffline)).ID)
 		case "8":
 			conversationIDs.add(SayByID(channelID, "What chains will this channel use to post with?\n\nAll (1)     All except self (2)     Self (3)     Custom (4)\n\nIf custom, what are the custom channels to use?").ID)
 			responseSettings := <-dialogueChannel
