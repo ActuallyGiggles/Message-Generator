@@ -68,8 +68,8 @@ func addDirective(channelID string, messageID string) {
 		dialogueChannel = nil
 	}()
 
+	dialogueChannel = make(chan Dialogue)
 	conversationIDs.add(messageID)
-
 	channel := global.Directive{}
 
 	// Get platform
@@ -191,9 +191,8 @@ func updateDirective(channelID string, messageID string) {
 		dialogueChannel = nil
 	}()
 
-	conversationIDs.add(messageID)
 	dialogueChannel = make(chan Dialogue)
-
+	conversationIDs.add(messageID)
 	var channel *global.Directive
 
 	conversationIDs.add(SayByID(channelID, "Which channel will you update?").ID)
@@ -283,8 +282,8 @@ func removeDirective(channelID string, messageID string, args []string) {
 		dialogueChannel = nil
 	}()
 
-	conversationIDs.add(messageID)
 	dialogueChannel = make(chan Dialogue)
+	conversationIDs.add(messageID)
 
 	if len(args) == 0 {
 		conversationIDs.add(SayByID(channelID, "Enter channel to remove.").ID)

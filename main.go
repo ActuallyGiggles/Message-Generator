@@ -72,14 +72,14 @@ func Start() {
 		SeparationKey:       " ",
 		StartKey:            "b5G(n1$I!4g",
 		EndKey:              "e1$D(n7",
-		Debug:               false,
+		Debug:               debug,
 		ShouldZip:           true,
 		ShouldDefluff:       true,
 		DefluffTriggerValue: 50,
 	})
 
 	twitch.GatherEmotes(debug)
-	go twitch.Start(debug, incomingMessages)
+	go twitch.Start(incomingMessages)
 
 	stats.Start()
 

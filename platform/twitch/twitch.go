@@ -14,7 +14,7 @@ var client *twitch.Client
 var totalM int
 
 // Start creates a twitch client and connects it.
-func Start(debug bool, incoming chan platform.Message) {
+func Start(incoming chan platform.Message) {
 startOver:
 	// Make unexported client use the address for the initialized client
 	client = &twitch.Client{}
