@@ -3003,5 +3003,26 @@
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
   }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "tectone",
+  "ChannelID": "27717340",
+  "DiscordChannelID": "1070829647442493491",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
  }
 ]
