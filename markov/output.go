@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -194,7 +195,7 @@ func targetedBeginning(name, target string) (output string, err error) {
 			panic(err)
 		}
 
-		if strings.Contains(currentParent.Word, target) {
+		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentParent.Word); match {
 			initialList = append(initialList, Choice{
 				Word:   currentParent.Word,
 				Weight: currentParent.Value,
@@ -289,7 +290,7 @@ func targetedEnding(name, target string) (output string, err error) {
 			panic(err)
 		}
 
-		if strings.Contains(currentParent.Word, target) {
+		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentParent.Word); match {
 			initialList = append(initialList, Choice{
 				Word:   currentParent.Word,
 				Weight: currentParent.Value,
@@ -386,7 +387,7 @@ func targetedMiddle(name, target string) (output string, err error) {
 			panic(err)
 		}
 
-		if strings.Contains(currentParent.Word, target) {
+		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentParent.Word); match {
 			var totalWeight int
 
 			for _, child := range currentParent.Children {
