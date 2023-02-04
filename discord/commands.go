@@ -325,6 +325,10 @@ func removeDirective(channelID string, messageID string, args []string) {
 
 func showDirectiveDetailed(channelID string, messageID string, args []string) {
 	defer DeleteDiscordMessage(channelID, messageID)
+	if len(args) <1 {
+		SayByIDAndDelete(channelID, "Specify channel!")
+		return
+	}
 	for _, directive := range global.Directives {
 		if directive.ChannelName == args[0] {
 			file, err := json.MarshalIndent(directive, "", " ")

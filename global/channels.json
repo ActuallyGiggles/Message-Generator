@@ -2985,27 +2985,6 @@
  },
  {
   "Platform": "twitch",
-  "ChannelName": "sodapoppin",
-  "ChannelID": "26301881",
-  "DiscordChannelID": "940620543546253383",
-  "Settings": {
-   "IsCollectingMessages": true,
-   "Reply": {
-    "IsEnabled": true,
-    "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": true
-   },
-   "Participation": {
-    "IsEnabled": true,
-    "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": true
-   },
-   "WhichChannelsToUse": "self",
-   "CustomChannelsToUse": null
-  }
- },
- {
-  "Platform": "twitch",
   "ChannelName": "tectone",
   "ChannelID": "27717340",
   "DiscordChannelID": "1070829647442493491",
@@ -3020,6 +2999,27 @@
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
     "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sodapoppin",
+  "ChannelID": "26301881",
+  "DiscordChannelID": "940620543546253383",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": true
+   },
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": true
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null

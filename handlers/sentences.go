@@ -130,7 +130,7 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockParticipation(global.RandomNumber(10, 20), msg.ChannelName) {
+	if !lockParticipation(global.RandomNumber(10, 30), msg.ChannelName) {
 		return
 	}
 

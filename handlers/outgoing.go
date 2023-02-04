@@ -31,7 +31,7 @@ func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence st
 	// stop
 	if origin == "participation" {
 		twitch.Say(sendBackToChannel, message)
-		discord.Say("participation", "Channel Used: "+oi.Chain+"\nMethod: "+oi.Method+"\nTrigger Sentence: "+triggerSentence+"\nTarget: "+oi.Target+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: "+message)
+		discord.Say("participation", "\nChannel Sent To: "+sendBackToChannel+"Channel Used: "+oi.Chain+"\nMethod: "+oi.Method+"\nTarget: "+oi.Target+"\nTrigger Sentence: "+triggerSentence+"\nMessage: "+message)
 		return
 	}
 
@@ -39,7 +39,7 @@ func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence st
 	// stop
 	if origin == "reply" {
 		twitch.Say(sendBackToChannel, "@"+mention+" "+message)
-		discord.Say("reply", "Channel Used: "+oi.Chain+"\nMethod: "+oi.Method+"\nTrigger Sentence: "+triggerSentence+"\nTarget: "+oi.Target+"\nChannel Sent To: "+sendBackToChannel+"\nMessage: @"+mention+" "+message)
+		discord.Say("reply", "\nChannel Sent To: "+sendBackToChannel+"Channel Used: "+oi.Chain+"\nMethod: "+oi.Method+"\nTarget: "+oi.Target+"\nTrigger Sentence: "+triggerSentence+"\nMessage: @"+mention+" "+message)
 		return
 	}
 
