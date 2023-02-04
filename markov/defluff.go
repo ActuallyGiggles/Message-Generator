@@ -7,6 +7,16 @@ import (
 	"time"
 )
 
+// determineDefluffTime will determine the next defluff time and whether the ticker should be new or not.
+func determineDefluffTime(init bool) (newTicker *time.Ticker) {
+	// If a positive amount of time is left (did not miss defluff time), return defluff ticker.
+	if timeRemaining := time.Until(stats.NextDefluffTime); timeRemaining > 0 && init {
+		return time.NewTicker(timeRemaining)
+	}
+
+	return time.NewTicker(defluffInterval)
+}
+
 func defluff() {
 	busy.Lock()
 	defer duration(track("defluffing duration"))

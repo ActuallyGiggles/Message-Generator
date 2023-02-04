@@ -38,8 +38,7 @@ func tickerLoops() {
 	}
 
 	if instructions.ShouldDefluff {
-		defluffTicker = time.NewTicker(defluffInterval)
-		stats.NextDefluffTime = time.Now().Add(defluffInterval)
+		defluffTicker = determineDefluffTime(true)
 	}
 
 	for {
@@ -49,6 +48,7 @@ func tickerLoops() {
 		case <-zippingTicker.C:
 			go zipChains()
 		case <-defluffTicker.C:
+			defluffTicker = determineDefluffTime(false)
 			go defluff()
 		}
 	}
