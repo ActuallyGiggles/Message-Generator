@@ -263,8 +263,8 @@ func isSentenceTooShort(sentence string) bool {
 	// Split sentence into words
 	s := strings.Split(sentence, " ")
 
-	// If there are one to three words, 20% chance to pass
-	if 0 < len(s) && len(s) < 4 {
+	// If there are one to two words, 20% chance to pass
+	if 0 < len(s) && len(s) < 3 {
 		n := global.RandomNumber(0, 100)
 		if n <= 10 {
 			return true
