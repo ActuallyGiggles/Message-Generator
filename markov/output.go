@@ -569,7 +569,7 @@ func getStartWord(name string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("Internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
+	return "", errors.New("internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
 }
 
 func getEndWord(name string) (phrase string, err error) {
@@ -635,5 +635,5 @@ func getEndWord(name string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("Internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
+	return "", errors.New("internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
 }
