@@ -99,7 +99,7 @@ func (w *worker) writeHead(errCh chan error, wg2 *sync.WaitGroup) {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
-			chainData, _ := json.MarshalIndent(w.Chain.Parents[0].Children, "", "    ")
+			chainData, _ := json.Marshal(w.Chain.Parents[0].Children)
 			w.Chain.removeParent(0)
 			f.Write(chainData)
 			f.Close()
@@ -203,7 +203,7 @@ func (w *worker) writeTail(errCh chan error, wg2 *sync.WaitGroup) {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
-			chainData, _ := json.MarshalIndent(w.Chain.Parents[0].Grandparents, "", "    ")
+			chainData, _ := json.Marshal(w.Chain.Parents[0].Grandparents)
 			w.Chain.removeParent(0)
 			f.Write(chainData)
 			f.Close()
@@ -317,7 +317,7 @@ func (w *worker) writeBody(errCh chan error) {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
-			chainData, _ := json.MarshalIndent(w.Chain.Parents, "", "    ")
+			chainData, _ := json.Marshal(w.Chain.Parents)
 			f.Write(chainData)
 			f.Close()
 			return
