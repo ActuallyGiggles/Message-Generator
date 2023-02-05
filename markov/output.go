@@ -517,7 +517,7 @@ func getStartWord(name string) (phrase string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via getStartWord) detected in " + "./markov-chains/" + name + "_body.json")
+		return "", errors.New("EOF (via getStartWord) detected in " + "./markov-chains/" + name + "_head.json")
 	}
 
 	for dec.More() {
@@ -569,7 +569,7 @@ func getStartWord(name string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
+	return "", errors.New("internal error - code should not reach this point - getStartWord - " + "./markov-chains/" + name + "_head.json")
 }
 
 func getEndWord(name string) (phrase string, err error) {
@@ -583,7 +583,7 @@ func getEndWord(name string) (phrase string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via getEndWord) detected in " + "./markov-chains/" + name + "_body.json")
+		return "", errors.New("EOF (via getEndWord) detected in " + "./markov-chains/" + name + "_tail.json")
 	}
 
 	for dec.More() {
@@ -635,5 +635,5 @@ func getEndWord(name string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_head.json")
+	return "", errors.New("internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_tail.json")
 }
