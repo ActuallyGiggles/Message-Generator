@@ -446,7 +446,10 @@ func (w *worker) writeBody(errCh chan error) {
 				errCh <- err
 			}
 
-			fN.Close()
+			err = fN.Close()
+			if err != nil {
+				panic(err)
+			}
 		}
 	}
 

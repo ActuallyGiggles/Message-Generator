@@ -230,8 +230,6 @@ func (enc *encode) CloseEncoder() (err error) {
 		panic(err)
 	}
 
-	enc.File.Close()
-
 	return nil
 }
 
