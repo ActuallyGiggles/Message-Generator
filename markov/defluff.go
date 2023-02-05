@@ -92,13 +92,20 @@ func defluffHead(chain string) (removed int) {
 			}
 
 			// Add child into new list
-			enc.AddEntry(child{
+			err = enc.AddEntry(child{
 				Word:  existingChild.Word,
 				Value: existingChild.Value,
 			})
+			if err != nil {
+				panic(err)
+			}
 		}
 
-		enc.CloseEncoder()
+		err = enc.CloseEncoder()
+		if err != nil {
+			panic(err)
+		}
+
 		fN.Close()
 	}
 
@@ -180,10 +187,17 @@ func defluffBody(chain string) (removed int) {
 			}
 
 			updatedParent.Word = existingParent.Word
-			enc.AddEntry(updatedParent)
+			err = enc.AddEntry(updatedParent)
+			if err != nil {
+				panic(err)
+			}
 		}
 
-		enc.CloseEncoder()
+		err = enc.CloseEncoder()
+		if err != nil {
+			panic(err)
+		}
+
 		fN.Close()
 
 	}
@@ -239,13 +253,20 @@ func defluffTail(chain string) (removed int) {
 			}
 
 			// Add grandparent into new list
-			enc.AddEntry(grandparent{
+			err = enc.AddEntry(grandparent{
 				Word:  existingGrandparent.Word,
 				Value: existingGrandparent.Value,
 			})
+			if err != nil {
+				panic(err)
+			}
 		}
 
-		enc.CloseEncoder()
+		err = enc.CloseEncoder()
+		if err != nil {
+			panic(err)
+		}
+
 		fN.Close()
 
 	}

@@ -98,7 +98,11 @@ func (w *worker) writeHead(errCh chan error) {
 		if err != nil {
 			chainData, _ := json.Marshal(w.Chain.Parents[0].Children)
 			w.Chain.removeParent(0)
-			f.Write(chainData)
+			_, err = f.Write(chainData)
+			if err != nil {
+				panic(err)
+			}
+
 			f.Close()
 			return
 		} else {
@@ -113,7 +117,7 @@ func (w *worker) writeHead(errCh chan error) {
 				panic(err)
 			}
 
-			for i, parent := range *&w.Chain.Parents {
+			for i, parent := range w.Chain.Parents {
 				if parent.Word == instructions.StartKey {
 
 					for dec.More() {
@@ -126,7 +130,7 @@ func (w *worker) writeHead(errCh chan error) {
 
 						childMatch := false
 
-						for j, newChild := range *&parent.Children {
+						for j, newChild := range parent.Children {
 
 							if newChild.Word == existingChild.Word {
 								childMatch = true
@@ -150,7 +154,7 @@ func (w *worker) writeHead(errCh chan error) {
 						}
 					}
 
-					for _, c := range *&parent.Children {
+					for _, c := range parent.Children {
 						if err := enc.AddEntry(c); err != nil {
 							panic(err)
 						}
@@ -202,7 +206,11 @@ func (w *worker) writeTail(errCh chan error) {
 		if err != nil {
 			chainData, _ := json.Marshal(w.Chain.Parents[0].Grandparents)
 			w.Chain.removeParent(0)
-			f.Write(chainData)
+			_, err = f.Write(chainData)
+			if err != nil {
+				panic(err)
+			}
+
 			f.Close()
 			return
 		} else {
@@ -218,7 +226,7 @@ func (w *worker) writeTail(errCh chan error) {
 			}
 
 			// For every parent in parents
-			for i, parent := range *&w.Chain.Parents {
+			for i, parent := range w.Chain.Parents {
 
 				// If the parent is an end key
 				if parent.Word == instructions.EndKey {
@@ -235,7 +243,7 @@ func (w *worker) writeTail(errCh chan error) {
 						grandparentMatch := false
 
 						// For every new grandparent in new grandparents
-						for j, newGrandparent := range *&parent.Grandparents {
+						for j, newGrandparent := range parent.Grandparents {
 
 							// If this new grandparent matches the existing/old grandparent
 							if newGrandparent.Word == existingGrandparent.Word {
@@ -264,7 +272,7 @@ func (w *worker) writeTail(errCh chan error) {
 					}
 
 					// Now, for every new grandparent that wasn't matched, also add it to the new file
-					for _, g := range *&parent.Grandparents {
+					for _, g := range parent.Grandparents {
 						if err := enc.AddEntry(g); err != nil {
 							panic(err)
 						}
@@ -315,7 +323,11 @@ func (w *worker) writeBody(errCh chan error) {
 		_, err = dec.Token()
 		if err != nil {
 			chainData, _ := json.Marshal(w.Chain.Parents)
-			f.Write(chainData)
+			_, err = f.Write(chainData)
+			if err != nil {
+				panic(err)
+			}
+
 			f.Close()
 			return
 		} else {
@@ -341,7 +353,7 @@ func (w *worker) writeBody(errCh chan error) {
 
 				parentMatch := false
 				// Find newParent in existingParents
-				for nPIndex, newParent := range *&w.Chain.Parents {
+				for nPIndex, newParent := range w.Chain.Parents {
 
 					if newParent.Word == instructions.StartKey || newParent.Word == instructions.EndKey {
 						continue
@@ -356,10 +368,10 @@ func (w *worker) writeBody(errCh chan error) {
 
 						// Do for child
 						// combine values and set into updatedChain
-						for _, existingChild := range *&existingParent.Children {
+						for _, existingChild := range existingParent.Children {
 							childMatch := false
 
-							for nCIndex, newChild := range *&newParent.Children {
+							for nCIndex, newChild := range newParent.Children {
 
 								if newChild.Word == existingChild.Word {
 									childMatch = true
@@ -379,16 +391,14 @@ func (w *worker) writeBody(errCh chan error) {
 							}
 						}
 
-						for _, newChild := range newParent.Children {
-							uParent.Children = append(uParent.Children, newChild)
-						}
+						uParent.Children = append(uParent.Children, newParent.Children...)
 
 						// Do for grandparent
 						// combine values and set into updatedChain
-						for _, existingGrandparent := range *&existingParent.Grandparents {
+						for _, existingGrandparent := range existingParent.Grandparents {
 							grandparentMatch := false
 
-							for nPIndex, newGrandparent := range *&newParent.Grandparents {
+							for nPIndex, newGrandparent := range newParent.Grandparents {
 
 								if newGrandparent.Word == existingGrandparent.Word {
 									grandparentMatch = true
@@ -408,9 +418,7 @@ func (w *worker) writeBody(errCh chan error) {
 							}
 						}
 
-						for _, newGrandparent := range newParent.Grandparents {
-							uParent.Grandparents = append(uParent.Grandparents, newGrandparent)
-						}
+						uParent.Grandparents = append(uParent.Grandparents, newParent.Grandparents...)
 
 						if err := enc.AddEntry(uParent); err != nil {
 							panic(err)

@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"math/big"
 	"os"
@@ -22,7 +21,7 @@ func debugLog(v ...any) {
 
 // chains gets a list of current chains found in the directory.
 func chains(isInit bool, includeFullName bool) (chains []string) {
-	files, err := ioutil.ReadDir("./markov-chains/")
+	files, err := os.ReadDir("./markov-chains/")
 	if err != nil {
 		return chains
 	}
@@ -65,20 +64,6 @@ func DoesChainExist(name string) (w *worker, exists bool) {
 	return nil, false
 }
 
-// workerExists returns if a chain worker exists or not.
-func workerExists(name string) (exists bool) {
-	for _, c := range workerMap {
-		if c.Name == name {
-			return true
-		}
-	}
-	return false
-}
-
-func now() string {
-	return time.Now().Format("15:04:05")
-}
-
 func PrettyPrint(v interface{}) {
 	b, err := json.MarshalIndent(v, "", "  ")
 	if err == nil {
@@ -95,11 +80,6 @@ func CurrentWorkers() []string {
 	}
 	workerMapMx.Unlock()
 	return s
-}
-
-// TimeUntilWrite returns the duration until the next write cycle.
-func TimeUntilWrite() time.Duration {
-	return stats.NextWriteTime.Sub(time.Now())
 }
 
 // NextWriteTime returns what time the next write cycle will happen.
@@ -169,11 +149,6 @@ func (p *parent) removeChild(i int) {
 func (c *chain) removeParent(i int) {
 	c.Parents[i] = c.Parents[len(c.Parents)-1]
 	c.Parents = c.Parents[:len(c.Parents)-1]
-}
-
-func pickRandomFromSlice(slice []string) string {
-	r, _ := randomNumber(0, len(slice))
-	return slice[r]
 }
 
 // randomNumber returns a random integer in the range from min to max.

@@ -9,8 +9,8 @@ import (
 func Stats() (statistics Statistics) {
 	stats.SessionUptime = time.Since(stats.SessionStartTime)
 	stats.TimeUntilWrite = time.Until(stats.NextWriteTime)
-	stats.TimeUntilZip = stats.NextZipTime.Sub(time.Now())
-	stats.TimeUntilDefluff = stats.NextDefluffTime.Sub(time.Now())
+	stats.TimeUntilZip = time.Until(statistics.NextZipTime)
+	stats.TimeUntilDefluff = time.Until(statistics.NextDefluffTime)
 	stats.Workers = len(CurrentWorkers())
 	return stats
 }
@@ -39,7 +39,6 @@ func saveStats() {
 
 	if err != nil {
 		debugLog(err)
-	} else {
 	}
 }
 

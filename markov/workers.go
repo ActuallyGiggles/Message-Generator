@@ -10,17 +10,16 @@ var (
 )
 
 func newWorker(name string) *worker {
-	var w *worker
-	w = &worker{
+	w := worker{
 		Name:  name,
 		Chain: chain{},
 	}
 
 	workerMapMx.Lock()
-	workerMap[name] = w
+	workerMap[name] = &w
 	workerMapMx.Unlock()
 
-	return w
+	return &w
 }
 
 // WorkersStats returns a slice of type WorkerStats.
