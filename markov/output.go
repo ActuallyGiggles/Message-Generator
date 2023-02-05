@@ -17,12 +17,14 @@ func Out(oi OutputInstructions) (output string, err error) {
 
 	defer duration(track("output duration"))
 
-	if w, exists := DoesChainExist(name); !exists {
+	w, exists := DoesChainExist(name)
+
+	if !exists {
 		return "", errors.New("Chain '" + name + "' is not found in directory.")
-	} else {
-		w.ChainMx.Lock()
-		defer w.ChainMx.Unlock()
 	}
+
+	w.ChainMx.Lock()
+	defer w.ChainMx.Unlock()
 
 	switch method {
 	case "LikelyBeginning":
