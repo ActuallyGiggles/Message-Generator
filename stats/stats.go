@@ -41,6 +41,7 @@ func Log(message ...string) {
 }
 
 func GetStats() (stats Stats) {
+	fmt.Println(stats.InputsPerHour)
 	stats.Markov = markov.Stats()
 	stats.System = SystemStats()
 	stats.Logs = logs
