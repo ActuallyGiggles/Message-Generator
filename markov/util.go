@@ -8,7 +8,6 @@ import (
 	"log"
 	"math/big"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -246,8 +245,22 @@ func compareSizes(old, new *os.File) error {
 	newSize := newStats.Size()
 
 	if newSize < oldSize {
-		return errors.New("Old file size is bigger than the new file size!\n" + old.Name() + ": " + strconv.FormatInt(oldSize, 10) + "\n" + new.Name() + ": " + strconv.FormatInt(newSize, 10) + ".")
+		return errors.New("Old file size is bigger than the new file size!\n" + old.Name() + ": " + ByteCountSI(oldSize) + "\n" + new.Name() + ": " + ByteCountSI(newSize))
 	}
 
 	return nil
+}
+
+func ByteCountSI(b int64) string {
+	const unit = 1000
+	if b < unit {
+		return fmt.Sprintf("%d B", b)
+	}
+	div, exp := int64(unit), 0
+	for n := b / unit; n >= unit; n /= unit {
+		div *= unit
+		exp++
+	}
+	return fmt.Sprintf("%.1f %cB",
+		float64(b)/float64(div), "kMGTPE"[exp])
 }
