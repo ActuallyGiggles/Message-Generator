@@ -25,8 +25,7 @@ func intakePerHour() {
 	for range time.Tick(10 * time.Second) {
 		mStats := markov.Stats()
 
-		i := mStats.SessionInputs - previousIntakeTotal
-		stats.InputsPerHour = i
+		stats.InputsPerHour = mStats.SessionInputs - previousIntakeTotal
 		previousIntakeTotal = mStats.SessionInputs
 
 		stats.OutputsPerHour = mStats.SessionOutputs - previousOutputTotal
@@ -41,7 +40,7 @@ func Log(message ...string) {
 	}
 }
 
-func GetStats() (stats Stats) {
+func GetStats() Stats {
 	stats.Markov = markov.Stats()
 	stats.System = SystemStats()
 	stats.Logs = logs
