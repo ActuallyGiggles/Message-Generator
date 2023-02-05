@@ -59,23 +59,26 @@ func main() {
 func Start() {
 	// Make platform and discord channels
 	incomingMessages := make(chan platform.Message)
-	errorChannel := make(chan string)
+	discordErrorChannel := make(chan error)
+	printErrorChannel := make(chan error)
 
 	global.Start()
 	go handlers.Incoming(incomingMessages)
 	go api.HandleRequests()
 
 	go twitter.Start()
-	go discord.Start(errorChannel)
+	go discord.Start(discordErrorChannel)
 
+	go markovToPrintErrorMessages(printErrorChannel)
 	markov.Start(markov.StartInstructions{
 		SeparationKey:       " ",
 		StartKey:            "b5G(n1$I!4g",
 		EndKey:              "e1$D(n7",
-		Debug:               debug,
 		ShouldZip:           true,
 		ShouldDefluff:       true,
 		DefluffTriggerValue: 50,
+		ErrorChannel:        printErrorChannel,
+		Debug:               debug,
 	})
 
 	twitch.GatherEmotes(debug)
@@ -84,5 +87,11 @@ func Start() {
 	stats.Start()
 
 	print.Page("Twitch Message Generator")
-	print.Started("Program Started at "+time.Now().Format(time.RFC822), errorChannel)
+	print.Started("Program Started at "+time.Now().Format(time.RFC822), discordErrorChannel)
+}
+
+func markovToPrintErrorMessages(printErrorChannel chan error) {
+	for err := range printErrorChannel {
+		print.Error(err.Error())
+	}
 }

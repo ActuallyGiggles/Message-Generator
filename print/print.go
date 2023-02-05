@@ -4,6 +4,7 @@ import (
 	"Message-Generator/stats"
 	"bufio"
 	"context"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -12,7 +13,7 @@ import (
 )
 
 var started string
-var errorChannel chan string
+var errorChannel chan error
 
 func Page(title string) {
 	print("\033[H\033[2J")
@@ -33,7 +34,7 @@ func Success(message string) {
 }
 
 func Error(message string) {
-	errorChannel <- message
+	errorChannel <- errors.New(message)
 	pterm.Error.Println(message)
 	stats.Log(message)
 	fmt.Println()
@@ -45,7 +46,7 @@ func Info(message string) {
 }
 
 func Warning(message string) {
-	errorChannel <- message
+	errorChannel <- errors.New(message)
 	pterm.Warning.Println(message)
 	fmt.Println()
 }
@@ -55,7 +56,7 @@ func ProgressBar(title string, total int) (pb *pterm.ProgressbarPrinter) {
 	return pb
 }
 
-func Started(text string, errorChan chan string) {
+func Started(text string, errorChan chan error) {
 	stats.Log(text)
 	Info(text)
 	started = text

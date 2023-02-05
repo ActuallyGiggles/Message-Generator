@@ -14,7 +14,7 @@ var (
 	discord *discordgo.Session
 )
 
-func Start(errorChannel chan string) {
+func Start(errorChannel chan error) {
 	bot, err := discordgo.New("Bot " + global.DiscordToken)
 	discord = bot
 	if err != nil {
@@ -192,8 +192,8 @@ func CollectSupportDiscordChannelIDs(session *discordgo.Session) (ok bool) {
 	return true
 }
 
-func reportErrors(errorChannel chan string) {
+func reportErrors(errorChannel chan error) {
 	for err := range errorChannel {
-		Say("error-tracking", err)
+		Say("error-tracking", err.Error())
 	}
 }

@@ -22,10 +22,10 @@ func Start(sI StartInstructions) {
 
 	createFolders()
 	loadStats()
-	go tickerLoops()
+	go tickerLoops(instructions.ErrorChannel)
 }
 
-func tickerLoops() {
+func tickerLoops(errCh chan error) {
 	var writingTicker *time.Ticker
 	var zippingTicker *time.Ticker
 	var defluffTicker *time.Ticker
@@ -44,7 +44,7 @@ func tickerLoops() {
 	for {
 		select {
 		case <-writingTicker.C:
-			go writeLoop()
+			go writeLoop(errCh)
 		case <-zippingTicker.C:
 			go zipChains()
 		case <-defluffTicker.C:

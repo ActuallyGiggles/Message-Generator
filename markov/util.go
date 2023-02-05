@@ -9,6 +9,7 @@ import (
 	"log"
 	"math/big"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -244,17 +245,6 @@ func IsBusy() bool {
 	return false
 }
 
-// RemoveWorker will remove a worker for a specific chain. Note that this does not remove any chain data, and if an input for the chain is made again, the worker will automatically be reinstated.
-func RemoveWorker(chain string) error {
-	if _, ok := workerMap[chain]; !ok {
-		return errors.New("Worker does not exist.")
-	}
-
-	delete(workerMap, chain)
-
-	return nil
-}
-
 func removeAndRename(defaultPath, newPath string) {
 	err := os.Remove(defaultPath)
 	if err != nil {
@@ -265,4 +255,26 @@ func removeAndRename(defaultPath, newPath string) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+// compareSizes will compare the size of an old write file and a new write file and return an error if old is bigger than new. lol
+func compareSizes(old, new *os.File) error {
+	oldStats, err := old.Stat()
+	if err != nil {
+		panic(err)
+	}
+
+	newStats, err := new.Stat()
+	if err != nil {
+		panic(err)
+	}
+
+	oldSize := oldStats.Size()
+	newSize := newStats.Size()
+
+	if newSize < oldSize {
+		return errors.New("Old file size is bigger than the new file size!\n" + old.Name() + ": " + strconv.FormatInt(oldSize, 10) + "." + new.Name() + ": " + strconv.FormatInt(newSize, 10) + ".")
+	}
+
+	return nil
 }

@@ -33,7 +33,7 @@ func writeTicker() *time.Ticker {
 	return time.NewTicker(writeInterval)
 }
 
-func writeLoop() {
+func writeLoop(errCh chan error) {
 	if !busy.TryLock() {
 		return
 	}
@@ -44,7 +44,7 @@ func writeLoop() {
 
 	for _, w := range workerMap {
 		wg.Add(1)
-		go w.writeAllPerChain(&wg)
+		go w.writeAllPerChain(errCh, &wg)
 	}
 
 	wg.Wait()
@@ -54,7 +54,7 @@ func writeLoop() {
 	busy.Unlock()
 }
 
-func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
+func (w *worker) writeAllPerChain(errCh chan error, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	if len(w.Chain.Parents) == 0 {
@@ -72,19 +72,18 @@ func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 	}
 
 	// Body needs to be last because it will write all existing parents into body file
-
 	var wg2 sync.WaitGroup
 	wg2.Add(2)
-	w.writeHead(&wg2)
-	w.writeTail(&wg2)
+	go w.writeHead(errCh, &wg2)
+	go w.writeTail(errCh, &wg2)
 	wg2.Wait()
-	w.writeBody()
+	w.writeBody(errCh)
 
 	w.Chain.Parents = nil
 	w.Intake = 0
 }
 
-func (w *worker) writeHead(wg2 *sync.WaitGroup) {
+func (w *worker) writeHead(errCh chan error, wg2 *sync.WaitGroup) {
 	defer wg2.Done()
 	defaultPath := "./markov-chains/" + w.Name + "_head.json"
 	newPath := "./markov-chains/" + w.Name + "_head_new.json"
@@ -168,7 +167,15 @@ func (w *worker) writeHead(wg2 *sync.WaitGroup) {
 				panic(err)
 			}
 
-			fN.Close()
+			err = compareSizes(f, fN)
+			if err != nil {
+				errCh <- err
+			}
+
+			err = fN.Close()
+			if err != nil {
+				panic(err)
+			}
 		}
 	}
 
@@ -180,7 +187,7 @@ func (w *worker) writeHead(wg2 *sync.WaitGroup) {
 	removeAndRename(defaultPath, newPath)
 }
 
-func (w *worker) writeTail(wg2 *sync.WaitGroup) {
+func (w *worker) writeTail(errCh chan error, wg2 *sync.WaitGroup) {
 	defer wg2.Done()
 	defaultPath := "./markov-chains/" + w.Name + "_tail.json"
 	newPath := "./markov-chains/" + w.Name + "_tail_new.json"
@@ -274,6 +281,12 @@ func (w *worker) writeTail(wg2 *sync.WaitGroup) {
 			if err := enc.CloseEncoder(); err != nil {
 				panic(err)
 			}
+
+			err = compareSizes(f, fN)
+			if err != nil {
+				errCh <- err
+			}
+
 			fN.Close()
 		}
 	}
@@ -286,7 +299,7 @@ func (w *worker) writeTail(wg2 *sync.WaitGroup) {
 	removeAndRename(defaultPath, newPath)
 }
 
-func (w *worker) writeBody() {
+func (w *worker) writeBody(errCh chan error) {
 	defaultPath := "./markov-chains/" + w.Name + "_body.json"
 	newPath := "./markov-chains/" + w.Name + "_body_new.json"
 
@@ -424,6 +437,12 @@ func (w *worker) writeBody() {
 			if err := enc.CloseEncoder(); err != nil {
 				panic(err)
 			}
+
+			err = compareSizes(f, fN)
+			if err != nil {
+				errCh <- err
+			}
+
 			fN.Close()
 		}
 	}

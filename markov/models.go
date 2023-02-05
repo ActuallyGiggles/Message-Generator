@@ -17,6 +17,7 @@ import (
 //	ShouldZip: Whether or not to zip the markov-chains folder every six hours.
 //	ShouldDefluff: Whether or not to defluff (clean infrequently used values) database every 24 hours.
 //	DefluffTriggerValue: What value amount is too little to keep and therefore should be defluffed.
+//	ErrorTracker: If you want to recieve errors from write operations, provide a channel.
 //	Debug: Print logs of stuffs.
 type StartInstructions struct {
 	WriteInterval int
@@ -30,7 +31,8 @@ type StartInstructions struct {
 	ShouldDefluff       bool
 	DefluffTriggerValue int
 
-	Debug bool
+	ErrorChannel chan error
+	Debug        bool
 }
 
 // OutputInstructions details instructions on how to make an output.
