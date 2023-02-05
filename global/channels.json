@@ -3012,12 +3012,12 @@
   "Settings": {
    "IsCollectingMessages": true,
    "Reply": {
-    "IsEnabled": true,
+    "IsEnabled": false,
     "IsAllowedWhenOnline": false,
     "IsAllowedWhenOffline": true
    },
    "Participation": {
-    "IsEnabled": true,
+    "IsEnabled": false,
     "IsAllowedWhenOnline": false,
     "IsAllowedWhenOffline": true
    },
