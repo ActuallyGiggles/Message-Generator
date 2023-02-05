@@ -7,8 +7,8 @@ import (
 )
 
 func Stats() (statistics Statistics) {
-	stats.SessionUptime = time.Now().Sub(stats.SessionStartTime)
-	stats.TimeUntilWrite = stats.NextWriteTime.Sub(time.Now())
+	stats.SessionUptime = time.Since(stats.SessionStartTime)
+	stats.TimeUntilWrite = time.Until(stats.NextWriteTime)
 	stats.TimeUntilZip = stats.NextZipTime.Sub(time.Now())
 	stats.TimeUntilDefluff = stats.NextDefluffTime.Sub(time.Now())
 	stats.Workers = len(CurrentWorkers())

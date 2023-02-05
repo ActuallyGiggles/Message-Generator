@@ -55,7 +55,7 @@ func likelyBeginning(name string) (output string, err error) {
 
 	output = parentWord
 
-	for true {
+	for {
 		f, err := os.Open("./markov-chains/" + name + "_body.json")
 		if err != nil {
 			return "", err
@@ -96,11 +96,9 @@ func likelyBeginning(name string) (output string, err error) {
 		}
 
 		if !parentExists {
-			return output, errors.New(fmt.Sprintf("parent %s does not exist in chain %s", parentWord, name))
+			return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 		}
 	}
-
-	return output, nil
 }
 
 func likelyEnding(name string) (output string, err error) {
@@ -113,7 +111,7 @@ func likelyEnding(name string) (output string, err error) {
 
 	output = parentWord
 
-	for true {
+	for {
 		f, err := os.Open("./markov-chains/" + name + "_body.json")
 		if err != nil {
 			return "", err
@@ -154,20 +152,18 @@ func likelyEnding(name string) (output string, err error) {
 		}
 
 		if !parentExists {
-			return output, errors.New(fmt.Sprintf("parent %s does not exist in chain %s", parentWord, name))
+			return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 		}
 	}
-
-	return output, nil
 }
 
 func targetedBeginning(name, target string) (output string, err error) {
 	if target == "" {
-		return "", errors.New("Target is empty for TargetedBeginning")
+		return "", errors.New("target is empty for TargetedBeginning")
 	}
 
 	if len(strings.Split(target, instructions.SeparationKey)) > 1 {
-		return "", errors.New(fmt.Sprintf("You can only have 1 target."))
+		return "", fmt.Errorf("you can only have 1 target")
 	}
 
 	var parentWord string
@@ -203,7 +199,7 @@ func targetedBeginning(name, target string) (output string, err error) {
 	}
 
 	if len(initialList) <= 0 {
-		return "", errors.New(fmt.Sprintf("%s does not contain parents that match: %s", name, target))
+		return "", fmt.Errorf("%s does not contain parents that match: %s", name, target)
 	}
 
 	parentWord, err = weightedRandom(initialList)
@@ -212,7 +208,7 @@ func targetedBeginning(name, target string) (output string, err error) {
 	}
 	output = parentWord
 
-	for true {
+	for {
 		f, err := os.Open("./markov-chains/" + name + "_body.json")
 		if err != nil {
 			panic(err)
@@ -249,20 +245,18 @@ func targetedBeginning(name, target string) (output string, err error) {
 		}
 
 		if !parentExists {
-			return output, errors.New(fmt.Sprintf("parent %s does not exist in chain %s", parentWord, name))
+			return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 		}
 	}
-
-	return output, nil
 }
 
 func targetedEnding(name, target string) (output string, err error) {
 	if target == "" {
-		return "", errors.New("Target is empty for TargetedEnding")
+		return "", errors.New("target is empty for TargetedEnding")
 	}
 
 	if len(strings.Split(target, instructions.SeparationKey)) > 1 {
-		return "", errors.New(fmt.Sprintf("You can only have 1 target."))
+		return "", fmt.Errorf("you can only have 1 target")
 	}
 
 	var parentWord string
@@ -298,7 +292,7 @@ func targetedEnding(name, target string) (output string, err error) {
 	}
 
 	if len(initialList) <= 0 {
-		return "", errors.New(fmt.Sprintf("%s does not contain parents that match: %s", name, target))
+		return "", fmt.Errorf("%s does not contain parents that match: %s", name, target)
 	}
 
 	parentWord, err = weightedRandom(initialList)
@@ -307,7 +301,7 @@ func targetedEnding(name, target string) (output string, err error) {
 	}
 	output = parentWord
 
-	for true {
+	for {
 		f, err := os.Open("./markov-chains/" + name + "_body.json")
 		if err != nil {
 			panic(err)
@@ -344,20 +338,18 @@ func targetedEnding(name, target string) (output string, err error) {
 		}
 
 		if !parentExists {
-			return output, errors.New(fmt.Sprintf("parent %s does not exist in chain %s", parentWord, name))
+			return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 		}
 	}
-
-	return output, nil
 }
 
 func targetedMiddle(name, target string) (output string, err error) {
 	if target == "" {
-		return "", errors.New("Target is empty for TargetedMiddle")
+		return "", errors.New("target is empty for TargetedMiddle")
 	}
 
 	if len(strings.Split(target, instructions.SeparationKey)) > 1 {
-		return "", errors.New(fmt.Sprintf("You can only have 1 target."))
+		return "", fmt.Errorf("you can only have 1 target")
 	}
 
 	var parentWord string
@@ -405,7 +397,7 @@ func targetedMiddle(name, target string) (output string, err error) {
 	}
 
 	if len(initialList) <= 0 {
-		return "", errors.New(fmt.Sprintf("%s does not contain parents that match: %s", name, target))
+		return "", fmt.Errorf("%s does not contain parents that match: %s", name, target)
 	}
 
 	parentWord, err = weightedRandom(initialList)
@@ -474,7 +466,7 @@ goThroughBody:
 	}
 
 	if !parentExists {
-		return output, errors.New(fmt.Sprintf("parent %s does not exist in chain %s", parentWord, name))
+		return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 	}
 
 	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle - " + "./markov-chains/" + name + "_head.json")
@@ -512,12 +504,6 @@ func getPreviousWord(parent parent) (grandparent string) {
 	return grandparent
 }
 
-func pickRandomParent(parents []string) (parent string) {
-	parent = pickRandomFromSlice(parents)
-
-	return parent
-}
-
 func getStartWord(name string) (phrase string, err error) {
 	var sum int
 
@@ -529,7 +515,7 @@ func getStartWord(name string) (phrase string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		panic(err)
+		return "", errors.New("EOF (via getStartWord) detected in " + "./markov-chains/" + name + "_body.json")
 	}
 
 	for dec.More() {
@@ -595,7 +581,7 @@ func getEndWord(name string) (phrase string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		panic(err)
+		return "", errors.New("EOF (via getEndWord) detected in " + "./markov-chains/" + name + "_body.json")
 	}
 
 	for dec.More() {

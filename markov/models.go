@@ -77,11 +77,6 @@ type grandparent struct {
 	Value int
 }
 
-type input struct {
-	Name    string
-	Content string
-}
-
 // WorkerStats contains the name of the chain the worker is responsible for and the intake amount in that worker.
 type WorkerStats struct {
 	ChainResponsibleFor string
