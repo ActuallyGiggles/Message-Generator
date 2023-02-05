@@ -11,9 +11,11 @@ import (
 func determineDefluffTime(init bool) (newTicker *time.Ticker) {
 	// If a positive amount of time is left (did not miss defluff time), return defluff ticker.
 	if timeRemaining := time.Until(stats.NextDefluffTime); timeRemaining > 0 && init {
+		stats.NextDefluffTime = time.Now().Add(timeRemaining)
 		return time.NewTicker(timeRemaining)
 	}
 
+	stats.NextDefluffTime = time.Now().Add(defluffInterval)
 	return time.NewTicker(defluffInterval)
 }
 
