@@ -266,7 +266,7 @@ func isSentenceTooShort(sentence string) bool {
 	// If there are one to three words, 20% chance to pass
 	if 0 < len(s) && len(s) < 4 {
 		n := global.RandomNumber(0, 100)
-		if n <= 20 {
+		if n <= 10 {
 			return true
 		}
 	}
