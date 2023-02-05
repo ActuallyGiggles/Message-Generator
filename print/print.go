@@ -63,7 +63,7 @@ func Started(text string, errorChan chan error) {
 	errorChannel = errorChan
 }
 
-func TerminalInput(cancel context.CancelFunc) {
+func TerminalInput(restart chan bool, cancel context.CancelFunc) {
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
@@ -76,6 +76,8 @@ func TerminalInput(cancel context.CancelFunc) {
 			Info("Not a command")
 		case "exit":
 			cancel()
+		case "restart":
+			restart <- true
 		case "clear":
 			Page("Twitch Message Generator")
 		case "help":
@@ -83,7 +85,6 @@ func TerminalInput(cancel context.CancelFunc) {
 			t += fmt.Sprintln("[help] for list of commands")
 			t += fmt.Sprintln("[clear] to clear the screen")
 			t += fmt.Sprintln("[exit] to exit the program")
-
 			Info(t)
 		case "started":
 			Info(started)
