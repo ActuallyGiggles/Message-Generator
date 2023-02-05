@@ -12,9 +12,7 @@ import (
 
 var (
 	stats               Stats
-	inputsPerHour       int
 	previousIntakeTotal int
-	iutputsPerHour      int
 	previousOutputTotal int
 	logs                []string
 )
@@ -24,14 +22,14 @@ func Start() {
 }
 
 func intakePerHour() {
-	for range time.Tick(1 * time.Hour) {
+	for range time.Tick(1 * time.Second) {
 		mStats := markov.Stats()
 
-		stats.InputsPerHour = mStats.SessionInputs - previousIntakeTotal
 		previousIntakeTotal = mStats.SessionInputs
+		stats.InputsPerHour = mStats.SessionInputs - previousIntakeTotal
 
-		stats.OutputsPerHour = mStats.SessionOutputs - previousOutputTotal
 		previousOutputTotal = mStats.SessionOutputs
+		stats.OutputsPerHour = mStats.SessionOutputs - previousOutputTotal
 	}
 }
 

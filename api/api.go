@@ -114,10 +114,7 @@ func websiteHomePage(w http.ResponseWriter, r *http.Request) {
 
 	// Channels Live
 	for channel, status := range twitch.IsLive {
-		e := struct {
-			Name string
-			Live bool
-		}{}
+		var e ChannelsLive
 		e.Name = channel
 		e.Live = status
 		data.ChannelsLive = append(data.ChannelsLive, e)
