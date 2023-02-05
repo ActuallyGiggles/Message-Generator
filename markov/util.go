@@ -58,6 +58,8 @@ func DoesChainExist(name string) (w *worker, exists bool) {
 					return w, true
 				}
 			}
+
+			return newWorker(name), true
 		}
 	}
 	return nil, false
