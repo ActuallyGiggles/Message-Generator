@@ -72,19 +72,16 @@ func (w *worker) writeAllPerChain(errCh chan error, wg *sync.WaitGroup) {
 	}
 
 	// Body needs to be last because it will write all existing parents into body file
-	var wg2 sync.WaitGroup
-	wg2.Add(2)
-	go w.writeHead(errCh, &wg2)
-	go w.writeTail(errCh, &wg2)
-	wg2.Wait()
+	w.writeHead(errCh)
+	w.writeTail(errCh)
 	w.writeBody(errCh)
 
 	w.Chain.Parents = nil
 	w.Intake = 0
 }
 
-func (w *worker) writeHead(errCh chan error, wg2 *sync.WaitGroup) {
-	defer wg2.Done()
+func (w *worker) writeHead(errCh chan error) {
+
 	defaultPath := "./markov-chains/" + w.Name + "_head.json"
 	newPath := "./markov-chains/" + w.Name + "_head_new.json"
 
@@ -187,8 +184,8 @@ func (w *worker) writeHead(errCh chan error, wg2 *sync.WaitGroup) {
 	removeAndRename(defaultPath, newPath)
 }
 
-func (w *worker) writeTail(errCh chan error, wg2 *sync.WaitGroup) {
-	defer wg2.Done()
+func (w *worker) writeTail(errCh chan error) {
+
 	defaultPath := "./markov-chains/" + w.Name + "_tail.json"
 	newPath := "./markov-chains/" + w.Name + "_tail_new.json"
 
