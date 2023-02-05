@@ -3024,5 +3024,47 @@
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
   }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "endra",
+  "ChannelID": "50815257",
+  "DiscordChannelID": "1071882791672881222",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "bikinibodhi",
+  "ChannelID": "129342719",
+  "DiscordChannelID": "1071883076210278490",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
  }
 ]
