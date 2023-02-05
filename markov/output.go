@@ -569,6 +569,10 @@ func getStartWord(name string) (phrase string, err error) {
 		}
 	}
 
+	b := make([]byte, 5)
+	n, _ := f.Read(b)
+	fmt.Println(string(b[:n]))
+
 	return "", errors.New("internal error - code should not reach this point - getStartWord - " + "./markov-chains/" + name + "_head.json")
 }
 
