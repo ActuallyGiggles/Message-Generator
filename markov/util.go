@@ -114,7 +114,7 @@ func weightedRandom(choices []Choice) (string, error) {
 			return c.Word, nil
 		}
 	}
-	err = errors.New("Internal error - code should not reach this point")
+	err = errors.New("internal error - code should not reach this point")
 	return "", err
 }
 
@@ -157,7 +157,7 @@ func randomNumber(min, max int) (int, error) {
 	switch {
 	case min > max:
 		// Fail with error
-		return result, errors.New("Min cannot be greater than max.")
+		return result, errors.New("min cannot be greater than max")
 	case max == min:
 		result = max
 	case max > min:
