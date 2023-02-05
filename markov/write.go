@@ -287,7 +287,10 @@ func (w *worker) writeTail(errCh chan error, wg2 *sync.WaitGroup) {
 				errCh <- err
 			}
 
-			fN.Close()
+			err = fN.Close()
+			if err != nil {
+				panic(err)
+			}
 		}
 	}
 
