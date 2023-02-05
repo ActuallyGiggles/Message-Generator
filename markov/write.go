@@ -165,7 +165,7 @@ func (w *worker) writeHead(errCh chan error) {
 			}
 
 			err = compareSizes(f, fN)
-			if err != nil {
+			if err != nil && errCh != nil {
 				errCh <- err
 			}
 
@@ -280,7 +280,7 @@ func (w *worker) writeTail(errCh chan error) {
 			}
 
 			err = compareSizes(f, fN)
-			if err != nil {
+			if err != nil && errCh != nil {
 				errCh <- err
 			}
 
@@ -439,7 +439,7 @@ func (w *worker) writeBody(errCh chan error) {
 			}
 
 			err = compareSizes(f, fN)
-			if err != nil {
+			if err != nil && errCh != nil {
 				errCh <- err
 			}
 

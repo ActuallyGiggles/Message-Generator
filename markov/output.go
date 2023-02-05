@@ -56,7 +56,6 @@ func likelyBeginning(name string) (output string, err error) {
 	output = parentWord
 
 	for true {
-		// TODO: does this cause the write concurrency issue? should test if open and openfile of same file at the same time causes concurrency issue when writing
 		f, err := os.Open("./markov-chains/" + name + "_body.json")
 		if err != nil {
 			return "", err
@@ -66,7 +65,7 @@ func likelyBeginning(name string) (output string, err error) {
 		dec := json.NewDecoder(f)
 		_, err = dec.Token()
 		if err != nil {
-			panic(err)
+			return "", errors.New("EOF (via likelyBeginning) detected in " + "./markov-chains/" + name + "_body.json")
 		}
 
 		parentExists := false
@@ -124,7 +123,7 @@ func likelyEnding(name string) (output string, err error) {
 		dec := json.NewDecoder(f)
 		_, err = dec.Token()
 		if err != nil {
-			panic(err)
+			return "", errors.New("EOF (via likelyEnding) detected in " + "./markov-chains/" + name + "_body.json")
 		}
 
 		parentExists := false
@@ -184,7 +183,7 @@ func targetedBeginning(name, target string) (output string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		panic(err)
+		return "", errors.New("EOF (via targetedBeginning) detected in " + "./markov-chains/" + name + "_body.json")
 	}
 
 	for dec.More() {
@@ -279,7 +278,7 @@ func targetedEnding(name, target string) (output string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		panic(err)
+		return "", errors.New("EOF (via targetedEnding) detected in " + "./markov-chains/" + name + "_body.json")
 	}
 
 	for dec.More() {
@@ -376,7 +375,7 @@ func targetedMiddle(name, target string) (output string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		panic(err)
+		return "", errors.New("EOF (via targetedMiddle) detected in " + "./markov-chains/" + name + "_body.json")
 	}
 
 	for dec.More() {
