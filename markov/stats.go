@@ -75,7 +75,7 @@ func track(process string) (string, time.Time) {
 
 func duration(process string, start time.Time) {
 	duration := time.Since(start).Round(1 * time.Second)
-	debugLog(process + ": " + duration.String())
+	//debugLog(process + ": " + duration.String())
 
 	var exists bool
 
