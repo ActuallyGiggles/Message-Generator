@@ -34,18 +34,7 @@ func main() {
 	print.Page("Started")
 	Start()
 
-	restart := make(chan bool)
-	go print.TerminalInput(restart, cancel)
-
-	go func(restart chan bool) {
-		for {
-			select {
-			case <-restart:
-				print.Page("Restarting")
-				Start()
-			}
-		}
-	}(restart)
+	go print.TerminalInput(cancel)
 
 	<-ctx.Done()
 	print.Page("Exiting")

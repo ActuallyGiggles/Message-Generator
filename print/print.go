@@ -63,7 +63,7 @@ func Started(text string, errorChan chan error) {
 	errorChannel = errorChan
 }
 
-func TerminalInput(restart chan bool, cancel context.CancelFunc) {
+func TerminalInput(cancel context.CancelFunc) {
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
@@ -77,7 +77,7 @@ func TerminalInput(restart chan bool, cancel context.CancelFunc) {
 		case "exit":
 			cancel()
 		case "restart":
-			restart <- true
+
 		case "clear":
 			Page("Twitch Message Generator")
 		case "help":
