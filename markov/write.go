@@ -2,6 +2,7 @@ package markov
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -96,6 +97,8 @@ func (w *worker) writeHead(errCh chan error) {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
+			fmt.Println("L head")
+			fmt.Println(err)
 			chainData, _ := json.Marshal(w.Chain.Parents[0].Children)
 			w.Chain.removeParent(0)
 			_, err = f.Write(chainData)
@@ -204,6 +207,8 @@ func (w *worker) writeTail(errCh chan error) {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
+			fmt.Println("L tail")
+			fmt.Println(err)
 			chainData, _ := json.Marshal(w.Chain.Parents[0].Grandparents)
 			w.Chain.removeParent(0)
 			_, err = f.Write(chainData)
@@ -322,6 +327,8 @@ func (w *worker) writeBody(errCh chan error) {
 		// Get beginning token
 		_, err = dec.Token()
 		if err != nil {
+			fmt.Println("L body")
+			fmt.Println(err)
 			chainData, _ := json.Marshal(w.Chain.Parents)
 			_, err = f.Write(chainData)
 			if err != nil {
