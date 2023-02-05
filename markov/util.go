@@ -271,7 +271,7 @@ func compareSizes(old, new *os.File) error {
 	newSize := newStats.Size()
 
 	if newSize < oldSize {
-		return errors.New("Old file size is bigger than the new file size!\n" + old.Name() + ": " + strconv.FormatInt(oldSize, 10) + "." + new.Name() + ": " + strconv.FormatInt(newSize, 10) + ".")
+		return errors.New("Old file size is bigger than the new file size!\n" + old.Name() + ": " + strconv.FormatInt(oldSize, 10) + "\n" + new.Name() + ": " + strconv.FormatInt(newSize, 10) + ".")
 	}
 
 	return nil
