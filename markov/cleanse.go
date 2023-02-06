@@ -2,30 +2,20 @@ package markov
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
-	"strings"
+	"regexp"
 )
 
+// Cleanse will go through every chain and remove any mention of the entry.
 func Cleanse(entry string) (totalCleansed int) {
 	busy.Lock()
 	defer duration(track("cleanse duration"))
 
-	for _, chain := range chains(false, true) {
-		if w, ok := workerMap[chain[:len(chain)-5]]; ok {
+	for _, chain := range chains(false) {
+		if w, ok := workerMap[chain]; ok {
 			w.ChainMx.Lock()
-
-			if strings.Contains(chain, "_head") {
-				totalCleansed += cleanseHead(chain, entry)
-			}
-
-			if strings.Contains(chain, "_body") {
-				totalCleansed += cleanseBody(chain, entry)
-			}
-
-			if strings.Contains(chain, "_tail") {
-				totalCleansed += cleanseTail(chain, entry)
-			}
-
+			totalCleansed += cleanseBody(chain, entry)
 			w.ChainMx.Unlock()
 		}
 	}
@@ -35,115 +25,51 @@ func Cleanse(entry string) (totalCleansed int) {
 	return totalCleansed
 }
 
-func cleanseHead(chain, entry string) (removed int) {
-	defaultPath := "./markov-chains/" + chain + ".json"
-	newPath := "./markov-chains/" + chain + "_defluffed.json"
-
-	// Open existing chain file
-	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
-	if err != nil {
-		panic(err)
-	} else {
-		// Start a new decoder
-		dec := json.NewDecoder(f)
-
-		// Get beginning token
-		_, err = dec.Token()
-		if err != nil {
-			panic(err)
-		}
-
-		fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
-		if err != nil {
-			panic(err)
-		}
-
-		var enc encode
-		if err = StartEncoder(&enc, fN); err != nil {
-			panic(err)
-		}
-
-		// For everything in old file
-		for dec.More() {
-			var existingChild child
-
-			err := dec.Decode(&existingChild)
-			if err != nil {
-				panic(err)
-			}
-
-			// If used less than x times in the past day, ignore
-			if strings.Contains(existingChild.Word, entry) {
-				removed++
-				continue
-			}
-
-			// Add child into new list
-			err = enc.AddEntry(child{
-				Word:  existingChild.Word,
-				Value: existingChild.Value,
-			})
-			if err != nil {
-				panic(err)
-			}
-		}
-
-		err = enc.CloseEncoder()
-		if err != nil {
-			panic(err)
-		}
-
-		fN.Close()
-	}
-
-	f.Close()
-
-	removeAndRename(defaultPath, newPath)
-
-	return removed
-}
-
 func cleanseBody(chain, entry string) (removed int) {
 	defaultPath := "./markov-chains/" + chain + ".json"
 	newPath := "./markov-chains/" + chain + "_defluffed.json"
 
 	// Open existing chain file
-	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	f, err := os.Open(defaultPath)
 	if err != nil {
 		panic(err)
-	} else {
-		// Start a new decoder
-		dec := json.NewDecoder(f)
+	}
 
-		// Get beginning token
-		_, err = dec.Token()
+	// Start a new decoder
+	dec := json.NewDecoder(f)
+
+	// Get beginning token
+	_, err = dec.Token()
+	if err != nil {
+		panic(err)
+	}
+
+	// Create a new chain file
+	fN, err := os.Create(newPath)
+	if err != nil {
+		panic(err)
+	}
+
+	// Start the new file encoder
+	var enc encode
+	if err = StartEncoder(&enc, fN); err != nil {
+		panic(err)
+	}
+
+	// For everything in old file
+	for dec.More() {
+		var existingParent parent
+		var updatedParent parent
+
+		err := dec.Decode(&existingParent)
 		if err != nil {
 			panic(err)
 		}
 
-		fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
-		if err != nil {
-			panic(err)
-		}
-
-		var enc encode
-		if err = StartEncoder(&enc, fN); err != nil {
-			panic(err)
-		}
-
-		// For everything in old file
-		for dec.More() {
-			var existingParent parent
-			var updatedParent parent
-
-			err := dec.Decode(&existingParent)
-			if err != nil {
-				panic(err)
-			}
-
+		// Do for every parent except start key
+		if existingParent.Word != instructions.EndKey {
 			for _, eChild := range existingParent.Children {
-				// If used less than x times in the past day, ignore
-				if strings.Contains(eChild.Word, entry) {
+				if matches, _ := regexp.MatchString("\\b"+entry+"\\b", eChild.Word); matches {
 					removed++
 					continue
 				}
@@ -154,10 +80,12 @@ func cleanseBody(chain, entry string) (removed int) {
 					Value: eChild.Value,
 				})
 			}
+		}
 
+		// Do for every parent except start key
+		if existingParent.Word != instructions.StartKey {
 			for _, eGrandparent := range existingParent.Grandparents {
-				// If used less than x times in the past day, ignore
-				if strings.Contains(eGrandparent.Word, entry) {
+				if matches, _ := regexp.MatchString("\\b"+entry+"\\b", eGrandparent.Word); matches {
 					removed++
 					continue
 				}
@@ -168,98 +96,41 @@ func cleanseBody(chain, entry string) (removed int) {
 					Value: eGrandparent.Value,
 				})
 			}
-
-			if len(updatedParent.Children) == 0 && len(updatedParent.Grandparents) == 0 {
-				continue
-			}
-
-			updatedParent.Word = existingParent.Word
-			err = enc.AddEntry(updatedParent)
-			if err != nil {
-				panic(err)
-			}
 		}
 
-		err = enc.CloseEncoder()
+		if matches, _ := regexp.MatchString("\\b"+entry+"\\b", existingParent.Word); matches {
+			continue
+		}
+
+		updatedParent.Word = existingParent.Word
+		err = enc.AddEntry(updatedParent)
 		if err != nil {
 			panic(err)
 		}
 
-		fN.Close()
-
+		fmt.Println(existingParent)
+		fmt.Println(updatedParent)
 	}
 
-	f.Close()
+	// Close the new file encoder
+	if err := enc.CloseEncoder(); err != nil {
+		panic(err)
+	}
 
-	removeAndRename(defaultPath, newPath)
-
-	return removed
-}
-
-func cleanseTail(chain, entry string) (removed int) {
-	defaultPath := "./markov-chains/" + chain + ".json"
-	newPath := "./markov-chains/" + chain + "_defluffed.json"
-
-	// Open existing chain file
-	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	// Close new file
+	err = fN.Close()
 	if err != nil {
 		panic(err)
-	} else {
-		// Start a new decoder
-		dec := json.NewDecoder(f)
-
-		// Get beginning token
-		_, err = dec.Token()
-		if err != nil {
-			panic(err)
-		}
-
-		fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
-		if err != nil {
-			panic(err)
-		}
-
-		var enc encode
-		if err = StartEncoder(&enc, fN); err != nil {
-			panic(err)
-		}
-
-		// For everything in old file
-		for dec.More() {
-			var existingGrandparent grandparent
-
-			err := dec.Decode(&existingGrandparent)
-			if err != nil {
-				panic(err)
-			}
-
-			// If used less than x times in the past day, ignore
-			if strings.Contains(existingGrandparent.Word, entry) {
-				removed++
-				continue
-			}
-
-			// Add grandparent into new list
-			err = enc.AddEntry(grandparent{
-				Word:  existingGrandparent.Word,
-				Value: existingGrandparent.Value,
-			})
-			if err != nil {
-				panic(err)
-			}
-		}
-
-		err = enc.CloseEncoder()
-		if err != nil {
-			panic(err)
-		}
-
-		fN.Close()
-
 	}
 
-	f.Close()
+	// Close old file
+	err = f.Close()
+	if err != nil {
+		panic(err)
+	}
 
+	// Remove the old file and rename the new file with the old file name
 	removeAndRename(defaultPath, newPath)
+
 	return removed
 }

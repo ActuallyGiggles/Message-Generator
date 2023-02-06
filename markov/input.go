@@ -25,9 +25,9 @@ func In(chainName string, content string) {
 
 func (w *worker) addInput(content string) {
 	slice := prepareContentForChainProcessing(content)
-	extractHead(&w.Chain, w.Name, slice)
-	extractBody(&w.Chain, w.Name, slice)
-	extractTail(&w.Chain, w.Name, slice)
+	w.Chain.extractHead(w.Name, slice)
+	w.Chain.extractBody(w.Name, slice)
+	w.Chain.extractTail(w.Name, slice)
 
 	w.Intake++
 	stats.TotalInputs++
@@ -49,7 +49,7 @@ func prepareContentForChainProcessing(content string) []string {
 	return returnSlice
 }
 
-func extractHead(c *chain, name string, slice []string) {
+func (c *chain) extractHead(name string, slice []string) {
 	start := slice[0]
 	next := slice[1]
 
@@ -93,7 +93,7 @@ func extractHead(c *chain, name string, slice []string) {
 	}
 }
 
-func extractBody(c *chain, name string, slice []string) {
+func (c *chain) extractBody(name string, slice []string) {
 	for i := 0; i < len(slice)-2; i++ {
 		current := slice[i+1]
 		next := slice[i+2]
@@ -171,7 +171,7 @@ func extractBody(c *chain, name string, slice []string) {
 	}
 }
 
-func extractTail(c *chain, name string, slice []string) {
+func (c *chain) extractTail(name string, slice []string) {
 	end := slice[len(slice)-1]
 	previous := slice[len(slice)-2]
 

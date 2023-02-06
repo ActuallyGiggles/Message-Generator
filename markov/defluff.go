@@ -3,7 +3,6 @@ package markov
 import (
 	"encoding/json"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -20,148 +19,80 @@ func determineDefluffTime(init bool) (newTicker *time.Ticker) {
 }
 
 func defluff() {
+	if !instructions.ShouldDefluff {
+		return
+	}
+
 	busy.Lock()
 	defer duration(track("defluffing duration"))
 
 	var totalRemoved int
 
-	for _, chain := range chains(false, true) {
-		if w, ok := workerMap[chain[:len(chain)-5]]; ok {
+	for _, chain := range chains(false) {
+		if w, ok := workerMap[chain]; ok {
 			w.ChainMx.Lock()
-
-			if strings.Contains(chain, "_head") {
-				totalRemoved += defluffHead(chain)
-			}
-
-			if strings.Contains(chain, "_body") {
-				totalRemoved += defluffBody(chain)
-			}
-
-			if strings.Contains(chain, "_tail") {
-				totalRemoved += defluffTail(chain)
-			}
-
+			totalRemoved += defluffChain(w.Name)
 			w.ChainMx.Unlock()
 		}
 	}
 
 	busy.Unlock()
-	debugLog("Total defluffed:", totalRemoved)
+	// fmt.Println("Total defluffed:", totalRemoved)
 	stats.NextDefluffTime = time.Now().Add(defluffInterval)
 }
 
-func defluffHead(chain string) (removed int) {
+func defluffChain(chain string) (othersRemoved int) {
 	defaultPath := "./markov-chains/" + chain + ".json"
 	newPath := "./markov-chains/" + chain + "_defluffed.json"
 
 	// Open existing chain file
-	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	f, err := os.Open(defaultPath)
 	if err != nil {
 		panic(err)
-	} else {
-		// Start a new decoder
-		dec := json.NewDecoder(f)
-
-		// Get beginning token
-		_, err = dec.Token()
-		if err != nil {
-			panic(err)
-		}
-
-		fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
-		if err != nil {
-			panic(err)
-		}
-
-		var enc encode
-		if err = StartEncoder(&enc, fN); err != nil {
-			panic(err)
-		}
-
-		// For everything in old file
-		for dec.More() {
-			var existingChild child
-
-			err := dec.Decode(&existingChild)
-			if err != nil {
-				panic(err)
-			}
-
-			// If used less than x times in the past day, ignore
-			if existingChild.Value < instructions.DefluffTriggerValue {
-				removed++
-				continue
-			}
-
-			// Add child into new list
-			err = enc.AddEntry(child{
-				Word:  existingChild.Word,
-				Value: existingChild.Value,
-			})
-			if err != nil {
-				panic(err)
-			}
-		}
-
-		err = enc.CloseEncoder()
-		if err != nil {
-			panic(err)
-		}
-
-		fN.Close()
 	}
 
-	f.Close()
+	// Start a new decoder
+	dec := json.NewDecoder(f)
 
-	removeAndRename(defaultPath, newPath)
-
-	return removed
-}
-
-func defluffBody(chain string) (removed int) {
-	defaultPath := "./markov-chains/" + chain + ".json"
-	newPath := "./markov-chains/" + chain + "_defluffed.json"
-
-	// Open existing chain file
-	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	// Get beginning token
+	_, err = dec.Token()
 	if err != nil {
 		panic(err)
-	} else {
-		// Start a new decoder
-		dec := json.NewDecoder(f)
+	}
 
-		// Get beginning token
-		_, err = dec.Token()
+	// Create a new chain file
+	fN, err := os.Create(newPath)
+	if err != nil {
+		panic(err)
+	}
+
+	// Start the new file encoder
+	var enc encode
+	if err = StartEncoder(&enc, fN); err != nil {
+		panic(err)
+	}
+
+	// For every new item in the existing chain
+	for dec.More() {
+		var existingParent parent
+		var existingParentValue int
+		var updatedParent parent
+
+		err := dec.Decode(&existingParent)
 		if err != nil {
 			panic(err)
 		}
 
-		fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
-		if err != nil {
-			panic(err)
-		}
-
-		var enc encode
-		if err = StartEncoder(&enc, fN); err != nil {
-			panic(err)
-		}
-
-		// For everything in old file
-		for dec.More() {
-			var existingParent parent
-			var updatedParent parent
-
-			err := dec.Decode(&existingParent)
-			if err != nil {
-				panic(err)
-			}
-
+		// Do for every parent except start key
+		if existingParent.Word != instructions.EndKey {
 			for _, eChild := range existingParent.Children {
 				// If used less than x times in the past day, ignore
-				if eChild.Value < instructions.DefluffTriggerValue {
-					removed++
+				if eChild.Value <= instructions.DefluffTriggerValue {
+					othersRemoved++
 					continue
 				}
+
+				existingParentValue++
 
 				// Add child into new list
 				updatedParent.Children = append(updatedParent.Children, child{
@@ -169,13 +100,18 @@ func defluffBody(chain string) (removed int) {
 					Value: eChild.Value,
 				})
 			}
+		}
 
+		// Do for every parent except start key
+		if existingParent.Word != instructions.StartKey {
 			for _, eGrandparent := range existingParent.Grandparents {
 				// If used less than x times in the past day, ignore
-				if eGrandparent.Value < instructions.DefluffTriggerValue {
-					removed++
+				if eGrandparent.Value <= instructions.DefluffTriggerValue {
+					othersRemoved++
 					continue
 				}
+
+				existingParentValue++
 
 				// Add grandparent into new list
 				updatedParent.Grandparents = append(updatedParent.Grandparents, grandparent{
@@ -183,98 +119,38 @@ func defluffBody(chain string) (removed int) {
 					Value: eGrandparent.Value,
 				})
 			}
-
-			if len(updatedParent.Children) == 0 && len(updatedParent.Grandparents) == 0 {
-				continue
-			}
-
-			updatedParent.Word = existingParent.Word
-			err = enc.AddEntry(updatedParent)
-			if err != nil {
-				panic(err)
-			}
 		}
 
-		err = enc.CloseEncoder()
+		if (len(updatedParent.Children) == 0 && len(updatedParent.Grandparents) == 0) || existingParentValue < instructions.DefluffTriggerValue {
+			continue
+		}
+
+		updatedParent.Word = existingParent.Word
+		err = enc.AddEntry(updatedParent)
 		if err != nil {
 			panic(err)
 		}
-
-		fN.Close()
-
 	}
 
-	f.Close()
+	// Close the new file encoder
+	if err := enc.CloseEncoder(); err != nil {
+		panic(err)
+	}
 
-	removeAndRename(defaultPath, newPath)
-
-	return removed
-}
-
-func defluffTail(chain string) (removed int) {
-	defaultPath := "./markov-chains/" + chain + ".json"
-	newPath := "./markov-chains/" + chain + "_defluffed.json"
-
-	// Open existing chain file
-	f, err := os.OpenFile(defaultPath, os.O_CREATE, 0666)
+	// Close new file
+	err = fN.Close()
 	if err != nil {
 		panic(err)
-	} else {
-		// Start a new decoder
-		dec := json.NewDecoder(f)
-
-		// Get beginning token
-		_, err = dec.Token()
-		if err != nil {
-			panic(err)
-		}
-
-		fN, err := os.OpenFile(newPath, os.O_CREATE, 0666)
-		if err != nil {
-			panic(err)
-		}
-
-		var enc encode
-		if err = StartEncoder(&enc, fN); err != nil {
-			panic(err)
-		}
-
-		// For everything in old file
-		for dec.More() {
-			var existingGrandparent grandparent
-
-			err := dec.Decode(&existingGrandparent)
-			if err != nil {
-				panic(err)
-			}
-
-			// If used less than x times in the past day, ignore
-			if existingGrandparent.Value < instructions.DefluffTriggerValue {
-				removed++
-				continue
-			}
-
-			// Add grandparent into new list
-			err = enc.AddEntry(grandparent{
-				Word:  existingGrandparent.Word,
-				Value: existingGrandparent.Value,
-			})
-			if err != nil {
-				panic(err)
-			}
-		}
-
-		err = enc.CloseEncoder()
-		if err != nil {
-			panic(err)
-		}
-
-		fN.Close()
-
 	}
 
-	f.Close()
+	// Close old file
+	err = f.Close()
+	if err != nil {
+		panic(err)
+	}
 
+	// Remove the old file and rename the new file with the old file name
 	removeAndRename(defaultPath, newPath)
-	return removed
+
+	return othersRemoved
 }

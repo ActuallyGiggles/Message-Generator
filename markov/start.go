@@ -32,14 +32,10 @@ func tickerLoops(errCh chan error) {
 
 	writingTicker = writeTicker()
 
-	if instructions.ShouldZip {
-		zippingTicker = time.NewTicker(zipInterval)
-		stats.NextZipTime = time.Now().Add(zipInterval)
-	}
+	zippingTicker = time.NewTicker(zipInterval)
+	stats.NextZipTime = time.Now().Add(zipInterval)
 
-	if instructions.ShouldDefluff {
-		defluffTicker = determineDefluffTime(true)
-	}
+	defluffTicker = determineDefluffTime(true)
 
 	for {
 		select {

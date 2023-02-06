@@ -76,7 +76,7 @@ func Start() {
 		EndKey:              "e1$D(n7",
 		ShouldZip:           true,
 		ShouldDefluff:       true,
-		DefluffTriggerValue: 50,
+		DefluffTriggerValue: 15,
 		ErrorChannel:        printErrorChannel,
 		Debug:               debug,
 	})

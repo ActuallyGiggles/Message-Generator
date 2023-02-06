@@ -19,7 +19,7 @@ func debugLog(v ...any) {
 }
 
 // chains gets a list of current chains found in the directory.
-func chains(isInit bool, includeFullName bool) (chains []string) {
+func chains(isInit bool) (chains []string) {
 	files, err := os.ReadDir("./markov-chains/")
 	if err != nil {
 		return chains
@@ -38,12 +38,7 @@ func chains(isInit bool, includeFullName bool) (chains []string) {
 			continue
 		}
 
-		if includeFullName {
-			chains = append(chains, file.Name()[:len(file.Name())-5])
-			continue
-		}
-
-		chains = append(chains, file.Name()[:len(file.Name())-10])
+		chains = append(chains, file.Name()[:len(file.Name())-5])
 	}
 
 	return chains
@@ -51,7 +46,7 @@ func chains(isInit bool, includeFullName bool) (chains []string) {
 
 // DoesChainExist returns if a chain exists or not.
 func DoesChainExist(name string) (w *worker, exists bool) {
-	for _, c := range chains(false, false) {
+	for _, c := range chains(false) {
 		if c == name {
 			for _, w := range workerMap {
 				if w.Name == c {
@@ -101,6 +96,9 @@ func PeakIntake() PeakIntakeStruct {
 func weightedRandom(choices []Choice) (string, error) {
 	// Based on this algorithm:
 	//     http://eli.thegreenplace.net/2010/01/22/weighted-random-generation-in-python/
+	if len(choices) == 1 {
+		return choices[0].Word, nil
+	}
 	sum := 0
 	for _, c := range choices {
 		sum += c.Weight
@@ -115,7 +113,7 @@ func weightedRandom(choices []Choice) (string, error) {
 			return c.Word, nil
 		}
 	}
-	err = errors.New("internal error - code should not reach this point")
+	err = errors.New("internal error - code should not reach this point - weighteRandom")
 	return "", err
 }
 

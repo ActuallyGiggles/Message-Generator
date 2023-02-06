@@ -49,8 +49,9 @@ func Out(oi OutputInstructions) (output string, err error) {
 
 func likelyBeginning(name string) (output string, err error) {
 	var child string
+	var path = "./markov-chains/" + name + ".json"
 
-	parentWord, err := getStartWord(name)
+	parentWord, err := getStartWord(path)
 	if err != nil {
 		return "", err
 	}
@@ -58,7 +59,7 @@ func likelyBeginning(name string) (output string, err error) {
 	output = parentWord
 
 	for {
-		f, err := os.Open("./markov-chains/" + name + "_body.json")
+		f, err := os.Open(path)
 		if err != nil {
 			return "", err
 		}
@@ -67,7 +68,7 @@ func likelyBeginning(name string) (output string, err error) {
 		dec := json.NewDecoder(f)
 		_, err = dec.Token()
 		if err != nil {
-			return "", errors.New("EOF (via likelyBeginning) detected in " + "./markov-chains/" + name + "_body.json")
+			return "", errors.New("EOF (via likelyBeginning) detected in " + path)
 		}
 
 		parentExists := false
@@ -105,8 +106,9 @@ func likelyBeginning(name string) (output string, err error) {
 
 func likelyEnding(name string) (output string, err error) {
 	var grandparent string
+	var path = "./markov-chains/" + name + ".json"
 
-	parentWord, err := getEndWord(name)
+	parentWord, err := getEndWord(path)
 	if err != nil {
 		return "", err
 	}
@@ -114,7 +116,7 @@ func likelyEnding(name string) (output string, err error) {
 	output = parentWord
 
 	for {
-		f, err := os.Open("./markov-chains/" + name + "_body.json")
+		f, err := os.Open(path)
 		if err != nil {
 			return "", err
 		}
@@ -123,7 +125,7 @@ func likelyEnding(name string) (output string, err error) {
 		dec := json.NewDecoder(f)
 		_, err = dec.Token()
 		if err != nil {
-			return "", errors.New("EOF (via likelyEnding) detected in " + "./markov-chains/" + name + "_body.json")
+			return "", errors.New("EOF (via likelyEnding) detected in " + path)
 		}
 
 		parentExists := false
@@ -160,6 +162,8 @@ func likelyEnding(name string) (output string, err error) {
 }
 
 func targetedBeginning(name, target string) (output string, err error) {
+	var path = "./markov-chains/" + name + ".json"
+
 	if target == "" {
 		return "", errors.New("target is empty for TargetedBeginning")
 	}
@@ -172,7 +176,7 @@ func targetedBeginning(name, target string) (output string, err error) {
 	var childChosen string
 	var initialList []Choice
 
-	f, err := os.Open("./markov-chains/" + name + "_head.json")
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -181,7 +185,7 @@ func targetedBeginning(name, target string) (output string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via targetedBeginning) detected in " + "./markov-chains/" + name + "_body.json")
+		return "", errors.New("EOF (via targetedBeginning) detected in " + path)
 	}
 
 	for dec.More() {
@@ -211,7 +215,7 @@ func targetedBeginning(name, target string) (output string, err error) {
 	output = parentWord
 
 	for {
-		f, err := os.Open("./markov-chains/" + name + "_body.json")
+		f, err := os.Open(path)
 		if err != nil {
 			panic(err)
 		}
@@ -253,6 +257,8 @@ func targetedBeginning(name, target string) (output string, err error) {
 }
 
 func targetedEnding(name, target string) (output string, err error) {
+	var path = "./markov-chains/" + name + ".json"
+
 	if target == "" {
 		return "", errors.New("target is empty for TargetedEnding")
 	}
@@ -265,7 +271,7 @@ func targetedEnding(name, target string) (output string, err error) {
 	var grandparentChosen string
 	var initialList []Choice
 
-	f, err := os.Open("./markov-chains/" + name + "_tail.json")
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -274,7 +280,7 @@ func targetedEnding(name, target string) (output string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via targetedEnding) detected in " + "./markov-chains/" + name + "_body.json")
+		return "", errors.New("EOF (via targetedEnding) detected in " + path)
 	}
 
 	for dec.More() {
@@ -304,7 +310,7 @@ func targetedEnding(name, target string) (output string, err error) {
 	output = parentWord
 
 	for {
-		f, err := os.Open("./markov-chains/" + name + "_body.json")
+		f, err := os.Open(path)
 		if err != nil {
 			panic(err)
 		}
@@ -346,6 +352,8 @@ func targetedEnding(name, target string) (output string, err error) {
 }
 
 func targetedMiddle(name, target string) (output string, err error) {
+	var path = "./markov-chains/" + name + ".json"
+
 	if target == "" {
 		return "", errors.New("target is empty for TargetedMiddle")
 	}
@@ -360,7 +368,7 @@ func targetedMiddle(name, target string) (output string, err error) {
 
 	var initialList []Choice
 
-	f, err := os.Open("./markov-chains/" + name + "_body.json")
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -369,7 +377,7 @@ func targetedMiddle(name, target string) (output string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via targetedMiddle) detected in " + "./markov-chains/" + name + "_body.json")
+		return "", errors.New("EOF (via targetedMiddle) detected in " + path)
 	}
 
 	for dec.More() {
@@ -412,7 +420,7 @@ func targetedMiddle(name, target string) (output string, err error) {
 	var forwardComplete bool
 
 goThroughBody:
-	f, err = os.Open("./markov-chains/" + name + "_body.json")
+	f, err = os.Open(path)
 	if err != nil {
 		panic(err)
 	}
@@ -471,7 +479,7 @@ goThroughBody:
 		return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 	}
 
-	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle - " + "./markov-chains/" + name + "_head.json")
+	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle - " + path)
 }
 
 func getNextWord(parent parent) (child string) {
@@ -506,10 +514,10 @@ func getPreviousWord(parent parent) (grandparent string) {
 	return grandparent
 }
 
-func getStartWord(name string) (phrase string, err error) {
+func getStartWord(path string) (phrase string, err error) {
 	var sum int
 
-	f, err := os.Open("./markov-chains/" + name + "_head.json")
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -517,20 +525,22 @@ func getStartWord(name string) (phrase string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via getStartWord) detected in " + "./markov-chains/" + name + "_head.json")
+		return "", errors.New("EOF (via getStartWord) detected in " + path)
 	}
 
 	for dec.More() {
-		var child child
+		var parent parent
 
-		err = dec.Decode(&child)
+		err = dec.Decode(&parent)
 		if err != nil {
-			fmt.Println(name)
-			fmt.Println(child)
 			panic(err)
 		}
 
-		sum += child.Value
+		if parent.Word == instructions.StartKey {
+			for _, child := range parent.Children {
+				sum += child.Value
+			}
+		}
 	}
 
 	f.Close()
@@ -540,7 +550,7 @@ func getStartWord(name string) (phrase string, err error) {
 		return "", err
 	}
 
-	f, err = os.Open("./markov-chains/" + name + "_head.json")
+	f, err = os.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -553,33 +563,31 @@ func getStartWord(name string) (phrase string, err error) {
 	}
 
 	for dec.More() {
-		var child child
+		var parent parent
 
-		err = dec.Decode(&child)
+		err = dec.Decode(&parent)
 		if err != nil {
-			fmt.Println(name)
-			fmt.Println(child)
 			panic(err)
 		}
 
-		r -= child.Value
+		if parent.Word == instructions.StartKey {
+			for _, child := range parent.Children {
+				r -= child.Value
 
-		if r < 0 {
-			return child.Word, nil
+				if r < 0 {
+					return child.Word, nil
+				}
+			}
 		}
 	}
 
-	b := make([]byte, 5)
-	n, _ := f.Read(b)
-	fmt.Println(string(b[:n]))
-
-	return "", errors.New("internal error - code should not reach this point - getStartWord - " + "./markov-chains/" + name + "_head.json")
+	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path)
 }
 
-func getEndWord(name string) (phrase string, err error) {
+func getEndWord(path string) (phrase string, err error) {
 	var sum int
 
-	f, err := os.Open("./markov-chains/" + name + "_tail.json")
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -587,20 +595,22 @@ func getEndWord(name string) (phrase string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via getEndWord) detected in " + "./markov-chains/" + name + "_tail.json")
+		return "", errors.New("EOF (via getEndWord) detected in " + path)
 	}
 
 	for dec.More() {
-		var grandparent grandparent
+		var parent parent
 
-		err = dec.Decode(&grandparent)
+		err = dec.Decode(&parent)
 		if err != nil {
-			fmt.Println(name)
-			fmt.Println(grandparent)
 			panic(err)
 		}
 
-		sum += grandparent.Value
+		if parent.Word == instructions.EndKey {
+			for _, grandparent := range parent.Grandparents {
+				sum += grandparent.Value
+			}
+		}
 	}
 
 	f.Close()
@@ -610,7 +620,7 @@ func getEndWord(name string) (phrase string, err error) {
 		return "", err
 	}
 
-	f, err = os.Open("./markov-chains/" + name + "_tail.json")
+	f, err = os.Open(path)
 	if err != nil {
 		return "", err
 	}
@@ -623,21 +633,23 @@ func getEndWord(name string) (phrase string, err error) {
 	}
 
 	for dec.More() {
-		var grandparent grandparent
+		var parent parent
 
-		err = dec.Decode(&grandparent)
+		err = dec.Decode(&parent)
 		if err != nil {
-			fmt.Println(name)
-			fmt.Println(grandparent)
 			panic(err)
 		}
 
-		r -= grandparent.Value
+		if parent.Word == instructions.EndKey {
+			for _, grandparent := range parent.Grandparents {
+				r -= grandparent.Value
 
-		if r < 0 {
-			return grandparent.Word, nil
+				if r < 0 {
+					return grandparent.Word, nil
+				}
+			}
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getEndWord - " + "./markov-chains/" + name + "_tail.json")
+	return "", errors.New("internal error - code should not reach this point - getEndWord - " + path)
 }

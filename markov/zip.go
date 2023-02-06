@@ -9,6 +9,10 @@ import (
 )
 
 func zipChains() {
+	if !instructions.ShouldZip {
+		return
+	}
+
 	busy.Lock()
 	defer duration(track("zipping duration"))
 
