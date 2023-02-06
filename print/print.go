@@ -30,13 +30,13 @@ func Page(title string) {
 
 func Success(message string) {
 	t := time.Now()
-	pterm.Success.Println(message, "\n", t.Format(time.RFC822))
+	pterm.Success.Println(message + "\n" + t.Format(time.RFC822))
 	stats.Log(t, message)
 }
 
 func Error(message string) {
 	t := time.Now()
-	pterm.Error.Println(message, "\n", t.Format(time.RFC822))
+	pterm.Error.Println(message + "\n" + t.Format(time.RFC822))
 	stats.Log(t, message)
 
 	errorChannel <- errors.New(message)
@@ -44,12 +44,12 @@ func Error(message string) {
 
 func Info(message string) {
 	t := time.Now()
-	pterm.Info.Println(message, "\n", t.Format(time.RFC822))
+	pterm.Info.Println(message + "\n" + t.Format(time.RFC822))
 }
 
 func Warning(message string) {
 	t := time.Now()
-	pterm.Warning.Println(message, "\n", t.Format(time.RFC822))
+	pterm.Warning.Println(message + "\n" + t.Format(time.RFC822))
 	stats.Log(t, message)
 
 	errorChannel <- errors.New(message)
