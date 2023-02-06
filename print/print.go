@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/pterm/pterm"
 )
@@ -28,27 +29,34 @@ func Page(title string) {
 }
 
 func Success(message string) {
-	pterm.Success.Println(message)
-	stats.Log(message)
+	t := time.Now()
+	pterm.Success.Println(message, t)
+	stats.Log(t, message)
 	fmt.Println()
 }
 
 func Error(message string) {
-	errorChannel <- errors.New(message)
-	pterm.Error.Println(message)
-	stats.Log(message)
+	t := time.Now()
+	pterm.Error.Println(message, t)
+	stats.Log(t, message)
 	fmt.Println()
+
+	errorChannel <- errors.New(message)
 }
 
 func Info(message string) {
-	pterm.Info.Println(message)
+	t := time.Now()
+	pterm.Info.Println(message, t)
 	fmt.Println()
 }
 
 func Warning(message string) {
-	errorChannel <- errors.New(message)
-	pterm.Warning.Println(message)
+	t := time.Now()
+	pterm.Warning.Println(message, t)
+	stats.Log(t, message)
 	fmt.Println()
+
+	errorChannel <- errors.New(message)
 }
 
 func ProgressBar(title string, total int) (pb *pterm.ProgressbarPrinter) {
@@ -57,7 +65,8 @@ func ProgressBar(title string, total int) (pb *pterm.ProgressbarPrinter) {
 }
 
 func Started(text string, errorChan chan error) {
-	stats.Log(text)
+	t := time.Now()
+	stats.Log(t, text)
 	Info(text)
 	started = text
 	errorChannel = errorChan

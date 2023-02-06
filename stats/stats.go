@@ -33,8 +33,7 @@ func intakePerHour() {
 	}
 }
 
-func Log(message ...string) {
-	t := time.Now()
+func Log(t time.Time, message ...string) {
 	for _, m := range message {
 		logs = append(logs, fmt.Sprintf("[%d/%d/%d %d:%d] %s %s", int(t.Month()), t.Day(), t.Year(), t.Hour(), t.Minute(), "|", m))
 	}
