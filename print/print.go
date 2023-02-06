@@ -67,7 +67,7 @@ func ProgressBar(title string, total int) (pb *pterm.ProgressbarPrinter) {
 func Started(text string, errorChan chan error) {
 	t := time.Now()
 	stats.Log(t, text)
-	Info(text)
+	pterm.Info.Println(text)
 	started = text
 	errorChannel = errorChan
 }
