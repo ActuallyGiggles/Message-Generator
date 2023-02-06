@@ -87,11 +87,17 @@ func (w *worker) writeBody(errCh chan error) {
 	// If chain file does not exist, create it and write the data to it.
 	if err != nil {
 		f, err = os.Create(defaultPath)
+		if err != nil {
+			panic(err)
+		}
+
 		chainData, _ := json.Marshal(w.Chain.Parents)
+
 		_, err = f.Write(chainData)
 		if err != nil {
 			panic(err)
 		}
+
 		f.Close()
 		return
 	}
