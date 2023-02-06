@@ -30,31 +30,27 @@ func Page(title string) {
 
 func Success(message string) {
 	t := time.Now()
-	pterm.Success.Println(message, t)
+	pterm.Success.Println(message, "\n", t.Format(time.RFC822))
 	stats.Log(t, message)
-	fmt.Println()
 }
 
 func Error(message string) {
 	t := time.Now()
-	pterm.Error.Println(message, t)
+	pterm.Error.Println(message, "\n", t.Format(time.RFC822))
 	stats.Log(t, message)
-	fmt.Println()
 
 	errorChannel <- errors.New(message)
 }
 
 func Info(message string) {
 	t := time.Now()
-	pterm.Info.Println(message, t)
-	fmt.Println()
+	pterm.Info.Println(message, "\n", t.Format(time.RFC822))
 }
 
 func Warning(message string) {
 	t := time.Now()
-	pterm.Warning.Println(message, t)
+	pterm.Warning.Println(message, "\n", t.Format(time.RFC822))
 	stats.Log(t, message)
-	fmt.Println()
 
 	errorChannel <- errors.New(message)
 }
