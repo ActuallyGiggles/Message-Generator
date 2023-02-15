@@ -3006,20 +3006,20 @@
  },
  {
   "Platform": "twitch",
-  "ChannelName": "sodapoppin",
-  "ChannelID": "26301881",
-  "DiscordChannelID": "940620543546253383",
+  "ChannelName": "fextralife",
+  "ChannelID": "156037856",
+  "DiscordChannelID": "1073144606616719420",
   "Settings": {
    "IsCollectingMessages": true,
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": true
+    "IsAllowedWhenOffline": false
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": true
+    "IsAllowedWhenOffline": false
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -3062,6 +3062,69 @@
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
     "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "susu_jpg",
+  "ChannelID": "132847709",
+  "DiscordChannelID": "1072774229981941800",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "vulpeshd",
+  "ChannelID": "42163359",
+  "DiscordChannelID": "1072774614935150653",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "Participation": {
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": false
+   },
+   "WhichChannelsToUse": "self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
+  "ChannelName": "sodapoppin",
+  "ChannelID": "26301881",
+  "DiscordChannelID": "940620543546253383",
+  "Settings": {
+   "IsCollectingMessages": true,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": true
+   },
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOffline": true
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
