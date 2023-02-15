@@ -29,7 +29,7 @@ func CreateDefaultSentence(channel string) {
 		return
 	}
 
-	var recursionLimit = 5
+	var recursionLimit = 25
 	var timesRecursed = 0
 
 recurse:
@@ -43,9 +43,13 @@ recurse:
 
 	if err != nil {
 		if timesRecursed > recursionLimit {
+			// If simply not found in chain, ignore error.
+			if strings.Contains(err.Error(), "does not exist in chain") {
+				return
+			}
+
 			// Report if too many errors.
 			print.Warning("Could not create default sentence.\nError: " + err.Error())
-
 			return
 		}
 
@@ -55,11 +59,15 @@ recurse:
 	}
 
 	if isSentenceTooShort(output) {
-		return
+		// Recurse.
+		timesRecursed++
+		goto recurse
 	}
 
 	if containsOwnName(output) {
-		return
+		// Recurse.
+		timesRecursed++
+		goto recurse
 	}
 
 	OutgoingHandler("default", channel, "", oi, output, "")
@@ -86,9 +94,13 @@ recurse:
 
 	if err != nil {
 		if timesRecursed > recursionLimit {
+			// If simply not found in chain, ignore error.
+			if strings.Contains(err.Error(), "does not exist in chain") {
+				return
+			}
+
 			// Report if too many errors.
 			print.Warning("Could not create API sentence.\nError: " + err.Error())
-
 			return "", false
 		}
 
