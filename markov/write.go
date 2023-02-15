@@ -90,14 +90,11 @@ func (w *worker) writeBody(errCh chan error) {
 		if err != nil {
 			panic(err)
 		}
-
 		chainData, _ := json.Marshal(w.Chain.Parents)
-
 		_, err = f.Write(chainData)
 		if err != nil {
 			panic(err)
 		}
-
 		f.Close()
 		return
 	}

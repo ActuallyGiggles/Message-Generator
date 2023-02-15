@@ -38,8 +38,10 @@ func prepareContentForChainProcessing(content string) []string {
 	var returnSlice []string
 	returnSlice = append(returnSlice, instructions.StartKey)
 	slice := strings.Split(content, instructions.SeparationKey)
-	for i := 0; i <= len(slice)-1; i += 2 {
-		if len(slice)-1 > i {
+	for i := 0; i <= len(slice)-1; i += 3 {
+		if len(slice)-1 > i+1 {
+			returnSlice = append(returnSlice, slice[i]+instructions.SeparationKey+slice[i+1]+instructions.SeparationKey+slice[i+2])
+		} else if len(slice)-1 > i {
 			returnSlice = append(returnSlice, slice[i]+instructions.SeparationKey+slice[i+1])
 		} else {
 			returnSlice = append(returnSlice, slice[i])

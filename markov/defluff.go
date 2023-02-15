@@ -72,12 +72,10 @@ func defluffChain(chain string) (othersRemoved int) {
 		panic(err)
 	}
 
-	// Track how many parents are present in the chain
-	var existingParents int
-
 	// For every new item in the existing chain
 	for dec.More() {
 		var existingParent parent
+		var existingParentValue int
 		var updatedParent parent
 
 		err := dec.Decode(&existingParent)
@@ -93,6 +91,8 @@ func defluffChain(chain string) (othersRemoved int) {
 					othersRemoved++
 					continue
 				}
+
+				existingParentValue++
 
 				// Add child into new list
 				updatedParent.Children = append(updatedParent.Children, child{
@@ -111,6 +111,8 @@ func defluffChain(chain string) (othersRemoved int) {
 					continue
 				}
 
+				existingParentValue++
+
 				// Add grandparent into new list
 				updatedParent.Grandparents = append(updatedParent.Grandparents, grandparent{
 					Word:  eGrandparent.Word,
@@ -119,7 +121,7 @@ func defluffChain(chain string) (othersRemoved int) {
 			}
 		}
 
-		if len(updatedParent.Children) == 0 && len(updatedParent.Grandparents) == 0 {
+		if (len(updatedParent.Children) == 0 && len(updatedParent.Grandparents) == 0) || existingParentValue < instructions.DefluffTriggerValue {
 			continue
 		}
 
@@ -147,17 +149,8 @@ func defluffChain(chain string) (othersRemoved int) {
 		panic(err)
 	}
 
-	// If there are less than 100 parents total in the chain, don't do anything, because it will result in an empty file
-	if existingParents < 100 {
-		err := os.Remove(newPath)
-		if err != nil {
-			panic(err)
-		}
-	} else {
-		// Remove the old file and rename the new file with the old file name
-		removeAndRename(defaultPath, newPath)
-
-	}
+	// Remove the old file and rename the new file with the old file name
+	removeAndRename(defaultPath, newPath)
 
 	return othersRemoved
 }

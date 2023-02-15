@@ -37,6 +37,8 @@ func Out(oi OutputInstructions) (output string, err error) {
 		output, err = targetedEnding(name, target)
 	case "TargetedMiddle":
 		output, err = targetedMiddle(name, target)
+	default:
+		return "", errors.New("no correct method provided")
 	}
 
 	if err == nil {
@@ -479,7 +481,7 @@ goThroughBody:
 		return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 	}
 
-	return "", errors.New(path + " is an empty file")
+	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle - " + path)
 }
 
 func getNextWord(parent parent) (child string) {
@@ -581,7 +583,7 @@ func getStartWord(path string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New(path + " is an empty file")
+	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path)
 }
 
 func getEndWord(path string) (phrase string, err error) {
@@ -651,5 +653,5 @@ func getEndWord(path string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New(path + " is an empty file")
+	return "", errors.New("internal error - code should not reach this point - getEndWord - " + path)
 }
