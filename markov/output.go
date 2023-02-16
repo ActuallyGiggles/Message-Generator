@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -15,16 +16,15 @@ func Out(oi OutputInstructions) (output string, err error) {
 	method := oi.Method
 	target := oi.Target
 
-	defer duration(track("output duration"))
-
 	w, exists := DoesChainExist(name)
-
 	if !exists {
 		return "", errors.New("Chain '" + name + "' is not found in directory.")
 	}
 
 	w.ChainMx.Lock()
 	defer w.ChainMx.Unlock()
+
+	defer duration(track("output duration"))
 
 	switch method {
 	case "LikelyBeginning":
@@ -583,7 +583,7 @@ func getStartWord(path string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path)
+	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path + " busy: " + strconv.FormatBool(IsBusy()))
 }
 
 func getEndWord(path string) (phrase string, err error) {
