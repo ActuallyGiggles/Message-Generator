@@ -64,21 +64,36 @@ func doesChainExist(name string) (w *worker, exists bool) {
 func DoesChainExist(name string) (exists bool) {
 	for _, c := range chains(false) {
 		if c == name {
-			jsonFile, err := os.Open("./markov-chains/" + name + ".json")
+			f, err := os.Open("./markov-chains/" + name + ".json")
 			if err != nil {
-				panic(err)
+				return false
 			}
-			defer jsonFile.Close()
-			fileInfo, err := jsonFile.Stat()
+			dec := json.NewDecoder(f)
+			_, err = dec.Token()
 			if err != nil {
-				panic(err)
+				return false
 			}
-			if fileInfo.Size() > 2 {
-				exists = true
+			var sum int
+			for dec.More() {
+				var parent parent
+
+				err = dec.Decode(&parent)
+				if err != nil {
+					panic(err)
+				}
+
+				if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
+					sum++
+				}
+
+				if sum > 50 {
+					return true
+				}
 			}
+			f.Close()
 		}
 	}
-	return exists
+	return false
 }
 
 func PrettyPrint(v interface{}) {
