@@ -34,10 +34,12 @@ func CreateDefaultSentence(msg platform.Message) {
 	var timesRecursed = 0
 
 recurse:
+	d := removeDeterminers(msg.Content)
+
 	oi := markov.OutputInstructions{
 		Chain:  msg.ChannelName,
 		Method: "TargetedMiddle",
-		Target: removeDeterminers(msg.Content),
+		Target: d,
 	}
 
 	// Get output.
@@ -46,6 +48,7 @@ recurse:
 	if err != nil {
 		if strings.Contains(err.Error(), "target is empty for TargetedMiddle") {
 			fmt.Println("MESSAGE USED -> " + msg.Content)
+			fmt.Println("MODIFIED MESSAGE USED -> " + d)
 		}
 
 		if timesRecursed > recursionLimit {
