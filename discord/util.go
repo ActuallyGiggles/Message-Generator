@@ -37,7 +37,7 @@ func manuallyTweet(r *discordgo.MessageReactionAdd) {
 		channel = getStringInBetween(messageInfo.Content, "Channel Used:", "Method:")
 		message = getStringToEnd(messageInfo.Content, "Message:")
 	case global.DiscordAllChannelID, global.DiscordWebsiteResultsChannelID:
-		channel = getStringInBetween(messageInfo.Content, "Channel:", "Method:")
+		channel = getStringInBetween(messageInfo.Content, "Channel:", "Message:")
 		message = getStringToEnd(messageInfo.Content, "Message:")
 	default:
 		c, _ := discord.Channel(r.ChannelID)
