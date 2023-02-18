@@ -1,10 +1,8 @@
 package handlers
 
 import (
-	"Message-Generator/discord"
 	"Message-Generator/global"
 	"Message-Generator/platform"
-	"Message-Generator/platform/twitch"
 	"regexp"
 	"strings"
 	"time"
@@ -84,7 +82,7 @@ func lowercaseIfNotEmote(channel string, message string) string {
 
 // removeWeirdTwitchCharactersAndTrim removes whitespaces that Twitch adds, such as  and 󠀀.
 func removeWeirdTwitchCharactersAndTrim(message string) string {
-	message = strings.ReplaceAll(message, "", "")
+	message = strings.ReplaceAll(message, "\x01", "")
 	message = strings.ReplaceAll(message, "󠀀", "")
 	slice := strings.Fields(message)
 	message = strings.Join(slice, " ")
@@ -112,10 +110,7 @@ func checkForBotUser(username string) bool {
 
 // checkForBadWording returns if a message contains a bad word or phrase.
 func checkForBadWording(message string) bool {
-	if global.Regex.MatchString(message) {
-		return true
-	}
-	return false
+	return global.Regex.MatchString(message)
 }
 
 // checkForCommand returns if a string is a potential command.
@@ -274,11 +269,7 @@ func isSentenceTooShort(sentence string) bool {
 }
 
 func containsOwnName(message string) bool {
-	if strings.Contains(message, global.BotName) {
-		return true
-	}
-
-	return false
+	return strings.Contains(message, global.BotName)
 }
 
 func DoesSliceContainIndex(slice []string, index int) bool {
@@ -304,41 +295,6 @@ func GetRandomChannel(mode string, channel string) (randomChannel string) {
 	return global.PickRandomFromSlice(s)
 }
 
-func findChannelIDs(mode string, platform string, channelName string, returnChannelID string) (platformChannelID string, discordChannelID string, success bool) {
-	if mode == "add" {
-		if platform == "twitch" {
-			c, err := twitch.GetBroadcasterInfo(channelName)
-			if err != nil {
-				go discord.SayByIDAndDelete(returnChannelID, "Is this a real twitch channel?")
-				return "", "", false
-			}
-			platformChannelID = c.ID
-		} else if platform == "youtube" {
-			go discord.SayByIDAndDelete(returnChannelID, "YouTube support not yet added.")
-			return
-		} else {
-			go discord.SayByIDAndDelete(returnChannelID, "Invalid platform.")
-			return
-		}
-
-		c, ok := discord.CreateDiscordChannel(channelName)
-		if !ok {
-			go discord.SayByIDAndDelete(returnChannelID, "Failed to create Discord channel.")
-			return "", "", false
-		}
-		discordChannelID = c.ID
-	} else {
-		for _, c := range global.Directives {
-			if channelName == c.ChannelName {
-				platformChannelID = c.ChannelID
-				discordChannelID = c.DiscordChannelID
-				break
-			}
-		}
-	}
-	return platformChannelID, discordChannelID, true
-}
-
 func removeDeterminers(content string) (target string) {
 	s := strings.Split(clearNonAlphanumeric(content), " ")
 	ns := []string{}
@@ -353,10 +309,7 @@ wordLoop:
 			}
 		}
 
-		w := strings.ReplaceAll(word, ".", "")
-		w = strings.ReplaceAll(word, ",", "")
-		w = strings.ReplaceAll(word, "!", "")
-		w = strings.ReplaceAll(word, "?", "")
+		w := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(word, ".", ""), ",", ""), "!", ""), "?", "")
 
 		ns = append(ns, w)
 	}

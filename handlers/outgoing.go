@@ -6,7 +6,6 @@ import (
 	"Message-Generator/platform/twitch"
 	"Message-Generator/twitter"
 	"strings"
-	"time"
 )
 
 func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence string, oi markov.OutputInstructions, message string, mention string) {
@@ -41,16 +40,5 @@ func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence st
 		twitch.Say(sendBackToChannel, "@"+mention+" "+message)
 		discord.Say("reply", "Channel Sent To: "+sendBackToChannel+"\nChannel Used: "+oi.Chain+"\nMethod: "+oi.Method+"\nTarget: "+oi.Target+"\nTrigger Sentence: "+triggerSentence+"\nMessage: @"+mention+" "+message)
 		return
-	}
-
-	return
-}
-
-func outputTicker() {
-	for range time.Tick(5 * time.Minute) {
-		chains := markov.CurrentWorkers()
-		for _, chain := range chains {
-			CreateDefaultSentence(chain)
-		}
 	}
 }

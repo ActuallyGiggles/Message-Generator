@@ -15,7 +15,7 @@ func Incoming(c chan platform.Message) {
 			continue
 		}
 
-		preparedContent := prepareMessageForMarkov(msg)
+		msg.Content = prepareMessageForMarkov(msg)
 
 		var exists bool
 
@@ -24,19 +24,16 @@ func Incoming(c chan platform.Message) {
 				exists = true
 
 				if directive.Settings.IsCollectingMessages {
-					go markov.In(msg.ChannelName, preparedContent)
-					go CreateDefaultSentence(msg.ChannelName)
+					go markov.In(msg.ChannelName, msg.Content)
+					go CreateDefaultSentence(msg)
 				}
-
-				preparedMsg := msg
-				preparedMsg.Content = preparedContent
 
 				// If message contains a ping for the bot, run a reply
 				if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(global.BotName)) {
-					go CreateReplySentence(preparedMsg, directive)
+					go CreateReplySentence(msg, directive)
+				} else {
+					go CreateParticipationSentence(msg, directive)
 				}
-
-				go CreateParticipationSentence(preparedMsg, directive)
 			}
 		}
 
