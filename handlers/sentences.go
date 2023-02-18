@@ -47,8 +47,9 @@ recurse:
 
 	if err != nil {
 		if strings.Contains(err.Error(), "target is empty for TargetedMiddle") {
-			fmt.Println("MESSAGE USED -> " + msg.Content)
-			fmt.Println("MODIFIED MESSAGE USED -> " + d)
+			fmt.Println("MESSAGE USED -> [" + msg.Content + "]")
+			fmt.Println("MODIFIED MESSAGE USED -> [" + d + "]")
+			fmt.Println("MODIFIED MESSAGE TRIMMED -> [" + strings.TrimSpace(d) + "]")
 		}
 
 		if timesRecursed > recursionLimit {
