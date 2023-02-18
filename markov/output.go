@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"strconv"
 	"strings"
 )
 
@@ -37,6 +36,8 @@ func Out(oi OutputInstructions) (output string, err error) {
 		output, err = targetedEnding(name, target)
 	case "TargetedMiddle":
 		output, err = targetedMiddle(name, target)
+	case "RandomMiddle":
+		output, err = randomMiddle(name)
 	default:
 		return "", errors.New("no correct method provided")
 	}
@@ -484,38 +485,6 @@ goThroughBody:
 	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle - " + path)
 }
 
-func getNextWord(parent parent) (child string) {
-	var wrS []Choice
-	for _, word := range parent.Children {
-		w := word.Word
-		v := word.Value
-		item := Choice{
-			Word:   w,
-			Weight: v,
-		}
-		wrS = append(wrS, item)
-	}
-	child, _ = weightedRandom(wrS)
-
-	return child
-}
-
-func getPreviousWord(parent parent) (grandparent string) {
-	var wrS []Choice
-	for _, word := range parent.Grandparents {
-		w := word.Word
-		v := word.Value
-		item := Choice{
-			Word:   w,
-			Weight: v,
-		}
-		wrS = append(wrS, item)
-	}
-	grandparent, _ = weightedRandom(wrS)
-
-	return grandparent
-}
-
 func getStartWord(path string) (phrase string, err error) {
 	var sum int
 
@@ -583,7 +552,7 @@ func getStartWord(path string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path + " busy: " + strconv.FormatBool(IsBusy()))
+	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path)
 }
 
 func getEndWord(path string) (phrase string, err error) {
@@ -654,4 +623,115 @@ func getEndWord(path string) (phrase string, err error) {
 	}
 
 	return "", errors.New("internal error - code should not reach this point - getEndWord - " + path)
+}
+
+func getNextWord(parent parent) (child string) {
+	var wrS []Choice
+	for _, word := range parent.Children {
+		w := word.Word
+		v := word.Value
+		item := Choice{
+			Word:   w,
+			Weight: v,
+		}
+		wrS = append(wrS, item)
+	}
+	child, _ = weightedRandom(wrS)
+
+	return child
+}
+
+func getPreviousWord(parent parent) (grandparent string) {
+	var wrS []Choice
+	for _, word := range parent.Grandparents {
+		w := word.Word
+		v := word.Value
+		item := Choice{
+			Word:   w,
+			Weight: v,
+		}
+		wrS = append(wrS, item)
+	}
+	grandparent, _ = weightedRandom(wrS)
+
+	return grandparent
+}
+
+func randomMiddle(name string) (output string, err error) {
+	target, err := getRandomWord("./markov-chains/" + name + ".json")
+	if err != nil {
+		return "", err
+	}
+
+	return targetedMiddle(name, target)
+}
+
+func getRandomWord(path string) (phrase string, err error) {
+	var sum int
+
+	f, err := os.Open(path)
+	if err != nil {
+		return "", err
+	}
+
+	dec := json.NewDecoder(f)
+	_, err = dec.Token()
+	if err != nil {
+		return "", errors.New("EOF (via getRandomWord) detected in " + path)
+	}
+
+	for dec.More() {
+		var parent parent
+
+		err = dec.Decode(&parent)
+		if err != nil {
+			panic(err)
+		}
+
+		if parent.Word != instructions.EndKey && parent.Word != instructions.StartKey {
+			for _, grandparent := range parent.Grandparents {
+				sum += grandparent.Value
+			}
+		}
+	}
+
+	f.Close()
+
+	r, err := randomNumber(0, sum)
+	if err != nil {
+		return "", err
+	}
+
+	f, err = os.Open(path)
+	if err != nil {
+		return "", err
+	}
+	defer f.Close()
+
+	dec = json.NewDecoder(f)
+	_, err = dec.Token()
+	if err != nil {
+		panic(err)
+	}
+
+	for dec.More() {
+		var parent parent
+
+		err = dec.Decode(&parent)
+		if err != nil {
+			panic(err)
+		}
+
+		if parent.Word != instructions.EndKey && parent.Word != instructions.StartKey {
+			for _, grandparent := range parent.Grandparents {
+				r -= grandparent.Value
+
+				if r < 0 {
+					return grandparent.Word, nil
+				}
+			}
+		}
+	}
+
+	return "", errors.New("internal error - code should not reach this point - getRandomWord - " + path)
 }

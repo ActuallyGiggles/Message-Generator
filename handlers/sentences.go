@@ -23,19 +23,20 @@ var (
 )
 
 // CreateDefaultSentence outputs a likely sentence to a Discord channel.
-func CreateDefaultSentence(channel string) {
+func CreateDefaultSentence(msg platform.Message) {
 	// Allow passage if not currently timed out.
-	if !lockDefault(300, channel) {
+	if !lockDefault(300, msg.ChannelName) {
 		return
 	}
 
-	var recursionLimit = 25
+	var recursionLimit = 50
 	var timesRecursed = 0
 
 recurse:
 	oi := markov.OutputInstructions{
-		Chain:  channel,
-		Method: "LikelyBeginning",
+		Chain:  msg.ChannelName,
+		Method: "TargetedBeginning",
+		Target: removeDeterminers(msg.Content),
 	}
 
 	// Get output.
@@ -70,7 +71,7 @@ recurse:
 		goto recurse
 	}
 
-	OutgoingHandler("default", channel, "", oi, output, "")
+	OutgoingHandler("default", msg.ChannelName, "", oi, output, "")
 }
 
 // CreateAPISentence outputs a likely sentence for the API.
@@ -86,7 +87,7 @@ func CreateAPISentence(channel string) (output string, success bool) {
 recurse:
 	oi := markov.OutputInstructions{
 		Chain:  channel,
-		Method: global.PickRandomFromSlice([]string{"LikelyBeginning", "LikelyEnding"}),
+		Method: "RandomMiddle",
 	}
 
 	// Get output.
@@ -152,7 +153,7 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 recurse:
 	oi := markov.OutputInstructions{
 		Chain:  decideWhichChannelToUse(directive),
-		Method: global.PickRandomFromSlice([]string{"TargetedBeginning", "TargetedMiddle", "TargetedEnding"}),
+		Method: "TargetedMiddle",
 		Target: removeDeterminers(msg.Content),
 	}
 
@@ -208,6 +209,7 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 		return
 	}
 
+	// Special recursion limit to at least visit each worker once
 	recursionLimit := len(markov.CurrentWorkers())
 	timesRecursed := 0
 
@@ -219,7 +221,7 @@ recurse:
 		oi = markov.OutputInstructions{
 			Method: "TargetedBeginning",
 			Chain:  decideWhichChannelToUse(directive),
-			Target: global.PickRandomFromSlice([]string{"yes", "no", "maybe", "absolutely", "absolutely", "who knows"}),
+			Target: global.PickRandomFromSlice([]string{"yes", "no", "maybe", "absolutely", "absolutely", "never", "always"}),
 		}
 	} else if questionType == "explanation question" {
 		oi = markov.OutputInstructions{
@@ -229,7 +231,7 @@ recurse:
 		}
 	} else {
 		oi = markov.OutputInstructions{
-			Method: global.PickRandomFromSlice([]string{"TargetedBeginning", "TargetedMiddle", "TargetedEnding"}),
+			Method: "TargetedMiddle",
 			Chain:  decideWhichChannelToUse(directive),
 			Target: removeDeterminers(msg.Content),
 		}
