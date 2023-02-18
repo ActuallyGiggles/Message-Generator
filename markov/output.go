@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"os"
 	"regexp"
-	"strconv"
 	"strings"
 )
 
@@ -518,6 +517,8 @@ func getPreviousWord(parent parent) (grandparent string) {
 
 func getStartWord(path string) (phrase string, err error) {
 	var sum int
+	var stepOne bool
+	var stepTwo bool
 
 	f, err := os.Open(path)
 	if err != nil {
@@ -541,6 +542,7 @@ func getStartWord(path string) (phrase string, err error) {
 		if parent.Word == instructions.StartKey {
 			for _, child := range parent.Children {
 				sum += child.Value
+				stepOne = true
 			}
 		}
 	}
@@ -575,6 +577,7 @@ func getStartWord(path string) (phrase string, err error) {
 		if parent.Word == instructions.StartKey {
 			for _, child := range parent.Children {
 				r -= child.Value
+				stepTwo = true
 
 				if r < 0 {
 					return child.Word, nil
@@ -583,7 +586,7 @@ func getStartWord(path string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path + " busy: " + strconv.FormatBool(IsBusy()))
+	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path + fmt.Sprintf("s1: %t s2: %t", stepOne, stepTwo))
 }
 
 func getEndWord(path string) (phrase string, err error) {
