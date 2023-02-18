@@ -15,7 +15,7 @@ func Out(oi OutputInstructions) (output string, err error) {
 	method := oi.Method
 	target := oi.Target
 
-	w, exists := DoesChainExist(name)
+	w, exists := doesChainExist(name)
 	if !exists {
 		return "", errors.New("Chain '" + name + "' is not found in directory.")
 	}
@@ -482,7 +482,7 @@ goThroughBody:
 		return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 	}
 
-	return "", errors.New("internal error - code should not reach this point - TargetedMiddle - " + path)
+	return "", errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty  - TargetedMiddle - " + path)
 }
 
 func getStartWord(path string) (phrase string, err error) {
@@ -546,7 +546,7 @@ func getStartWord(path string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getStartWord - " + path)
+	return "", errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty  - getStartWord - " + path)
 }
 
 func getEndWord(path string) (phrase string, err error) {
@@ -616,7 +616,7 @@ func getEndWord(path string) (phrase string, err error) {
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getEndWord - " + path)
+	return "", errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty  - getEndWord - " + path)
 }
 
 func getNextWord(parent parent) (child string) {
@@ -661,7 +661,7 @@ func getRandomParent(name string) (parentToReturn string, err error) {
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return parentToReturn, errors.New("EOF (via randomMiddle) detected in " + path)
+		return parentToReturn, errors.New("EOF (via getRandomParent) detected in " + path)
 	}
 	var sum int
 	for dec.More() {
@@ -714,7 +714,7 @@ func getRandomParent(name string) (parentToReturn string, err error) {
 		}
 	}
 
-	return parentToReturn, errors.New("internal error - code should not reach this point - randomMiddle - " + path)
+	return parentToReturn, errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty - getRandomParent - " + path)
 }
 
 func randomMiddle(name string) (output string, err error) {
@@ -792,5 +792,5 @@ goThroughBody:
 		return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 	}
 
-	return "", errors.New("internal error - code should not reach this point - RandomMiddle - " + path)
+	return "", errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty  - randomMiddle - " + path)
 }

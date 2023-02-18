@@ -325,7 +325,7 @@ func removeDirective(channelID string, messageID string, args []string) {
 
 func showDirectiveDetailed(channelID string, messageID string, args []string) {
 	defer DeleteDiscordMessage(channelID, messageID)
-	if len(args) <1 {
+	if len(args) < 1 {
 		SayByIDAndDelete(channelID, "Specify channel!")
 		return
 	}
@@ -490,5 +490,5 @@ func cleanse(channelID string, messageID string, args []string) {
 
 func help(channelID string, messageID string) {
 	defer DeleteDiscordMessage(channelID, messageID)
-	SayByIDAndDelete(channelID, fmt.Sprintf("Commands:\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]", "showchannels", "addchannel", "updatechannel", "removechannel", "showregex", "addregex", "removeregex", "showbannedusers", "addbanneduser", "removebanneduser", "cleanse", "help"))
+	SayByIDAndDelete(channelID, fmt.Sprintf("Commands:\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]\n[%s]", "showchannels", "showchanneldetailed", "addchannel", "updatechannel", "removechannel", "showregex", "addregex", "removeregex", "showbannedusers", "addbanneduser", "removebanneduser", "cleanse", "help"))
 }

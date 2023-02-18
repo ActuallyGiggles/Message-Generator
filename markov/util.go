@@ -44,8 +44,8 @@ func chains(isInit bool) (chains []string) {
 	return chains
 }
 
-// DoesChainExist returns if a chain exists or not.
-func DoesChainExist(name string) (w *worker, exists bool) {
+// doesChainExist returns whether a chain exists. If it exists, but is not a worker, it will create and return the worker.
+func doesChainExist(name string) (w *worker, exists bool) {
 	for _, c := range chains(false) {
 		if c == name {
 			for _, w := range workerMap {
@@ -58,6 +58,27 @@ func DoesChainExist(name string) (w *worker, exists bool) {
 		}
 	}
 	return nil, false
+}
+
+// DoesChainExist returns whether a chain exists. If the chain exists, but is empty, it will return false.
+func DoesChainExist(name string) (exists bool) {
+	for _, c := range chains(false) {
+		if c == name {
+			jsonFile, err := os.Open("./markov-chains/" + name + ".json")
+			if err != nil {
+				panic(err)
+			}
+			defer jsonFile.Close()
+			fileInfo, err := jsonFile.Stat()
+			if err != nil {
+				panic(err)
+			}
+			if fileInfo.Size() > 2 {
+				exists = true
+			}
+		}
+	}
+	return exists
 }
 
 func PrettyPrint(v interface{}) {
