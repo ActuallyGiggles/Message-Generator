@@ -5,6 +5,7 @@ import (
 	"Message-Generator/platform"
 	"Message-Generator/platform/twitch"
 	"Message-Generator/print"
+	"fmt"
 	"strings"
 	"sync"
 
@@ -43,6 +44,10 @@ recurse:
 	output, err := markov.Out(oi)
 
 	if err != nil {
+		if strings.Contains(err.Error(), "target is empty for TargetedMiddle") {
+			fmt.Println("MESSAGE USED -> " + msg.Content)
+		}
+
 		if timesRecursed > recursionLimit {
 			// If simply not found in chain, ignore error.
 			if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
