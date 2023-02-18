@@ -30,27 +30,48 @@ func manuallyTweet(r *discordgo.MessageReactionAdd) {
 	var channel string
 	var message string
 
-	// If starts with "```Channel:", get channel and message
-	// If starts with "```Channel Used:", get channel and message differently
-	// Else, get channel from channel name and message from content
-	if strings.HasPrefix(messageInfo.Content, "```Channel:") {
-		s := strings.Split(strings.ReplaceAll(strings.ReplaceAll(messageInfo.Content, "`", ""), "\n", " "), " ")
-		channel = s[1]
-		message = strings.Join(s[3:], " ")
-	} else if strings.HasPrefix(messageInfo.Content, "```Channel Used:") {
-		s := strings.Split(strings.ReplaceAll(strings.ReplaceAll(messageInfo.Content, "`", ""), "\n", " "), " ")
-		channel = s[2]
-		message = strings.Join(s[8:], " ")
-	} else {
+	messageInfo.Content = strings.ReplaceAll(strings.ReplaceAll(messageInfo.Content, "`", ""), "\n", " ")
+
+	switch r.ChannelID {
+	case global.DiscordReplyChannelID, global.DiscordParticipationChannelID:
+		channel = getStringInBetween(messageInfo.Content, "Channel Used:", "Method:")
+		message = getStringToEnd(messageInfo.Content, "Message:")
+	case global.DiscordAllChannelID, global.DiscordWebsiteResultsChannelID:
+		channel = getStringInBetween(messageInfo.Content, "Channel:", "Method:")
+		message = getStringToEnd(messageInfo.Content, "Message:")
+	default:
 		c, _ := discord.Channel(r.ChannelID)
 		channel = c.Name
-		message = strings.ReplaceAll(messageInfo.Content, "`", "")
+		message = messageInfo.Content
 	}
 
 	twitter.SendTweet(channel, message)
 }
 
-func findChannelIDs(mode string, platform string, channelName string, returnChannelID string) (platformChannelID string, discordChannelID string, success bool) {
+// getStringInBetween Returns empty string if no start string found
+func getStringInBetween(str, start, end string) (result string) {
+	s := strings.Index(str, start)
+	if s == -1 {
+		return result
+	}
+	new := str[s+len(start):]
+	e := strings.Index(new, end)
+	if e == -1 {
+		return result
+	}
+	return strings.TrimSpace(new[:e])
+}
+
+// getStringToEnd Returns empty string if no start string found
+func getStringToEnd(str, start string) (result string) {
+	s := strings.Index(str, start)
+	if s == -1 {
+		return
+	}
+	return strings.TrimSpace(str[s+len(start):])
+}
+
+func findChannelIDs(mode, platform, channelName, returnChannelID string) (platformChannelID, discordChannelID string, success bool) {
 	if mode == "add" {
 		if platform == "twitch" {
 			c, err := twitch.GetBroadcasterInfo(channelName)

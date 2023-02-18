@@ -309,9 +309,11 @@ wordLoop:
 			}
 		}
 
-		w := strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(word, ".", ""), ",", ""), "!", ""), "?", "")
-
-		ns = append(ns, w)
+		if trimmed := strings.TrimSpace(word); trimmed == "" {
+			continue wordLoop
+		} else {
+			ns = append(ns, strings.TrimSpace(word))
+		}
 	}
 
 	if len(ns) == 0 {

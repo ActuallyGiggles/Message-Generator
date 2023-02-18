@@ -5,7 +5,6 @@ import (
 	"Message-Generator/platform"
 	"Message-Generator/platform/twitch"
 	"Message-Generator/print"
-	"fmt"
 	"strings"
 	"sync"
 
@@ -30,34 +29,28 @@ func CreateDefaultSentence(msg platform.Message) {
 		return
 	}
 
-	fmt.Println("new default request -> " + msg.Content)
-
 	var recursionLimit = 50
 	var timesRecursed = 0
 
 recurse:
-	d := removeDeterminers(msg.Content)
+	target := removeDeterminers(msg.Content)
+	if target == "" {
+		return
+	}
 
 	oi := markov.OutputInstructions{
 		Chain:  msg.ChannelName,
 		Method: "TargetedMiddle",
-		Target: d,
+		Target: target,
 	}
 
 	// Get output.
 	output, err := markov.Out(oi)
 
 	if err != nil {
-		if strings.Contains(err.Error(), "target is empty for TargetedMiddle") {
-			fmt.Println("MESSAGE USED -> [" + msg.Content + "]")
-			fmt.Println("MODIFIED MESSAGE USED -> [" + d + "]")
-			fmt.Println("MODIFIED MESSAGE TRIMMED -> [" + strings.TrimSpace(d) + "]")
-		}
-
 		if timesRecursed > recursionLimit {
 			// If simply not found in chain, ignore error.
 			if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
-				fmt.Println("does not exist")
 				return
 			}
 
@@ -73,14 +66,12 @@ recurse:
 
 	if isSentenceTooShort(output) {
 		// Recurse.
-		fmt.Println("too short")
 		timesRecursed++
 		goto recurse
 	}
 
 	if containsOwnName(output) {
 		// Recurse.
-		fmt.Println("own name")
 		timesRecursed++
 		goto recurse
 	}
@@ -165,10 +156,15 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	var timesRecursed = 0
 
 recurse:
+	target := removeDeterminers(msg.Content)
+	if target == "" {
+		return
+	}
+
 	oi := markov.OutputInstructions{
 		Chain:  decideWhichChannelToUse(directive),
 		Method: "TargetedMiddle",
-		Target: removeDeterminers(msg.Content),
+		Target: target,
 	}
 
 	// Get output.
@@ -249,10 +245,15 @@ recurse:
 			Target: global.PickRandomFromSlice([]string{"because", "idk", "idc", "well", "you see"}),
 		}
 	} else {
+		target := removeDeterminers(msg.Content)
+		if target == "" {
+			return
+		}
+
 		oi = markov.OutputInstructions{
 			Method: "TargetedMiddle",
 			Chain:  decideWhichChannelToUse(directive),
-			Target: removeDeterminers(msg.Content),
+			Target: target,
 		}
 	}
 

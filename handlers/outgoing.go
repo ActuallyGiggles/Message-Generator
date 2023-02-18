@@ -22,7 +22,7 @@ func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence st
 	// If message is from api, send to website results.
 	// stop
 	if origin == "api" {
-		discord.Say("website-results", "Channel: "+oi.Chain+"\nMethod: "+oi.Method+"\nMessage: "+message)
+		discord.Say("website-results", "Channel: "+oi.Chain+"\nMessage: "+message)
 		return
 	}
 
