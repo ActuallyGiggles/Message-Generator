@@ -30,6 +30,8 @@ func CreateDefaultSentence(msg platform.Message) {
 		return
 	}
 
+	fmt.Println("new default request -> " + msg.Content)
+
 	var recursionLimit = 50
 	var timesRecursed = 0
 
@@ -55,6 +57,7 @@ recurse:
 		if timesRecursed > recursionLimit {
 			// If simply not found in chain, ignore error.
 			if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
+				fmt.Println("does not exist")
 				return
 			}
 
@@ -70,12 +73,14 @@ recurse:
 
 	if isSentenceTooShort(output) {
 		// Recurse.
+		fmt.Println("too short")
 		timesRecursed++
 		goto recurse
 	}
 
 	if containsOwnName(output) {
 		// Recurse.
+		fmt.Println("own name")
 		timesRecursed++
 		goto recurse
 	}

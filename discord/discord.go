@@ -104,7 +104,6 @@ func Say(channel string, message string) {
 	}
 
 	SayByID(sendToChannel, message)
-	return
 }
 
 // SayMention sends a reply message to a specific user via Say.
