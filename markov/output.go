@@ -391,7 +391,7 @@ func targetedMiddle(name, target string) (output string, err error) {
 			panic(err)
 		}
 
-		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentParent.Word); match {
+		if strings.Contains(currentParent.Word, instructions.SeparationKey+target+instructions.SeparationKey) {
 			var totalWeight int
 
 			for _, child := range currentParent.Children {
@@ -482,23 +482,20 @@ goThroughBody:
 		return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
 	}
 
-	return "", errors.New("Internal error - code should not reach this point - TargetedMiddle - " + path)
+	return "", errors.New("internal error - code should not reach this point - TargetedMiddle - " + path)
 }
 
 func getStartWord(path string) (phrase string, err error) {
-	var sum int
-
 	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
-
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
 		return "", errors.New("EOF (via getStartWord) detected in " + path)
 	}
-
+	var sum int
 	for dec.More() {
 		var parent parent
 
@@ -513,7 +510,6 @@ func getStartWord(path string) (phrase string, err error) {
 			}
 		}
 	}
-
 	f.Close()
 
 	r, err := randomNumber(0, sum)
@@ -526,13 +522,11 @@ func getStartWord(path string) (phrase string, err error) {
 		return "", err
 	}
 	defer f.Close()
-
 	dec = json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
 		panic(err)
 	}
-
 	for dec.More() {
 		var parent parent
 
@@ -657,29 +651,19 @@ func getPreviousWord(parent parent) (grandparent string) {
 	return grandparent
 }
 
-func randomMiddle(name string) (output string, err error) {
-	target, err := getRandomWord("./markov-chains/" + name + ".json")
-	if err != nil {
-		return "", err
-	}
-
-	return targetedMiddle(name, target)
-}
-
-func getRandomWord(path string) (phrase string, err error) {
-	var sum int
+func getRandomParent(name string) (parentToReturn string, err error) {
+	var path = "./markov-chains/" + name + ".json"
 
 	f, err := os.Open(path)
 	if err != nil {
-		return "", err
+		return
 	}
-
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return "", errors.New("EOF (via getRandomWord) detected in " + path)
+		return parentToReturn, errors.New("EOF (via randomMiddle) detected in " + path)
 	}
-
+	var sum int
 	for dec.More() {
 		var parent parent
 
@@ -688,32 +672,29 @@ func getRandomWord(path string) (phrase string, err error) {
 			panic(err)
 		}
 
-		if parent.Word != instructions.EndKey && parent.Word != instructions.StartKey {
-			for _, grandparent := range parent.Grandparents {
-				sum += grandparent.Value
+		if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
+			for _, child := range parent.Children {
+				sum += child.Value
 			}
 		}
 	}
-
 	f.Close()
 
 	r, err := randomNumber(0, sum)
 	if err != nil {
-		return "", err
+		return
 	}
 
 	f, err = os.Open(path)
 	if err != nil {
-		return "", err
+		return
 	}
 	defer f.Close()
-
 	dec = json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
 		panic(err)
 	}
-
 	for dec.More() {
 		var parent parent
 
@@ -722,16 +703,94 @@ func getRandomWord(path string) (phrase string, err error) {
 			panic(err)
 		}
 
-		if parent.Word != instructions.EndKey && parent.Word != instructions.StartKey {
-			for _, grandparent := range parent.Grandparents {
-				r -= grandparent.Value
+		if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
+			for _, child := range parent.Children {
+				r -= child.Value
 
 				if r < 0 {
-					return grandparent.Word, nil
+					return parent.Word, nil
 				}
 			}
 		}
 	}
 
-	return "", errors.New("internal error - code should not reach this point - getRandomWord - " + path)
+	return parentToReturn, errors.New("internal error - code should not reach this point - randomMiddle - " + path)
+}
+
+func randomMiddle(name string) (output string, err error) {
+	// Get a random parent
+	originalParentWord, err := getRandomParent(name)
+	if err != nil {
+		return
+	}
+
+	output = originalParentWord
+	parentWord := originalParentWord
+
+	var path = "./markov-chains/" + name + ".json"
+	var forwardComplete bool
+	var childChosen string
+	var grandparentChosen string
+
+goThroughBody:
+	f, err := os.Open(path)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	dec := json.NewDecoder(f)
+	_, err = dec.Token()
+	if err != nil {
+		panic(err)
+	}
+
+	parentExists := false
+	for dec.More() {
+		var currentParent parent
+
+		err = dec.Decode(&currentParent)
+		if err != nil {
+			panic(err)
+		}
+
+		if currentParent.Word == parentWord {
+
+			if !forwardComplete {
+				parentExists = true
+				childChosen = getNextWord(currentParent)
+
+				if childChosen == instructions.EndKey {
+					forwardComplete = true
+					parentWord = originalParentWord
+					goto goThroughBody
+				} else {
+					output = output + instructions.SeparationKey + childChosen
+
+					parentWord = childChosen
+					goto goThroughBody
+				}
+			}
+
+			if forwardComplete {
+				parentExists = true
+				grandparentChosen = getPreviousWord(currentParent)
+
+				if grandparentChosen == instructions.StartKey {
+					return output, nil
+				} else {
+					output = grandparentChosen + instructions.SeparationKey + output
+
+					parentWord = grandparentChosen
+					goto goThroughBody
+				}
+			}
+		}
+	}
+
+	if !parentExists {
+		return output, fmt.Errorf("parent %s does not exist in chain %s", parentWord, name)
+	}
+
+	return "", errors.New("internal error - code should not reach this point - RandomMiddle - " + path)
 }

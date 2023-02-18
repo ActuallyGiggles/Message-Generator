@@ -35,7 +35,7 @@ func CreateDefaultSentence(msg platform.Message) {
 recurse:
 	oi := markov.OutputInstructions{
 		Chain:  msg.ChannelName,
-		Method: "TargetedBeginning",
+		Method: "TargetedMiddle",
 		Target: removeDeterminers(msg.Content),
 	}
 
@@ -45,7 +45,7 @@ recurse:
 	if err != nil {
 		if timesRecursed > recursionLimit {
 			// If simply not found in chain, ignore error.
-			if strings.Contains(err.Error(), "does not exist in chain") {
+			if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
 				return
 			}
 
@@ -81,7 +81,7 @@ func CreateAPISentence(channel string) (output string, success bool) {
 		return "", false
 	}
 
-	var recursionLimit = 100
+	var recursionLimit = 500
 	var timesRecursed = 0
 
 recurse:
@@ -96,8 +96,8 @@ recurse:
 	if err != nil {
 		if timesRecursed > recursionLimit {
 			// If simply not found in chain, ignore error.
-			if strings.Contains(err.Error(), "does not exist in chain") {
-				return
+			if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
+				return "", false
 			}
 
 			// Report if too many errors.
@@ -163,6 +163,11 @@ recurse:
 	// Handle error.
 	if err != nil {
 		if strings.Contains(err.Error(), "Target is empty") {
+			return
+		}
+
+		// If simply not found in chain, ignore error.
+		if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
 			return
 		}
 
@@ -241,6 +246,11 @@ recurse:
 
 	// Handle error.
 	if err != nil {
+		// If simply not found in chain, ignore error.
+		if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
+			return
+		}
+
 		if strings.Contains(err.Error(), "Target is empty") {
 			return
 		}

@@ -89,13 +89,13 @@ func PeakIntake() PeakIntakeStruct {
 }
 
 // weightedRandom used weighted random selection to return one of the supplied
-// choices.  Weights of 0 are never selected.  All other weight values are
-// relative.  E.g. if you have two choices both weighted 3, they will be
+// choices. Weights of 0 are never selected. All other weight values are
+// relative. E.g. if you have two choices both weighted 3, they will be
 // returned equally often; and each will be returned 3 times as often as a
 // choice weighted 1.
 func weightedRandom(choices []Choice) (string, error) {
 	// Based on this algorithm:
-	//     http://eli.thegreenplace.net/2010/01/22/weighted-random-generation-in-python/
+	// http://eli.thegreenplace.net/2010/01/22/weighted-random-generation-in-python/
 	if len(choices) == 1 {
 		return choices[0].Word, nil
 	}
@@ -113,7 +113,7 @@ func weightedRandom(choices []Choice) (string, error) {
 			return c.Word, nil
 		}
 	}
-	err = errors.New("internal error - code should not reach this point - weighteRandom")
+	err = errors.New("internal error - code should not reach this point - weightedRandom")
 	return "", err
 }
 
