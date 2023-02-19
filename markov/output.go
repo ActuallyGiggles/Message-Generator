@@ -10,6 +10,7 @@ import (
 )
 
 // Out takes output instructions and returns an output and error.
+// If a chain has less than 50 parent values, it will act as if the chain is not found in the directory.
 func Out(oi OutputInstructions) (output string, err error) {
 	name := oi.Chain
 	method := oi.Method

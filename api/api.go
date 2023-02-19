@@ -3,7 +3,6 @@ package api
 import (
 	"Message-Generator/global"
 	"Message-Generator/handlers"
-	"Message-Generator/platform"
 	"Message-Generator/platform/twitch"
 	"Message-Generator/print"
 	"Message-Generator/stats"
@@ -16,7 +15,6 @@ import (
 )
 
 var (
-	in           chan platform.Message
 	websiteHits  int
 	sentenceHits int
 )
@@ -172,7 +170,6 @@ func getSentence(w http.ResponseWriter, r *http.Request) {
 	apiResponse.MarkovSentence = output
 
 	json.NewEncoder(w).Encode(apiResponse)
-	return
 }
 
 func serverStats(w http.ResponseWriter, r *http.Request) {

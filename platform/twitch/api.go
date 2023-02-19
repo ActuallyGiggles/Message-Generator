@@ -197,9 +197,6 @@ func get7tvChannelEmotes(c Data) (err error) {
 	if err != nil {
 		return err
 	}
-	if resp.StatusCode >= http.StatusBadRequest {
-		// User not registered for 7tv
-	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	emotes := []SevenTVEmote{}
@@ -264,9 +261,6 @@ func getBttvChannelEmotes(c Data) (err error) {
 	if err != nil {
 		return err
 	}
-	if resp.StatusCode >= http.StatusBadRequest {
-		// User not registered for 7tv
-	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	emotes := BttvChannelEmotes[BttvEmote]{}
@@ -320,16 +314,12 @@ func getFfzGlobalEmotes() {
 				Name: emote.Name,
 			}
 			for size, url := range emote.Urls {
-				switch size {
-				case "4":
+				if size == "4" {
 					e.Url = "https:" + url
-					break
-				case "2":
+				} else if size == "2" {
 					e.Url = "https:" + url
-					break
-				case "1":
+				} else if size == "1" {
 					e.Url = "https:" + url
-					break
 				}
 			}
 			globalEmotesToUpdate = append(globalEmotesToUpdate, e)
@@ -350,9 +340,6 @@ func getFfzChannelEmotes(c Data) (err error) {
 	if err != nil {
 		return err
 	}
-	if resp.StatusCode >= http.StatusBadRequest {
-		// User not registered for 7tv
-	}
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 	set := FfzSets{}
@@ -368,16 +355,12 @@ func getFfzChannelEmotes(c Data) (err error) {
 						Name: emote.Name,
 					}
 					for size, url := range emote.Urls {
-						switch size {
-						case "4":
+						if size == "4" {
 							e.Url = "https:" + url
-							break
-						case "2":
+						} else if size == "2" {
 							e.Url = "https:" + url
-							break
-						case "1":
+						} else if size == "1" {
 							e.Url = "https:" + url
-							break
 						}
 					}
 					thirdPartyChannelEmotesToUpdate[i].Emotes = append(thirdPartyChannelEmotesToUpdate[i].Emotes, e)
