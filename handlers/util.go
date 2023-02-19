@@ -174,6 +174,10 @@ func passesMessageQualityCheck(username string, message string) bool {
 	return true
 }
 
+func mentionsBot(msg string) bool {
+	return strings.Contains(strings.ToLower(msg), strings.ToLower(global.BotName))
+}
+
 // lockAPI will mark a channel as locked until the time (in seconds) has passed.
 func lockAPI(timer int, channel string) bool {
 	apiLocksMx.Lock()
@@ -280,21 +284,6 @@ func DoesSliceContainIndex(slice []string, index int) bool {
 	}
 }
 
-// GetRandomChannel will return a random channel, unless mode == "except self", in which case channel won't be included.
-func GetRandomChannel(mode string, channel string) (randomChannel string) {
-	var s []string
-
-	chains := markov.CurrentWorkers()
-	for _, chain := range chains {
-		if mode == "except self" && chain == channel {
-			continue
-		}
-		s = append(s, chain)
-	}
-
-	return global.PickRandomFromSlice(s)
-}
-
 func removeDeterminers(content string) (target string) {
 	s := strings.Split(clearNonAlphanumeric(content), " ")
 	ns := []string{}
@@ -356,6 +345,17 @@ func decideWhichChannelToUse(directive global.Directive) string {
 		return global.PickRandomFromSlice(directive.Settings.CustomChannelsToUse)
 	}
 
-	// At this point, "directive.Settings.WhichChannelsToUse" will be either all or except self
-	return GetRandomChannel(directive.Settings.WhichChannelsToUse, directive.ChannelName)
+	if directive.Settings.WhichChannelsToUse == "all" {
+		return global.PickRandomFromSlice(markov.Chains())
+	}
+
+	// At this point, "directive.Settings.WhichChannelsToUse" will be except self
+	var s []string
+	for _, chain := range markov.Chains() {
+		if chain == directive.ChannelName {
+			continue
+		}
+		s = append(s, chain)
+	}
+	return global.PickRandomFromSlice(s)
 }

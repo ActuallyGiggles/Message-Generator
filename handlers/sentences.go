@@ -142,18 +142,19 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 		return
 	}
 
-	// Allow passage if random rejection of 50% allows.
-	if randomChance := global.RandomNumber(0, 100); randomChance > 25 {
+	// Allow passage if random rejection of 10% allows.
+	if randomChance := global.RandomNumber(0, 100); randomChance > 10 {
 		return
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockParticipation(global.RandomNumber(10, 30), msg.ChannelName) {
+	if !lockParticipation(global.RandomNumber(5, 30), msg.ChannelName) {
 		return
 	}
 
-	var recursionLimit = 50
-	var timesRecursed = 0
+	// Try each chain at least 2 times
+	recursionLimit := len(markov.CurrentWorkers()) * 2
+	timesRecursed := 0
 
 recurse:
 	target := removeDeterminers(msg.Content)
@@ -173,11 +174,6 @@ recurse:
 	// Handle error.
 	if err != nil {
 		if strings.Contains(err.Error(), "Target is empty") {
-			return
-		}
-
-		// If simply not found in chain, ignore error.
-		if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
 			return
 		}
 
@@ -220,12 +216,12 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockReply(global.RandomNumber(1, 5), msg.ChannelName) {
+	if !lockReply(global.RandomNumber(0, 1), msg.ChannelName) {
 		return
 	}
 
-	// Special recursion limit to at least visit each worker once
-	recursionLimit := len(markov.CurrentWorkers())
+	// Try each chain at least 2 times
+	recursionLimit := len(markov.CurrentWorkers()) * 2
 	timesRecursed := 0
 
 recurse:
@@ -237,12 +233,6 @@ recurse:
 			Method: "TargetedBeginning",
 			Chain:  decideWhichChannelToUse(directive),
 			Target: global.PickRandomFromSlice([]string{"yes", "no", "maybe", "absolutely", "absolutely", "never", "always"}),
-		}
-	} else if questionType == "explanation question" {
-		oi = markov.OutputInstructions{
-			Method: "TargetedBeginning",
-			Chain:  decideWhichChannelToUse(directive),
-			Target: global.PickRandomFromSlice([]string{"because", "idk", "idc", "well", "you see"}),
 		}
 	} else {
 		target := removeDeterminers(msg.Content)
@@ -261,11 +251,6 @@ recurse:
 
 	// Handle error.
 	if err != nil {
-		// If simply not found in chain, ignore error.
-		if strings.Contains(err.Error(), "does not exist in chain") || strings.Contains(err.Error(), "does not contain parents that match") {
-			return
-		}
-
 		if strings.Contains(err.Error(), "Target is empty") {
 			return
 		}

@@ -22,6 +22,7 @@ func Start(sI StartInstructions) {
 
 	createFolders()
 	loadStats()
+	loadChains()
 	go tickerLoops(instructions.ErrorChannel)
 }
 

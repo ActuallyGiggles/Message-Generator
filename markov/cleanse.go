@@ -12,7 +12,7 @@ func Cleanse(entry string) (totalCleansed int) {
 	busy.Lock()
 	defer duration(track("cleanse duration"))
 
-	for _, chain := range chains(false) {
+	for _, chain := range Chains() {
 		if w, ok := workerMap[chain]; ok {
 			w.ChainMx.Lock()
 			totalCleansed += cleanseBody(chain, entry)

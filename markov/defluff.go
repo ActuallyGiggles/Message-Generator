@@ -28,7 +28,7 @@ func defluff() {
 
 	var totalRemoved int
 
-	for _, chain := range chains(false) {
+	for _, chain := range Chains() {
 		if w, ok := workerMap[chain]; ok {
 			w.ChainMx.Lock()
 			totalRemoved += defluffChain(w.Name)

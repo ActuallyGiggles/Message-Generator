@@ -18,8 +18,32 @@ func debugLog(v ...any) {
 	}
 }
 
-// chains gets a list of current chains found in the directory.
-func chains(isInit bool) (chains []string) {
+// loadChains gets a list of current chains found in the directory and deletes corrupted chains.
+func loadChains() {
+	files, err := os.ReadDir("./markov-chains/")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, file := range files {
+		if file.Name() == "stats" {
+			continue
+		}
+
+		if strings.Contains(file.Name(), "_new") {
+			err = os.Remove("./markov-chains/" + file.Name())
+			if err != nil {
+				panic(err)
+			}
+			continue
+		}
+
+		newWorker(file.Name()[:len(file.Name())-5])
+	}
+}
+
+// Chains gets a list of current chains found in the directory.
+func Chains() (chains []string) {
 	files, err := os.ReadDir("./markov-chains/")
 	if err != nil {
 		return chains
@@ -30,69 +54,42 @@ func chains(isInit bool) (chains []string) {
 			continue
 		}
 
-		if strings.Contains(file.Name(), "_new") && isInit {
-			err = os.Remove("./markov-chains/" + file.Name())
-			if err != nil {
-				panic(err)
-			}
-			continue
-		}
-
 		chains = append(chains, file.Name()[:len(file.Name())-5])
 	}
 
 	return chains
 }
 
-// doesChainExist returns whether a chain exists. If it exists, but is not a worker, it will create and return the worker.
-func doesChainExist(name string) (w *worker, exists bool) {
-	for _, c := range chains(false) {
-		if c == name {
-			for _, w := range workerMap {
-				if w.Name == c {
-					return w, true
-				}
-			}
-
-			return newWorker(name), true
-		}
-	}
-	return nil, false
-}
-
-// DoesChainExist returns whether a chain exists. If the chain exists, but is empty, it will return false.
+// DoesChainExist returns whether a chain exists. If the chain exists, but is empty or really small, it will return false.
 func DoesChainExist(name string) (exists bool) {
-	for _, c := range chains(false) {
-		if c == name {
-			f, err := os.Open("./markov-chains/" + name + ".json")
-			if err != nil {
-				return false
-			}
-			dec := json.NewDecoder(f)
-			_, err = dec.Token()
-			if err != nil {
-				return false
-			}
-			var sum int
-			for dec.More() {
-				var parent parent
+	f, err := os.Open("./markov-chains/" + name + ".json")
+	if err != nil {
+		return false
+	}
+	dec := json.NewDecoder(f)
+	_, err = dec.Token()
+	if err != nil {
+		return false
+	}
+	var sum int
+	for dec.More() {
+		var parent parent
 
-				err = dec.Decode(&parent)
-				if err != nil {
-					panic(err)
-				}
+		err = dec.Decode(&parent)
+		if err != nil {
+			panic(err)
+		}
 
-				if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
-					sum++
-				}
+		if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
+			sum++
+		}
 
-				if sum > 50 {
-					return true
-				}
-			}
-			f.Close()
+		if sum > 50 {
+			return true
 		}
 	}
+	f.Close()
+
 	return false
 }
 
@@ -132,6 +129,9 @@ func PeakIntake() PeakIntakeStruct {
 func weightedRandom(choices []Choice) (string, error) {
 	// Based on this algorithm:
 	// http://eli.thegreenplace.net/2010/01/22/weighted-random-generation-in-python/
+	if len(choices) == 0 {
+		return "", errors.New("no choices provided - weightedRandom")
+	}
 	if len(choices) == 1 {
 		return choices[0].Word, nil
 	}
@@ -149,8 +149,7 @@ func weightedRandom(choices []Choice) (string, error) {
 			return c.Word, nil
 		}
 	}
-	err = errors.New("internal error - code should not reach this point - weightedRandom")
-	return "", err
+	return "", errors.New("internal error - code should not reach this point - weightedRandom")
 }
 
 func createFolders() {

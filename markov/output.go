@@ -15,11 +15,14 @@ func Out(oi OutputInstructions) (output string, err error) {
 	method := oi.Method
 	target := oi.Target
 
-	w, exists := doesChainExist(name)
-	if !exists {
-		return "", errors.New("Chain '" + name + "' is not found in directory.")
+	if !DoesChainExist(name) {
+		return "", errors.New("chain [" + name + "] is not found in directory")
 	}
 
+	w, exists := workerMap[name]
+	if !exists {
+		return "", errors.New("worker [" + name + "] is not found")
+	}
 	w.ChainMx.Lock()
 	defer w.ChainMx.Unlock()
 
