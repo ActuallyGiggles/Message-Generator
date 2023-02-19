@@ -82,7 +82,7 @@ func Start() {
 	})
 
 	twitch.GatherEmotes(debug)
-	go twitch.Start(incomingMessages)
+	go twitch.Start(incomingMessages, debug)
 
 	stats.Start()
 
