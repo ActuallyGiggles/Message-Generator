@@ -30,6 +30,7 @@ func Incoming(c chan platform.Message) {
 
 				// If message contains a ping for the bot, run a reply
 				if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(global.BotName)) {
+					fmt.Println("test2")
 					go CreateReplySentence(msg, directive)
 				} else {
 					go CreateParticipationSentence(msg, directive)
