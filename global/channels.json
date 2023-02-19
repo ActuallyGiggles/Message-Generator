@@ -2689,22 +2689,22 @@
  },
  {
   "Platform": "twitch",
-  "ChannelName": "teclu",
-  "ChannelID": "27090497",
-  "DiscordChannelID": "1051795199224987678",
+  "ChannelName": "sodapoppin",
+  "ChannelID": "26301881",
+  "DiscordChannelID": "940620543546253383",
   "Settings": {
-   "IsCollectingMessages": false,
+   "IsCollectingMessages": true,
    "Reply": {
     "IsEnabled": true,
-    "IsAllowedWhenOnline": true,
+    "IsAllowedWhenOnline": false,
     "IsAllowedWhenOffline": true
    },
    "Participation": {
-    "IsEnabled": true,
-    "IsAllowedWhenOnline": true,
+    "IsEnabled": false,
+    "IsAllowedWhenOnline": false,
     "IsAllowedWhenOffline": true
    },
-   "WhichChannelsToUse": "all",
+   "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
   }
  },
@@ -3111,22 +3111,22 @@
  },
  {
   "Platform": "twitch",
-  "ChannelName": "sodapoppin",
-  "ChannelID": "26301881",
-  "DiscordChannelID": "940620543546253383",
+  "ChannelName": "teclu",
+  "ChannelID": "27090497",
+  "DiscordChannelID": "1051795199224987678",
   "Settings": {
-   "IsCollectingMessages": true,
+   "IsCollectingMessages": false,
    "Reply": {
     "IsEnabled": true,
-    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOnline": true,
     "IsAllowedWhenOffline": true
    },
    "Participation": {
     "IsEnabled": true,
-    "IsAllowedWhenOnline": false,
+    "IsAllowedWhenOnline": true,
     "IsAllowedWhenOffline": true
    },
-   "WhichChannelsToUse": "self",
+   "WhichChannelsToUse": "all",
    "CustomChannelsToUse": null
   }
  }
