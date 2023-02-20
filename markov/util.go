@@ -252,6 +252,15 @@ func IsBusy() bool {
 	return false
 }
 
+func (w *worker) isChainBusy() bool {
+	if !w.ChainMx.TryLock() {
+		return true
+	}
+	w.ChainMx.Unlock()
+
+	return false
+}
+
 func removeAndRename(defaultPath, newPath string) {
 	err := os.Remove(defaultPath)
 	if err != nil {
