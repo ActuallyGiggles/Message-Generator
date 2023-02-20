@@ -2,7 +2,6 @@ package markov
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -246,9 +245,6 @@ func (w *worker) writeBody(errCh chan error) {
 	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println("markov busy:", IsBusy())
-	fmt.Println("chain", w.Name, "busy:", w.isChainBusy())
 
 	// Remove the old file and rename the new file with the old file name
 	removeAndRename(defaultPath, newPath)

@@ -62,6 +62,14 @@ func Chains() (chains []string) {
 
 // DoesChainExist returns whether a chain exists. If the chain exists, but is empty or really small, it will return false.
 func DoesChainExist(name string) (exists bool) {
+	w, exists := workerMap[name]
+	if !exists {
+		return false
+	}
+
+	w.ChainMx.Lock()
+	defer w.ChainMx.Unlock()
+
 	f, err := os.Open("./markov-chains/" + name + ".json")
 	if err != nil {
 		return false

@@ -60,7 +60,6 @@ func addDirectoryToZip(zipWriter *zip.Writer, path string) error {
 		if err != nil {
 			return err
 		}
-		defer f2.Close()
 
 		filePath = strings.TrimPrefix(filePath, "./")
 		w2, err := zipWriter.Create(filePath)
@@ -70,6 +69,8 @@ func addDirectoryToZip(zipWriter *zip.Writer, path string) error {
 		if _, err := io.Copy(w2, f2); err != nil {
 			return err
 		}
+
+		f2.Close()
 	}
 
 	return nil
