@@ -8,9 +8,10 @@ import (
 	"strings"
 )
 
-var streamerMonthsAlreadySeen map[string][]string
+var streamerMonthsAlreadySeen = make(map[string][]string)
 
 func doIt(c chan platform.Message) {
+
 	// Get all the streamers folders that exist and put it into the map streamerMonthsAlreadySeen
 	getLogFolders()
 
