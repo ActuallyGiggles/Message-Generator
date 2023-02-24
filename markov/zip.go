@@ -20,6 +20,7 @@ func zipChains() {
 	if err != nil {
 		panic(err)
 	}
+	defer archive.Close()
 	zipWriter := zip.NewWriter(archive)
 
 	if err := addDirectoryToZip(zipWriter, "./markov-chains/"); err != nil {
@@ -27,7 +28,6 @@ func zipChains() {
 	}
 
 	zipWriter.Close()
-	archive.Close()
 	busy.Unlock()
 	stats.NextZipTime = time.Now().Add(zipInterval)
 }

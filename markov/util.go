@@ -74,6 +74,7 @@ func DoesChainExist(name string) (exists bool) {
 	if err != nil {
 		return false
 	}
+	defer f.Close()
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
@@ -96,7 +97,6 @@ func DoesChainExist(name string) (exists bool) {
 			return true
 		}
 	}
-	f.Close()
 
 	return false
 }

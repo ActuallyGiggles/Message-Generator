@@ -90,14 +90,15 @@ func (w *worker) writeBody(errCh chan error) {
 		if err != nil {
 			panic(err)
 		}
+		defer f.Close()
 		chainData, _ := json.Marshal(w.Chain.Parents)
 		_, err = f.Write(chainData)
 		if err != nil {
 			panic(err)
 		}
-		f.Close()
 		return
 	}
+	defer f.Close()
 
 	// Start a new decoder
 	dec := json.NewDecoder(f)
@@ -113,6 +114,7 @@ func (w *worker) writeBody(errCh chan error) {
 	if err != nil {
 		panic(err)
 	}
+	defer fN.Close()
 
 	// Start the new file encoder
 	var enc encode
@@ -232,18 +234,6 @@ func (w *worker) writeBody(errCh chan error) {
 	err = compareSizes(f, fN)
 	if err != nil && errCh != nil {
 		errCh <- err
-	}
-
-	// Close new file
-	err = fN.Close()
-	if err != nil {
-		panic(err)
-	}
-
-	// Close old file
-	err = f.Close()
-	if err != nil {
-		panic(err)
 	}
 
 	// Remove the old file and rename the new file with the old file name

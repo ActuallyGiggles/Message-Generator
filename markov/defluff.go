@@ -50,6 +50,7 @@ func defluffChain(chain string) (othersRemoved int) {
 	if err != nil {
 		panic(err)
 	}
+	defer f.Close()
 
 	// Start a new decoder
 	dec := json.NewDecoder(f)
@@ -65,6 +66,7 @@ func defluffChain(chain string) (othersRemoved int) {
 	if err != nil {
 		panic(err)
 	}
+	defer fN.Close()
 
 	// Start the new file encoder
 	var enc encode
@@ -134,18 +136,6 @@ func defluffChain(chain string) (othersRemoved int) {
 
 	// Close the new file encoder
 	if err := enc.CloseEncoder(); err != nil {
-		panic(err)
-	}
-
-	// Close new file
-	err = fN.Close()
-	if err != nil {
-		panic(err)
-	}
-
-	// Close old file
-	err = f.Close()
-	if err != nil {
 		panic(err)
 	}
 

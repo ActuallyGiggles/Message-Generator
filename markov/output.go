@@ -494,6 +494,7 @@ func getStartWord(path string) (phrase string, err error) {
 	if err != nil {
 		return "", err
 	}
+	defer f.Close()
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
@@ -514,7 +515,6 @@ func getStartWord(path string) (phrase string, err error) {
 			}
 		}
 	}
-	f.Close()
 
 	r, err := randomNumber(0, sum)
 	if err != nil {
@@ -525,7 +525,6 @@ func getStartWord(path string) (phrase string, err error) {
 	if err != nil {
 		return "", err
 	}
-	defer f.Close()
 	dec = json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
@@ -560,7 +559,7 @@ func getEndWord(path string) (phrase string, err error) {
 	if err != nil {
 		return "", err
 	}
-
+	defer f.Close()
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
@@ -582,8 +581,6 @@ func getEndWord(path string) (phrase string, err error) {
 		}
 	}
 
-	f.Close()
-
 	r, err := randomNumber(0, sum)
 	if err != nil {
 		return "", err
@@ -593,7 +590,6 @@ func getEndWord(path string) (phrase string, err error) {
 	if err != nil {
 		return "", err
 	}
-	defer f.Close()
 
 	dec = json.NewDecoder(f)
 	_, err = dec.Token()
@@ -662,6 +658,7 @@ func getRandomParent(name string) (parentToReturn string, err error) {
 	if err != nil {
 		return
 	}
+	defer f.Close()
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
@@ -682,7 +679,6 @@ func getRandomParent(name string) (parentToReturn string, err error) {
 			}
 		}
 	}
-	f.Close()
 
 	r, err := randomNumber(0, sum)
 	if err != nil {
@@ -693,7 +689,6 @@ func getRandomParent(name string) (parentToReturn string, err error) {
 	if err != nil {
 		return
 	}
-	defer f.Close()
 	dec = json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
