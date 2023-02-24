@@ -34,23 +34,25 @@ func main() {
 	print.Page("Started")
 	Start()
 
-	go print.TerminalInput(cancel)
+	// FIX
+	// go print.TerminalInput(cancel)
 
 	<-ctx.Done()
-	print.Page("Exiting")
+	// FIX
+	// print.Page("Exiting")
 
-	noted := false
-	for {
-		if markov.IsBusy() {
-			if !noted {
-				print.Info("Markov is busy.")
-				noted = true
-			}
-			time.Sleep(1 * time.Second)
-			continue
-		}
-		break
-	}
+	// noted := false
+	// for {
+	// 	if markov.IsBusy() {
+	// 		if !noted {
+	// 			print.Info("Markov is busy.")
+	// 			noted = true
+	// 		}
+	// 		time.Sleep(1 * time.Second)
+	// 		continue
+	// 	}
+	// 	break
+	// }
 
 	print.Page("Exited")
 	print.Info("Come back soon. T-T")
@@ -82,7 +84,9 @@ func Start() {
 	})
 
 	twitch.GatherEmotes(debug)
-	go twitch.Start(incomingMessages, debug)
+	// FIX
+	//go twitch.Start(incomingMessages, debug)
+	doIt(incomingMessages)
 
 	stats.Start()
 

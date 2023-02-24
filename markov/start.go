@@ -23,7 +23,11 @@ func Start(sI StartInstructions) {
 	createFolders()
 	loadStats()
 	loadChains()
-	go tickerLoops(instructions.ErrorChannel)
+	//go tickerLoops(instructions.ErrorChannel)
+}
+
+func TempTriggerWriteTicker() {
+	writeLoop(instructions.ErrorChannel)
 }
 
 func tickerLoops(errCh chan error) {
