@@ -4,6 +4,7 @@ import (
 	"Message-Generator/markov"
 	"Message-Generator/platform"
 	"bufio"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -38,6 +39,7 @@ func doIt(c chan platform.Message) {
 			fileScanner := bufio.NewScanner(f)
 			fileScanner.Split(bufio.ScanLines)
 			for fileScanner.Scan() {
+				fmt.Println(fileScanner.Text())
 				split := strings.Split(fileScanner.Text(), " ")
 				author := strings.ReplaceAll(split[3], ":", "")
 				content := strings.Join(split[4:], " ")
