@@ -97,11 +97,11 @@ func checkForUrl(urlOrNot string) bool {
 
 // checkForBotUser returns if a username belongs to a bot account.
 func checkForBotUser(username string) bool {
-	if strings.Contains(username, "bot") {
+	if m, _ := regexp.MatchString(".bot", username); m {
 		return true
 	}
 	for _, v := range global.BannedUsers {
-		if strings.Contains(username, v) {
+		if v == username {
 			return true
 		}
 	}

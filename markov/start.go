@@ -14,6 +14,8 @@ var (
 	busy sync.Mutex
 
 	stats Statistics
+
+	errorChannel chan error
 )
 
 // Start starts markov based on instructions pDuration
@@ -23,14 +25,36 @@ func Start(sI StartInstructions) {
 	createFolders()
 	loadStats()
 	loadChains()
-	//go tickerLoops(instructions.ErrorChannel)
+	//go tickerLoops()
 }
 
-func TempTriggerWriteTicker() {
-	writeLoop(instructions.ErrorChannel)
+func TempTriggerWrite(streamer string) {
+	w, exist := workerMap[streamer]
+	if !exist {
+		return
+	}
+
+	if len(w.Chain.Parents) == 0 {
+		return
+	}
+
+	w.ChainMx.Lock()
+	defer w.ChainMx.Unlock()
+
+	// Find new peak intake chain
+	if w.Intake > stats.PeakChainIntake.Amount {
+		stats.PeakChainIntake.Chain = w.Name
+		stats.PeakChainIntake.Amount = w.Intake
+		stats.PeakChainIntake.Time = time.Now()
+	}
+
+	w.writeBody()
+
+	w.Chain.Parents = nil
+	w.Intake = 0
 }
 
-func tickerLoops(errCh chan error) {
+func tickerLoops() {
 	var writingTicker *time.Ticker
 	var zippingTicker *time.Ticker
 	var defluffTicker *time.Ticker
@@ -45,7 +69,7 @@ func tickerLoops(errCh chan error) {
 	for {
 		select {
 		case <-writingTicker.C:
-			go writeLoop(errCh)
+			go writeLoop()
 		case <-zippingTicker.C:
 			go zipChains()
 		case <-defluffTicker.C:

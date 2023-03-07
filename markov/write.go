@@ -33,7 +33,7 @@ func writeTicker() *time.Ticker {
 	return time.NewTicker(writeInterval)
 }
 
-func writeLoop(errCh chan error) {
+func writeLoop() {
 	if !busy.TryLock() {
 		return
 	}
@@ -44,7 +44,7 @@ func writeLoop(errCh chan error) {
 
 	for _, w := range workerMap {
 		wg.Add(1)
-		go w.writeAllPerChain(errCh, &wg)
+		go w.writeAllPerChain(&wg)
 	}
 
 	wg.Wait()
@@ -54,7 +54,7 @@ func writeLoop(errCh chan error) {
 	busy.Unlock()
 }
 
-func (w *worker) writeAllPerChain(errCh chan error, wg *sync.WaitGroup) {
+func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	if len(w.Chain.Parents) == 0 {
@@ -71,13 +71,13 @@ func (w *worker) writeAllPerChain(errCh chan error, wg *sync.WaitGroup) {
 		stats.PeakChainIntake.Time = time.Now()
 	}
 
-	w.writeBody(errCh)
+	w.writeBody()
 
 	w.Chain.Parents = nil
 	w.Intake = 0
 }
 
-func (w *worker) writeBody(errCh chan error) {
+func (w *worker) writeBody() {
 	defaultPath := "./markov-chains/" + w.Name + ".json"
 	newPath := "./markov-chains/" + w.Name + "_new.json"
 
@@ -90,15 +90,14 @@ func (w *worker) writeBody(errCh chan error) {
 		if err != nil {
 			panic(err)
 		}
-		defer f.Close()
 		chainData, _ := json.Marshal(w.Chain.Parents)
 		_, err = f.Write(chainData)
 		if err != nil {
 			panic(err)
 		}
+		f.Close()
 		return
 	}
-	defer f.Close()
 
 	// Start a new decoder
 	dec := json.NewDecoder(f)
@@ -114,7 +113,6 @@ func (w *worker) writeBody(errCh chan error) {
 	if err != nil {
 		panic(err)
 	}
-	defer fN.Close()
 
 	// Start the new file encoder
 	var enc encode
@@ -232,8 +230,18 @@ func (w *worker) writeBody(errCh chan error) {
 
 	// Verify if new file size is larger than old file size
 	err = compareSizes(f, fN)
-	if err != nil && errCh != nil {
-		errCh <- err
+	if err != nil && errorChannel != nil {
+		errorChannel <- err
+	}
+
+	err = f.Close()
+	if err != nil {
+		panic(err)
+	}
+
+	err = fN.Close()
+	if err != nil {
+		panic(err)
 	}
 
 	// Remove the old file and rename the new file with the old file name

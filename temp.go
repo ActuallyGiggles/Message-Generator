@@ -1,75 +1,114 @@
 package main
 
 import (
+	"Message-Generator/handlers"
 	"Message-Generator/markov"
 	"Message-Generator/platform"
 	"bufio"
 	"fmt"
 	"os"
 	"strings"
+	"sync"
+	"time"
+
+	"github.com/pterm/pterm"
 )
 
-var streamerMonthsAlreadySeen = make(map[string][]string)
+var channelsToWrite int
+var channelsWritten int
+var timesWritten uint64
 
-func doIt(c chan platform.Message) {
+func doIt() {
+	spinner, err := pterm.DefaultSpinner.Start(fmt.Sprintf("[%v] Started Chaining Process", time.Now().Format(time.Stamp)))
+	if err != nil {
+		panic(err)
+	}
+	var wgMain sync.WaitGroup
+	for _, streamer := range getLogFolders() {
+		wgMain.Add(1)
+		channelsToWrite++
+		go processStreamerLogs(streamer, spinner, &wgMain)
+	}
+	wgMain.Wait()
+	spinner.Success("[%v] Finished Chaining Process", time.Now().Format(time.Stamp))
+}
 
-	// Get all the streamers folders that exist and put it into the map streamerMonthsAlreadySeen
-	getLogFolders()
+func processStreamerLogs(streamer string, spinner *pterm.SpinnerPrinter, wgMain *sync.WaitGroup) {
+	months, err := os.ReadDir("./collected-logs/" + streamer + "/")
+	if err != nil {
+		panic(err)
+	}
 
-	for streamer, monthsSeen := range streamerMonthsAlreadySeen {
-		months, err := os.ReadDir("./collected-logs/" + streamer + "/")
+	var linesPassed int
+
+	for _, month := range months {
+		file, err := os.Open("./collected-logs/" + streamer + "/" + month.Name())
 		if err != nil {
 			panic(err)
 		}
 
-	monthForLoop:
-		for _, month := range months {
-			// If month was already processed, skip it
-			for _, monthSeen := range monthsSeen {
-				if monthSeen == month.Name() {
-					continue monthForLoop
-				}
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			if scanner.Text() == "" {
+				continue
 			}
 
-			f, err := os.Open("./collected-logs/" + streamer + "/" + month.Name())
-			if err != nil {
-				panic(err)
+			split := strings.Split(scanner.Text(), " ")
+
+			if handlers.TempIncoming(platform.Message{
+				Platform:    "twitch",
+				ChannelName: streamer,
+				AuthorName:  strings.ReplaceAll(split[3], ":", ""),
+				Content:     strings.Join(split[4:], " "),
+			}) {
+				linesPassed++
 			}
 
-			fileScanner := bufio.NewScanner(f)
-			fileScanner.Split(bufio.ScanLines)
-			for fileScanner.Scan() {
-				fmt.Println(fileScanner.Text())
-				split := strings.Split(fileScanner.Text(), " ")
-				author := strings.ReplaceAll(split[3], ":", "")
-				content := strings.Join(split[4:], " ")
-
-				message := platform.Message{
-					Platform:    "twitch",
-					ChannelName: streamer,
-					AuthorName:  author,
-					Content:     content,
-				}
-
-				c <- message
+			if linesPassed < 10000 {
+				continue
 			}
 
-			markov.TempTriggerWriteTicker()
-
-			f.Close()
-			streamerMonthsAlreadySeen[streamer] = append(streamerMonthsAlreadySeen[streamer], month.Name())
-
+		loop:
+			time.Sleep(time.Second)
+			if markov.ChainIntake(streamer) == -1 {
+				goto loop
+			}
+			markov.TempTriggerWrite(streamer)
+			timesWritten++
+			spinner.UpdateText(fmt.Sprintf("[%v] Chaining... Channels Chained: %03d/%03d | Times Written: %d", time.Now().Format(time.Stamp), channelsWritten, channelsToWrite, timesWritten))
+			linesPassed = 0
 		}
+
+		if err := scanner.Err(); err != nil {
+			panic(err)
+		}
+
+		file.Close()
 	}
+
+loop2:
+	time.Sleep(time.Second)
+	if markov.ChainIntake(streamer) == -1 {
+		goto loop2
+	}
+
+	markov.TempTriggerWrite(streamer)
+	timesWritten++
+	spinner.UpdateText(fmt.Sprintf("[%v] Chaining... Channels Chained: %03d/%03d | Times Written: %d", time.Now().Format(time.Stamp), channelsWritten, channelsToWrite, timesWritten))
+	wgMain.Done()
+	channelsWritten++
+	pterm.Success.Printf("[%v] Chained %s\n", time.Now().Format(time.Stamp), streamer)
 }
 
-func getLogFolders() {
+func getLogFolders() (slice []string) {
 	files, err := os.ReadDir("./collected-logs/")
 	if err != nil {
 		panic(err)
 	}
 
 	for _, file := range files {
-		streamerMonthsAlreadySeen[file.Name()] = nil
+		slice = append(slice, file.Name())
 	}
+
+	return
 }

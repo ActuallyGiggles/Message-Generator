@@ -13,7 +13,6 @@ func In(chainName string, content string) {
 	workerMapMx.Lock()
 	w, ok := workerMap[chainName]
 	workerMapMx.Unlock()
-
 	if !ok {
 		w = newWorker(chainName)
 	}

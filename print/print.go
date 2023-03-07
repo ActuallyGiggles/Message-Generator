@@ -57,7 +57,12 @@ func Warning(message string) {
 
 func ProgressBar(title string, total int) (pb *pterm.ProgressbarPrinter) {
 	pb, _ = pterm.DefaultProgressbar.WithTotal(total).WithTitle(title).WithRemoveWhenDone(true).Start()
-	return pb
+	return
+}
+
+func Spinner(title string) (sp *pterm.SpinnerPrinter) {
+	sp, _ = pterm.DefaultSpinner.Start("Doing a lot of stuff...")
+	return
 }
 
 func Started(text string, errorChan chan error) {
@@ -95,4 +100,12 @@ func TerminalInput(cancel context.CancelFunc) {
 			Info(started)
 		}
 	}
+}
+
+func ClearScreen() {
+	print("\033[H\033[2J")
+}
+
+func Table(data [][]string) {
+	pterm.DefaultTable.WithHasHeader().WithData(data).Render()
 }

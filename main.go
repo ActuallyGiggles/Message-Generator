@@ -21,7 +21,7 @@ import (
 	"github.com/pkg/profile"
 )
 
-var debug = true
+var debug = false
 
 func main() {
 	// Profiling
@@ -32,27 +32,25 @@ func main() {
 	defer cancel()
 
 	print.Page("Started")
-	Start()
+	go Start()
 
-	// FIX
-	// go print.TerminalInput(cancel)
+	go print.TerminalInput(cancel)
 
 	<-ctx.Done()
-	// FIX
-	// print.Page("Exiting")
+	print.Page("Exiting")
 
-	// noted := false
-	// for {
-	// 	if markov.IsBusy() {
-	// 		if !noted {
-	// 			print.Info("Markov is busy.")
-	// 			noted = true
-	// 		}
-	// 		time.Sleep(1 * time.Second)
-	// 		continue
-	// 	}
-	// 	break
-	// }
+	noted := false
+	for {
+		if markov.IsBusy() {
+			if !noted {
+				print.Info("Markov is busy.")
+				noted = true
+			}
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		break
+	}
 
 	print.Page("Exited")
 	print.Info("Come back soon. T-T")
@@ -80,13 +78,12 @@ func Start() {
 		ShouldDefluff:       true,
 		DefluffTriggerValue: 15,
 		ErrorChannel:        printErrorChannel,
-		Debug:               debug,
 	})
 
 	twitch.GatherEmotes(debug)
-	// FIX
-	//go twitch.Start(incomingMessages, debug)
-	doIt(incomingMessages)
+	go twitch.Start(incomingMessages, debug)
+	time.Sleep(time.Second)
+	// go doIt()
 
 	stats.Start()
 
