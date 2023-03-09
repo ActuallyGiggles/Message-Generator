@@ -8,7 +8,6 @@ import (
 	"Message-Generator/platform/twitch"
 	"Message-Generator/print"
 	"Message-Generator/twitter"
-	"fmt"
 	"strings"
 	"sync"
 )
@@ -180,16 +179,15 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 		return
 	}
 
-	isLive := twitch.IsChannelLive(directive.ChannelName)
-	fmt.Println(directive.ChannelName, "is live:", isLive)
+	isOnline := twitch.IsChannelLive(directive.ChannelName)
 
 	// Allow passage if channel is online and online is enabled.
-	if isLive && !directive.Settings.Participation.IsAllowedWhenOnline {
+	if isOnline && !directive.Settings.Participation.IsAllowedWhenOnline {
 		return
 	}
 
 	// Allow passage if channel is offline and offline is enabled.
-	if !isLive && !directive.Settings.Participation.IsAllowedWhenOffline {
+	if !isOnline && !directive.Settings.Participation.IsAllowedWhenOffline {
 		return
 	}
 
@@ -199,7 +197,7 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	// }
 
 	// Allow passage if not currently timed out.
-	if isLive {
+	if isOnline {
 		if !lockParticipation(directive.Settings.Participation.OnlineTimeToWait, msg.ChannelName) {
 			return
 		}
@@ -272,20 +270,20 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 		return
 	}
 
-	isLive := twitch.IsChannelLive(directive.ChannelName)
+	isOnline := twitch.IsChannelLive(directive.ChannelName)
 
 	// Allow passage if channel is online and online is enabled.
-	if isLive && !directive.Settings.Reply.IsAllowedWhenOnline {
+	if isOnline && !directive.Settings.Reply.IsAllowedWhenOnline {
 		return
 	}
 
 	// Allow passage if channel is offline and offline is enabled.
-	if !isLive && !directive.Settings.Reply.IsAllowedWhenOffline {
+	if !isOnline && !directive.Settings.Reply.IsAllowedWhenOffline {
 		return
 	}
 
 	// Allow passage if not currently timed out. Also, based on if offline or online.
-	if isLive {
+	if isOnline {
 		if !lockReply(directive.Settings.Reply.OnlineTimeToWait, msg.ChannelName) {
 			return
 		}
