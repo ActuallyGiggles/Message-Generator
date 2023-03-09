@@ -181,6 +181,7 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	}
 
 	isLive := twitch.IsChannelLive(directive.ChannelName)
+	fmt.Println(directive.ChannelName, "is live:", isLive)
 
 	// Allow passage if channel is online and online is enabled.
 	if isLive && !directive.Settings.Participation.IsAllowedWhenOnline {
@@ -272,8 +273,6 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 	}
 
 	isLive := twitch.IsChannelLive(directive.ChannelName)
-
-	fmt.Println(directive.ChannelName, "is live:", isLive)
 
 	// Allow passage if channel is online and online is enabled.
 	if isLive && !directive.Settings.Reply.IsAllowedWhenOnline {
