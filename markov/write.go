@@ -37,7 +37,7 @@ func writeLoop() {
 	if !busy.TryLock() {
 		return
 	}
-	busy.Unlock()
+	defer busy.Unlock()
 
 	defer duration(track("writing duration"))
 

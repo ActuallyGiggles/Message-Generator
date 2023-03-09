@@ -262,8 +262,13 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 		return
 	}
 
-	// Allow passage if channel is online and online is enabled or if channel is offline and offline is enabled.
-	if (twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOnline) || (!twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOffline) {
+	// Allow passage if channel is online and online is enabled.
+	if twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOnline {
+		return
+	}
+
+	// Allow passage if channel is offline and offline is enabled.
+	if !twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOffline {
 		return
 	}
 
