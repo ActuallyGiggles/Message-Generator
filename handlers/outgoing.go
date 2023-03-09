@@ -13,14 +13,15 @@ import (
 )
 
 var (
-	defaultLocks         = make(map[string]bool)
-	defaultLocksMx       sync.Mutex
-	apiLocks             = make(map[string]bool)
-	apiLocksMx           sync.Mutex
-	participationLocks   = make(map[string]bool)
-	participationLocksMx sync.Mutex
-	replyLocks           = make(map[string]bool)
-	replyLocksMx         sync.Mutex
+	currentlyMakingDefaultSentence sync.Mutex
+	defaultLocks                   = make(map[string]bool)
+	defaultLocksMx                 sync.Mutex
+	apiLocks                       = make(map[string]bool)
+	apiLocksMx                     sync.Mutex
+	participationLocks             = make(map[string]bool)
+	participationLocksMx           sync.Mutex
+	replyLocks                     = make(map[string]bool)
+	replyLocksMx                   sync.Mutex
 )
 
 func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence string, oi markov.OutputInstructions, message string, mention string) {
@@ -60,12 +61,17 @@ func OutgoingHandler(origin string, sendBackToChannel string, triggerSentence st
 
 // CreateDefaultSentence outputs a likely sentence to a Discord channel.
 func CreateDefaultSentence(msg platform.Message) {
+	if !currentlyMakingDefaultSentence.TryLock() {
+		return
+	}
+	defer currentlyMakingDefaultSentence.Unlock()
+
 	// Allow passage if not currently timed out.
-	if !lockDefault(300, msg.ChannelName) {
+	if !lockDefault(600, msg.ChannelName) {
 		return
 	}
 
-	var recursionLimit = 50
+	var recursionLimit = 5
 	var timesRecursed = 0
 
 recurse:
@@ -173,8 +179,13 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 		return
 	}
 
-	// Allow passage if channel is online and online is enabled or if channel is offline and offline is enabled.
-	if (twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Participation.IsAllowedWhenOnline) || (!twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Participation.IsAllowedWhenOffline) {
+	// Allow passage if channel is online and online is enabled.
+	if twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Participation.IsAllowedWhenOnline {
+		return
+	}
+
+	// Allow passage if channel is offline and offline is enabled.
+	if !twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Participation.IsAllowedWhenOffline {
 		return
 	}
 
@@ -184,12 +195,12 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockParticipation(global.RandomNumber(5, 30), msg.ChannelName) {
+	if !lockParticipation(global.RandomNumber(20, 30), msg.ChannelName) {
 		return
 	}
 
 	// Try each chain at least 2 times
-	recursionLimit := len(markov.CurrentWorkers()) * 2
+	recursionLimit := len(markov.CurrentWorkers())
 	timesRecursed := 0
 
 recurse:
@@ -257,12 +268,12 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 	}
 
 	// Allow passage if not currently timed out.
-	if !lockReply(global.RandomNumber(0, 1), msg.ChannelName) {
+	if !lockReply(global.RandomNumber(5, 10), msg.ChannelName) {
 		return
 	}
 
 	// Try each chain at least 2 times
-	recursionLimit := len(markov.CurrentWorkers()) * 2
+	recursionLimit := len(markov.CurrentWorkers())
 	timesRecursed := 0
 
 recurse:

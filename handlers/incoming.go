@@ -17,7 +17,12 @@ func Incoming(c chan platform.Message) {
 
 			for _, directive := range global.Directives {
 				if directive.ChannelName == msg.ChannelName {
-					mentionsBot := mentionsBot(msg.Content)
+					if mentionsBot(msg.Content) {
+						go CreateReplySentence(msg, directive)
+					} else {
+						go CreateParticipationSentence(msg, directive)
+					}
+
 					msg.Content = prepareMessageForMarkov(msg)
 
 					if directive.Settings.IsCollectingMessages {
@@ -25,34 +30,11 @@ func Incoming(c chan platform.Message) {
 						go CreateDefaultSentence(msg)
 					}
 
-					if mentionsBot {
-						go CreateReplySentence(msg, directive)
-					} else {
-						go CreateParticipationSentence(msg, directive)
-					}
+					return
 				}
 			}
 
 			discord.Say("error-tracking", fmt.Sprintf("%s does not exist as a directive", msg.ChannelName))
 		}(msg)
 	}
-}
-
-func TempIncoming(msg platform.Message) bool {
-	if !passesMessageQualityCheck(msg.AuthorName, msg.Content) {
-		return false
-	}
-
-	for _, directive := range global.Directives {
-		if directive.ChannelName == msg.ChannelName {
-			msg.Content = prepareMessageForMarkov(msg)
-
-			if directive.Settings.IsCollectingMessages {
-				go markov.In(msg.ChannelName, msg.Content)
-				return true
-			}
-		}
-	}
-
-	return false
 }

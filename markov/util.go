@@ -60,6 +60,15 @@ func Chains() (chains []string) {
 	return chains
 }
 
+func DoesChainExistSimple(name string) (exists bool) {
+	for _, chain := range Chains() {
+		if chain == name {
+			return true
+		}
+	}
+	return false
+}
+
 // DoesChainExist returns whether a chain exists. If the chain exists, but is empty or really small, it will return false.
 func DoesChainExist(name string) (exists bool) {
 	w, exists := workerMap[name]
@@ -143,16 +152,16 @@ func weightedRandom(choices []Choice) (string, error) {
 	if len(choices) == 1 {
 		return choices[0].Word, nil
 	}
-	sum := 0
+	var sum int64
 	for _, c := range choices {
-		sum += c.Weight
+		sum += int64(c.Weight)
 	}
 	r, err := randomNumber(0, sum)
 	if err != nil {
 		return "", err
 	}
 	for _, c := range choices {
-		r -= c.Weight
+		r -= int64(c.Weight)
 		if r < 0 {
 			return c.Word, nil
 		}
@@ -194,8 +203,7 @@ func (c *chain) removeParent(i int) {
 }
 
 // randomNumber returns a random integer in the range from min to max.
-func randomNumber(min, max int) (int, error) {
-	var result int
+func randomNumber(min, max int64) (result int64, err error) {
 	switch {
 	case min > max:
 		// Fail with error
@@ -208,7 +216,7 @@ func randomNumber(min, max int) (int, error) {
 		if err != nil {
 			return result, err
 		}
-		result = min + int(b.Int64())
+		result = min + b.Int64()
 	}
 	return result, nil
 }

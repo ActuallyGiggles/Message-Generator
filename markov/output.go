@@ -9,6 +9,10 @@ import (
 	"strings"
 )
 
+var (
+	previousChainSums = make(map[string]int64)
+)
+
 // Out takes output instructions and returns an output and error.
 // If a chain has less than 50 parent values, it will act as if the chain is not found in the directory.
 func Out(oi OutputInstructions) (output string, err error) {
@@ -58,7 +62,7 @@ func likelyBeginning(name string) (output string, err error) {
 	var child string
 	var path = "./markov-chains/" + name + ".json"
 
-	parentWord, err := getStartWord(path)
+	parentWord, err := getStartWord(name)
 	if err != nil {
 		return "", err
 	}
@@ -79,9 +83,8 @@ func likelyBeginning(name string) (output string, err error) {
 		}
 
 		parentExists := false
+		var currentParent parent
 		for dec.More() {
-			var currentParent parent
-
 			err = dec.Decode(&currentParent)
 			if err != nil {
 				fmt.Println(name)
@@ -103,6 +106,8 @@ func likelyBeginning(name string) (output string, err error) {
 					continue
 				}
 			}
+
+			currentParent = parent{}
 		}
 
 		if !parentExists {
@@ -115,7 +120,7 @@ func likelyEnding(name string) (output string, err error) {
 	var grandparent string
 	var path = "./markov-chains/" + name + ".json"
 
-	parentWord, err := getEndWord(path)
+	parentWord, err := getEndWord(name)
 	if err != nil {
 		return "", err
 	}
@@ -136,9 +141,8 @@ func likelyEnding(name string) (output string, err error) {
 		}
 
 		parentExists := false
+		var currentParent parent
 		for dec.More() {
-			var currentParent parent
-
 			err = dec.Decode(&currentParent)
 			if err != nil {
 				fmt.Println(name)
@@ -160,6 +164,8 @@ func likelyEnding(name string) (output string, err error) {
 					continue
 				}
 			}
+
+			currentParent = parent{}
 		}
 
 		if !parentExists {
@@ -195,20 +201,22 @@ func targetedBeginning(name, target string) (output string, err error) {
 		return "", errors.New("EOF (via targetedBeginning) detected in " + path)
 	}
 
+	var currentChild child
 	for dec.More() {
-		var currentParent child
 
-		err = dec.Decode(&currentParent)
+		err = dec.Decode(&currentChild)
 		if err != nil {
 			panic(err)
 		}
 
-		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentParent.Word); match {
+		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentChild.Word); match {
 			initialList = append(initialList, Choice{
-				Word:   currentParent.Word,
-				Weight: currentParent.Value,
+				Word:   currentChild.Word,
+				Weight: currentChild.Value,
 			})
 		}
+
+		currentChild = child{}
 	}
 
 	if len(initialList) <= 0 {
@@ -234,9 +242,9 @@ func targetedBeginning(name, target string) (output string, err error) {
 			panic(err)
 		}
 
+		var currentParent parent
 		parentExists := false
 		for dec.More() {
-			var currentParent parent
 
 			err = dec.Decode(&currentParent)
 			if err != nil {
@@ -255,6 +263,8 @@ func targetedBeginning(name, target string) (output string, err error) {
 					continue
 				}
 			}
+
+			currentParent = parent{}
 		}
 
 		if !parentExists {
@@ -290,20 +300,22 @@ func targetedEnding(name, target string) (output string, err error) {
 		return "", errors.New("EOF (via targetedEnding) detected in " + path)
 	}
 
-	for dec.More() {
-		var currentParent grandparent
+	var currentGrandparent grandparent
 
-		err = dec.Decode(&currentParent)
+	for dec.More() {
+		err = dec.Decode(&currentGrandparent)
 		if err != nil {
 			panic(err)
 		}
 
-		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentParent.Word); match {
+		if match, _ := regexp.MatchString("\\b"+target+"\\b", currentGrandparent.Word); match {
 			initialList = append(initialList, Choice{
-				Word:   currentParent.Word,
-				Weight: currentParent.Value,
+				Word:   currentGrandparent.Word,
+				Weight: currentGrandparent.Value,
 			})
 		}
+
+		currentGrandparent = grandparent{}
 	}
 
 	if len(initialList) <= 0 {
@@ -330,9 +342,8 @@ func targetedEnding(name, target string) (output string, err error) {
 		}
 
 		parentExists := false
+		var currentParent parent
 		for dec.More() {
-			var currentParent parent
-
 			err = dec.Decode(&currentParent)
 			if err != nil {
 				panic(err)
@@ -350,6 +361,8 @@ func targetedEnding(name, target string) (output string, err error) {
 					continue
 				}
 			}
+
+			currentParent = parent{}
 		}
 
 		if !parentExists {
@@ -387,9 +400,8 @@ func targetedMiddle(name, target string) (output string, err error) {
 		return "", errors.New("EOF (via targetedMiddle) detected in " + path)
 	}
 
+	var currentParent parent
 	for dec.More() {
-		var currentParent parent
-
 		err = dec.Decode(&currentParent)
 		if err != nil {
 			panic(err)
@@ -411,6 +423,8 @@ func targetedMiddle(name, target string) (output string, err error) {
 				Weight: totalWeight,
 			})
 		}
+
+		currentParent = parent{}
 	}
 
 	if len(initialList) <= 0 {
@@ -441,8 +455,6 @@ goThroughBody:
 
 	parentExists := false
 	for dec.More() {
-		var currentParent parent
-
 		err = dec.Decode(&currentParent)
 		if err != nil {
 			panic(err)
@@ -480,6 +492,8 @@ goThroughBody:
 				}
 			}
 		}
+
+		currentParent = parent{}
 	}
 
 	if !parentExists {
@@ -489,31 +503,18 @@ goThroughBody:
 	return "", errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty  - TargetedMiddle - " + path)
 }
 
-func getStartWord(path string) (phrase string, err error) {
-	f, err := os.Open(path)
-	if err != nil {
-		return "", err
-	}
-	defer f.Close()
-	dec := json.NewDecoder(f)
-	_, err = dec.Token()
-	if err != nil {
-		return "", errors.New("EOF (via getStartWord) detected in " + path)
-	}
-	var sum int
-	for dec.More() {
-		var parent parent
-
-		err = dec.Decode(&parent)
+func getStartWord(name string) (phrase string, err error) {
+	var path = "./markov-chains/" + name + ".json"
+	var sum int64
+	if s, exists := previousChainSums[name]; !exists {
+		calculatedSum, err := getSum(name)
 		if err != nil {
 			panic(err)
 		}
-
-		if parent.Word == instructions.StartKey {
-			for _, child := range parent.Children {
-				sum += child.Value
-			}
-		}
+		sum = calculatedSum
+	} else {
+		sum = s
+		go getSum(name)
 	}
 
 	r, err := randomNumber(0, sum)
@@ -521,11 +522,11 @@ func getStartWord(path string) (phrase string, err error) {
 		return "", err
 	}
 
-	f, err = os.Open(path)
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
-	dec = json.NewDecoder(f)
+	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
 		panic(err)
@@ -540,7 +541,7 @@ func getStartWord(path string) (phrase string, err error) {
 
 		if parent.Word == instructions.StartKey {
 			for _, child := range parent.Children {
-				r -= child.Value
+				r -= int64(child.Value)
 
 				if r < 0 {
 					return child.Word, nil
@@ -552,33 +553,19 @@ func getStartWord(path string) (phrase string, err error) {
 	return "", errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty  - getStartWord - " + path)
 }
 
-func getEndWord(path string) (phrase string, err error) {
-	var sum int
+func getEndWord(name string) (phrase string, err error) {
+	var path = "./markov-chains/" + name + ".json"
+	var sum int64
 
-	f, err := os.Open(path)
-	if err != nil {
-		return "", err
-	}
-	defer f.Close()
-	dec := json.NewDecoder(f)
-	_, err = dec.Token()
-	if err != nil {
-		return "", errors.New("EOF (via getEndWord) detected in " + path)
-	}
-
-	for dec.More() {
-		var parent parent
-
-		err = dec.Decode(&parent)
+	if s, exists := previousChainSums[name]; !exists {
+		calculatedSum, err := getSum(name)
 		if err != nil {
 			panic(err)
 		}
-
-		if parent.Word == instructions.EndKey {
-			for _, grandparent := range parent.Grandparents {
-				sum += grandparent.Value
-			}
-		}
+		sum = calculatedSum
+	} else {
+		sum = s
+		go getSum(name)
 	}
 
 	r, err := randomNumber(0, sum)
@@ -586,12 +573,12 @@ func getEndWord(path string) (phrase string, err error) {
 		return "", err
 	}
 
-	f, err = os.Open(path)
+	f, err := os.Open(path)
 	if err != nil {
 		return "", err
 	}
 
-	dec = json.NewDecoder(f)
+	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
 		panic(err)
@@ -607,7 +594,7 @@ func getEndWord(path string) (phrase string, err error) {
 
 		if parent.Word == instructions.EndKey {
 			for _, grandparent := range parent.Grandparents {
-				r -= grandparent.Value
+				r -= int64(grandparent.Value)
 
 				if r < 0 {
 					return grandparent.Word, nil
@@ -651,33 +638,51 @@ func getPreviousWord(parent parent) (grandparent string) {
 	return grandparent
 }
 
-func getRandomParent(name string) (parentToReturn string, err error) {
+func getSum(name string) (sum int64, err error) {
 	var path = "./markov-chains/" + name + ".json"
-
 	f, err := os.Open(path)
 	if err != nil {
-		return
+		return sum, err
 	}
 	defer f.Close()
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
-		return parentToReturn, errors.New("EOF (via getRandomParent) detected in " + path)
+		return sum, errors.New("EOF (via getRandomParent) detected in " + path)
 	}
-	var sum int
-	for dec.More() {
-		var parent parent
 
-		err = dec.Decode(&parent)
+	var Parent parent
+	for dec.More() {
+		err = dec.Decode(&Parent)
 		if err != nil {
 			panic(err)
 		}
 
-		if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
-			for _, child := range parent.Children {
-				sum += child.Value
-			}
+		for _, child := range Parent.Children {
+			sum += int64(child.Value)
 		}
+
+		Parent = parent{}
+	}
+
+	previousChainSums[name] = sum
+
+	return sum, err
+}
+
+func getRandomParent(name string) (parentToReturn string, err error) {
+	var path = "./markov-chains/" + name + ".json"
+	var sum int64
+
+	if s, exists := previousChainSums[name]; !exists {
+		calculatedSum, err := getSum(name)
+		if err != nil {
+			panic(err)
+		}
+		sum = calculatedSum
+	} else {
+		sum = s
+		go getSum(name)
 	}
 
 	r, err := randomNumber(0, sum)
@@ -685,32 +690,31 @@ func getRandomParent(name string) (parentToReturn string, err error) {
 		return
 	}
 
-	f, err = os.Open(path)
+	f, err := os.Open(path)
 	if err != nil {
 		return
 	}
-	dec = json.NewDecoder(f)
+	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
 		panic(err)
 	}
+	var Parent parent
 	for dec.More() {
-		var parent parent
-
-		err = dec.Decode(&parent)
+		err = dec.Decode(&Parent)
 		if err != nil {
 			panic(err)
 		}
 
-		if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
-			for _, child := range parent.Children {
-				r -= child.Value
+		for _, child := range Parent.Children {
+			r -= int64(child.Value)
 
-				if r < 0 {
-					return parent.Word, nil
-				}
+			if r < 0 {
+				return Parent.Word, nil
 			}
 		}
+
+		Parent = parent{}
 	}
 
 	return parentToReturn, errors.New("internal error - code should not reach this point, most likely due to chain being defluffed or being empty - getRandomParent - " + path)
@@ -744,17 +748,15 @@ goThroughBody:
 		panic(err)
 	}
 
+	var currentParent parent
 	parentExists := false
 	for dec.More() {
-		var currentParent parent
-
 		err = dec.Decode(&currentParent)
 		if err != nil {
 			panic(err)
 		}
 
 		if currentParent.Word == parentWord {
-
 			if !forwardComplete {
 				parentExists = true
 				childChosen = getNextWord(currentParent)
@@ -785,6 +787,8 @@ goThroughBody:
 				}
 			}
 		}
+
+		currentParent = parent{}
 	}
 
 	if !parentExists {

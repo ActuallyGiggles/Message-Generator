@@ -37,6 +37,7 @@ func writeLoop() {
 	if !busy.TryLock() {
 		return
 	}
+	busy.Unlock()
 
 	defer duration(track("writing duration"))
 
@@ -44,14 +45,13 @@ func writeLoop() {
 
 	for _, w := range workerMap {
 		wg.Add(1)
-		go w.writeAllPerChain(&wg)
+		w.writeAllPerChain(&wg)
 	}
 
 	wg.Wait()
 
 	saveStats()
 	stats.NextWriteTime = time.Now().Add(writeInterval)
-	busy.Unlock()
 }
 
 func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {

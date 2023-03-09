@@ -25,7 +25,7 @@ func Start(sI StartInstructions) {
 	createFolders()
 	loadStats()
 	loadChains()
-	//go tickerLoops()
+	go tickerLoops()
 }
 
 func TempTriggerWrite(streamer string) {
@@ -57,14 +57,14 @@ func TempTriggerWrite(streamer string) {
 func tickerLoops() {
 	var writingTicker *time.Ticker
 	var zippingTicker *time.Ticker
-	var defluffTicker *time.Ticker
+	// var defluffTicker *time.Ticker
 
 	writingTicker = writeTicker()
 
 	zippingTicker = time.NewTicker(zipInterval)
 	stats.NextZipTime = time.Now().Add(zipInterval)
 
-	defluffTicker = determineDefluffTime(true)
+	// defluffTicker = determineDefluffTime(true)
 
 	for {
 		select {
@@ -72,9 +72,9 @@ func tickerLoops() {
 			go writeLoop()
 		case <-zippingTicker.C:
 			go zipChains()
-		case <-defluffTicker.C:
-			defluffTicker = determineDefluffTime(false)
-			go defluff()
+			// case <-defluffTicker.C:
+			// 	defluffTicker = determineDefluffTime(false)
+			// 	go defluff()
 		}
 	}
 }
