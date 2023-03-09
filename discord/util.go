@@ -5,6 +5,7 @@ import (
 	"Message-Generator/platform/twitch"
 	"Message-Generator/print"
 	"Message-Generator/twitter"
+	"strconv"
 	"strings"
 
 	"github.com/bwmarrin/discordgo"
@@ -114,4 +115,36 @@ func (IDs *MessageIDs) delete(channelID string) {
 	for _, mID := range IDs.IDs {
 		DeleteDiscordMessage(channelID, mID)
 	}
+}
+
+func parseTimeToWait(channelID string, args []string) (time int, success bool) {
+	if len(args) > 1 || len(args) < 1 {
+		SayByIDAndDelete(channelID, "Please only provide one number.")
+		return time, false
+	}
+	time, err := strconv.Atoi(args[0])
+	if err != nil {
+		SayByIDAndDelete(channelID, "Not a number.")
+		return time, false
+	}
+	return time, true
+}
+
+func spiel(channel *global.Directive) (s string) {
+	s = "Which do you want to update?\n"
+	s = s + "\n1. Collecting messages for Markov chains? Currently: " + strconv.FormatBool(channel.Settings.IsCollectingMessages)
+	s = s + "\n2. Allowing replies? Currently: " + strconv.FormatBool(channel.Settings.Reply.IsEnabled)
+	s = s + "\n3. Allowing replies online? Currently: " + strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOnline)
+	s = s + "\n4. Change reply online wait time? Currently: " + strconv.Itoa(channel.Settings.Reply.OnlineTimeToWait)
+	s = s + "\n5. Allowing replies offline? Currently: " + strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOffline)
+	s = s + "\n6. Change reply offline wait time? Currently: " + strconv.Itoa(channel.Settings.Reply.OfflineTimeToWait)
+	s = s + "\n7. Allowing participation? Currently: " + strconv.FormatBool(channel.Settings.Participation.IsEnabled)
+	s = s + "\n8. Allowing participation online? Currently: " + strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOnline)
+	s = s + "\n9. Change participation online wait time? Currently: " + strconv.Itoa(channel.Settings.Participation.OnlineTimeToWait)
+	s = s + "\n10. Allowing participation offline? Currently: " + strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOffline)
+	s = s + "\n11. Change participation offline wait time? Currently: " + strconv.Itoa(channel.Settings.Participation.OfflineTimeToWait)
+	s = s + "\n12. What chains to use when posting to chat? Currently: " + channel.Settings.WhichChannelsToUse
+	s = s + "\n\nType [cancel] or [done] if you want to cancel or you are done."
+
+	return s
 }

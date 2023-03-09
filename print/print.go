@@ -86,8 +86,8 @@ func TerminalInput(cancel context.CancelFunc) {
 			Info("Not a command")
 		case "exit":
 			cancel()
-		case "restart":
-
+		case "force exit":
+			os.Exit(0)
 		case "clear":
 			Page("Twitch Message Generator")
 		case "help":

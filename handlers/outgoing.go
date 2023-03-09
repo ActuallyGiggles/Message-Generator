@@ -179,24 +179,32 @@ func CreateParticipationSentence(msg platform.Message, directive global.Directiv
 		return
 	}
 
+	isLive := twitch.IsChannelLive(directive.ChannelName)
+
 	// Allow passage if channel is online and online is enabled.
-	if twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Participation.IsAllowedWhenOnline {
+	if isLive && !directive.Settings.Participation.IsAllowedWhenOnline {
 		return
 	}
 
 	// Allow passage if channel is offline and offline is enabled.
-	if !twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Participation.IsAllowedWhenOffline {
+	if !isLive && !directive.Settings.Participation.IsAllowedWhenOffline {
 		return
 	}
 
-	// Allow passage if random rejection of 10% allows.
-	if randomChance := global.RandomNumber(0, 100); randomChance > 10 {
-		return
-	}
+	// // Allow passage if random rejection of 10% allows.
+	// if randomChance := global.RandomNumber(0, 100); randomChance > 10 {
+	// 	return
+	// }
 
 	// Allow passage if not currently timed out.
-	if !lockParticipation(global.RandomNumber(20, 30), msg.ChannelName) {
-		return
+	if isLive {
+		if !lockParticipation(directive.Settings.Participation.OnlineTimeToWait, msg.ChannelName) {
+			return
+		}
+	} else {
+		if !lockParticipation(directive.Settings.Participation.OfflineTimeToWait, msg.ChannelName) {
+			return
+		}
 	}
 
 	// Try each chain at least 2 times
@@ -262,19 +270,27 @@ func CreateReplySentence(msg platform.Message, directive global.Directive) {
 		return
 	}
 
+	isLive := twitch.IsChannelLive(directive.ChannelName)
+
 	// Allow passage if channel is online and online is enabled.
-	if twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOnline {
+	if isLive && !directive.Settings.Reply.IsAllowedWhenOnline {
 		return
 	}
 
 	// Allow passage if channel is offline and offline is enabled.
-	if !twitch.IsChannelLive(directive.ChannelName) && !directive.Settings.Reply.IsAllowedWhenOffline {
+	if !isLive && !directive.Settings.Reply.IsAllowedWhenOffline {
 		return
 	}
 
-	// Allow passage if not currently timed out.
-	if !lockReply(global.RandomNumber(5, 10), msg.ChannelName) {
-		return
+	// Allow passage if not currently timed out. Also, based on if offline or online.
+	if isLive {
+		if !lockReply(directive.Settings.Reply.OnlineTimeToWait, msg.ChannelName) {
+			return
+		}
+	} else {
+		if !lockReply(directive.Settings.Reply.OfflineTimeToWait, msg.ChannelName) {
+			return
+		}
 	}
 
 	// Try each chain at least 2 times

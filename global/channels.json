@@ -9,12 +9,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -30,12 +34,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -51,12 +59,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -72,12 +84,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -93,12 +109,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -114,12 +134,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -135,12 +159,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -156,12 +184,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -177,12 +209,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -198,12 +234,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -219,12 +259,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -240,12 +284,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -261,12 +309,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -282,12 +334,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -303,12 +359,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -324,12 +384,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -345,12 +409,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -366,12 +434,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -387,12 +459,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -408,12 +484,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -429,12 +509,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -450,12 +534,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -471,12 +559,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -492,12 +584,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -513,12 +609,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -534,12 +634,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -555,12 +659,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -576,12 +684,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -597,12 +709,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -618,12 +734,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -639,12 +759,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -660,12 +784,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -681,12 +809,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -702,12 +834,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -723,12 +859,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -744,12 +884,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -765,12 +909,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -786,12 +934,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -807,12 +959,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -828,12 +984,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -849,12 +1009,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -870,12 +1034,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -891,12 +1059,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -912,12 +1084,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -933,12 +1109,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -954,12 +1134,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -975,12 +1159,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -996,12 +1184,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1017,12 +1209,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1038,12 +1234,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1059,12 +1259,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1080,12 +1284,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1101,12 +1309,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1122,12 +1334,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1143,12 +1359,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1164,12 +1384,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1185,12 +1409,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1206,12 +1434,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1227,12 +1459,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1248,12 +1484,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1269,12 +1509,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1290,12 +1534,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1311,12 +1559,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1332,12 +1584,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1353,12 +1609,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1374,12 +1634,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1395,12 +1659,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1416,12 +1684,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1437,12 +1709,16 @@
    "Reply": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 5,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 5
    },
    "Participation": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 5,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 5
    },
    "WhichChannelsToUse": "all",
    "CustomChannelsToUse": null
@@ -1458,12 +1734,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1479,12 +1759,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1500,12 +1784,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1521,12 +1809,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1542,12 +1834,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1563,12 +1859,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1584,12 +1884,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1605,12 +1909,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1626,12 +1934,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1647,12 +1959,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1668,12 +1984,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1689,12 +2009,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1710,12 +2034,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1731,12 +2059,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1752,12 +2084,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1773,12 +2109,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1794,12 +2134,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1815,12 +2159,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1836,12 +2184,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1857,12 +2209,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1878,12 +2234,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1899,12 +2259,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1920,12 +2284,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1941,12 +2309,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1962,12 +2334,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -1983,12 +2359,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2004,12 +2384,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2025,12 +2409,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2046,12 +2434,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2067,12 +2459,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2088,12 +2484,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2109,12 +2509,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2130,12 +2534,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2151,12 +2559,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2172,12 +2584,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2193,12 +2609,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2214,12 +2634,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2235,12 +2659,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2256,12 +2684,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2277,12 +2709,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2298,12 +2734,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2319,12 +2759,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2340,12 +2784,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2361,12 +2809,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2382,12 +2834,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2403,12 +2859,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2424,12 +2884,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2445,12 +2909,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2466,12 +2934,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 20,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 40
    },
    "WhichChannelsToUse": "except self",
    "CustomChannelsToUse": null
@@ -2487,12 +2959,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2508,12 +2984,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2529,12 +3009,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2550,12 +3034,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2571,12 +3059,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2592,12 +3084,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2613,12 +3109,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2634,12 +3134,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2655,12 +3159,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2676,12 +3184,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2697,12 +3209,16 @@
    "Reply": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 10,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 10
    },
    "Participation": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 20,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 40
    },
    "WhichChannelsToUse": "all",
    "CustomChannelsToUse": null
@@ -2718,12 +3234,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2739,12 +3259,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2760,12 +3284,16 @@
    "Reply": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 10,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 10
    },
    "Participation": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 20,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 20
    },
    "WhichChannelsToUse": "all",
    "CustomChannelsToUse": null
@@ -2781,12 +3309,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2802,12 +3334,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2823,12 +3359,16 @@
    "Reply": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 1,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 1
    },
    "Participation": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 5,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 5
    },
    "WhichChannelsToUse": "except self",
    "CustomChannelsToUse": [
@@ -2846,12 +3386,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2867,12 +3411,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2888,12 +3436,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2909,12 +3461,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2930,12 +3486,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2951,12 +3511,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2972,12 +3536,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -2993,12 +3561,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -3014,12 +3586,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -3035,12 +3611,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -3056,12 +3636,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -3077,12 +3661,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -3098,12 +3686,16 @@
    "Reply": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "Participation": {
     "IsEnabled": false,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": false
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": false,
+    "OfflineTimeToWait": 0
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
@@ -3119,12 +3711,16 @@
    "Reply": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": true
+    "OnlineTimeToWait": 0,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 1
    },
    "Participation": {
     "IsEnabled": true,
-    "IsAllowedWhenOnline": false,
-    "IsAllowedWhenOffline": true
+    "IsAllowedWhenOnline": true,
+    "OnlineTimeToWait": 20,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 40
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null

@@ -127,7 +127,7 @@ getTheSettingsToSet:
 	}
 	for i, setting := range boolSettings.Arguments {
 		if result, err := strconv.ParseBool(setting); err != nil {
-			SayByIDAndDelete(channelID, "Unable to parse settings.")
+			SayByIDAndDelete(channelID, "Unable to parse settings. Cancelled.")
 			DeleteDiscordChannel(channelName.Arguments[0])
 			return
 		} else {
@@ -141,14 +141,58 @@ getTheSettingsToSet:
 				channel.Settings.Reply.IsEnabled = result
 			case 2:
 				channel.Settings.Reply.IsAllowedWhenOnline = result
+				if result {
+					conversationIDs.add(SayByID(channelID, "Minutes to wait before replying online again?").ID)
+					time := <-dialogueChannel
+					conversationIDs.add(time.MessageID)
+					timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+					if !success {
+						DeleteDiscordChannel(channelName.Arguments[0])
+						return
+					}
+					channel.Settings.Reply.OnlineTimeToWait = timeParsed
+				}
 			case 3:
 				channel.Settings.Reply.IsAllowedWhenOffline = result
+				if result {
+					conversationIDs.add(SayByID(channelID, "Minutes to wait before replying offline again?").ID)
+					time := <-dialogueChannel
+					conversationIDs.add(time.MessageID)
+					timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+					if !success {
+						DeleteDiscordChannel(channelName.Arguments[0])
+						return
+					}
+					channel.Settings.Reply.OfflineTimeToWait = timeParsed
+				}
 			case 4:
 				channel.Settings.Participation.IsEnabled = result
 			case 5:
 				channel.Settings.Participation.IsAllowedWhenOnline = result
+				if result {
+					conversationIDs.add(SayByID(channelID, "Minutes to wait before participating online again?").ID)
+					time := <-dialogueChannel
+					conversationIDs.add(time.MessageID)
+					timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+					if !success {
+						DeleteDiscordChannel(channelName.Arguments[0])
+						return
+					}
+					channel.Settings.Participation.OnlineTimeToWait = timeParsed
+				}
 			case 6:
 				channel.Settings.Participation.IsAllowedWhenOffline = result
+				if result {
+					conversationIDs.add(SayByID(channelID, "Minutes to wait before participating offline again?").ID)
+					time := <-dialogueChannel
+					conversationIDs.add(time.MessageID)
+					timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+					if !success {
+						DeleteDiscordChannel(channelName.Arguments[0])
+						return
+					}
+					channel.Settings.Participation.OfflineTimeToWait = timeParsed
+				}
 			}
 		}
 	}
@@ -229,7 +273,7 @@ func updateDirective(channelID string, messageID string) {
 	}
 
 getWhatSettingToUpdate:
-	conversationIDs.add(SayByID(channelID, "Which do you want to update?\n\n1. Collecting messages for Markov chains? Currently: "+strconv.FormatBool(channel.Settings.IsCollectingMessages)+"\n2. Allowing replies? Currently: "+strconv.FormatBool(channel.Settings.Reply.IsEnabled)+"\n3. Allowing replies online? Currently: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOnline)+"\n4. Allowing replies offline? Currently: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOffline)+"\n5. Allowing chat participation? Currently: "+strconv.FormatBool(channel.Settings.Participation.IsEnabled)+"\n6. Allowing chat participation when online? Currently: "+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOnline)+"\n7. Allowing chat participation when offline? Currently: "+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOffline)+"\n8. What chains to use when posting to chat? Currently: "+channel.Settings.WhichChannelsToUse+"\n\nType [cancel] or [done] if you want to cancel or you are done.").ID)
+	conversationIDs.add(SayByID(channelID, spiel(channel)).ID)
 	settingsToUpdate := <-dialogueChannel
 	conversationIDs.add(settingsToUpdate.MessageID)
 	if settingsToUpdate.Arguments[0] == "cancel" {
@@ -253,18 +297,62 @@ getWhatSettingToUpdate:
 			channel.Settings.Reply.IsAllowedWhenOnline = !channel.Settings.Reply.IsAllowedWhenOnline
 			conversationIDs.add(SayByID(channelID, "Reply online: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOnline)).ID)
 		case "4":
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before replying online again?").ID)
+			time := <-dialogueChannel
+			conversationIDs.add(time.MessageID)
+			timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+			if !success {
+				DeleteDiscordChannel(channelName.Arguments[0])
+				return
+			}
+			channel.Settings.Reply.OnlineTimeToWait = timeParsed
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before replying online again: "+time.Arguments[0]).ID)
+		case "5":
 			channel.Settings.Reply.IsAllowedWhenOffline = !channel.Settings.Reply.IsAllowedWhenOffline
 			conversationIDs.add(SayByID(channelID, "Reply offline: "+strconv.FormatBool(channel.Settings.Reply.IsAllowedWhenOffline)).ID)
-		case "5":
+		case "6":
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before replying offline again?").ID)
+			time := <-dialogueChannel
+			conversationIDs.add(time.MessageID)
+			timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+			if !success {
+				DeleteDiscordChannel(channelName.Arguments[0])
+				return
+			}
+			channel.Settings.Reply.OnlineTimeToWait = timeParsed
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before replying offline again: "+time.Arguments[0]).ID)
+		case "7":
 			channel.Settings.Participation.IsEnabled = !channel.Settings.Participation.IsEnabled
 			conversationIDs.add(SayByID(channelID, "Participation: "+strconv.FormatBool(channel.Settings.Participation.IsEnabled)).ID)
-		case "6":
+		case "8":
 			channel.Settings.Participation.IsAllowedWhenOnline = !channel.Settings.Participation.IsAllowedWhenOnline
 			conversationIDs.add(SayByID(channelID, "Participation online: "+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOnline)).ID)
-		case "7":
+		case "9":
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before participation online again?").ID)
+			time := <-dialogueChannel
+			conversationIDs.add(time.MessageID)
+			timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+			if !success {
+				DeleteDiscordChannel(channelName.Arguments[0])
+				return
+			}
+			channel.Settings.Participation.OnlineTimeToWait = timeParsed
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before participation online again: "+time.Arguments[0]).ID)
+		case "10":
 			channel.Settings.Participation.IsAllowedWhenOffline = !channel.Settings.Participation.IsAllowedWhenOffline
 			conversationIDs.add(SayByID(channelID, "Participation offline: "+strconv.FormatBool(channel.Settings.Participation.IsAllowedWhenOffline)).ID)
-		case "8":
+		case "11":
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before participation offline again?").ID)
+			time := <-dialogueChannel
+			conversationIDs.add(time.MessageID)
+			timeParsed, success := parseTimeToWait(channelID, time.Arguments)
+			if !success {
+				DeleteDiscordChannel(channelName.Arguments[0])
+				return
+			}
+			channel.Settings.Participation.OfflineTimeToWait = timeParsed
+			conversationIDs.add(SayByID(channelID, "New minutes to wait before participation offline again: "+time.Arguments[0]).ID)
+		case "12":
 			conversationIDs.add(SayByID(channelID, "What chains will this channel use to post with?\n\nAll (1)     All except self (2)     Self (3)     Custom (4)\n\nIf custom, what are the custom channels to use?").ID)
 			responseSettings := <-dialogueChannel
 			conversationIDs.add(responseSettings.MessageID)

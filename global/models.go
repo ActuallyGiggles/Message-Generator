@@ -24,7 +24,9 @@ type DirectiveSettings struct {
 type PostConditions struct {
 	IsEnabled            bool
 	IsAllowedWhenOnline  bool
+	OnlineTimeToWait     int
 	IsAllowedWhenOffline bool
+	OfflineTimeToWait    int
 }
 
 type Resource struct {
