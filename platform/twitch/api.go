@@ -315,11 +315,11 @@ func getFfzGlobalEmotes() {
 			}
 			for size, url := range emote.Urls {
 				if size == "4" {
-					e.Url = "https:" + url
+					e.Url = url
 				} else if size == "2" {
-					e.Url = "https:" + url
+					e.Url = url
 				} else if size == "1" {
-					e.Url = "https:" + url
+					e.Url = url
 				}
 			}
 			globalEmotesToUpdate = append(globalEmotesToUpdate, e)

@@ -3703,6 +3703,31 @@
  },
  {
   "Platform": "twitch",
+  "ChannelName": "maruk3y",
+  "ChannelID": "128319348",
+  "DiscordChannelID": "1083610419320594524",
+  "Settings": {
+   "IsCollectingMessages": false,
+   "Reply": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "OnlineTimeToWait": 5,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 10
+   },
+   "Participation": {
+    "IsEnabled": true,
+    "IsAllowedWhenOnline": true,
+    "OnlineTimeToWait": 5,
+    "IsAllowedWhenOffline": true,
+    "OfflineTimeToWait": 10
+   },
+   "WhichChannelsToUse": "except self",
+   "CustomChannelsToUse": null
+  }
+ },
+ {
+  "Platform": "twitch",
   "ChannelName": "sodapoppin",
   "ChannelID": "26301881",
   "DiscordChannelID": "940620543546253383",
@@ -3720,7 +3745,7 @@
     "IsAllowedWhenOnline": true,
     "OnlineTimeToWait": 20,
     "IsAllowedWhenOffline": true,
-    "OfflineTimeToWait": 40
+    "OfflineTimeToWait": 120
    },
    "WhichChannelsToUse": "self",
    "CustomChannelsToUse": null
