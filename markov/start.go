@@ -31,7 +31,21 @@ func Start(sI StartInstructions) {
 
 // TEMP
 func TempTriggerWrite() {
-	writeLoop()
+	busy.Lock()
+	defer busy.Unlock()
+
+	defer duration(track("writing duration"))
+
+	var wg sync.WaitGroup
+
+	for _, w := range workerMap {
+		wg.Add(1)
+		w.writeAllPerChain(&wg)
+	}
+
+	wg.Wait()
+
+	saveStats()
 }
 
 func tickerLoops() {
