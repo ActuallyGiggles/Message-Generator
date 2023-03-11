@@ -24,3 +24,4 @@ mem.pprof
 .sync/
 /markov-chains/
 /collected-logs/
+/temp/*.json
