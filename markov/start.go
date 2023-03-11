@@ -25,33 +25,13 @@ func Start(sI StartInstructions) {
 	createFolders()
 	loadStats()
 	loadChains()
-	go tickerLoops()
+	// TEMP
+	// go tickerLoops()
 }
 
-func TempTriggerWrite(streamer string) {
-	w, exist := workerMap[streamer]
-	if !exist {
-		return
-	}
-
-	if len(w.Chain.Parents) == 0 {
-		return
-	}
-
-	w.ChainMx.Lock()
-	defer w.ChainMx.Unlock()
-
-	// Find new peak intake chain
-	if w.Intake > stats.PeakChainIntake.Amount {
-		stats.PeakChainIntake.Chain = w.Name
-		stats.PeakChainIntake.Amount = w.Intake
-		stats.PeakChainIntake.Time = time.Now()
-	}
-
-	w.writeBody()
-
-	w.Chain.Parents = nil
-	w.Intake = 0
+// TEMP
+func TempTriggerWrite() {
+	writeLoop()
 }
 
 func tickerLoops() {

@@ -9,7 +9,7 @@ import (
 	"Message-Generator/platform/twitch"
 	"Message-Generator/print"
 	"Message-Generator/stats"
-	"Message-Generator/twitter"
+	"Message-Generator/temp"
 	"context"
 	"time"
 
@@ -66,7 +66,7 @@ func Start() {
 	go handlers.Incoming(incomingMessages)
 	go api.HandleRequests()
 
-	go twitter.Start()
+	//go twitter.Start()
 	go discord.Start(discordErrorChannel)
 
 	go markovToPrintErrorMessages(printErrorChannel)
@@ -82,6 +82,7 @@ func Start() {
 
 	twitch.GatherEmotes(debug)
 	go twitch.Start(incomingMessages, debug)
+	go temp.Start(incomingMessages)
 
 	stats.Start()
 

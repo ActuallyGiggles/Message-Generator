@@ -16,7 +16,10 @@ func zipChains() {
 	busy.Lock()
 	defer duration(track("zipping duration"))
 
-	archive, err := os.OpenFile("markov-chains.zip", os.O_CREATE, 0666)
+	defaultPath := "./markov-chains.zip"
+	newPath := "./markov-chains_new.zip"
+
+	archive, err := os.Create(newPath)
 	if err != nil {
 		panic(err)
 	}
@@ -26,6 +29,8 @@ func zipChains() {
 	if err := addDirectoryToZip(zipWriter, "./markov-chains/"); err != nil {
 		panic(err)
 	}
+
+	removeAndRename(defaultPath, newPath)
 
 	zipWriter.Close()
 	busy.Unlock()
