@@ -25,16 +25,8 @@ func Start(sI StartInstructions) {
 	go tickerLoops()
 }
 
-func TempTriggerWrite(name string) {
-	exists, w := doesWorkerExist(name)
-	if !exists {
-		return
-	}
-
-	var wg sync.WaitGroup
-	wg.Add(1)
-	w.writeChainHeader(&wg)
-	wg.Wait()
+func TempTriggerWrite() {
+	writeLoop()
 }
 
 func tickerLoops() {
@@ -49,7 +41,7 @@ func tickerLoops() {
 	for {
 		select {
 		case <-writingTicker.C:
-			go writeLoop()
+			//go writeLoop()
 		case <-zippingTicker.C:
 			//go zipChains()
 		}

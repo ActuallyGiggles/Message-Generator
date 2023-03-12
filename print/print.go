@@ -47,6 +47,10 @@ func Info(message string) {
 	pterm.Info.Println(message + "\n" + t.Format(time.RFC822))
 }
 
+func InfoNoTime(message string) {
+	pterm.Info.Println(message)
+}
+
 func Warning(message string) {
 	t := time.Now()
 	pterm.Warning.Println(message + "\n" + t.Format(time.RFC822))

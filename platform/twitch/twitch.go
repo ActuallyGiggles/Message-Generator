@@ -19,16 +19,18 @@ startOver:
 	client = twitch.NewClient(global.BotName, "oauth:"+global.TwitchOAuth)
 
 	client.OnPrivateMessage(func(message twitch.PrivateMessage) {
-		m := platform.Message{
-			Platform:    "twitch",
-			ChannelName: message.Channel,
-			ChannelID:   message.ID,
-			AuthorName:  message.User.Name,
-			AuthorID:    message.User.ID,
-			Content:     message.Message,
-		}
+		// TEMP
 
-		incoming <- m
+		// m := platform.Message{
+		// 	Platform:    "twitch",
+		// 	ChannelName: message.Channel,
+		// 	ChannelID:   message.ID,
+		// 	AuthorName:  message.User.Name,
+		// 	AuthorID:    message.User.ID,
+		// 	Content:     message.Message,
+		// }
+
+		// incoming <- m
 	})
 
 	if debug {

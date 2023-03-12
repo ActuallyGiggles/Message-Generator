@@ -1,7 +1,5 @@
 package temp
 
-import "sync"
-
 type Log struct {
 	Messages []struct {
 		Channel  string `json:"channel"`
@@ -10,13 +8,14 @@ type Log struct {
 	} `json:"messages"`
 }
 
-type Streamer struct {
-	Name     string
-	Mutex    sync.Mutex
-	DaysDone int
+type AvailableStreamers struct {
+	Channels []struct {
+		Name   string `json:"name"`
+		UserID string `json:"userID"`
+	} `json:"channels"`
 }
 
-type Ready struct {
+type Status struct {
 	Name   string
 	Status string
 }

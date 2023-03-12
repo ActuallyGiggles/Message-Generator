@@ -5,118 +5,104 @@ import (
 	"Message-Generator/markov"
 	"Message-Generator/platform"
 	"Message-Generator/print"
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
-	"os"
-	"strconv"
 	"sync"
 	"time"
 
 	"github.com/pterm/pterm"
 )
 
-var streamers = make(map[string]*Streamer)
-var streamerMx sync.Mutex
+var spinner *pterm.SpinnerPrinter
+var streamers = make(map[string]*sync.Mutex)
+var streamersMx sync.Mutex
+var statusOfGoRoutines = make(chan Status)
+var readyChannels []string
 var totalChannels int
 var doneChannels int
-var daysDone uint
 var logsAccess sync.Mutex
 
 func Start(c chan platform.Message) {
-	spinner := print.Spinner("Starting Transcription...")
+	spinner = print.Spinner("Starting Transcription...")
+
+	channels := returnListOfAvailableStreamers().Channels
+	for _, channel := range channels {
+		streamers[channel.Name] = &sync.Mutex{}
+	}
+
+	go StatusManager()
 
 	var wg sync.WaitGroup
-	for _, directive := range global.Directives {
-		wg.Add(1)
-		go transcribeChannel(c, directive, spinner, &wg)
+	for _, streamer := range channels {
+		for _, directive := range global.Directives {
+			if streamer.Name == directive.ChannelName {
+				wg.Add(1)
+				totalChannels++
+				go transcribe(c, directive, &wg)
+			}
+		}
 	}
 
 	wg.Wait()
 	spinner.Success(fmt.Sprintf("All %d Logs Completed!", totalChannels))
 }
 
-func transcribeChannel(c chan platform.Message, directive global.Directive, spinner *pterm.SpinnerPrinter, wg *sync.WaitGroup) {
+func transcribe(c chan platform.Message, directive global.Directive, wg *sync.WaitGroup) {
+	defer wg.Done()
 	newDate := time.Now()
-	firstDay := true
 
-collectAnotherDaysLogs:
-	log, issue := collectLogForDay(directive.ChannelName, newDate.Year(), newDate.Month(), newDate.Day())
-	if issue != "" {
-		if firstDay {
+	for {
+		if newDate.Year() == 2020 {
+			doneChannels++
+			print.Success("Finished Writing Logs for " + directive.ChannelName + " up to day " + newDate.Format(time.RFC3339))
+			statusOfGoRoutines <- Status{Name: directive.ChannelName, Status: "complete"}
 			return
 		}
 
-		doneChannels++
-		print.Success("Finished Writing Logs for " + directive.ChannelName + " at day" + newDate.Format(time.DateOnly))
-		wg.Done()
-		spinner.UpdateText(fmt.Sprintf("Transcribing Channels... %d/%d (days written: %d)", doneChannels, totalChannels, daysDone))
-		return
-	} else {
-		if firstDay {
-			firstDay = false
-			totalChannels++
+		theMutex := streamers[directive.ChannelName]
+		theMutex.Lock()
+
+		log, _ := collectLogForDay(directive.ChannelName, newDate.Year(), newDate.Month(), newDate.Day())
+		for _, message := range log.Messages {
+			c <- platform.Message{
+				ChannelName: message.Channel,
+				AuthorName:  message.Username,
+				Content:     message.Text,
+			}
 		}
+
+		statusOfGoRoutines <- Status{Name: directive.ChannelName, Status: "ready"}
+		newDate = newDate.AddDate(0, 0, -1)
 	}
-
-	for _, message := range log.Messages {
-		c <- platform.Message{
-			ChannelName: message.Channel,
-			AuthorName:  message.Username,
-			Content:     message.Text,
-		}
-	}
-
-	markov.TempTriggerWrite(directive.ChannelName)
-
-	daysDone++
-	spinner.UpdateText(fmt.Sprintf("Transcribing Channels... %d/%d (days written: %d)", doneChannels, totalChannels, daysDone))
-	newDate = newDate.AddDate(0, 0, -1)
-	goto collectAnotherDaysLogs
 }
 
-func collectLogForDay(channelName string, year int, month time.Month, day int) (log Log, issue string) {
-	logsAccess.Lock()
+func StatusManager() {
+	for status := range statusOfGoRoutines {
+		go func(status Status) {
+			if status.Status == "ready" {
+				readyChannels = append(readyChannels, status.Name)
+			}
 
-	url := fmt.Sprintf("https://logs.ivr.fi/channel/%s/%s/%s/%s?json=", channelName, strconv.Itoa(year), month.String(), strconv.Itoa(day))
+			if status.Status == "complete" {
+				totalChannels--
+			}
 
-	var jsonStr = []byte(`{"content-type":"application/json"}`)
-	req, err := http.NewRequest("GET", url, bytes.NewBuffer(jsonStr))
-	req.Header.Set("Authorization", "Bearer "+global.TwitchOAuth)
-	req.Header.Set("Client-Id", global.TwitchClientID)
-	req.Header.Set("Content-Type", "application/json; charset=utf-8")
-	if err != nil {
-		panic(err)
-	}
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-	go allowLogsAccess()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	if err := json.Unmarshal(body, &log); err != nil {
-		return log, string(body)
-	}
+			print.InfoNoTime(fmt.Sprintf("%s %s (%d/%d)", status.Name, status.Status, len(readyChannels), totalChannels))
+			spinner.UpdateText(fmt.Sprintf("Transcribing Channels... %d/%d (channels ready: %d/%d)", doneChannels, totalChannels, len(readyChannels), totalChannels))
 
-	return log, ""
-}
-
-func saveWrittenChannelsAndDatesAsJson(obj map[string][]string) {
-	jsonObj, err := json.MarshalIndent(obj, "", " ")
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.WriteFile("./temp/saved_logs.json", jsonObj, 0644)
-	if err != nil {
-		panic(err)
+			if len(readyChannels) >= totalChannels {
+				print.InfoNoTime("writing")
+				markov.TempTriggerWrite()
+				for _, channel := range readyChannels {
+					for s, mutex := range streamers {
+						if s == channel {
+							mutex.Unlock()
+						}
+					}
+				}
+				readyChannels = nil
+				print.InfoNoTime("done writing")
+			}
+		}(status)
 	}
 }
 
