@@ -80,8 +80,7 @@ func Start() {
 		ErrorChannel:        printErrorChannel,
 	})
 
-	// TEMP
-	// twitch.GatherEmotes(debug)
+	twitch.GatherEmotes(debug)
 	go twitch.Start(incomingMessages, debug)
 	go temp.Start(incomingMessages)
 
