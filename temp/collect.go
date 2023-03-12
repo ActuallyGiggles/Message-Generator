@@ -15,7 +15,7 @@ import (
 var spinner *pterm.SpinnerPrinter
 var streamers = make(map[string]*sync.Mutex)
 var streamersMx sync.Mutex
-var statusOfGoRoutines = make(chan Status)
+var statusOfGoRoutines = make(chan Status)a
 var readyChannels []string
 var totalChannels int
 var doneChannels int
