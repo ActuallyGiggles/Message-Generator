@@ -97,7 +97,7 @@ func websiteHomePage(w http.ResponseWriter, r *http.Request) {
 		}
 
 		// Has to have a chain existing
-		if exists := markov.DoesChainExistSimple(directive.ChannelName); !exists {
+		if exists := markov.DoesChainFileExist(directive.ChannelName); !exists {
 			continue
 		}
 

@@ -20,16 +20,17 @@ func Out(oi OutputInstructions) (output string, err error) {
 	method := oi.Method
 	target := oi.Target
 
-	if !DoesChainExist(name) {
+	if !DoesChainFileExist(name) {
 		return "", errors.New("chain [" + name + "] is not found in directory")
 	}
 
-	w, exists := workerMap[name]
-	if !exists {
-		return "", errors.New("worker [" + name + "] is not found")
+	exists, w := doesWorkerExist(name)
+	if exists {
+		if !w.ChainMx.TryLock() {
+			return
+		}
+		defer w.ChainMx.Unlock()
 	}
-	w.ChainMx.Lock()
-	defer w.ChainMx.Unlock()
 
 	defer duration(track("output duration"))
 
@@ -526,6 +527,7 @@ func getStartWord(name string) (phrase string, err error) {
 	if err != nil {
 		return "", err
 	}
+	defer f.Close()
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {
@@ -577,6 +579,7 @@ func getEndWord(name string) (phrase string, err error) {
 	if err != nil {
 		return "", err
 	}
+	defer f.Close()
 
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
@@ -694,6 +697,7 @@ func getRandomParent(name string) (parentToReturn string, err error) {
 	if err != nil {
 		return
 	}
+	defer f.Close()
 	dec := json.NewDecoder(f)
 	_, err = dec.Token()
 	if err != nil {

@@ -1,12 +1,6 @@
 package temp
 
-type List struct {
-	Dates []struct {
-		Year  string `json:"year"`
-		Month string `json:"month"`
-		Day   string `json:"day"`
-	} `json:"availableLogs"`
-}
+import "sync"
 
 type Log struct {
 	Messages []struct {
@@ -14,4 +8,15 @@ type Log struct {
 		Username string `json:"username"`
 		Text     string `json:"text"`
 	} `json:"messages"`
+}
+
+type Streamer struct {
+	Name     string
+	Mutex    sync.Mutex
+	DaysDone int
+}
+
+type Ready struct {
+	Name   string
+	Status string
 }

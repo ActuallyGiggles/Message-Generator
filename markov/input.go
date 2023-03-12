@@ -10,10 +10,8 @@ func In(chainName string, content string) {
 		return
 	}
 
-	workerMapMx.Lock()
-	w, ok := workerMap[chainName]
-	workerMapMx.Unlock()
-	if !ok {
+	exists, w := doesWorkerExist(chainName)
+	if !exists {
 		w = newWorker(chainName)
 	}
 

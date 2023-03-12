@@ -6,15 +6,12 @@ import (
 )
 
 var (
-	instructions    StartInstructions
-	writeInterval   = 10 * time.Minute
-	zipInterval     = 6 * time.Hour
-	defluffInterval = 24 * time.Hour
+	instructions  StartInstructions
+	writeInterval = 10 * time.Minute
+	zipInterval   = 6 * time.Hour
 
-	busy sync.Mutex
-
-	stats Statistics
-
+	busy         sync.Mutex
+	stats        Statistics
 	errorChannel chan error
 )
 
@@ -25,27 +22,19 @@ func Start(sI StartInstructions) {
 	createFolders()
 	loadStats()
 	loadChains()
-	// TEMP
-	// go tickerLoops()
+	go tickerLoops()
 }
 
-// TEMP
-func TempTriggerWrite() {
-	busy.Lock()
-	defer busy.Unlock()
-
-	defer duration(track("writing duration"))
-
-	var wg sync.WaitGroup
-
-	for _, w := range workerMap {
-		wg.Add(1)
-		w.writeAllPerChain(&wg)
+func TempTriggerWrite(name string) {
+	exists, w := doesWorkerExist(name)
+	if !exists {
+		return
 	}
 
+	var wg sync.WaitGroup
+	wg.Add(1)
+	w.writeChainHeader(&wg)
 	wg.Wait()
-
-	saveStats()
 }
 
 func tickerLoops() {
@@ -62,7 +51,7 @@ func tickerLoops() {
 		case <-writingTicker.C:
 			go writeLoop()
 		case <-zippingTicker.C:
-			go zipChains()
+			//go zipChains()
 		}
 	}
 }

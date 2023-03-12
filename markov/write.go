@@ -38,23 +38,22 @@ func writeLoop() {
 		return
 	}
 	defer busy.Unlock()
-
 	defer duration(track("writing duration"))
 
 	var wg sync.WaitGroup
-
+	workerMapMx.Lock()
 	for _, w := range workerMap {
 		wg.Add(1)
-		w.writeAllPerChain(&wg)
+		w.writeChainHeader(&wg)
 	}
-
+	workerMapMx.Unlock()
 	wg.Wait()
 
 	saveStats()
 	stats.NextWriteTime = time.Now().Add(writeInterval)
 }
 
-func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
+func (w *worker) writeChainHeader(wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	if len(w.Chain.Parents) == 0 {
@@ -62,7 +61,6 @@ func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 	}
 
 	w.ChainMx.Lock()
-	defer w.ChainMx.Unlock()
 
 	// Find new peak intake chain
 	if w.Intake > stats.PeakChainIntake.Amount {
@@ -75,6 +73,8 @@ func (w *worker) writeAllPerChain(wg *sync.WaitGroup) {
 
 	w.Chain.Parents = nil
 	w.Intake = 0
+
+	w.ChainMx.Unlock()
 }
 
 func (w *worker) writeBody() {

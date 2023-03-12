@@ -10,17 +10,17 @@ import (
 // Cleanse will go through every chain and remove any mention of the entry.
 func Cleanse(entry string) (totalCleansed int) {
 	busy.Lock()
+	defer busy.Unlock()
 	defer duration(track("cleanse duration"))
 
 	for _, chain := range Chains() {
-		if w, ok := workerMap[chain]; ok {
+		if exists, w := doesWorkerExist(chain); exists {
 			w.ChainMx.Lock()
 			totalCleansed += cleanseBody(chain, entry)
 			w.ChainMx.Unlock()
 		}
 	}
 
-	busy.Unlock()
 	debugLog("Total cleansed:", totalCleansed)
 	return totalCleansed
 }

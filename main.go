@@ -10,6 +10,7 @@ import (
 	"Message-Generator/print"
 	"Message-Generator/stats"
 	"Message-Generator/temp"
+	"Message-Generator/twitter"
 	"context"
 	"time"
 
@@ -41,7 +42,7 @@ func main() {
 
 	noted := false
 	for {
-		if markov.IsBusy() {
+		if markov.IsMarkovBusy() {
 			if !noted {
 				print.Info("Markov is busy.")
 				noted = true
@@ -66,7 +67,7 @@ func Start() {
 	go handlers.Incoming(incomingMessages)
 	go api.HandleRequests()
 
-	//go twitter.Start()
+	go twitter.Start()
 	go discord.Start(discordErrorChannel)
 
 	go markovToPrintErrorMessages(printErrorChannel)
@@ -74,8 +75,7 @@ func Start() {
 		SeparationKey:       " ",
 		StartKey:            "b5G(n1$I!4g",
 		EndKey:              "e1$D(n7",
-		ShouldZip:           true,
-		ShouldDefluff:       true,
+		ShouldZip:           false,
 		DefluffTriggerValue: 15,
 		ErrorChannel:        printErrorChannel,
 	})

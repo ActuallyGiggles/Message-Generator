@@ -61,7 +61,7 @@ func ProgressBar(title string, total int) (pb *pterm.ProgressbarPrinter) {
 }
 
 func Spinner(title string) (sp *pterm.SpinnerPrinter) {
-	sp, _ = pterm.DefaultSpinner.Start("Doing a lot of stuff...")
+	sp, _ = pterm.DefaultSpinner.Start(title)
 	return
 }
 

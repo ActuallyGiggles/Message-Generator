@@ -60,7 +60,7 @@ func Chains() (chains []string) {
 	return chains
 }
 
-func DoesChainExistSimple(name string) (exists bool) {
+func DoesChainFileExist(name string) (exists bool) {
 	for _, chain := range Chains() {
 		if chain == name {
 			return true
@@ -69,45 +69,12 @@ func DoesChainExistSimple(name string) (exists bool) {
 	return false
 }
 
-// DoesChainExist returns whether a chain exists. If the chain exists, but is empty or really small, it will return false.
-func DoesChainExist(name string) (exists bool) {
-	w, exists := workerMap[name]
-	if !exists {
-		return false
-	}
-
-	w.ChainMx.Lock()
-	defer w.ChainMx.Unlock()
-
-	f, err := os.Open("./markov-chains/" + name + ".json")
-	if err != nil {
-		return false
-	}
-	defer f.Close()
-	dec := json.NewDecoder(f)
-	_, err = dec.Token()
-	if err != nil {
-		return false
-	}
-	var sum int
-	for dec.More() {
-		var parent parent
-
-		err = dec.Decode(&parent)
-		if err != nil {
-			panic(err)
-		}
-
-		if parent.Word != instructions.StartKey && parent.Word != instructions.EndKey {
-			sum++
-		}
-
-		if sum > 50 {
-			return true
-		}
-	}
-
-	return false
+// One use case is to simply see if the chain is in use while writing/outputting/etc to not have concurrency issues.
+func doesWorkerExist(name string) (exists bool, w *worker) {
+	workerMapMx.Lock()
+	defer workerMapMx.Unlock()
+	w, exists = workerMap[name]
+	return
 }
 
 func PrettyPrint(v interface{}) {
@@ -258,8 +225,8 @@ func (enc *encode) CloseEncoder() (err error) {
 	return nil
 }
 
-// IsBusy returns false if not writing, zipping, or defluffing. Returns true otherwise.
-func IsBusy() bool {
+// IsMarkovBusy returns false if not writing, zipping, or defluffing. Returns true otherwise.
+func IsMarkovBusy() bool {
 	if !busy.TryLock() {
 		return true
 	}
@@ -269,20 +236,20 @@ func IsBusy() bool {
 }
 
 func ChainIntake(chain string) int {
-	w, ok := workerMap[chain]
-	if !ok {
+	exists, w := doesWorkerExist(chain)
+	if !exists {
 		return -1
 	}
 	return w.Intake
 }
 
 func IsChainBusy(chain string) bool {
-	w, ok := workerMap[chain]
-	if !ok {
+	exists, w := doesWorkerExist(chain)
+	if !exists {
 		return false
 	}
 
-	if w.ChainMx.TryLock() {
+	if !w.ChainMx.TryLock() {
 		return true
 	}
 

@@ -3734,7 +3734,7 @@
   "Settings": {
    "IsCollectingMessages": true,
    "Reply": {
-    "IsEnabled": true,
+    "IsEnabled": false,
     "IsAllowedWhenOnline": false,
     "OnlineTimeToWait": 0,
     "IsAllowedWhenOffline": true,
@@ -3743,7 +3743,7 @@
    "Participation": {
     "IsEnabled": true,
     "IsAllowedWhenOnline": true,
-    "OnlineTimeToWait": 20,
+    "OnlineTimeToWait": 60,
     "IsAllowedWhenOffline": true,
     "OfflineTimeToWait": 120
    },

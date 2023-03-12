@@ -12,8 +12,8 @@ func zipChains() {
 	if !instructions.ShouldZip {
 		return
 	}
-
 	busy.Lock()
+	defer busy.Unlock()
 	defer duration(track("zipping duration"))
 
 	defaultPath := "./markov-chains.zip"
@@ -24,8 +24,8 @@ func zipChains() {
 		panic(err)
 	}
 	defer archive.Close()
-	zipWriter := zip.NewWriter(archive)
 
+	zipWriter := zip.NewWriter(archive)
 	if err := addDirectoryToZip(zipWriter, "./markov-chains/"); err != nil {
 		panic(err)
 	}
@@ -33,7 +33,6 @@ func zipChains() {
 	removeAndRename(defaultPath, newPath)
 
 	zipWriter.Close()
-	busy.Unlock()
 	stats.NextZipTime = time.Now().Add(zipInterval)
 }
 
@@ -51,7 +50,6 @@ func addDirectoryToZip(zipWriter *zip.Writer, path string) error {
 	}
 
 	for _, file := range files {
-
 		filePath := path + file.Name()
 
 		if file.IsDir() {
@@ -61,10 +59,17 @@ func addDirectoryToZip(zipWriter *zip.Writer, path string) error {
 			continue
 		}
 
+		exists, w := doesWorkerExist(file.Name())
+		if exists {
+			w.ChainMx.Lock()
+			defer w.ChainMx.Unlock()
+		}
+
 		f2, err := os.Open(filePath)
 		if err != nil {
 			return err
 		}
+		defer f2.Close()
 
 		filePath = strings.TrimPrefix(filePath, "./")
 		w2, err := zipWriter.Create(filePath)
@@ -74,8 +79,6 @@ func addDirectoryToZip(zipWriter *zip.Writer, path string) error {
 		if _, err := io.Copy(w2, f2); err != nil {
 			return err
 		}
-
-		f2.Close()
 	}
 
 	return nil

@@ -15,7 +15,6 @@ import (
 //	StartKey: What string can be used to mark the beginning of a message. (E.g. "!-")
 //	EndKey: What string can be used to mark the end of a message. (E.g. "-!")
 //	ShouldZip: Whether or not to zip the markov-chains folder every six hours.
-//	ShouldDefluff: Whether or not to defluff (clean infrequently used values) database every 24 hours.
 //	DefluffTriggerValue: What value amount is too little to keep and therefore should be defluffed.
 //	ErrorTracker: If you want to recieve errors from write operations, provide a channel.
 //	Debug: Print logs of stuffs.
@@ -28,7 +27,6 @@ type StartInstructions struct {
 	EndKey        string
 
 	ShouldZip           bool
-	ShouldDefluff       bool
 	DefluffTriggerValue int
 
 	ErrorChannel chan error
@@ -53,7 +51,7 @@ type OutputInstructions struct {
 type worker struct {
 	Name    string
 	Chain   chain
-	ChainMx sync.RWMutex
+	ChainMx sync.Mutex
 	Intake  int
 }
 
